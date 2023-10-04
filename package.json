@@ -6,7 +6,8 @@
     "scripts": {
         "api": "cd api && npm run develop",
         "web": "cd web && npm run dev",
-        "dev": "concurrently \"npm run web\" \"npm run api\""
+        "dev": "concurrently \"npm run web\" \"npm run api\"",
+        "setup": "cd web && npm install && cd ../api && npm install"
     },
     "devDependencies": {
         "concurrently": "^8.2.1"
