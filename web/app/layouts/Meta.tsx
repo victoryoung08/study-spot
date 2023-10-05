@@ -47,7 +47,7 @@ const Meta = (props: IMetaProps) => {
           key="favicon"
         />
       </Head>
-      <NextSe
+      {/* <NextSeo
         title={props.title}
         description={props.description}
         canonical={props.canonical}
@@ -58,7 +58,7 @@ const Meta = (props: IMetaProps) => {
           locale: AppConfig.locale,
           site_name: AppConfig.site_name,
         }}
-      />
+      /> */}
     </>
   );
 };
