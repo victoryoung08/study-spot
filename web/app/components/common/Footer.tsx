@@ -106,7 +106,7 @@ export function Footer() {
             <div className="flex gap-5  justify-center items-center md:justify-normal md:items-start ">
               <Link href="/">
                 <svg
-                  aria-label="social media "
+                  aria-label="social media tiktok url "
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
@@ -123,7 +123,7 @@ export function Footer() {
               </Link>
               <Link href="/">
                 <svg
-                  aria-label="social media "
+                  aria-label="social media instagram url "
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"

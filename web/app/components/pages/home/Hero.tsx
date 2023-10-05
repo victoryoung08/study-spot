@@ -25,9 +25,9 @@ export default function Hero() {
             loading="eager"
             src={heroImg}
             alt="Hero image"
-            className="rounded-2xl w-3/4 lg:h-full mx-auto lg:mx-0"
+            className="rounded-2xl  lg:h-full mx-auto lg:mx-0"
           />
-          <div className=" bg-gradient-to-t lg:bg-gradient-to-l from-[#181818] h-56 w-full lg:w-44 absolute bottom-0 rounded-bl-2xl rounded-br-2xl lg:rounded-tr-2xl lg:rounded-br-2xl"></div>
+          <div className="absolute right-0 bottom-0 left-96  shadow z-2 w-200 h-full bg-gradient-to-l from-[#181818] via-[#13121297] to-transparent"></div>
         </div>
       </div>
     </Container>
