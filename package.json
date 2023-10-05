@@ -4,10 +4,10 @@
         "web/*"
     ],
     "scripts": {
-        "api": "cd api && npm run develop",
-        "web": "cd web && npm run dev",
-        "dev": "concurrently \"npm run web\" \"npm run api\"",
-        "setup": "cd web && npm install && cd ../api && npm install"
+        "api": "cd api && yarn run develop",
+        "web": "cd web && yarn run dev",
+        "dev": "concurrently \"yarn run web\" \"yarn run api\"",
+        "setup": "cd web && yarn install && cd ../api && yarn install"
     },
     "devDependencies": {
         "concurrently": "^8.2.1"
