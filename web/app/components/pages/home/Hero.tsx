@@ -22,6 +22,7 @@ export default function Hero() {
         </div>
         <div className="relative">
           <Image
+            loading="eager"
             src={heroImg}
             alt="Hero image"
             className="rounded-2xl w-3/4 lg:h-full mx-auto lg:mx-0"
