@@ -21,6 +21,7 @@ export default function Navbar() {
           <Image src={logo} alt="Logo" className="w-32 h-32" />
         </Link>
         <button
+          aria-label="Menu"
           type="button"
           className="flex cursor-pointer flex-col space-y-1 bg-transparent hover:bg-transparent lg:hidden"
           onClick={handleNav}
