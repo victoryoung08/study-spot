@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_component_list_items",
+  "info": {
+    "displayName": "list_item",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

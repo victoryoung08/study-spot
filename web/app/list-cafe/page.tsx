@@ -1,25 +1,48 @@
-import App from "../components/pages/list-cafe/App";
-import Form from "../components/pages/list-cafe/Form";
-import Hero from "../components/pages/list-cafe/Hero";
-import HowStudySpotWorks from "../components/pages/list-cafe/HowStudySpotWorks";
-import HowToGetStarted from "../components/pages/list-cafe/HowToGetStarted";
-import Opportunities from "../components/pages/list-cafe/Opportunities";
-import Partners from "../components/pages/list-cafe/Partners";
-import Versions from "../components/pages/list-cafe/Versions";
+import * as component from "../components/common/ComponentSelector";
+import ApplyNow from "../components/pages/creator-program/ApplyNow";
 
-const ListCafe = () => {
+type componentsType =
+  | "HeroWithBackground"
+  | "Partners"
+  | "SingleRowWithImage"
+  | "BorderedText"
+  | "ThreeGridCircle"
+  | "Versions"
+  | "BookNow"
+  | "Videos";
+
+export default async function ListCafe() {
+  const response = await fetch(
+    "http://127.0.0.1:1337/api/list-cafe?populate=deep",
+    {
+      next: { revalidate: 30 },
+    }
+  );
+  let data = [];
+  if (response.ok) {
+    data = await response.json();
+  } else {
+    return <>Error</>;
+  }
+
+  const componentLists = data.data.attributes.components.map((item: any) => {
+    const name = item.__component.split(".")[1];
+    const componentNameParts = name.split("-");
+
+    // Capitalize each part and join them
+    const componentName = componentNameParts
+      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join("");
+    const Component = component[componentName as componentsType];
+    return { ...item, Component };
+  });
   return (
     <div>
-      <Hero />
-      <Partners />
-      <App />
-      <Opportunities />
-      <HowStudySpotWorks />
-      <Versions />
-      <HowToGetStarted />
-      <Form />
+      {componentLists.map((item: any) => {
+        const { __component, Component, ...rest } = item;
+        return <Component key={item.id} {...rest} />;
+      })}
+      <ApplyNow />
     </div>
   );
-};
-
-export default ListCafe;
+}

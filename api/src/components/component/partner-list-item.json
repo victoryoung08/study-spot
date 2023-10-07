@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_component_partner_list_items",
+  "info": {
+    "displayName": "partner_list_item",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

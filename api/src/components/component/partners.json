@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_component_partners",
+  "info": {
+    "displayName": "partners",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "item": {
+      "displayName": "partner_list_item",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.partner-list-item"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

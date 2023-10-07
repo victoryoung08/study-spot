@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_component_circle_items",
+  "info": {
+    "displayName": "circle_item",
+    "icon": "cloud"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    }
+  }
+}

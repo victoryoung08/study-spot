@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_component_text_image_items",
+  "info": {
+    "displayName": "text_image_item",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

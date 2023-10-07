@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_hero_centers",
+  "info": {
+    "displayName": "hero_center",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "cta_text": {
+      "type": "string"
+    },
+    "cta_link": {
+      "type": "string"
+    }
+  }
+}

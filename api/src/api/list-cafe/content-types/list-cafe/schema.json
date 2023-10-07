@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "list_cafes",
+  "info": {
+    "singularName": "list-cafe",
+    "pluralName": "list-cafes",
+    "displayName": "list-cafe"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "components": {
+      "type": "dynamiczone",
+      "components": [
+        "component.hero-with-background",
+        "component.partners",
+        "component.single-row-with-image",
+        "component.bordered-text",
+        "component.three-grid-circle",
+        "component.versions",
+        "component.videos",
+        "component.book-now",
+        "seo.seo"
+      ]
+    }
+  }
+}

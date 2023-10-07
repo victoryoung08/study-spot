@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_three_grid_circles",
+  "info": {
+    "displayName": "ThreeGridCircle",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "item": {
+      "displayName": "circle_item",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.circle-item"
+    }
+  }
+}
