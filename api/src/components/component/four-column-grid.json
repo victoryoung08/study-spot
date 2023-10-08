@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_four_column_grids",
+  "info": {
+    "displayName": "four_column_grid",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "item": {
+      "displayName": "grid_item",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.grid-item"
+    },
+    "quietness": {
+      "type": "integer",
+      "max": 100,
+      "min": 0
+    }
+  }
+}

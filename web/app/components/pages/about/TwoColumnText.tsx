@@ -12,10 +12,13 @@ export default function TwoColumnText({ item }: any) {
                   {data.title || ""}
                 </h2>
               </div>
-              <div>
-                <p className="text-base lg:text-lg">
-                  {data.description || ""}{" "}
-                </p>
+              <div className="">
+                {/* <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  className="text-base lg:text-lg"
+                >
+                  {data.description || ""}
+                </Markdown> */}
               </div>
             </div>
           );

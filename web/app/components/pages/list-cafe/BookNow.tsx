@@ -36,7 +36,8 @@ export default function BookNow({
         </h2>
 
         <div className="mt-10">
-          <h3 className="font-bold text-xl lg:text-2xl">
+         
+          {/* <h3 className="font-bold text-xl lg:text-2xl">
             As a thank you for being the first 25 Study Spots, you&apos;ll
             receive:
           </h3>
@@ -55,7 +56,7 @@ export default function BookNow({
           <h4 className="lg:w-3/4 mx-auto mt-10 font-semibold text-lg lg:text-xl">
             Listing Fees will increase once we&apos;ve reached 25 Study Spots.
             Early Study Spots will retain foundational rates.
-          </h4>
+          </h4> */}
           <div className="mt-20">
             <form action="" className="w-3/4 lg:w-2/5 mx-auto">
               <input

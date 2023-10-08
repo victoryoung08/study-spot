@@ -10,7 +10,7 @@
     "item": {
       "type": "component",
       "repeatable": true,
-      "component": "component.two-column-cta-image-left"
+      "component": "component.column-image"
     }
   }
 }

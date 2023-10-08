@@ -15,6 +15,8 @@ import ThreeGridCircle from "../pages/list-cafe/ThreeGridCircle";
 import Versions from "../pages/list-cafe/Versions";
 import BookNow from "../pages/list-cafe/BookNow";
 import Videos from "../pages/list-cafe/Videos";
+import HeaderWithGridImage from "../pages/cafe/HeaderWithGridImage";
+import FourColumnGrid from "../pages/cafe/FourColumnGrid";
 
 export {
   Hero,
@@ -34,4 +36,6 @@ export {
   Versions,
   BookNow,
   Videos,
+  HeaderWithGridImage,
+  FourColumnGrid,
 };

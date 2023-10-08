@@ -36,14 +36,15 @@ export default function TwoColumnCtaImageLeft({
             {title || ""}
           </h2>
           <p className="mt-5 mb-5 text-sm lg:text-base">{description || ""}</p>
-
-          <Link
-            href={cta_link || "/"}
-            type="button"
-            className="mt-5 lg:mt-10 btn bg-[#505050] hover:bg-primary rounded-xl text-white border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
-          >
-            {cta_text || ""}
-          </Link>
+          {cta_link && (
+            <Link
+              href={cta_link || "/"}
+              type="button"
+              className="mt-5 lg:mt-10 btn bg-[#505050] hover:bg-primary rounded-xl text-white border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
+            >
+              {cta_text || ""}
+            </Link>
+          )}
         </div>
       </div>
     </Container>

@@ -103,6 +103,50 @@ export interface ComponentFeatures extends Schema.Component {
   };
 }
 
+export interface ComponentFourColumnGrid extends Schema.Component {
+  collectionName: 'components_component_four_column_grids';
+  info: {
+    displayName: 'four_column_grid';
+    icon: 'apps';
+    description: '';
+  };
+  attributes: {
+    item: Attribute.Component<'component.grid-item', true>;
+    quietness: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+        max: 100;
+      }>;
+  };
+}
+
+export interface ComponentGridItem extends Schema.Component {
+  collectionName: 'components_component_grid_items';
+  info: {
+    displayName: 'grid_item';
+    icon: 'apps';
+  };
+  attributes: {
+    title: Attribute.String;
+    tag: Attribute.Component<'component.tags', true>;
+  };
+}
+
+export interface ComponentHeaderWithGridImage extends Schema.Component {
+  collectionName: 'components_component_header_with_grid_images';
+  info: {
+    displayName: 'header_with_grid_image';
+    icon: 'alien';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    location: Attribute.Text;
+    item: Attribute.Component<'component.image-list', true> &
+      Attribute.Required;
+  };
+}
+
 export interface ComponentHeroCenter extends Schema.Component {
   collectionName: 'components_component_hero_centers';
   info: {
@@ -146,6 +190,17 @@ export interface ComponentHero extends Schema.Component {
     cta_text: Attribute.String;
     cta_link: Attribute.String;
     section_title: Attribute.String;
+  };
+}
+
+export interface ComponentImageList extends Schema.Component {
+  collectionName: 'components_component_image_lists';
+  info: {
+    displayName: 'image_list';
+    icon: 'apps';
+  };
+  attributes: {
+    image: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -207,6 +262,17 @@ export interface ComponentSingleRowWithImage extends Schema.Component {
     title: Attribute.String;
     description: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface ComponentTags extends Schema.Component {
+  collectionName: 'components_component_tags';
+  info: {
+    displayName: 'tags';
+    icon: 'apps';
+  };
+  attributes: {
+    tag: Attribute.String;
   };
 }
 
@@ -287,7 +353,7 @@ export interface ComponentTwoColumnImageLeft extends Schema.Component {
     description: '';
   };
   attributes: {
-    item: Attribute.Component<'component.two-column-cta-image-left', true>;
+    item: Attribute.Component<'component.column-image', true>;
   };
 }
 
@@ -372,14 +438,19 @@ declare module '@strapi/types' {
       'component.cta-center': ComponentCtaCenter;
       'component.feature-item': ComponentFeatureItem;
       'component.features': ComponentFeatures;
+      'component.four-column-grid': ComponentFourColumnGrid;
+      'component.grid-item': ComponentGridItem;
+      'component.header-with-grid-image': ComponentHeaderWithGridImage;
       'component.hero-center': ComponentHeroCenter;
       'component.hero-with-background': ComponentHeroWithBackground;
       'component.hero': ComponentHero;
+      'component.image-list': ComponentImageList;
       'component.list-item': ComponentListItem;
       'component.list-version': ComponentListVersion;
       'component.partner-list-item': ComponentPartnerListItem;
       'component.partners': ComponentPartners;
       'component.single-row-with-image': ComponentSingleRowWithImage;
+      'component.tags': ComponentTags;
       'component.text-column': ComponentTextColumn;
       'component.text-image-item': ComponentTextImageItem;
       'component.three-grid-circle': ComponentThreeGridCircle;

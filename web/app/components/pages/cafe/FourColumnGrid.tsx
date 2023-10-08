@@ -38,28 +38,30 @@ const data = [
     items: [{ id: 1, title: "chill", image: chill }],
   },
 ];
-export default function About() {
+export default function FourColumnGrid({ quietness, item }: any) {
   return (
     <Container>
       <div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {data.map((item) => {
+          {item.map((ctx: any) => {
             return (
-              <div key={item.id}>
+              <div key={ctx.id}>
                 <div>
-                  <h2 className="text-2xl font-semibold">{item.title}</h2>
+                  <h2 className="text-2xl font-semibold">{ctx.title || ""}</h2>
                   <div className="mt-2 space-y-2">
-                    {item.items.map((tag) => {
+                    {ctx.tag.map((tag: any) => {
                       return (
                         <div key={tag.id} className="flex gap-2 items-center">
                           <div className="bg-primary border border-white p-2 rounded-2xl">
                             <Image
-                              src={tag.image}
+                              src={chill}
                               alt={tag.title}
+                              width={5}
+                              height={5}
                               className="w-5 h-5"
                             />
                           </div>
-                          <p className="text-base">{item.title}</p>
+                          <p className="text-base">{ctx.title || ""}</p>
                         </div>
                       );
                     })}
@@ -73,7 +75,7 @@ export default function About() {
           <h2 className="text-3xl font-semibold">Quietness</h2>
           <progress
             className="progress w-80 progress-primary"
-            value="70"
+            value={quietness || 0}
             max="100"
           ></progress>
           <p className="text-sm">Cafe Chatter</p>
