@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Container } from "../../components/common/Container";
 import * as component from "../../components/common/ComponentSelector";
 
