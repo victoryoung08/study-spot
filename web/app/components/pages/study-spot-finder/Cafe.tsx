@@ -99,23 +99,32 @@ const tags = [
   { id: 10, title: "artistic", image: artistic },
 ];
 
-export default function Cafe() {
+export default function Cafe({ cafe }) {
+  // console.log(cafe);
   return (
     <div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {cafes.map((item) => {
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {cafe.map((item: any) => {
           return (
             <Link
-              href={`/cafes/${item.slug}`}
+              href={`/cafes/${item.attributes.slug}`}
               key={item.id}
               className="rounded-3xl border border-white overflow-hidden hover:bg-primary transition-all ease-in-out delay-100 duration-500"
             >
-              <Image src={item.image} alt={item.cafeName} />
+              <Image
+                src={item.attributes.images.data[0].attributes.url || ""}
+                alt={item.cafe_name}
+                width={400}
+                height={400}
+                className="w-full h-[400px]"
+              />
               <div className="p-5">
-                <h2 className="font-semibold text-xl">{item.cafeName}</h2>
-                <p className="text-sm mb-2">{item.location}</p>
+                <h2 className="font-semibold text-xl">
+                  {item.attributes.cafe_name}
+                </h2>
+                <p className="text-sm mb-2">{item.attributes.suburb}</p>
                 <div className="flex gap-2">
-                  {item.tags.map((item, indx) => {
+                  {/* {item.tags.map((item, indx) => {
                     return (
                       <div
                         key={indx + 1}
@@ -138,7 +147,7 @@ export default function Cafe() {
                         })}
                       </div>
                     );
-                  })}
+                  })} */}
                 </div>
               </div>
             </Link>

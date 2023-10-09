@@ -36,7 +36,6 @@ export default function TwoColumnCtaList({
         </div>
         <div className="flex flex-col gap-10">
           {item.map((library: any) => {
-            console.log(library.image);
             return (
               <div
                 key={library.id}
