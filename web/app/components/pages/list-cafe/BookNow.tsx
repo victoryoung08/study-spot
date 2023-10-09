@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "../../common/Container";
+import Markdown from "markdown-to-jsx";
 
 const benefits = [
   { id: 1, title: "Get 50% off your 1st 3-months Listing Fees ($50/month)" },
@@ -26,6 +27,7 @@ export default function BookNow({
   cta_link,
   book_in_a_call_link,
 }: bookNowType) {
+  console.log(description);
   return (
     <Container>
       <div className="text-center lg:py-20">
@@ -36,7 +38,31 @@ export default function BookNow({
         </h2>
 
         <div className="mt-10">
-         
+          <Markdown
+            options={{
+              overrides: {
+                p: {
+                  component: "p",
+                  props: {
+                    className: "font-bold",
+                  },
+                },
+                li: {
+                  component: "div",
+                  props: {
+                    className:
+                      "underline decoration-white/50 decoration-1 my-4 underline-offset-8",
+                  },
+                },
+              },
+            }}
+          >
+            {description}
+          </Markdown>
+        </div>
+        <div className="mt-4"></div>
+
+        <div className="mt-10">
           {/* <h3 className="font-bold text-xl lg:text-2xl">
             As a thank you for being the first 25 Study Spots, you&apos;ll
             receive:
@@ -87,6 +113,7 @@ export default function BookNow({
               </Link>
               <div className="mt-5">
                 <Link
+                  target="_blank"
                   href={book_in_a_call_link || "/"}
                   className="text-base underline"
                 >
