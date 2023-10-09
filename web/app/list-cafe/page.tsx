@@ -15,7 +15,7 @@ export default async function ListCafe() {
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/list-cafe?populate=deep`,
     {
-      next: { revalidate: 30 },
+      next: { revalidate: 1 },
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
       },

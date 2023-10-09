@@ -7,7 +7,7 @@ export default async function About() {
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/about?populate=deep`,
     {
-      next: { revalidate: 30 },
+      next: { revalidate: 1 },
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
       },

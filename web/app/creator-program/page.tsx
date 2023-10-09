@@ -8,7 +8,7 @@ export default async function CreatorProgram() {
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/be-a-creator?populate=deep`,
     {
-      next: { revalidate: 30 },
+      next: { revalidate: 1 },
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
       },
