@@ -13,41 +13,29 @@ import artistic from "@/public/images/artistic.svg";
 import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
 
-interface Tag {
-  id: number;
-  title: string;
-  image: StaticImageData;
-}
+type FilterProps = {
+  features: any;
+  vibes: any;
+  styles: any;
+  selectedTags: string[];
+  setSelectedTags: any;
+};
 
-const gen: Tag[] = [
-  { id: 1, title: "wifi", image: wifi },
-  { id: 2, title: "charging", image: charging },
-];
-
-const vibe: Tag[] = [
-  { id: 1, title: "chill", image: chill },
-  { id: 2, title: "cozy", image: cozy },
-  { id: 3, title: "fast", image: fast },
-  { id: 4, title: "upbeat", image: upbeat },
-];
-
-const style: Tag[] = [
-  { id: 1, title: "minimal", image: minimal },
-  { id: 2, title: "earthy", image: earthy },
-  { id: 3, title: "vintage", image: vintage },
-  { id: 4, title: "artistic", image: artistic },
-];
-
-export default function Filter({ features, vibes, styles }: any) {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
+export default function Filter({
+  features,
+  vibes,
+  styles,
+  selectedTags,
+  setSelectedTags,
+}: FilterProps) {
   const handleTagClick = (tag: string) => {
-    setSelectedTags((prevSelectedTags) =>
+    setSelectedTags((prevSelectedTags: any) =>
       prevSelectedTags.includes(tag)
-        ? prevSelectedTags.filter((item) => item !== tag)
+        ? prevSelectedTags.filter((item: any) => item !== tag)
         : [...prevSelectedTags, tag]
     );
   };
+
   return (
     <div className="border border-white rounded-3xl p-4 bg-[#252525]">
       <div className="grid grid-cols-2 gap-3">
@@ -57,7 +45,7 @@ export default function Filter({ features, vibes, styles }: any) {
               onClick={() => handleTagClick(item)}
               key={item.item}
               className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
-                selectedTags.includes(item.title) ? "bg-primary" : ""
+                selectedTags.includes(item) ? "bg-primary" : ""
               }`}
             >
               <Image
