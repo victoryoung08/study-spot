@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_component_versions",
+  "info": {
+    "displayName": "versions",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "version": {
+      "displayName": "list_version",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.list-version"
+    }
+  }
+}

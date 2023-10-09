@@ -52,41 +52,41 @@ const data = [
   },
 ];
 
-export default function Versions() {
+export default function Versions({ version }: any) {
   return (
     <Container>
       <div className="lg:py-20">
         <div className="grid md:grid-cols-3 gap-10">
-          {data.map((version) => {
+          {version.map((ver: any) => {
             return (
-              <div key={version.id}>
+              <div key={ver.id}>
                 <div
                   className={`border border-white rounded-full px-4 py-1 w-44 md:w-auto lg:w-3/5 flex items-center  ${
-                    version.isCurrent
+                    ver.isCurrent
                       ? "bg-primary justify-between"
                       : "border gap-2"
                   }`}
                 >
-                  {version.isCurrent === false && (
+                  {ver.isCurrent === false && (
                     <div className="w-5 h-5 rounded-full bg-white" />
                   )}
-                  <p className="font-semibold">{version.title}</p>
-                  {version.isCurrent && <p className="text-sm">Current</p>}
-                  {version.isCurrent && (
+                  <p className="font-semibold">{ver.version_number || ""}</p>
+                  {ver.isCurrent && <p className="text-sm">Current</p>}
+                  {ver.isCurrent && (
                     <div className="w-5 h-5 rounded-full bg-white" />
                   )}
                 </div>
                 <div className="space-y-3 mt-5">
-                  {version.data.map((item) => {
+                  {ver.item.map((ctx: any) => {
                     return (
                       <div
-                        key={item.id}
+                        key={ctx.id}
                         className={`rounded-2xl border border-white p-5 ${
-                          version.isCurrent ? "bg-[#3a3939]" : ""
+                          ver.isCurrent ? "bg-[#3a3939]" : ""
                         }`}
                       >
                         <div>
-                          <p className="text-sm">{item.text}</p>
+                          <p className="text-sm">{ctx.description || ""}</p>
                         </div>
                       </div>
                     );

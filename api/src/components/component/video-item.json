@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_component_video_items",
+  "info": {
+    "displayName": "video_item",
+    "icon": "bell"
+  },
+  "options": {},
+  "attributes": {
+    "video_link": {
+      "type": "string"
+    },
+    "thumnail_video": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_component_version_descriptions",
+  "info": {
+    "displayName": "version_description",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    }
+  }
+}

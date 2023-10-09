@@ -1,16 +1,42 @@
 import { Container } from "./components/common/Container";
-import Hero from "./components/pages/home/Hero";
-import About from "./components/pages/home/About";
-import Cta from "./components/pages/home/Cta";
-import ExploreLibrary from "./components/pages/home/ExploreLibrary";
+import * as component from "./components/common/ComponentSelector";
 
-export default function Home() {
+type componentsType =
+  | "Hero"
+  | "SingleRowWithImage"
+  | "TwoColumnCtaImageLeft"
+  | "Features"
+  | "TwoColumnCtaList";
+
+export default async function Home() {
+  const response = await fetch("http://127.0.0.1:1337/api/home?populate=deep", {
+    next: { revalidate: 30 },
+  });
+  let data = [];
+  if (response.ok) {
+    data = await response.json();
+  } else {
+    return <>Error</>;
+  }
+
+  const componentLists = data.data.attributes.components.map((item: any) => {
+    const name = item.__component.split(".")[1];
+    const componentNameParts = name.split("-");
+
+    // Capitalize each part and join them
+    const componentName = componentNameParts
+      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join("");
+    const Component = component[componentName as componentsType];
+    return { ...item, Component };
+  });
+
   return (
     <Container>
-      <Hero />
-      <About />
-      <Cta />
-      <ExploreLibrary />
+      {componentLists.map((item: any) => {
+        const { __component, Component, ...rest } = item;
+        return <Component key={item.id} {...rest} />;
+      })}
     </Container>
   );
 }

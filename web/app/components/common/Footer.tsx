@@ -14,19 +14,19 @@ export function Footer() {
           <div className="flex flex-col gap-5">
             <p className="font-semibold">Home</p>
             <Link
-              href="/"
+              href="/creator-program"
               className="text-white hover:border-none text-sm hover:text-gray-300"
             >
               Become a creator
             </Link>
             <Link
-              href="/"
+              href="/list-cafe"
               className="text-white hover:border-none text-sm hover:text-gray-300"
             >
               List your cafe
             </Link>
             <Link
-              href="/"
+              href="/study-spot-finder"
               className="text-white hover:border-none text-sm hover:text-gray-300"
             >
               Study Spot Finder

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_component_grid_items",
+  "info": {
+    "displayName": "grid_item",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.tags"
+    }
+  }
+}

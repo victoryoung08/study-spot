@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_component_two_column_cta_image_lefts",
+  "info": {
+    "displayName": "TwoColumnCtaImageLeft",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "cta_link": {
+      "type": "string"
+    },
+    "cta_text": {
+      "type": "string"
+    }
+  }
+}

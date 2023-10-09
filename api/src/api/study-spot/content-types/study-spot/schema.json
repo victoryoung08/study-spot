@@ -1,0 +1,85 @@
+{
+  "kind": "collectionType",
+  "collectionName": "study_spots",
+  "info": {
+    "singularName": "study-spot",
+    "pluralName": "study-spots",
+    "displayName": "Study_spot",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "features": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feature.feature"
+    },
+    "styles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::style.style"
+    },
+    "vibes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vibe.vibe"
+    },
+    "cafe_name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "cafe_name"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "loudness": {
+      "type": "integer",
+      "max": 100,
+      "default": 50
+    },
+    "study_lengths": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::study-length.study-length"
+    },
+    "Study_duration": {
+      "type": "enumeration",
+      "enum": [
+        "Short",
+        "Medium",
+        "Long"
+      ]
+    },
+    "show": {
+      "type": "boolean"
+    },
+    "discount": {
+      "type": "string"
+    },
+    "google_map_link": {
+      "type": "string"
+    },
+    "tiktok_embed": {
+      "type": "string"
+    },
+    "tiktok_link": {
+      "type": "string"
+    },
+    "suburb": {
+      "type": "string"
+    }
+  }
+}

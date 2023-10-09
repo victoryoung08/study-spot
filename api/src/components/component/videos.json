@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_component_videos",
+  "info": {
+    "displayName": "Videos",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "item": {
+      "displayName": "video_item",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.video-item"
+    }
+  }
+}

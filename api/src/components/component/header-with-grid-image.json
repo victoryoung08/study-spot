@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_component_header_with_grid_images",
+  "info": {
+    "displayName": "header_with_grid_image",
+    "icon": "alien",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "location": {
+      "type": "text"
+    },
+    "item": {
+      "displayName": "image_list",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.image-list",
+      "required": true
+    }
+  }
+}

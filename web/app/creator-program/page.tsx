@@ -1,20 +1,41 @@
 import { Container } from "../components/common/Container";
-import AboutYou from "../components/pages/creator-program/AboutYou";
+import * as component from "../components/common/ComponentSelector";
 import ApplyNow from "../components/pages/creator-program/ApplyNow";
-import BeingStudySpotCreator from "../components/pages/creator-program/BeingStudySpotCreator";
-import Hero from "../components/pages/creator-program/Hero";
-import YourSchedule from "../components/pages/creator-program/YourSchedule";
 
-const CreatorProgram = () => {
+type componentsType = "Hero" | "AboutUs" | "TwoColumnText" | "CtaCenter";
+
+export default async function CreatorProgram() {
+  const response = await fetch(
+    "http://127.0.0.1:1337/api/Be-a-creator?populate=deep",
+    {
+      next: { revalidate: 30 },
+    }
+  );
+  let data = [];
+  if (response.ok) {
+    data = await response.json();
+  } else {
+    return <>Error</>;
+  }
+
+  const componentLists = data.data.attributes.components.map((item: any) => {
+    const name = item.__component.split(".")[1];
+    const componentNameParts = name.split("-");
+
+    // Capitalize each part and join them
+    const componentName = componentNameParts
+      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join("");
+    const Component = component[componentName as componentsType];
+    return { ...item, Component };
+  });
   return (
     <Container>
-      <Hero />
-      <AboutYou />
-      <BeingStudySpotCreator />
-      <YourSchedule />
+      {componentLists.map((item: any) => {
+        const { __component, Component, ...rest } = item;
+        return <Component key={item.id} {...rest} />;
+      })}
       <ApplyNow />
     </Container>
   );
-};
-
-export default CreatorProgram;
+}

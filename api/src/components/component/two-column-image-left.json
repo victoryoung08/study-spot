@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_component_two_column_image_lefts",
+  "info": {
+    "displayName": "twoColumnImageLeft",
+    "icon": "alien",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "item": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.column-image"
+    }
+  }
+}

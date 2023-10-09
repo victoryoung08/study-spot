@@ -677,6 +677,426 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutAbout extends Schema.SingleType {
+  collectionName: 'abouts';
+  info: {
+    singularName: 'about';
+    pluralName: 'abouts';
+    displayName: 'About';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Attribute.DynamicZone<
+      [
+        'component.about-us',
+        'component.column-image',
+        'component.cta-center',
+        'component.feature-item',
+        'component.features',
+        'component.hero-center',
+        'component.hero',
+        'component.list-item',
+        'component.single-row-with-image',
+        'component.text-column',
+        'component.two-column-cta-image-left',
+        'component.two-column-cta-list',
+        'component.two-column-image-left',
+        'component.two-column-text',
+        'seo.seo'
+      ]
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBeACreatorBeACreator extends Schema.SingleType {
+  collectionName: 'be_a_creators';
+  info: {
+    singularName: 'be-a-creator';
+    pluralName: 'be-a-creators';
+    displayName: 'BeACreator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Attribute.DynamicZone<
+      [
+        'component.about-us',
+        'component.column-image',
+        'component.cta-center',
+        'component.feature-item',
+        'component.features',
+        'component.hero-center',
+        'component.hero',
+        'component.list-item',
+        'component.single-row-with-image',
+        'component.text-column',
+        'component.two-column-cta-image-left',
+        'component.two-column-cta-list',
+        'component.two-column-image-left',
+        'component.two-column-text',
+        'seo.seo'
+      ]
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::be-a-creator.be-a-creator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::be-a-creator.be-a-creator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCafeCafe extends Schema.SingleType {
+  collectionName: 'cafes';
+  info: {
+    singularName: 'cafe';
+    pluralName: 'cafes';
+    displayName: 'cafe';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Attribute.DynamicZone<
+      [
+        'component.header-with-grid-image',
+        'component.four-column-grid',
+        'component.cta-center',
+        'seo.seo'
+      ]
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::cafe.cafe', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::cafe.cafe', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFeatureFeature extends Schema.CollectionType {
+  collectionName: 'features';
+  info: {
+    singularName: 'feature';
+    pluralName: 'features';
+    displayName: 'Feature';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item: Attribute.String;
+    svg_icon: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::feature.feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::feature.feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGenreGenre extends Schema.CollectionType {
+  collectionName: 'genres';
+  info: {
+    singularName: 'genre';
+    pluralName: 'genres';
+    displayName: 'Music_genre';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item: Attribute.String;
+    svg_icon: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::genre.genre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::genre.genre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'home';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Attribute.DynamicZone<
+      [
+        'component.feature-item',
+        'component.features',
+        'component.hero',
+        'component.list-item',
+        'seo.seo',
+        'component.single-row-with-image',
+        'component.two-column-cta-image-left',
+        'component.two-column-cta-list'
+      ]
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiListCafeListCafe extends Schema.SingleType {
+  collectionName: 'list_cafes';
+  info: {
+    singularName: 'list-cafe';
+    pluralName: 'list-cafes';
+    displayName: 'list-cafe';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Attribute.DynamicZone<
+      [
+        'component.hero-with-background',
+        'component.partners',
+        'component.single-row-with-image',
+        'component.bordered-text',
+        'component.three-grid-circle',
+        'component.versions',
+        'component.videos',
+        'component.book-now',
+        'seo.seo'
+      ]
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::list-cafe.list-cafe',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::list-cafe.list-cafe',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudyLengthStudyLength extends Schema.CollectionType {
+  collectionName: 'study_lengths';
+  info: {
+    singularName: 'study-length';
+    pluralName: 'study-lengths';
+    displayName: 'Study_length';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::study-length.study-length',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::study-length.study-length',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudySpotStudySpot extends Schema.CollectionType {
+  collectionName: 'study_spots';
+  info: {
+    singularName: 'study-spot';
+    pluralName: 'study-spots';
+    displayName: 'Study_spot';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    features: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToMany',
+      'api::feature.feature'
+    >;
+    styles: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToMany',
+      'api::style.style'
+    >;
+    vibes: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToMany',
+      'api::vibe.vibe'
+    >;
+    cafe_name: Attribute.String;
+    location: Attribute.String;
+    slug: Attribute.UID<'api::study-spot.study-spot', 'cafe_name'>;
+    images: Attribute.Media;
+    loudness: Attribute.Integer &
+      Attribute.SetMinMax<{
+        max: 100;
+      }> &
+      Attribute.DefaultTo<50>;
+    study_lengths: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToMany',
+      'api::study-length.study-length'
+    >;
+    Study_duration: Attribute.Enumeration<['Short', 'Medium', 'Long']>;
+    show: Attribute.Boolean;
+    discount: Attribute.String;
+    google_map_link: Attribute.String;
+    tiktok_embed: Attribute.String;
+    tiktok_link: Attribute.String;
+    suburb: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStyleStyle extends Schema.CollectionType {
+  collectionName: 'styles';
+  info: {
+    singularName: 'style';
+    pluralName: 'styles';
+    displayName: 'Style';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item: Attribute.String;
+    svg_icon: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::style.style',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::style.style',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVibeVibe extends Schema.CollectionType {
+  collectionName: 'vibes';
+  info: {
+    singularName: 'vibe';
+    pluralName: 'vibes';
+    displayName: 'Vibe';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item: Attribute.String;
+    svg_icon: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::vibe.vibe', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::vibe.vibe', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -693,6 +1113,17 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::about.about': ApiAboutAbout;
+      'api::be-a-creator.be-a-creator': ApiBeACreatorBeACreator;
+      'api::cafe.cafe': ApiCafeCafe;
+      'api::feature.feature': ApiFeatureFeature;
+      'api::genre.genre': ApiGenreGenre;
+      'api::home.home': ApiHomeHome;
+      'api::list-cafe.list-cafe': ApiListCafeListCafe;
+      'api::study-length.study-length': ApiStudyLengthStudyLength;
+      'api::study-spot.study-spot': ApiStudySpotStudySpot;
+      'api::style.style': ApiStyleStyle;
+      'api::vibe.vibe': ApiVibeVibe;
     }
   }
 }

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vibes",
+  "info": {
+    "singularName": "vibe",
+    "pluralName": "vibes",
+    "displayName": "Vibe",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "item": {
+      "type": "string"
+    },
+    "svg_icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

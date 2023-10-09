@@ -12,13 +12,15 @@ const images = [
   { id: 4, Image: img4 },
 ];
 
-export default function Partners() {
+export default function Partners({title, item}: any) {
   return (
     <Container>
       <div className="text-center">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug text-white mb-5">
-          Thank you to our Early Study Spots so far
+          {title || ""}
         </h2>
+
+        {/* image not showing */}
         <div className="flex gap-10 items-center justify-center">
           {images.map((item) => {
             return (

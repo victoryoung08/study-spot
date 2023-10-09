@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_component_two_column_cta_lists",
+  "info": {
+    "displayName": "TwoColumnCtaList",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "cta_text": {
+      "type": "string"
+    },
+    "cta_link": {
+      "type": "string"
+    },
+    "item": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.list-item"
+    }
+  }
+}

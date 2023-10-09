@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_component_bordered_texts",
+  "info": {
+    "displayName": "borderedText",
+    "icon": "alien",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "section_title": {
+      "type": "string"
+    },
+    "item": {
+      "displayName": "text_image_item",
+      "type": "component",
+      "repeatable": true,
+      "component": "component.text-image-item"
+    }
+  }
+}

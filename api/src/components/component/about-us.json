@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_component_about_uses",
+  "info": {
+    "displayName": "About_us",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}

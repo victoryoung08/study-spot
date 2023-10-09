@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "components": {
+      "type": "dynamiczone",
+      "components": [
+        "component.about-us",
+        "component.column-image",
+        "component.cta-center",
+        "component.feature-item",
+        "component.features",
+        "component.hero-center",
+        "component.hero",
+        "component.list-item",
+        "component.single-row-with-image",
+        "component.text-column",
+        "component.two-column-cta-image-left",
+        "component.two-column-cta-list",
+        "component.two-column-image-left",
+        "component.two-column-text",
+        "seo.seo"
+      ]
+    }
+  }
+}

@@ -18,7 +18,7 @@ export default function Navbar() {
     <div className="max-w-screen-lg z-10 mx-auto px-5 lg:px-0">
       <div className=" flex items-center justify-between">
         <Link href="/">
-          <Image src={logo} alt="Logo" className="w-32 h-32" />
+          <Image src={logo} alt="Logo" className="w-32 h-32" priority />
         </Link>
         <button
           aria-label="Menu"
