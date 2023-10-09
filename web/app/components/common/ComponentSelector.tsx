@@ -36,6 +36,6 @@ export {
   Versions,
   BookNow,
   Videos,
-  HeaderWithGridImage,
+  HeaderWithGridImage, // remove this component in strapi it will cause error when used
   FourColumnGrid,
 };

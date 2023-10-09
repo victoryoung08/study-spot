@@ -1,18 +1,12 @@
 import Image from "next/image";
 import { Container } from "../../common/Container";
 import pinIcon from "@/public/images/pin.svg";
-import img1 from "@/public/images/cherubcafe1.webp";
-import img2 from "@/public/images/cherub-specialty-coffee-.webp";
-
-const image = [
-  { id: 1, image: img1 },
-  { id: 2, image: img2 },
-  { id: 3, image: img1 },
-  { id: 4, image: img1 },
-  { id: 5, image: img2 },
-];
-
-export default function HeaderWithGridImage({ title, location, item }: any) {
+export default function HeaderWithGridImage({
+  title,
+  location,
+  images,
+  item,
+}: any) {
   return (
     <Container>
       <div className="">
@@ -25,11 +19,11 @@ export default function HeaderWithGridImage({ title, location, item }: any) {
             <p className="text-base">{location || ""}</p>
           </div>
         )}
-        {item && (
+        {images && (
           <div className={item.length === 1 ? "" : "grid md:grid-cols-2 gap-5"}>
             <div>
               <Image
-                src={item[0]?.image?.data?.attributes?.url}
+                src={images.data[0]?.attributes?.url}
                 alt="image"
                 width={400}
                 height={400}
@@ -37,12 +31,12 @@ export default function HeaderWithGridImage({ title, location, item }: any) {
               />
             </div>
             <div className="grid grid-cols-2 gap-5">
-              {item
+              {images.data
                 .map((img: any) => {
                   return (
                     <div key={item.id}>
                       <Image
-                        src={img?.image?.data?.attributes?.url}
+                        src={img?.attributes?.url}
                         width={200}
                         height={200}
                         className="w-full h-full"

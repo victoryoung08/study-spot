@@ -1,35 +1,13 @@
-// "use client";
-// import { Container } from "@/app/components/common/Container";
-// import About from "@/app/components/pages/cafe/About";
-// import Hero from "@/app/components/pages/cafe/HeaderWithGridImage";
-// import Promotion from "@/app/components/pages/cafe/Promotion";
-// import Support from "@/app/components/pages/cafe/Support";
-// import { usePathname } from "next/navigation";
-
-// const Page = () => {
-//   const path = usePathname();
-//   const slug = path.split("/");
-
-//   return (
-//     <div>
-//       <Hero />
-//       <Promotion />
-//       <About />
-//       <Support />
-//     </div>
-//   );
-// };
-
-// export default Page;
-
 import { Container } from "../../components/common/Container";
 import * as component from "../../components/common/ComponentSelector";
 
 type componentsType = "HeaderWithGridImage" | "CtaCenter" | "FourColumnGrid";
 
-export default async function CreatorProgram() {
+export default async function CreatorProgram(searchParams: any) {
+  const { params } = searchParams;
+
   const response = await fetch(
-    `${process.env.STRAPI_API_ENDPOINT}/cafe?populate=deep`,
+    `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${params.slug}&populate=deep`,
     {
       next: { revalidate: 1 },
       headers: {
@@ -37,6 +15,7 @@ export default async function CreatorProgram() {
       },
     }
   );
+
   let data = [];
   if (response.ok) {
     data = await response.json();
@@ -44,23 +23,44 @@ export default async function CreatorProgram() {
     return <>Error</>;
   }
 
-  const componentLists = data.data.attributes.components.map((item: any) => {
-    const name = item.__component.split(".")[1];
-    const componentNameParts = name.split("-");
+  const headerWithGridImageProps = {
+    title: data.data[0].attributes.cafe_name,
+    location: data.data[0].attributes.location,
+    item: [],
+    images: data.data[0].attributes.images,
+  };
 
-    // Capitalize each part and join them
-    const componentName = componentNameParts
-      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join("");
-    const Component = component[componentName as componentsType];
-    return { ...item, Component };
-  });
+  const fourColumnGridProps = {
+    quietness: 90,
+    items: [
+      { name: "Features", tags: data.data[0].attributes.features },
+      { name: "Styles", tags: data.data[0].attributes.styles },
+      { name: "Vibe", tags: data.data[0].attributes.vibes },
+    ],
+  };
+
+  const ctaCenterProps = {
+    title: "Promotion",
+    description: "Simply share a story or post and tag us!",
+    cta_text: "Unlock Now 🎁",
+    cta_link: "/",
+  };
+
   return (
     <Container>
-      {componentLists.map((item: any) => {
-        const { __component, Component, ...rest } = item;
-        return <Component key={item.id} {...rest} />;
-      })}
+      <component.HeaderWithGridImage {...headerWithGridImageProps} />
+      <component.FourColumnGrid {...fourColumnGridProps} />
+      <component.CtaCenter {...ctaCenterProps} />
+      <div>
+        <h6 className="text-center text-3xl font-bold mb-2">
+          {" "}
+          Support your Study Spot ✨
+        </h6>
+        <p className="text-center">
+          For extended study periods it's always great to buy another coffee ☕️
+          Let's show some love and support them where we can!
+        </p>
+      </div>
     </Container>
   );
 }
