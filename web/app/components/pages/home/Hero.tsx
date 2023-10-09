@@ -48,8 +48,8 @@ export default function Hero({
           <Image
             src={image?.data?.attributes?.url}
             alt="Hero image"
-            width={500}
-            height={500}
+            width={700}
+            height={700}
             className="rounded-2xl  lg:h-full mx-auto lg:mx-0"
           />
           <div className="absolute right-0 bottom-0   shadow z-2 w-20 h-full bg-gradient-to-l from-[#181818] via-[#13121297] to-transparent"></div>

@@ -38,7 +38,7 @@ const style: Tag[] = [
   { id: 4, title: "artistic", image: artistic },
 ];
 
-export default function Filter() {
+export default function Filter({ features, vibes, styles }: any) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleTagClick = (tag: string) => {
@@ -48,21 +48,26 @@ export default function Filter() {
         : [...prevSelectedTags, tag]
     );
   };
-
   return (
     <div className="border border-white rounded-3xl p-4 bg-[#252525]">
       <div className="grid grid-cols-2 gap-3">
-        {gen.map((item) => {
+        {features.distinctItemValues.map((item: any, index: any) => {
           return (
             <button
-              onClick={() => handleTagClick(item.title)}
-              key={item.id}
+              onClick={() => handleTagClick(item)}
+              key={index + 1}
               className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                 selectedTags.includes(item.title) ? "bg-primary" : ""
               }`}
             >
-              <Image src={item.image} alt={item.title} className="w-6 h-6" />
-              <p className="text-sm">{item.title}</p>
+              {/* <Image
+                src={item.svg_icon.data.attributes.url}
+                alt={item.svg_icon.data.attributes.alternativeText || item.item}
+                className="w-6 h-6"
+                width={500}
+                height={500}
+              /> */}
+              <p className="text-sm">{item}</p>
             </button>
           );
         })}
@@ -71,17 +76,17 @@ export default function Filter() {
       <div className="mt-5">
         <h2 className="mb-2 text-base font-medium">Vibe</h2>
         <div className="grid grid-cols-2 gap-3">
-          {vibe.map((item) => {
+          {vibes.distinctItemValues.map((item: any) => {
             return (
               <button
-                onClick={() => handleTagClick(item.title)}
+                onClick={() => handleTagClick(item)}
                 key={item.id}
                 className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
-                  selectedTags.includes(item.title) ? "bg-primary" : ""
+                  selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >
-                <Image src={item.image} alt={item.title} className="w-6 h-6" />
-                <p className="text-sm">{item.title}</p>
+                {/* <Image src={item.image} alt={item.title} className="w-6 h-6" /> */}
+                <p className="text-sm">{item}</p>
               </button>
             );
           })}
@@ -91,17 +96,17 @@ export default function Filter() {
       <div className="mt-5">
         <h2 className="mb-2 text-base font-medium">Style</h2>
         <div className="grid grid-cols-2 gap-3">
-          {style.map((item) => {
+          {styles.distinctItemValues.map((item: any) => {
             return (
               <button
-                onClick={() => handleTagClick(item.title)}
+                onClick={() => handleTagClick(item)}
                 key={item.id}
                 className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
-                  selectedTags.includes(item.title) ? "bg-primary" : ""
+                  selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >
-                <Image src={item.image} alt={item.title} className="w-6 h-6" />
-                <p className="text-sm">{item.title}</p>
+                {/* <Image src={item.image} alt={item} className="w-6 h-6" /> */}
+                <p className="text-sm">{item}</p>
               </button>
             );
           })}
