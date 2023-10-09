@@ -1,5 +1,5 @@
 import Content from "../components/pages/study-spot-finder/Content";
-import getUniqueValues from "../hooks/getUniqueValues";
+import getUniqueValues from "../../hooks/getUniqueValues";
 
 export default async function StudySpotFinder() {
   const response = await fetch(
