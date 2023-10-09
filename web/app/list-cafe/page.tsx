@@ -13,9 +13,12 @@ type componentsType =
 
 export default async function ListCafe() {
   const response = await fetch(
-    "http://127.0.0.1:1337/api/list-cafe?populate=deep",
+    `${process.env.STRAPI_API_ENDPOINT}/list-cafe?populate=deep`,
     {
       next: { revalidate: 30 },
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      },
     }
   );
   let data = [];

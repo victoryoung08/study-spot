@@ -25,12 +25,18 @@
 import { Container } from "../../components/common/Container";
 import * as component from "../../components/common/ComponentSelector";
 
-type componentsType = "HeaderWithGridImage" | "CtaCenter" | "FourColumnGrid" ;
+type componentsType = "HeaderWithGridImage" | "CtaCenter" | "FourColumnGrid";
 
 export default async function CreatorProgram() {
-  const response = await fetch("http://127.0.0.1:1337/api/cafe?populate=deep", {
-    next: { revalidate: 30 },
-  });
+  const response = await fetch(
+    `${process.env.STRAPI_API_ENDPOINT}/cafe?populate=deep`,
+    {
+      next: { revalidate: 30 },
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      },
+    }
+  );
   let data = [];
   if (response.ok) {
     data = await response.json();
