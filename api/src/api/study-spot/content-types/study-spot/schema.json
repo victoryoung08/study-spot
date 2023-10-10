@@ -80,6 +80,12 @@
     },
     "suburb": {
       "type": "string"
+    },
+    "Longitude": {
+      "type": "float"
+    },
+    "Latitute": {
+      "type": "float"
     }
   }
 }

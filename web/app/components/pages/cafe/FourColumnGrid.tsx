@@ -1,12 +1,7 @@
 import { Container } from "../../common/Container";
-import wifi from "@/public/images/wifi.svg";
-import charging from "@/public/images/charging.svg";
-import chill from "@/public/images/chill.svg";
-import cozy from "@/public/images/cozy.svg";
 import Image from "next/image";
 
 export default function FourColumnGrid({ quietness, items }: any) {
-  console.log(items);
   return (
     <Container>
       <div>

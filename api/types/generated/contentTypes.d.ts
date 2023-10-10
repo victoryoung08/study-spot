@@ -1023,6 +1023,8 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     tiktok_embed: Attribute.String;
     tiktok_link: Attribute.String;
     suburb: Attribute.String;
+    Longitude: Attribute.Float;
+    Latitute: Attribute.Float;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

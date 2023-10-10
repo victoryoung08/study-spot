@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Cafe from "./Cafe";
 import Filter from "./Filter";
+import MapView from "./Map";
 
 type ContentProps = {
   features: any;
@@ -51,8 +52,9 @@ export default function Content({
           styles={styles}
         />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 h-screen ">
         <Cafe cafe={filteredCafe} />
+        {/* <MapView cafe={filteredCafe} /> */}
       </div>
     </div>
   );

@@ -27,7 +27,6 @@ export default function BookNow({
   cta_link,
   book_in_a_call_link,
 }: bookNowType) {
-  console.log(description);
   return (
     <Container>
       <div className="text-center lg:py-20">
