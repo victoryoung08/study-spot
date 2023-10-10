@@ -12,7 +12,6 @@
     "@heroicons/react": "^2.0.18",
     "@types/lodash": "^4.14.199",
     "cross-env": "^7.0.3",
-    "loadash": "^1.0.0",
     "markdown-to-jsx": "^7.3.2",
     "next": "13.5.5-canary.4",
     "react": "^18",
