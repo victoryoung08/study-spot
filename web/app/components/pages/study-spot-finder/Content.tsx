@@ -78,7 +78,7 @@ export default function Content({
             styles={styles}
           />
         </div>
-        <div className="flex-1 h-screen ">
+        <div className={`flex-1 ${view === "map" ? "h-screen" : ""}`}>
           {
             {
               grid: <Cafe cafe={filteredCafe} />,
