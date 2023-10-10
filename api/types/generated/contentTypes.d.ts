@@ -903,6 +903,66 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
+export interface ApiLeadLead extends Schema.CollectionType {
+  collectionName: 'leads';
+  info: {
+    singularName: 'lead';
+    pluralName: 'leads';
+    displayName: 'Lead';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    cafe_name: Attribute.String;
+    email: Attribute.String;
+    contact_number: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLibraryLibrary extends Schema.CollectionType {
+  collectionName: 'libraries';
+  info: {
+    singularName: 'library';
+    pluralName: 'libraries';
+    displayName: 'library';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    author: Attribute.String;
+    author_image: Attribute.Media & Attribute.Required;
+    description: Attribute.RichText;
+    library_image: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::library.library',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::library.library',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiListCafeListCafe extends Schema.SingleType {
   collectionName: 'list_cafes';
   info: {
@@ -1023,6 +1083,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     tiktok_embed: Attribute.String;
     tiktok_link: Attribute.String;
     suburb: Attribute.String;
+    study_length: Attribute.Integer &
+      Attribute.SetMinMax<{
+        max: 10;
+      }>;
+    featured: Attribute.Boolean & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1119,6 +1184,8 @@ declare module '@strapi/types' {
       'api::feature.feature': ApiFeatureFeature;
       'api::genre.genre': ApiGenreGenre;
       'api::home.home': ApiHomeHome;
+      'api::lead.lead': ApiLeadLead;
+      'api::library.library': ApiLibraryLibrary;
       'api::list-cafe.list-cafe': ApiListCafeListCafe;
       'api::study-length.study-length': ApiStudyLengthStudyLength;
       'api::study-spot.study-spot': ApiStudySpotStudySpot;

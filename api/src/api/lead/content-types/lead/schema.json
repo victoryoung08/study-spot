@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leads",
+  "info": {
+    "singularName": "lead",
+    "pluralName": "leads",
+    "displayName": "Lead"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "cafe_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "contact_number": {
+      "type": "string"
+    }
+  }
+}

@@ -80,6 +80,14 @@
     },
     "suburb": {
       "type": "string"
+    },
+    "study_length": {
+      "type": "integer",
+      "max": 10
+    },
+    "featured": {
+      "type": "boolean",
+      "required": true
     }
   }
 }

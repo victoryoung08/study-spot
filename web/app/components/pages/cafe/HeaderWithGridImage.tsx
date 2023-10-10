@@ -20,7 +20,11 @@ export default function HeaderWithGridImage({
           </div>
         )}
         {images && (
-          <div className={item.length === 1 ? "" : "grid md:grid-cols-2 gap-5"}>
+          <div
+            className={
+              images.data.length === 1 ? "" : "grid md:grid-cols-2 gap-5"
+            }
+          >
             <div>
               <Image
                 src={images.data[0]?.attributes?.url}
@@ -30,7 +34,11 @@ export default function HeaderWithGridImage({
                 className="w-full h-full"
               />
             </div>
-            <div className="grid grid-cols-2 gap-5">
+            <div
+              className={
+                images.data.length === 2 ? "" : "grid grid-cols-2 gap-5"
+              }
+            >
               {images.data
                 .map((img: any) => {
                   return (
@@ -39,7 +47,11 @@ export default function HeaderWithGridImage({
                         src={img?.attributes?.url}
                         width={200}
                         height={200}
-                        className="w-full h-full"
+                        className={
+                          images.data.length === 2
+                            ? "w-full h-full "
+                            : "w-full h-40"
+                        }
                         alt={
                           img?.image?.data?.attributes?.alternativeText ||
                           "Image"
