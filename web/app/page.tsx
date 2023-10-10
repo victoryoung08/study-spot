@@ -1,5 +1,6 @@
 import { Container } from "./components/common/Container";
 import * as component from "./components/common/ComponentSelector";
+import lodash from "lodash";
 
 type componentsType =
   | "Hero"
@@ -9,6 +10,8 @@ type componentsType =
   | "TwoColumnCtaList";
 
 export default async function Home() {
+  if (process.env.node_env !== "production") console.log(lodash);
+
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/home?populate=deep`,
     {
