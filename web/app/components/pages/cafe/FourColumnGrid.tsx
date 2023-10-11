@@ -28,7 +28,7 @@ export default function FourColumnGrid({ quietness, items }: any) {
                             />
                           </div>
                           <p className="text-base">
-                            {tag?.atrributes?.item || ""}
+                            {tag.attributes.item || ""}
                           </p>
                         </div>
                       );
