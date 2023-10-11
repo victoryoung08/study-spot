@@ -903,6 +903,36 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
+export interface ApiLeadLead extends Schema.CollectionType {
+  collectionName: 'leads';
+  info: {
+    singularName: 'lead';
+    pluralName: 'leads';
+    displayName: 'Lead';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    cafe_name: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.String;
+    contact_attempts: Attribute.Enumeration<
+      ['First ', 'Second', 'Third', 'Fourth', 'Fifth']
+    >;
+    lead_notes: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiListCafeListCafe extends Schema.SingleType {
   collectionName: 'list_cafes';
   info: {
@@ -1121,6 +1151,7 @@ declare module '@strapi/types' {
       'api::feature.feature': ApiFeatureFeature;
       'api::genre.genre': ApiGenreGenre;
       'api::home.home': ApiHomeHome;
+      'api::lead.lead': ApiLeadLead;
       'api::list-cafe.list-cafe': ApiListCafeListCafe;
       'api::study-length.study-length': ApiStudyLengthStudyLength;
       'api::study-spot.study-spot': ApiStudySpotStudySpot;

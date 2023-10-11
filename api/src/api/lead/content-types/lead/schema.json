@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leads",
+  "info": {
+    "singularName": "lead",
+    "pluralName": "leads",
+    "displayName": "Lead",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "cafe_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "contact_attempts": {
+      "type": "enumeration",
+      "enum": [
+        "First ",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ]
+    },
+    "lead_notes": {
+      "type": "richtext"
+    }
+  }
+}
