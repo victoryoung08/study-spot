@@ -32,7 +32,7 @@ const MapView = ({ cafe }: any) => {
           borderColor: "white",
           borderWidth: "3px",
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
+        mapStyle="mapbox://styles/studyspotcafe/cljwdrlf2008w01pygx57dfve"
       >
         {showPopup && (
           <Popup
