@@ -44,7 +44,7 @@ export default function Filter({
             <button
               onClick={() => handleTagClick(item)}
               key={item.item}
-              className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
+              className={`border hover:bg-primary/20  border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                 selectedTags.includes(item) ? "bg-primary" : ""
               }`}
             >
@@ -69,7 +69,7 @@ export default function Filter({
               <button
                 onClick={() => handleTagClick(item)}
                 key={item.item}
-                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
+                className={`border hover:bg-primary/20 border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                   selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >
@@ -95,7 +95,7 @@ export default function Filter({
               <button
                 onClick={() => handleTagClick(item)}
                 key={item.item}
-                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
+                className={`border hover:bg-primary/20 border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                   selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >

@@ -168,7 +168,7 @@ export default function BookNow({
                       </div>
                     )}
                     <input
-                      type="text"
+                      type="email"
                       {...register("email")}
                       placeholder="Your best email"
                       className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"

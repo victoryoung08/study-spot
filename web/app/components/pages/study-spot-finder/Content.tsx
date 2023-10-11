@@ -52,14 +52,14 @@ export default function Content({
         <label className="label cursor-pointer">
           <input
             type="checkbox"
-            className="toggle toggle-neutral toggle-lg"
+            className="toggle toggle-base toggle-lg"
             onChange={() => setView(view === "map" ? "grid" : "map")}
             checked={view === "map" ? true : false}
           />
 
           <span
             className={`label-text ml-2 flex gap-1 ${
-              view == "map" ? "text-primary" : ""
+              view == "map" ? "text-primary" : "text-white"
             }`}
           >
             <MapPinIcon className="w-5 h-5" />
@@ -78,7 +78,7 @@ export default function Content({
             styles={styles}
           />
         </div>
-        <div className={`flex-1 ${view === "map" ? "h-screen" : ""}`}>
+        <div className={`flex-1 ${view === "map" ? "h-[800px]" : ""}`}>
           {
             {
               grid: <Cafe cafe={filteredCafe} />,

@@ -11,6 +11,7 @@ import Map, {
 import mapboxgl from "mapbox-gl";
 import Image from "next/image";
 import pinIcon from "@/public/images/pin.svg";
+import Link from "next/link";
 const MapView = ({ cafe }: any) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popUpData, setPopupData] = useState<any>();
@@ -23,7 +24,7 @@ const MapView = ({ cafe }: any) => {
         initialViewState={{
           latitude: cafe[0]?.attributes?.Latitute,
           longitude: cafe[0]?.attributes?.Longitude,
-          zoom: 10,
+          zoom: 11,
         }}
         style={{
           width: "100%",
@@ -41,96 +42,108 @@ const MapView = ({ cafe }: any) => {
               setPopupData(null);
             }}
             style={{ padding: 0, margin: 0 }}
-            className="w-[500px] h-[500px] p-0 m-0 "
+            className="w-[500px] h-[500px] p-0 m-0 z-50 "
             anchor="top"
             longitude={popUpData?.attributes?.Longitude}
             latitude={popUpData?.attributes?.Latitute}
           >
-            <div className="border-2 border-white bg-[#454545] rounded-xl p-4">
+            <div className="border-2 border-white bg-[#454545] rounded-xl p-4 z-50">
               <div>
-                <img
-                  className="border-2 border-white rounded-xl w-full h-full"
-                  alt="marker"
-                  src={popUpData?.attributes?.images?.data[0]?.attributes?.url}
-                />
+                <Link href={`/cafes/${popUpData.attributes.slug}`}>
+                  <img
+                    className="border-2 border-white rounded-xl w-full h-full"
+                    alt="marker"
+                    src={
+                      popUpData?.attributes?.images?.data[0]?.attributes?.url
+                    }
+                  />
 
-                <div className="mt-2">
-                  <span className="text-lg font-bold">
-                    {popUpData.attributes.cafe_name}
-                  </span>
-                  <div className="flex gap-1 ">
-                    <Image
-                      className="w-4 h-4"
-                      src={pinIcon}
-                      alt="Location Icon"
-                    />
-                    <a
-                      target="_blank"
-                      href={popUpData.attributes.google_map_link}
-                    >
-                      <span className="text-xs">
-                        {popUpData.attributes.location}
-                      </span>
-                    </a>
-                  </div>
+                  <div className="mt-2">
+                    <span className="text-lg font-bold">
+                      {popUpData.attributes.cafe_name}
+                    </span>
+                    <div className="flex gap-1 ">
+                      <Image
+                        className="w-4 h-4"
+                        src={pinIcon}
+                        alt="Location Icon"
+                      />
+                      <a
+                        target="_blank"
+                        href={popUpData.attributes.google_map_link}
+                      >
+                        <span className="text-xs">
+                          {popUpData.attributes.location}
+                        </span>
+                      </a>
+                    </div>
 
-                  <div className="flex gap-2 mt-2">
-                    {popUpData?.attributes?.features?.data?.map((item: any) => {
-                      return (
-                        <div
-                          key={item.id}
-                          className="border p-1 rounded-xl bg-primary"
-                        >
-                          <Image
-                            width={5}
-                            height={5}
-                            src={
-                              item?.attributes?.svg_icon?.data?.attributes?.url
-                            }
-                            alt={item?.attributes?.item}
-                            className="w-5 h-5"
-                          />
-                        </div>
-                      );
-                    })}
-                    {popUpData?.attributes?.vibes?.data?.map((item: any) => {
-                      return (
-                        <div
-                          key={item.id}
-                          className="border p-1 rounded-xl bg-primary"
-                        >
-                          <Image
-                            width={5}
-                            height={5}
-                            src={
-                              item?.attributes?.svg_icon?.data?.attributes?.url
-                            }
-                            alt={item?.attributes?.item}
-                            className="w-5 h-5"
-                          />
-                        </div>
-                      );
-                    })}
-                    {popUpData?.attributes?.styles?.data?.map((item: any) => {
-                      return (
-                        <div
-                          key={item.id}
-                          className="border p-1 rounded-xl bg-primary"
-                        >
-                          <Image
-                            width={5}
-                            height={5}
-                            src={
-                              item?.attributes?.svg_icon?.data?.attributes?.url
-                            }
-                            alt={item?.attributes?.item}
-                            className="w-5 h-5"
-                          />
-                        </div>
-                      );
-                    })}
+                    <div className="flex gap-2 mt-2">
+                      {popUpData?.attributes?.features?.data?.map(
+                        (item: any) => {
+                          return (
+                            <div
+                              key={item.id}
+                              className="border p-1 rounded-xl bg-primary tooltip"
+                              data-tip={item?.attributes?.item}
+                            >
+                              <Image
+                                width={5}
+                                height={5}
+                                src={
+                                  item?.attributes?.svg_icon?.data?.attributes
+                                    ?.url
+                                }
+                                alt={item?.attributes?.item}
+                                className="w-5 h-5"
+                              />
+                            </div>
+                          );
+                        }
+                      )}
+                      {popUpData?.attributes?.vibes?.data?.map((item: any) => {
+                        return (
+                          <div
+                            key={item.id}
+                            className="border p-1 rounded-xl bg-primary tooltip"
+                            data-tip={item?.attributes?.item}
+                          >
+                            <Image
+                              width={5}
+                              height={5}
+                              src={
+                                item?.attributes?.svg_icon?.data?.attributes
+                                  ?.url
+                              }
+                              alt={item?.attributes?.item}
+                              className="w-5 h-5"
+                            />
+                          </div>
+                        );
+                      })}
+                      {popUpData?.attributes?.styles?.data?.map((item: any) => {
+                        return (
+                          <div
+                            key={item.id}
+                            className="border p-1 rounded-xl bg-primary tooltip"
+                            data-tip={item?.attributes?.item}
+                          >
+                            <Image
+                              width={5}
+                              height={5}
+                              src={
+                                item?.attributes?.svg_icon?.data?.attributes
+                                  ?.url
+                              }
+                              alt={item?.attributes?.item}
+                              className="w-5 h-5"
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </Popup>
@@ -140,7 +153,6 @@ const MapView = ({ cafe }: any) => {
             <>
               {item.attributes.Latitute && item.attributes.Longitude && (
                 <Marker
-                  style={{ zIndex: 1000 }}
                   onClick={(e) => {
                     e.originalEvent.stopPropagation();
                     setShowPopup(true);
@@ -153,6 +165,7 @@ const MapView = ({ cafe }: any) => {
                   //   anchor="bottom"
                 >
                   <img
+                    className="h-20 w-20 z-0"
                     alt="marker"
                     src={
                       popUpData
