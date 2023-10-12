@@ -945,6 +945,8 @@ export interface ApiLibraryLibrary extends Schema.CollectionType {
     author_image: Attribute.Media & Attribute.Required;
     description: Attribute.RichText;
     library_image: Attribute.Media & Attribute.Required;
+    short_description: Attribute.String;
+    slug: Attribute.UID<'api::library.library', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

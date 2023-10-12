@@ -34,6 +34,7 @@ export default function TwoColumnImageLeft({ item }: any) {
                 >
                   {ctx.drescription}
                 </Markdown> */}
+                
               </div>
             </div>
           );

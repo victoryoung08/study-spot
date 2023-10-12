@@ -1,8 +1,17 @@
 import { Container } from "../components/common/Container";
-import * as component from "../components/common/ComponentSelector";
 import TwoColumnImagewithBorder from "../components/pages/library/twoColumnImageWithBorder";
 
 export default async function library() {
+  const response = await fetch(
+    `${process.env.STRAPI_API_ENDPOINT}/libraries?populate=deep`,
+    {
+      next: { revalidate: 1 },
+      // headers: {
+      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      // },
+    }
+  );
+  const data = await response.json();
   return (
     <Container>
       <div className="text-center mb-10">
@@ -10,7 +19,7 @@ export default async function library() {
           Explore the Cafe Library
         </h2>
       </div>
-      <TwoColumnImagewithBorder />
+      <TwoColumnImagewithBorder library={data} />
     </Container>
   );
 }
