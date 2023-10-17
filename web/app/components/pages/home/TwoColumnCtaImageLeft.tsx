@@ -1,6 +1,4 @@
 import Image from "next/image";
-
-import ctaImg from "@/public/images/become-contributor.png";
 import { Container } from "../../common/Container";
 import Link from "next/link";
 

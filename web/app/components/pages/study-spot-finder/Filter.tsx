@@ -1,15 +1,4 @@
 "use client";
-
-import wifi from "@/public/images/wifi.svg";
-import charging from "@/public/images/charging.svg";
-import chill from "@/public/images/chill.svg";
-import cozy from "@/public/images/cozy.svg";
-import fast from "@/public/images/fast.svg";
-import upbeat from "@/public/images/upbeat.svg";
-import minimal from "@/public/images/minimal.svg";
-import earthy from "@/public/images/earthy.svg";
-import vintage from "@/public/images/vintage.svg";
-import artistic from "@/public/images/artistic.svg";
 import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
 
@@ -44,7 +33,7 @@ export default function Filter({
             <button
               onClick={() => handleTagClick(item)}
               key={item.item}
-              className={`border hover:bg-primary/20  border-white flex flex-col justify-center items-center p-3 rounded-xl ${
+              className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                 selectedTags.includes(item) ? "bg-primary" : ""
               }`}
             >
@@ -69,7 +58,7 @@ export default function Filter({
               <button
                 onClick={() => handleTagClick(item)}
                 key={item.item}
-                className={`border hover:bg-primary/20 border-white flex flex-col justify-center items-center p-3 rounded-xl ${
+                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                   selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >
@@ -95,7 +84,7 @@ export default function Filter({
               <button
                 onClick={() => handleTagClick(item)}
                 key={item.item}
-                className={`border hover:bg-primary/20 border-white flex flex-col justify-center items-center p-3 rounded-xl ${
+                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl ${
                   selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >

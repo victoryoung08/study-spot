@@ -1,47 +1,7 @@
 import { Container } from "../../common/Container";
-import img1 from "@/public/images/op1.webp";
-import img2 from "@/public/images/op2.webp";
-import img3 from "@/public/images/op3.webp";
-import img4 from "@/public/images/op4.webp";
 import Image from "next/image";
 
-const opportunities = [
-  {
-    id: 1,
-    title: "Boost your word of mouth",
-    desc1: "There's nothing stronger than a friend's recommendation.",
-    desc2:
-      "With Study Spot, you’re able incentivise your customers to share social media content for a promotion of your choice.",
-    Image: img1,
-  },
-  {
-    id: 2,
-    title: "Connect with a warm audience",
-    desc1:
-      "Digital marketing channels like Instagram and Tiktok don’t always put you in front of high-buying intent customers.",
-    desc2:
-      "Study Spot helps you reach those who are actively looking for a cafe to go to - right there and then.",
-    Image: img2,
-  },
-  {
-    id: 3,
-    title: "Increase your reach and visibility",
-    desc1:
-      "Get more eyeballs to your cafe. We’ll do the work of finding cafe enthusiasts who enjoy great spaces and environments.",
-    desc2: "We're talking Tiktok, Instagram, Google - all promoting you!",
-    Image: img3,
-  },
-  {
-    id: 4,
-    title: "Another source of revenue",
-    desc1: "There's a gap with finding the perfect study cafe.",
-    desc2:
-      "Our Study Spot apps helps customers find study friendly cafes like yours providing an additional source of leads, customers and branding opportunities.",
-    Image: img4,
-  },
-];
-
-export default function BorderedText({section_title, item}: any) {
+export default function BorderedText({ section_title, item }: any) {
   return (
     <Container>
       <div>
@@ -52,7 +12,7 @@ export default function BorderedText({section_title, item}: any) {
         )}
 
         <div className="mx-5 md:mx-10 lg:mx-32">
-          {opportunities.map((item) => {
+          {item.map((item: any) => {
             return (
               <div
                 key={item.id}
@@ -75,17 +35,24 @@ export default function BorderedText({section_title, item}: any) {
                 </div>
                 <div>
                   <h2 className="font-semibold text-3xl">{item.title}</h2>
-                  <p className="my-5 text-sm">{item.desc1}</p>
-                  <p className="text-sm">{item.desc2}</p>
+                  <p className="my-5 text-sm">{item.description}</p>
                 </div>
-                <div className="relative mt-10">
-                  <Image src={item.Image} alt={item.title} />
-                  {item.id === 3 || item.id === 4 ? (
-                    <div className="bg-gradient-to-t h-2/4 mt-auto from-[#181818] absolute top-0 right-0 bottom-0 left-0"></div>
-                  ) : (
-                    <div className="bg-gradient-to-l w-2/4 ml-auto  from-[#181818] absolute top-0 right-0 bottom-0 left-0 "></div>
-                  )}
-                </div>
+                {item.image.data && (
+                  <div className="relative mt-10">
+                    <Image
+                      src={item.image.data?.attributes.url}
+                      alt={item.title}
+                      height={700}
+                      width={700}
+                      className="w-full"
+                    />
+                    {item.id === 3 || item.id === 4 ? (
+                      <div className="bg-gradient-to-t h-2/4 mt-auto from-[#181818] absolute top-0 right-0 bottom-0 left-0"></div>
+                    ) : (
+                      <div className="bg-gradient-to-l w-2/4 ml-auto  from-[#181818] absolute top-0 right-0 bottom-0 left-0 "></div>
+                    )}
+                  </div>
+                )}
               </div>
             );
           })}

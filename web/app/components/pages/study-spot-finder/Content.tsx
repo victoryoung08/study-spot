@@ -3,8 +3,8 @@ import { useState } from "react";
 import Cafe from "./Cafe";
 import Filter from "./Filter";
 import MapView from "./Map";
-import { set } from "lodash";
-import Lottie from "lottie-react";
+// import { set } from "lodash";
+// import Lottie from "lottie-react";
 import { MapIcon, MapPinIcon } from "@heroicons/react/24/solid";
 
 type ContentProps = {

@@ -1,57 +1,5 @@
 import { Container } from "../../common/Container";
 
-const data = [
-  {
-    id: 1,
-    title: "V 1.0",
-    isCurrent: true,
-    data: [
-      { id: 1, text: "Partner with 25 Foundational Study Spots" },
-      {
-        id: 2,
-        text: "Directory-style app to allow Study Spot users discover your cafe",
-      },
-      {
-        id: 3,
-        text: "Grow our social media & Google SEO and direct visibility to your cafe",
-      },
-      { id: 4, text: "Collaborate with social media content with your Cafe" },
-    ],
-  },
-  {
-    id: 2,
-    title: "V 1.1",
-    isCurrent: false,
-    data: [
-      { id: 1, text: "Integrate interactive map view for Study Spot App" },
-      {
-        id: 2,
-        text: "Onboard additional 50 Study Spots",
-      },
-      {
-        id: 3,
-        text: "Initiate Study Spot User Database for Email Marketing",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "V 1.2",
-    isCurrent: false,
-    data: [
-      { id: 1, text: "Develop user & business logins" },
-      {
-        id: 2,
-        text: "Business Analytic Dashboard for discoverability & revenue metrics",
-      },
-      {
-        id: 3,
-        text: "Rollout Email Marketing for your Cafe with our Study Spot Database",
-      },
-    ],
-  },
-];
-
 export default function Versions({ version }: any) {
   return (
     <Container>

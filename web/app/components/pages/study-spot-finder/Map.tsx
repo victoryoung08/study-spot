@@ -12,6 +12,7 @@ import mapboxgl from "mapbox-gl";
 import Image from "next/image";
 import pinIcon from "@/public/images/pin.svg";
 import Link from "next/link";
+
 const MapView = ({ cafe }: any) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popUpData, setPopupData] = useState<any>();

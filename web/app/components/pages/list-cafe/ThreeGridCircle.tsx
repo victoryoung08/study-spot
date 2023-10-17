@@ -1,11 +1,5 @@
 import { Container } from "../../common/Container";
 
-const data = [
-  { id: 1, title: "List and tell us about your cafe." },
-  { id: 2, title: "Our Study Spot community find your cafe" },
-  { id: 3, title: "Choose how and what you want to promote" },
-];
-
 export default function ThreeGridCircle({ title, description, item }: any) {
   return (
     <Container>

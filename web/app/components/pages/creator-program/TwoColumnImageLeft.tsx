@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Container } from "../../common/Container";
-import image from "@/public/images/your-schedule.webp";
 import Markdown from "markdown-to-jsx";
 
 export default function TwoColumnImageLeft({ item }: any) {
@@ -23,17 +22,21 @@ export default function TwoColumnImageLeft({ item }: any) {
                 <h3 className="text-2xl mb-5 lg:text-3xl font-semibold">
                   {ctx.title || ""}
                 </h3>
-                {/* <Markdown
+                <Markdown
                   options={{
                     overrides: {
                       li: {
-                        component: "li",
+                        component: "div",
+                        props: {
+                          className:
+                            "list-item list-inside list-disc my-2 text-sm",
+                        },
                       },
                     },
                   }}
                 >
-                  {ctx.drescription}
-                </Markdown> */}
+                  {ctx.description}
+                </Markdown>
               </div>
             </div>
           );
