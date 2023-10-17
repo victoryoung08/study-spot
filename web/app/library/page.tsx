@@ -6,9 +6,9 @@ export default async function library() {
     `${process.env.STRAPI_API_ENDPOINT}/libraries?populate=deep`,
     {
       next: { revalidate: 1 },
-      // headers: {
-      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      },
     }
   );
   const data = await response.json();

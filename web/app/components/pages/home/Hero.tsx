@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Container } from "../../common/Container";
-import heroImg from "@/public/images/hero-image.webp";
 import Link from "next/link";
 
 type heroType = {

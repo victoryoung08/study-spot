@@ -41,8 +41,8 @@ export default function Content({
   });
 
   return (
-    <div className="mx-5 lg:mx-10 flex gap-5 lg:gap-10">
-      <div className="hidden md:block w-72">
+    <div className="lg:mx-10 flex gap-5 lg:gap-10 relative">
+      <div className="w-full md:w-72 fixed bottom-0 md:relative">
         <Filter
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
@@ -51,7 +51,7 @@ export default function Content({
           styles={styles}
         />
       </div>
-      <div className="flex-1">
+      <div className="mx-5 lg:mx-0 flex-1">
         <Cafe cafe={filteredCafe} />
       </div>
     </div>

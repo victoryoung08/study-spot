@@ -1,6 +1,8 @@
+import Markdown from "markdown-to-jsx";
 import { Container } from "../../common/Container";
 
 export default function TwoColumnText({ item }: any) {
+  console.log(item);
   return (
     <Container>
       <div className="flex flex-col gap-28 lg:gap-44">
@@ -13,12 +15,20 @@ export default function TwoColumnText({ item }: any) {
                 </h2>
               </div>
               <div className="">
-                {/* <Markdown
-                  remarkPlugins={[remarkGfm]}
-                  className="text-base lg:text-lg"
+                <Markdown
+                  options={{
+                    overrides: {
+                      p: {
+                        component: "p",
+                        props: {
+                          className: "my-2 text-base",
+                        },
+                      },
+                    },
+                  }}
                 >
-                  {data.description || ""}
-                </Markdown> */}
+                  {data.description}
+                </Markdown>
               </div>
             </div>
           );

@@ -2,8 +2,6 @@
 import { Container } from "../../components/common/Container";
 import * as component from "../../components/common/ComponentSelector";
 
-type componentsType = "HeaderWithGridImage" | "CtaCenter" | "FourColumnGrid";
-
 export default async function CreatorProgram(searchParams: any) {
   const { params } = searchParams;
 

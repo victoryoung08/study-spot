@@ -2,16 +2,6 @@ import Link from "next/link";
 import { Container } from "../../common/Container";
 import Markdown from "markdown-to-jsx";
 
-const benefits = [
-  { id: 1, title: "Get 50% off your 1st 3-months Listing Fees ($50/month)" },
-  { id: 2, title: "3x Social Media Content / Month for the 1st 3-months" },
-  {
-    id: 3,
-    title:
-      "Secure Lifetime Early Study Spot Pricing at $100/month after 3-months",
-  },
-];
-
 type bookNowType = {
   title: string;
   description: string;
@@ -27,14 +17,11 @@ export default function BookNow({
   cta_link,
   book_in_a_call_link,
 }: bookNowType) {
-  console.log(description);
   return (
     <Container>
       <div className="text-center lg:py-20">
         <h2 className="text-3xl font-semibold text-white md:text-4xl lg:text-5xl">
           {title || ""}
-          {/* Become an <span className="text-primary">Early Study Spot Cafe </span>
-          for lifetime foundational rates */}
         </h2>
         {description && (
           <div className="mt-10">
@@ -61,7 +48,6 @@ export default function BookNow({
             </Markdown>
           </div>
         )}
-
 
         <div className="mt-10">
           <div className="mt-20">
