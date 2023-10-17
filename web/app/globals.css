@@ -40,3 +40,12 @@ body {
     }
   }
 }
+/* Mapbox Popup */
+
+.mapboxgl-popup-content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.mapboxgl-popup-close-button {
+  display: none !important;
+}

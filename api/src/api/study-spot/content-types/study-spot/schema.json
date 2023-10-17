@@ -81,13 +81,11 @@
     "suburb": {
       "type": "string"
     },
-    "study_length": {
-      "type": "integer",
-      "max": 10
+    "Longitude": {
+      "type": "float"
     },
-    "featured": {
-      "type": "boolean",
-      "required": true
+    "Latitute": {
+      "type": "float"
     }
   }
 }

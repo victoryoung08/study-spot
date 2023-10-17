@@ -2,7 +2,6 @@ import Markdown from "markdown-to-jsx";
 import { Container } from "../../common/Container";
 
 export default function TwoColumnText({ item }: any) {
-  console.log(item);
   return (
     <Container>
       <div className="flex flex-col gap-28 lg:gap-44">

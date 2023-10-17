@@ -28,7 +28,8 @@ export default function TwoColumnImageLeft({ item }: any) {
                       li: {
                         component: "div",
                         props: {
-                          className: "list-item list-disc my-2 text-sm",
+                          className:
+                            "list-item list-inside list-disc my-2 text-sm",
                         },
                       },
                     },

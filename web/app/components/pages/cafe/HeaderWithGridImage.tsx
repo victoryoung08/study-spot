@@ -1,16 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import { Container } from "../../common/Container";
 import pinIcon from "@/public/images/pin.svg";
+import { register } from "swiper/element/bundle";
+import { useEffect } from "react";
+
 export default function HeaderWithGridImage({
   title,
   location,
   images,
   item,
 }: any) {
+  useEffect(() => {
+    register();
+  }, []);
   return (
     <Container>
       <div className="">
-        <h2 className="mt-5 text-4xl font-semibold leading-tight lg:mt-0 lg:text-left lg:text-5xl">
+        <h2 className="mt-5 text-4xl font-semibold leading-tight lg:mt-0 lg:text-left lg:text-5xl mb-2">
           {title || ""}
         </h2>
         {location && (

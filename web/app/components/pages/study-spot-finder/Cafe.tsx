@@ -17,7 +17,7 @@ export default function Cafe({ cafe }: any) {
                 alt={item?.attributes?.cafe_name}
                 width={400}
                 height={400}
-                className="w-full h-[300px]"
+                className="w-full"
               />
               <div className="p-5">
                 <h2 className="font-semibold text-xl">
@@ -29,7 +29,8 @@ export default function Cafe({ cafe }: any) {
                     return (
                       <div
                         key={item.id}
-                        className="border p-1 rounded-xl bg-primary"
+                        className="border p-1 rounded-xl bg-primary tooltip"
+                        data-tip={item?.attributes?.item}
                       >
                         <Image
                           width={5}
@@ -47,7 +48,8 @@ export default function Cafe({ cafe }: any) {
                     return (
                       <div
                         key={item.id}
-                        className="border p-1 rounded-xl bg-primary"
+                        className="border p-1 rounded-xl bg-primary tooltip"
+                        data-tip={item?.attributes?.item}
                       >
                         <Image
                           width={5}
@@ -65,7 +67,8 @@ export default function Cafe({ cafe }: any) {
                     return (
                       <div
                         key={item.id}
-                        className="border p-1 rounded-xl bg-primary"
+                        className="border p-1 rounded-xl bg-primary tooltip"
+                        data-tip={item?.attributes?.item}
                       >
                         <Image
                           width={5}

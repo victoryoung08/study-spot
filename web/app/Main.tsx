@@ -9,7 +9,7 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => (
-  <div className="w-full bg-[#181818] text-gray-700 antialiased">
+  <div className="w-full !bg-[#181818] text-gray-700 antialiased h-full">
     <div className="">
       <header className=" bg-[#181818]">
         <Navbar />
