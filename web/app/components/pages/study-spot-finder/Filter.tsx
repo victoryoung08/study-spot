@@ -26,7 +26,7 @@ export default function Filter({
   };
 
   return (
-    <div className="md:border border-white md:rounded-3xl py-10 px-5 md:p-4 bg-[#252525] flex flex-row md:flex-col gap-3 overflow-y-auto no-scrollbar">
+    <div className="md:border border-white md:rounded-3xl py-8 px-5 md:p-4 bg-[#252525] flex flex-row md:flex-col gap-3 overflow-y-auto no-scrollbar">
       {features && (
         <div className="flex flex-row md:grid grid-cols-2 gap-3">
           {features.map((item: any) => {
