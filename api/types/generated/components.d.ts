@@ -335,13 +335,18 @@ export interface ComponentTwoColumnCtaList extends Schema.Component {
   info: {
     displayName: 'TwoColumnCtaList';
     icon: 'alien';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
     cta_text: Attribute.String;
     cta_link: Attribute.String;
-    item: Attribute.Component<'component.list-item', true>;
+    libraries: Attribute.Relation<
+      'component.two-column-cta-list',
+      'oneToMany',
+      'api::library.library'
+    >;
   };
 }
 
