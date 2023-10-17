@@ -2,7 +2,8 @@
   "collectionName": "components_component_two_column_cta_lists",
   "info": {
     "displayName": "TwoColumnCtaList",
-    "icon": "alien"
+    "icon": "alien",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -18,10 +19,10 @@
     "cta_link": {
       "type": "string"
     },
-    "item": {
-      "type": "component",
-      "repeatable": true,
-      "component": "component.list-item"
+    "libraries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::library.library"
     }
   }
 }

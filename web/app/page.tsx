@@ -36,7 +36,6 @@ export default async function Home() {
     const Component = component[componentName as componentsType];
     return { ...item, Component };
   });
-
   return (
     <Container>
       {componentLists.map((item: any) => {

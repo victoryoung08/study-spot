@@ -1,6 +1,6 @@
 import Image from "next/image";
-
 import { Container } from "../../common/Container";
+
 type singleRowImageType = {
   title: string;
   description: string;
