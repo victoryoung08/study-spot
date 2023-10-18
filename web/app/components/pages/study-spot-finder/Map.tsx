@@ -43,16 +43,16 @@ const MapView = ({ cafe }: any) => {
               setPopupData(null);
             }}
             style={{ padding: 0, margin: 0 }}
-            className="w-[500px] h-[500px] p-0 m-0 z-50 "
+            className=" w-[500px] h-[500px] p-0 m-0 z-50 "
             anchor="top"
             longitude={popUpData?.attributes?.Longitude}
             latitude={popUpData?.attributes?.Latitute}
           >
-            <div className="border-2 border-white bg-[#454545] rounded-xl p-4 z-50">
+            <div className=" bg-[#454545] p-4 z-50 border-2 rounded-xl border-white">
               <div>
                 <Link href={`/cafes/${popUpData.attributes.slug}`}>
                   <img
-                    className="border-2 border-white rounded-xl w-full h-full"
+                    className="border-2 border-white  rounded-xl w-full h-full"
                     alt="marker"
                     src={
                       popUpData?.attributes?.images?.data[0]?.attributes?.url

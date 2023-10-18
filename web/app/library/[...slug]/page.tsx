@@ -16,6 +16,7 @@ export default async function LibrarySlug(searchParams: any) {
     }
   );
   const library = await response.json();
+  
   return (
     <Container>
       <div>

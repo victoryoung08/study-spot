@@ -31,6 +31,8 @@ const schema = z.object({
   phone: z.string().min(1, { message: "Please input phone number" }),
 });
 
+const resolver = zodResolver(schema);
+
 export default function BookNow({
   title,
   description,
@@ -38,6 +40,17 @@ export default function BookNow({
   cta_link,
   book_in_a_call_link,
 }: bookNowType) {
+  type FormData = z.infer<typeof schema>;
+  const { handleSubmit, register, formState, reset } = useForm<FormData>({
+    resolver,
+  });
+
+  const onSubmit = async (data: Inputs) => {
+    console.log(data);
+  };
+
+  const { errors } = formState;
+
   return (
     <Container>
       <div className="text-center lg:py-20">
@@ -71,54 +84,71 @@ export default function BookNow({
         )}
 
         <div className="mt-10">
-          {/* <h3 className="font-bold text-xl lg:text-2xl">
-            As a thank you for being the first 25 Study Spots, you&apos;ll
-            receive:
-          </h3>
-          <div className="mt-3 space-y-3">
-            {benefits.map((item) => {
-              return (
-                <p
-                  key={item.id}
-                  className="border-b border-gray-500 w-3/4 md:w-4/6 mx-auto"
-                >
-                  {item.title}
-                </p>
-              );
-            })}
-          </div>
-          <h4 className="lg:w-3/4 mx-auto mt-10 font-semibold text-lg lg:text-xl">
-            Listing Fees will increase once we&apos;ve reached 25 Study Spots.
-            Early Study Spots will retain foundational rates.
-          </h4> */}
           <div className="mt-20">
-            <form action="" className="w-3/4 lg:w-2/5 mx-auto">
-              <input
-                type="text"
-                placeholder="Your First Name"
-                className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <input
-                type="text"
-                placeholder="Your Cafe Name"
-                className="input input-bordered w-full my-5 rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <input
-                type="text"
-                placeholder="Your best Name"
-                className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <input
-                type="text"
-                placeholder="Your best contact number"
-                className="input input-bordered w-full mt-5 rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <Link
-                href={cta_link || "/"}
+            <form
+              action=""
+              className="w-3/4 lg:w-2/5 mx-auto"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div>
+                <input
+                  {...register("first_name")}
+                  type="text"
+                  placeholder="Your First Name"
+                  className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                />
+                {errors.first_name && (
+                  <span className="text-red-500 text-sm">
+                    Please check your name.
+                  </span>
+                )}
+              </div>
+              <div className="my-5">
+                <input
+                  {...register("cafe_name")}
+                  type="text"
+                  placeholder="Your Cafe Name"
+                  className="input input-bordered w-full  rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                />
+                {errors.cafe_name && (
+                  <span className="text-red-500 text-sm">
+                    Please check your cafe name.
+                  </span>
+                )}
+              </div>
+              <div>
+                <input
+                  {...register("email")}
+                  type="text"
+                  placeholder="Your best Email"
+                  className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-sm">
+                    Please check your email
+                  </span>
+                )}
+              </div>
+              <div>
+                <input
+                  {...register("phone")}
+                  type="number"
+                  placeholder="Your best contact number"
+                  className="input input-bordered w-full mt-5 rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                />
+                {errors.phone && (
+                  <span className="text-red-500 text-sm">
+                    Please check your phone number
+                  </span>
+                )}
+              </div>
+
+              <button
+                type="submit"
                 className="mt-10 btn btn-primary capitalize font-normal border-white hover:border-white"
               >
                 {cta_text || ""}
-              </Link>
+              </button>
               <div className="mt-5">
                 <Link
                   target="_blank"
