@@ -1,4 +1,3 @@
-import Seo from "../../layouts/Meta";
 import Hero from "../pages/home/Hero";
 import SingleRowWithImage from "../pages/home/SingleRowWithImage";
 import TwoColumnCtaImageLeft from "../pages/home/TwoColumnCtaImageLeft";
@@ -20,7 +19,6 @@ import HeaderWithGridImage from "../pages/cafe/HeaderWithGridImage";
 import FourColumnGrid from "../pages/cafe/FourColumnGrid";
 
 export {
-  Seo,
   Hero,
   SingleRowWithImage,
   TwoColumnCtaImageLeft,

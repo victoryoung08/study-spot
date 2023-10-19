@@ -16,7 +16,7 @@ export default async function LibrarySlug(searchParams: any) {
     }
   );
   const library = await response.json();
-  
+
   return (
     <Container>
       <div>
@@ -39,12 +39,11 @@ export default async function LibrarySlug(searchParams: any) {
             </div>
             <div>
               <p className="text-base font-bold">
-                {library?.data[0]?.attributes?.author || ""} 
+                {library?.data[0]?.attributes?.author || ""}
               </p>
               <p className="text-base">Founder</p>
             </div>
           </div>
-            
 
           <div className="mt-44 w-2/4 mx-auto">
             <Markdown
@@ -84,4 +83,37 @@ export default async function LibrarySlug(searchParams: any) {
       </div>
     </Container>
   );
+}
+
+// generate dynamic metadata
+export async function generateMetadata({ params }: any) {
+  try {
+    const seo = await fetch(
+      `${process.env.STRAPI_API_ENDPOINT}/libraries?filters[slug][$eq]=${params.slug}&populate=deep`,
+      {
+        next: { revalidate: 1 },
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+        },
+      }
+    );
+    const data = await seo.json();
+    if (!data) {
+      return {
+        title: "Not Found",
+        description: "The page you are looking for does not exist.",
+      };
+    }
+
+    return {
+      title: data.data[0].attributes.title,
+      description: data.data[0].attributes.short_description,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      title: "Not Found",
+      description: "The page you are looking for does not exist.",
+    };
+  }
 }

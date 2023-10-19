@@ -2,7 +2,6 @@ import { Container } from "./components/common/Container";
 import * as component from "./components/common/ComponentSelector";
 
 type componentsType =
-  | "Seo"
   | "Hero"
   | "SingleRowWithImage"
   | "TwoColumnCtaImageLeft"
