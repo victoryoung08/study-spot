@@ -1,7 +1,5 @@
 import { Container } from "./components/common/Container";
 import * as component from "./components/common/ComponentSelector";
-import { NextSeo } from "next-seo";
-import { Metadata, ResolvingMetadata } from "next";
 
 type componentsType =
   | "Seo"
@@ -28,25 +26,25 @@ export default async function Home() {
     return <>Error</>;
   }
 
-  const componentLists = data.data.attributes.components.map((item: any) => {
-    const name = item.__component.split(".")[1];
-    const componentNameParts = name.split("-");
-    // Capitalize each part and join them
-    const componentName = componentNameParts
-      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join("");
+  const componentLists = data.data.attributes.components
+    .map((item: any) => {
+      const name = item.__component.split(".")[1];
+      const componentNameParts = name.split("-");
+      // Capitalize each part and join them
 
-    const Component = component[componentName as componentsType];
+      const componentName = componentNameParts
+        .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join("");
 
-    return { ...item, Component };
-  });
+      if (componentName === "Seo") return;
+      const Component = component[componentName as componentsType];
+
+      return { ...item, Component };
+    })
+    .filter((item: any) => item);
 
   return (
     <Container>
-      {/* <NextSeo
-        title="Home Page Title"
-        description="Home page description of the page"
-      /> */}
       {componentLists.map((item: any) => {
         const { __component, Component, ...rest } = item;
         return <Component key={item.id} {...rest} />;
@@ -76,20 +74,14 @@ export async function generateMetadata() {
       };
     }
 
-    data.data.attributes.components.map((item: any) => {
-      if (item.__component === "seo.seo") {
-        console.log(item.description);
-        return {
-          title: item.title,
-          description: item.description,
-        };
-      } else {
-        return {
-          title: "Not Found",
-          description: "The page you are looking for does not exist.",
-        };
-      }
-    });
+    const seoData2 = data.data.attributes.components.filter((item: any) => {
+      return item.__component === "seo.seo";
+    })[0];
+
+    return {
+      title: seoData2.title,
+      description: seoData2.description,
+    };
   } catch (error) {
     console.error(error);
     return {
