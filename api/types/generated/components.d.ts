@@ -17,12 +17,11 @@ export interface ComponentBookNow extends Schema.Component {
   info: {
     displayName: 'Book_now';
     icon: 'alien';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.RichText;
-    cta_text: Attribute.String;
-    cta_link: Attribute.String;
     book_in_a_call_link: Attribute.String;
   };
 }

@@ -2,7 +2,8 @@
   "collectionName": "components_component_book_nows",
   "info": {
     "displayName": "Book_now",
-    "icon": "alien"
+    "icon": "alien",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -11,12 +12,6 @@
     },
     "description": {
       "type": "richtext"
-    },
-    "cta_text": {
-      "type": "string"
-    },
-    "cta_link": {
-      "type": "string"
     },
     "book_in_a_call_link": {
       "type": "string"
