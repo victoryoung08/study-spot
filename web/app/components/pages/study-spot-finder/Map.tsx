@@ -191,9 +191,9 @@ const MapView = ({ cafe }: any) => {
                     src={
                       popUpData
                         ? item.id === popUpData.id
-                          ? "https://res.cloudinary.com/dz9t8ncms/image/upload/v1696958014/marker_631477ea83.svg"
+                          ? "https://res.cloudinary.com/dz9t8ncms/image/upload/v1697819184/purple_marker_86dbd3e393.png"
                           : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1696963244/graymarker_8a7239412c.svg"
-                        : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1696958014/marker_631477ea83.svg"
+                        : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1697819184/purple_marker_86dbd3e393.png"
                     }
                   />
                 </Marker>
