@@ -12,8 +12,6 @@ import { PaperPlane } from "@/animations/paperplane";
 type bookNowType = {
   title: string;
   description: string;
-  cta_text: string;
-  cta_link: string;
   book_in_a_call_link: string;
 };
 
@@ -31,13 +29,51 @@ const schema = z.object({
   phone: z.string().min(1, { message: "Please input phone number" }),
 });
 
+const resolver = zodResolver(schema);
+
 export default function BookNow({
   title,
   description,
-  cta_text,
-  cta_link,
   book_in_a_call_link,
 }: bookNowType) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>({ resolver: zodResolver(schema) });
+  const [loading, setLoading] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true);
+    setError(false);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT}/leads`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      setLoading(false);
+      setFormSubmitted(true);
+      reset();
+    } else {
+      setLoading(false);
+      setFormSubmitted(false);
+      setError(true);
+    }
+  };
+
   return (
     <Container>
       <div className="text-center lg:py-20">
@@ -71,64 +107,110 @@ export default function BookNow({
         )}
 
         <div className="mt-10">
-          {/* <h3 className="font-bold text-xl lg:text-2xl">
-            As a thank you for being the first 25 Study Spots, you&apos;ll
-            receive:
-          </h3>
-          <div className="mt-3 space-y-3">
-            {benefits.map((item) => {
-              return (
-                <p
-                  key={item.id}
-                  className="border-b border-gray-500 w-3/4 md:w-4/6 mx-auto"
-                >
-                  {item.title}
+          <div id="formContainer" className="mt-20">
+            {formSubmitted && !error ? (
+              <div className="flex justify-center items-center flex-col">
+                <Lottie
+                  style={{ width: 300, textAlign: "center" }}
+                  animationData={PaperPlane}
+                  loop
+                />
+                <p className="text-sm">
+                  Thank you for reaching out, your message is on its way.
                 </p>
-              );
-            })}
-          </div>
-          <h4 className="lg:w-3/4 mx-auto mt-10 font-semibold text-lg lg:text-xl">
-            Listing Fees will increase once we&apos;ve reached 25 Study Spots.
-            Early Study Spots will retain foundational rates.
-          </h4> */}
-          <div className="mt-20">
-            <form action="" className="w-3/4 lg:w-2/5 mx-auto">
-              <input
-                type="text"
-                placeholder="Your First Name"
-                className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <input
-                type="text"
-                placeholder="Your Cafe Name"
-                className="input input-bordered w-full my-5 rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <input
-                type="text"
-                placeholder="Your best Name"
-                className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <input
-                type="text"
-                placeholder="Your best contact number"
-                className="input input-bordered w-full mt-5 rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
-              />
-              <Link
-                href={cta_link || "/"}
-                className="mt-10 btn btn-primary capitalize font-normal border-white hover:border-white"
-              >
-                {cta_text || ""}
-              </Link>
-              <div className="mt-5">
-                <Link
-                  target="_blank"
-                  href={book_in_a_call_link || "/"}
-                  className="text-base underline"
-                >
-                  Book in a call first
-                </Link>
               </div>
-            </form>
+            ) : (
+              <div>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="w-3/4 lg:w-2/5 mx-auto flex flex-col gap-4"
+                >
+                  <div>
+                    {errors.first_name && (
+                      <div className="flex justify-start ml-4 mb-1">
+                        <span className="text-xs text-red-400">
+                          {errors.first_name.message}
+                        </span>
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      {...register("first_name")}
+                      placeholder="Your First Name"
+                      className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                    />
+                  </div>
+
+                  <div>
+                    {errors.cafe_name && (
+                      <div className="flex justify-start ml-4 mb-1">
+                        <span className="text-xs text-red-400">
+                          {errors.cafe_name.message}
+                        </span>
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      {...register("cafe_name")}
+                      placeholder="Your Cafe Name"
+                      className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                    />
+                  </div>
+
+                  <div>
+                    {errors.email && (
+                      <div className="flex justify-start ml-4 mb-1">
+                        <span className="text-xs text-red-400">
+                          {errors.email.message}
+                        </span>
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      {...register("email")}
+                      placeholder="Your best email"
+                      className="input input-bordered w-full rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                    />
+                  </div>
+
+                  <div>
+                    {errors.phone && (
+                      <div className="flex justify-start ml-4 mb-1">
+                        <span className="text-xs text-red-400">
+                          {errors.phone.message}
+                        </span>
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      {...register("phone")}
+                      placeholder="Your best contact number"
+                      className="input input-bordered w-full  rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                    />
+                  </div>
+                  {error && (
+                    <p className="text-sm text-warning">
+                      Error Submitting Form, Please try again
+                    </p>
+                  )}
+                  <button
+                    type="submit"
+                    className="mt-10 btn btn-primary capitalize font-normal border-white hover:border-white"
+                  >
+                    {loading ? "Submitting..." : "Get Started"}
+                  </button>
+                  <div className="mt-5">
+                    <Link
+                      target="_blank"
+                      href={book_in_a_call_link || "/"}
+                      className="text-base underline"
+                    >
+                      Book in a call first
+                    </Link>
+                  </div>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>

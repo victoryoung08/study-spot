@@ -17,16 +17,36 @@ const MapView = ({ cafe }: any) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popUpData, setPopupData] = useState<any>();
 
+  const [viewState, setViewState] = useState({
+    latitude: popUpData?.attributes.Latitute || cafe[0].attributes.Latitute,
+    longitude: popUpData?.attributes.Longitude || cafe[0].attributes.Longitude,
+    zoom: 11,
+  });
+
+  const handleMarkerClick = (item: any, e: any) => {
+    if (item.attributes.Latitute && item.attributes.Longitude) {
+      setShowPopup(true);
+      setPopupData(item);
+      e.originalEvent.stopPropagation();
+
+      setViewState({
+        latitude: item.attributes.Latitute,
+        longitude: item.attributes.Longitude,
+        zoom: 11,
+      });
+    } else {
+      // Handle the case where latitude or longitude is missing or undefined
+      console.error("Invalid latitude or longitude for marker:", item);
+    }
+  };
+
   return (
     <>
       <Map
         mapboxAccessToken="pk.eyJ1Ijoic3R1ZHlzcG90Y2FmZSIsImEiOiJjbG5qOWV1aGMxZzVtMmxsZnZyNmxlc2djIn0.vJPppkgvvnh0nz90LgpWmQ"
         mapLib={import("mapbox-gl")}
-        initialViewState={{
-          latitude: cafe[0]?.attributes?.Latitute,
-          longitude: cafe[0]?.attributes?.Longitude,
-          zoom: 11,
-        }}
+        onMove={(evt) => setViewState(evt.viewState)}
+        {...viewState}
         style={{
           width: "100%",
           height: "100%",
@@ -43,22 +63,21 @@ const MapView = ({ cafe }: any) => {
               setPopupData(null);
             }}
             style={{ padding: 0, margin: 0 }}
-            className="w-[500px] h-[500px] p-0 m-0 z-50 "
+            className=" w-[500px]  p-0 m-0 z-50 "
             anchor="top"
             longitude={popUpData?.attributes?.Longitude}
             latitude={popUpData?.attributes?.Latitute}
           >
-            <div className="border-2 border-white bg-[#454545] rounded-xl p-4 z-50">
+            <div className=" bg-[#454545] p-4 z-50 border-2 rounded-3xl border-white">
               <div>
                 <Link href={`/cafes/${popUpData.attributes.slug}`}>
                   <img
-                    className="border-2 border-white rounded-xl w-full h-full"
+                    className="border-2 border-white  rounded-xl w-full h-full"
                     alt="marker"
                     src={
                       popUpData?.attributes?.images?.data[0]?.attributes?.url
                     }
                   />
-
                   <div className="mt-2">
                     <span className="text-lg font-bold">
                       {popUpData.attributes.cafe_name}
@@ -154,11 +173,12 @@ const MapView = ({ cafe }: any) => {
             <>
               {item.attributes.Latitute && item.attributes.Longitude && (
                 <Marker
-                  onClick={(e) => {
-                    e.originalEvent.stopPropagation();
-                    setShowPopup(true);
-                    setPopupData(item);
-                  }}
+                  // onClick={(e) => {
+                  //   e.originalEvent.stopPropagation();
+                  //   setShowPopup(true);
+                  //   setPopupData(item);
+                  // }}
+                  onClick={(e) => handleMarkerClick(item, e)}
                   key={item.id}
                   latitude={item.attributes.Latitute}
                   longitude={item.attributes.Longitude}
