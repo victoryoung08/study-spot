@@ -26,7 +26,7 @@ export default function TwoColumnCtaImageLeft({
             alt={title || ""}
             width={500}
             height={500}
-            className="mx-auto h-96 w-96 lg:h-auto lg:w-auto"
+            className="mx-auto h-96 w-96 lg:h-auto lg:w-auto rounded-xl"
           />
         </div>
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">

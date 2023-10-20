@@ -16,6 +16,7 @@ export default function Partners({ title, item }: any) {
             return (
               <div key={item.id}>
                 <Image
+                  className="filter grayscale invert"
                   src={item.image.data?.attributes.url}
                   alt="image"
                   width={100}

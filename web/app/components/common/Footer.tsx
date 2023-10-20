@@ -62,34 +62,6 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-5">
-            <p className="font-semibold">Study Spots</p>
-            <Link
-              href="/"
-              className="text-white hover:border-none text-sm hover:text-gray-300"
-            >
-              App Road Map
-            </Link>
-            <Link
-              href="/"
-              className="text-white hover:border-none text-sm hover:text-gray-300"
-            >
-              Support
-            </Link>
-            <Link
-              href="/"
-              className="text-white hover:border-none text-sm hover:text-gray-300"
-            >
-              Scheduler
-            </Link>
-            <Link
-              href="/"
-              className="text-white hover:border-none text-sm hover:text-gray-300"
-            >
-              Update your listing
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-5">
             <p className="font-semibold">About</p>
             <Link
               href="/"

@@ -45,7 +45,7 @@ export default async function LibrarySlug(searchParams: any) {
             </div>
           </div>
 
-          <div className="mt-44 w-2/4 mx-auto">
+          <div className="mt-20  mx-auto">
             <Markdown
               options={{
                 overrides: {
@@ -70,7 +70,7 @@ export default async function LibrarySlug(searchParams: any) {
                   img: {
                     component: "img",
                     props: {
-                      className: "my-5 w-3/4 mx-auto",
+                      className: "my-5 w-[500px]",
                     },
                   },
                 },
