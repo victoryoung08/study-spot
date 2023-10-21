@@ -1,9 +1,18 @@
 import { Container } from "../../common/Container";
 
-export default function Versions({ version }: any) {
+export default function Versions({ version, title, description }: any) {
   return (
     <Container>
-      <div className="lg:py-20">
+      <div className="lg:py-20" id="road-map">
+        {title && (
+          <h2 className="text-4xl font-bold text-center mb-2">{title}</h2>
+        )}
+        {description && (
+          <p className="text-center mb-10 md:mb-20 text-base md:w-3/4 mx-auto">
+            {description}
+          </p>
+        )}
+
         <div className="grid md:grid-cols-3 gap-10">
           {version.map((ver: any) => {
             return (

@@ -21,7 +21,7 @@ export default function FourColumnGrid({ quietness, items }: any) {
                               src={
                                 tag?.attributes?.svg_icon?.data?.attributes?.url
                               }
-                              alt={tag?.atrributes?.item}
+                              alt={tag?.atrributes?.item || ""}
                               width={5}
                               height={5}
                               className="w-5 h-5"

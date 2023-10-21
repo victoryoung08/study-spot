@@ -42,7 +42,7 @@ export default async function CreatorProgram(searchParams: any) {
     title: "Promotion",
     description: "Simply share a story or post and tag us!",
     cta_text: "Unlock Now 🎁",
-    cta_link: "/",
+    promo_code: data.data[0].attributes.discount,
   };
 
   return (

@@ -5,6 +5,7 @@ import { Container } from "../../common/Container";
 import pinIcon from "@/public/images/pin.svg";
 import { register } from "swiper/element/bundle";
 import { useEffect } from "react";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 export default function HeaderWithGridImage({
   title,
@@ -18,6 +19,9 @@ export default function HeaderWithGridImage({
   return (
     <Container>
       <div className="">
+        <button className="w-8 h-8 mb-5" onClick={() => history.back()}>
+          <ArrowLeftIcon />
+        </button>
         <h2 className="mt-5 text-4xl font-semibold leading-tight lg:mt-0 lg:text-left lg:text-5xl mb-2">
           {title || ""}
         </h2>

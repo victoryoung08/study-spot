@@ -1181,6 +1181,39 @@ export interface ApiStyleStyle extends Schema.CollectionType {
   };
 }
 
+export interface ApiSupportSupport extends Schema.CollectionType {
+  collectionName: 'supports';
+  info: {
+    singularName: 'support';
+    pluralName: 'supports';
+    displayName: 'Support';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    email: Attribute.String;
+    cafe_name: Attribute.String;
+    inquiry: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::support.support',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::support.support',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiVibeVibe extends Schema.CollectionType {
   collectionName: 'vibes';
   info: {
@@ -1234,6 +1267,7 @@ declare module '@strapi/types' {
       'api::study-length.study-length': ApiStudyLengthStudyLength;
       'api::study-spot.study-spot': ApiStudySpotStudySpot;
       'api::style.style': ApiStyleStyle;
+      'api::support.support': ApiSupportSupport;
       'api::vibe.vibe': ApiVibeVibe;
     }
   }

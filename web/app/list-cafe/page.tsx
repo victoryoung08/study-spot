@@ -1,4 +1,6 @@
 import * as component from "../components/common/ComponentSelector";
+import { Container } from "../components/common/Container";
+import ErrorPage from "../components/common/ErrorPage";
 import ApplyNow from "../components/pages/creator-program/ApplyNow";
 
 type componentsType =
@@ -25,7 +27,7 @@ export default async function ListCafe() {
   if (response.ok) {
     data = await response.json();
   } else {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   const componentLists = data.data.attributes.components
@@ -75,7 +77,7 @@ export async function generateMetadata() {
       };
     }
 
-    const seoData2 = data.data.attributes.components.filter((item: any) => {
+    const seoData2 = data?.data?.attributes?.components.filter((item: any) => {
       return item.__component === "seo.seo";
     })[0];
 

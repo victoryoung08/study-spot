@@ -16,7 +16,6 @@ export default async function LibrarySlug(searchParams: any) {
     }
   );
   const library = await response.json();
-
   return (
     <Container>
       <div>
@@ -83,7 +82,7 @@ export default async function LibrarySlug(searchParams: any) {
                   img: {
                     component: "img",
                     props: {
-                      className: "mb-5 w-[500px] mx-auto",
+                      className: "mb-5 w-[500px]",
                     },
                   },
                 },

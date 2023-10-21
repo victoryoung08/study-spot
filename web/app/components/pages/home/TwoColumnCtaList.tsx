@@ -32,30 +32,33 @@ export default function TwoColumnCtaList({
           </Link>
         </div>
         <div className="flex flex-col gap-5 items-center text-left">
-          {libraries?.data?.map((library: any) => {
-            return (
-              <div
-                key={library.id}
-                className="flex flex-col sm:flex-row items-center border border-white rounded-2xl md:w-3/4 lg:w-auto"
-              >
-                <Image
-                  src={
-                    library?.attributes?.library_image?.data?.attributes?.url
-                  }
-                  alt={
-                    library?.attributes?.library_image?.data?.attributes
-                      ?.alternativeText || library?.attributes?.title
-                  }
-                  className="w-full sm:w-44 lg:w-1/4 sm:h-28 rounded-tl-2xl rounded-tr-2xl sm:rounded-tr-none sm:rounded-bl-2xl"
-                  width={500}
-                  height={500}
-                />
-                <span className="text-sm lg:text-base font-medium m-5 sm:mx-5">
-                  {library?.attributes?.short_description || ""}
-                </span>
-              </div>
-            );
-          })}
+          {libraries?.data
+            ?.map((library: any) => {
+              return (
+                <Link
+                  href={`/library/${library.attributes.slug}`}
+                  key={library.id}
+                  className="flex flex-col sm:flex-row items-center border border-white rounded-2xl md:w-3/4 lg:w-auto"
+                >
+                  <Image
+                    src={
+                      library?.attributes?.library_image?.data?.attributes?.url
+                    }
+                    alt={
+                      library?.attributes?.library_image?.data?.attributes
+                        ?.alternativeText || library?.attributes?.title
+                    }
+                    className="w-full sm:w-44 lg:w-2/4 sm:h-28 rounded-tl-2xl rounded-tr-2xl sm:rounded-tr-none sm:rounded-bl-2xl"
+                    width={500}
+                    height={500}
+                  />
+                  <span className="text-sm lg:text-base font-medium m-5 sm:mx-5">
+                    {library?.attributes?.short_description || ""}
+                  </span>
+                </Link>
+              );
+            })
+            .slice(0, 3)}
         </div>
       </div>
     </Container>

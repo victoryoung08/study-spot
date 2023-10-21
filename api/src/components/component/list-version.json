@@ -1,19 +1,18 @@
 {
   "collectionName": "components_component_list_versions",
   "info": {
-    "displayName": "list_version",
-    "icon": "alien"
+    "displayName": "List_version",
+    "icon": "arrowDown"
   },
   "options": {},
   "attributes": {
-    "isCurrent": {
-      "type": "boolean"
-    },
     "version_number": {
       "type": "string"
     },
+    "isCurrent": {
+      "type": "boolean"
+    },
     "item": {
-      "displayName": "version_description",
       "type": "component",
       "repeatable": true,
       "component": "component.version-description"
