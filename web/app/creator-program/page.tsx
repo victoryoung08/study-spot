@@ -9,9 +9,9 @@ export default async function CreatorProgram() {
     `${process.env.STRAPI_API_ENDPOINT}/be-a-creator?populate=deep`,
     {
       next: { revalidate: 1 },
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      // },
     }
   );
   let data = [];
@@ -56,9 +56,9 @@ export async function generateMetadata() {
       `${process.env.STRAPI_API_ENDPOINT}/be-a-creator?populate=deep`,
       {
         next: { revalidate: 1 },
-        headers: {
-          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+        // },
       }
     );
     const data = await seo.json();

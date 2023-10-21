@@ -805,6 +805,45 @@ export interface ApiCafeCafe extends Schema.SingleType {
   };
 }
 
+export interface ApiCreatorCreator extends Schema.CollectionType {
+  collectionName: 'creators';
+  info: {
+    singularName: 'creator';
+    pluralName: 'creators';
+    displayName: 'Creator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.String;
+    hasVehicle: Attribute.String;
+    isParttime: Attribute.Boolean;
+    isCasual: Attribute.Boolean;
+    isFreelance: Attribute.Boolean;
+    portfolioVideos: Attribute.Text;
+    what_makes_great_tiktok: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::creator.creator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::creator.creator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFeatureFeature extends Schema.CollectionType {
   collectionName: 'features';
   info: {
@@ -1185,6 +1224,7 @@ declare module '@strapi/types' {
       'api::about.about': ApiAboutAbout;
       'api::be-a-creator.be-a-creator': ApiBeACreatorBeACreator;
       'api::cafe.cafe': ApiCafeCafe;
+      'api::creator.creator': ApiCreatorCreator;
       'api::feature.feature': ApiFeatureFeature;
       'api::genre.genre': ApiGenreGenre;
       'api::home.home': ApiHomeHome;

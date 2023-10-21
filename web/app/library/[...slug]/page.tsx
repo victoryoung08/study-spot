@@ -45,20 +45,33 @@ export default async function LibrarySlug(searchParams: any) {
             </div>
           </div>
 
-          <div className="mt-20  mx-auto">
+          <div className="mt-20 w-3/4  mx-auto">
             <Markdown
               options={{
                 overrides: {
                   h2: {
                     component: "h2",
                     props: {
-                      className: "font-bold whitespace-pre text-4xl",
+                      className: "mt-5 font-bold whitespace-pre text-4xl mb-2",
+                    },
+                  },
+                  h3: {
+                    component: "h3",
+                    props: {
+                      className:
+                        "font-bold whitespace-pre text-xl mb-2 capitalize",
                     },
                   },
                   p: {
                     component: "div",
                     props: {
                       className: "text-base mb-10",
+                    },
+                  },
+                  a: {
+                    component: "a",
+                    props: {
+                      className: "text-base underline",
                     },
                   },
                   li: {
@@ -70,7 +83,7 @@ export default async function LibrarySlug(searchParams: any) {
                   img: {
                     component: "img",
                     props: {
-                      className: "my-5 w-[500px]",
+                      className: "mb-5 w-[500px] mx-auto",
                     },
                   },
                 },

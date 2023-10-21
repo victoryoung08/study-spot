@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Cafe({ cafe }: any) {
   return (
     <div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-10">
         {cafe?.map((item: any) => {
           return (
             <Link
@@ -17,9 +17,9 @@ export default function Cafe({ cafe }: any) {
                 alt={item?.attributes?.cafe_name}
                 width={400}
                 height={400}
-                className="w-full"
+                className="w-full h-44 lg:h-60 xl:h-72"
               />
-              <div className="p-5">
+              <div className="p-5 ">
                 <h2 className="font-semibold text-xl">
                   {item?.attributes?.cafe_name}
                 </h2>

@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "creators",
+  "info": {
+    "singularName": "creator",
+    "pluralName": "creators",
+    "displayName": "Creator",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "hasVehicle": {
+      "type": "string"
+    },
+    "isParttime": {
+      "type": "boolean"
+    },
+    "isCasual": {
+      "type": "boolean"
+    },
+    "isFreelance": {
+      "type": "boolean"
+    },
+    "portfolioVideos": {
+      "type": "text"
+    },
+    "what_makes_great_tiktok": {
+      "type": "text"
+    }
+  }
+}
