@@ -25,7 +25,9 @@ const schema = z
     name: z.string().min(1, { message: "Please input name" }),
     email: z.string().min(1, { message: "Please input email address" }),
     phone: z.string().min(1, { message: "Please input phone number" }),
-    what_makes_great_tiktok: z.string().min(1, { message: "Please input answer" }),
+    what_makes_great_tiktok: z
+      .string()
+      .min(1, { message: "Please input answer" }),
     portfolioVideos: z.string(),
     hasVehicle: z.string(),
     isCasual: z.boolean(),
@@ -54,9 +56,11 @@ const schema = z
 
 export default function ApplyNow() {
   const [step, setStep] = useState(1);
-  const handleNext = async () => {
-    setStep(step + 1);
-  };
+
+  // const handleNext = async () => {
+  //   setStep(step + 1);
+  // };
+
   const handlePrev = async () => {
     setStep(step - 1);
   };
@@ -66,6 +70,8 @@ export default function ApplyNow() {
     handleSubmit,
     watch,
     reset,
+    trigger,
+    getValues,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
   const [loading, setLoading] = useState(false);
@@ -100,6 +106,22 @@ export default function ApplyNow() {
     }
   };
 
+  const handleNext = async (fields: (keyof Inputs)[]) => {
+    const name = getValues("name");
+
+    await trigger(fields);
+
+    // check if fields are inside the error array
+    if (fields.some((field) => errors[field])) {
+      return;
+    } else {
+      if (name === "") {
+        return;
+      }
+      setStep(step + 1);
+    }
+  };
+
   const forms = [
     <div key="1" className="mt-5 form-control w-full">
       <label className="label">
@@ -114,6 +136,7 @@ export default function ApplyNow() {
       )}
       <input
         {...register("name")}
+        required
         type="text"
         placeholder="eg. Sarah Smith"
         className="input input-bordered w-full border-white focus:border-primary bg-[#2e2e2e] h-14"
@@ -304,8 +327,26 @@ export default function ApplyNow() {
                         className={`rounded-md h-full btn bg-primary text-white capitalize font-normal btn-primary ${
                           step === 1 ? "w-full" : "w-4/5 "
                         }`}
+                        type="button"
                         onClick={() => {
-                          handleNext();
+                          if (step === 1) {
+                            handleNext(["name"]);
+                          } else if (step === 2) {
+                            handleNext(["email", "phone"]);
+                          } else if (step === 3) {
+                            handleNext(["what_makes_great_tiktok"]);
+                          } else if (step === 4) {
+                            handleNext(["portfolioVideos"]);
+                          } else if (step === 5) {
+                            handleNext(["hasVehicle"]);
+                          } else if (step === 6) {
+                            handleNext([
+                              "isCasual",
+                              "isParttime",
+                              "isFreelance",
+                            ]);
+                          }
+                          //
                         }}
                       >
                         {step === 1 ? "Get Started" : "Next"}
