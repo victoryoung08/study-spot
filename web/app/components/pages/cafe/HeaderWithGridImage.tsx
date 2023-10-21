@@ -33,7 +33,7 @@ export default function HeaderWithGridImage({
               src={images?.data[0].attributes?.url}
               width={200}
               height={200}
-              className="h-full w-full"
+              className="w-3/5 mx-auto"
               alt={images?.data[0].attributes?.alternativeText || "Image"}
             />
           )}
@@ -68,7 +68,7 @@ export default function HeaderWithGridImage({
                       src={img?.attributes?.url}
                       width={200}
                       height={200}
-                      className="h-[330px] w-[330px]"
+                      className="h-[250px] w-[330px]"
                       alt={
                         img?.image?.data?.attributes?.alternativeText || "Image"
                       }

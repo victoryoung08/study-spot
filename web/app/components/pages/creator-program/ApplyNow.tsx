@@ -2,6 +2,55 @@
 import { Container } from "../../common/Container";
 import { useState } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import Lottie from "lottie-react";
+import { PaperPlane } from "@/animations/paperplane";
+
+type Inputs = {
+  name: string;
+  email: string;
+  phone: string;
+  what_makes_great_tiktok: string;
+  portfolioVideos?: string;
+  hasVehicle: string;
+  isCasual: boolean;
+  isParttime: boolean;
+  isFreelance: boolean;
+};
+
+const schema = z
+  .object({
+    name: z.string().min(1, { message: "Please input name" }),
+    email: z.string().min(1, { message: "Please input email address" }),
+    phone: z.string().min(1, { message: "Please input phone number" }),
+    what_makes_great_tiktok: z.string().min(1, { message: "Please input answer" }),
+    portfolioVideos: z.string(),
+    hasVehicle: z.string(),
+    isCasual: z.boolean(),
+    isParttime: z.boolean(),
+    isFreelance: z.boolean(),
+  })
+  .superRefine((values, ctx) => {
+    if (!values.isCasual && !values.isParttime && !values.isFreelance) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select any.",
+        path: ["isCasual"],
+      });
+      ctx.addIssue({
+        message: "Please select any.",
+        code: z.ZodIssueCode.custom,
+        path: ["isParttime"],
+      });
+      ctx.addIssue({
+        message: "Please select any.",
+        code: z.ZodIssueCode.custom,
+        path: ["isFreelance"],
+      });
+    }
+  });
 
 export default function ApplyNow() {
   const [step, setStep] = useState(1);
@@ -12,6 +61,45 @@ export default function ApplyNow() {
     setStep(step - 1);
   };
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>({ resolver: zodResolver(schema) });
+  const [loading, setLoading] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true);
+    setError(false);
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT}/creators`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      setLoading(false);
+      setFormSubmitted(true);
+      reset();
+    } else {
+      setLoading(false);
+      setFormSubmitted(false);
+      setError(true);
+    }
+  };
+
   const forms = [
     <div key="1" className="mt-5 form-control w-full">
       <label className="label">
@@ -19,7 +107,13 @@ export default function ApplyNow() {
           Enter your name
         </span>
       </label>
+      {errors.name && (
+        <div className="flex justify-start ml-1  mb-1">
+          <span className="text-xs text-red-400">{errors.name.message}</span>
+        </div>
+      )}
       <input
+        {...register("name")}
         type="text"
         placeholder="eg. Sarah Smith"
         className="input input-bordered w-full border-white focus:border-primary bg-[#2e2e2e] h-14"
@@ -28,7 +122,13 @@ export default function ApplyNow() {
     <div key="2" className="space-y-10">
       <div className="mt-5 form-control w-full">
         <h3 className="text-xl mb-5">What&apos;s your best email?</h3>
+        {errors.email && (
+          <div className="flex justify-start ml-1  mb-1">
+            <span className="text-xs text-red-400">{errors.email.message}</span>
+          </div>
+        )}
         <input
+          {...register("email")}
           type="text"
           placeholder="eg. myemail@email.com"
           className="input input-bordered w-full border-white focus:border-primary bg-[#2e2e2e] h-14"
@@ -36,7 +136,13 @@ export default function ApplyNow() {
       </div>
       <div className="mt-5 form-control w-full">
         <h3 className="text-xl mb-5">What&apos;s your best contact number?</h3>
+        {errors.phone && (
+          <div className="flex justify-start ml-1  mb-1">
+            <span className="text-xs text-red-400">{errors.phone.message}</span>
+          </div>
+        )}
         <input
+          {...register("phone")}
           type="text"
           placeholder="eg. 0412345678"
           className="input input-bordered w-full border-white focus:border-primary bg-[#2e2e2e] h-14"
@@ -48,8 +154,15 @@ export default function ApplyNow() {
         <h3 className="text-xl mb-5">
           What makes a great Tiktok or Instagram Reel?
         </h3>
-
+        {errors.what_makes_great_tiktok && (
+          <div className="flex justify-start ml-1  mb-1">
+            <span className="text-xs text-red-400">
+              {errors.what_makes_great_tiktok.message}
+            </span>
+          </div>
+        )}
         <textarea
+          {...register("what_makes_great_tiktok")}
           className="textarea textarea-bordered w-full border-white focus:border-primary bg-[#2e2e2e]"
           rows={5}
           placeholder="(no wrong answers)"
@@ -64,6 +177,7 @@ export default function ApplyNow() {
         </h3>
 
         <textarea
+          {...register("portfolioVideos", { required: false })}
           className="textarea textarea-bordered w-full border-white focus:border-primary bg-[#2e2e2e]"
           rows={5}
           placeholder="(Links here)"
@@ -76,19 +190,26 @@ export default function ApplyNow() {
           This will require travelling to cafes across Sydney. <br /> Do you
           have your own vehicle?
         </h3>
+        {errors.hasVehicle && (
+          <div className="flex justify-start ml-1  mb-1">
+            <span className="text-xs text-red-400">Please Select</span>
+          </div>
+        )}
         <div className="w-16">
           <label className="label cursor-pointer">
             <input
+              {...register("hasVehicle")}
               type="radio"
-              name="radio-10"
+              value="Yes"
               className="radio radio-primary checked:bg-primary"
             />
             <span className="label-text">Yes</span>
           </label>
           <label className="label cursor-pointer">
             <input
+              {...register("hasVehicle")}
               type="radio"
-              name="radio-10"
+              value="No"
               className="radio radio-primary checked:bg-primary"
             />
             <span className="label-text">No</span>
@@ -101,17 +222,36 @@ export default function ApplyNow() {
         <h3 className="text-xl mb-5">
           What position best suits you? Select any you&apos;re open to
         </h3>
+        {errors.isCasual && errors.isParttime && errors.isFreelance && (
+          <div className="flex justify-start ml-1  mb-1">
+            <span className="text-xs text-red-400">Please select.</span>
+          </div>
+        )}
         <div className="w-1/4 text-left space-y-2">
           <label className="flex items-center cursor-pointer gap-5">
-            <input type="checkbox" className="checkbox" />
+            <input
+              {...register("isCasual")}
+              type="checkbox"
+              className="checkbox"
+            />
             <span className="label-text">Casual</span>
           </label>
+
           <label className="flex items-center cursor-pointer gap-5">
-            <input type="checkbox" className="checkbox" />
+            <input
+              {...register("isParttime")}
+              type="checkbox"
+              className="checkbox"
+            />
             <span className="label-text">Part Time</span>
           </label>
+
           <label className="flex items-center cursor-pointer gap-5">
-            <input type="checkbox" className="checkbox" />
+            <input
+              {...register("isFreelance")}
+              type="checkbox"
+              className="checkbox"
+            />
             <span className="label-text">Freelance/Contract</span>
           </label>
         </div>
@@ -135,38 +275,54 @@ export default function ApplyNow() {
             </h3>
           )}
           <div>
-            {forms[step - 1]}
-
-            <div className="mt-10 flex items-center justify-center h-16 gap-5">
-              {step >= 2 && (
-                <div
-                  className="rounded-md w-1/4 p-2 h-full bg-[#2e2e2e] cursor-pointer flex justify-center items-center"
-                  onClick={handlePrev}
-                >
-                  <ArrowLeftIcon className="w-5 h-5 " />
-                </div>
-              )}
-              {step != 6 && (
-                <button
-                  className={`rounded-md h-full btn bg-primary text-white capitalize font-normal btn-primary ${
-                    step === 1 ? "w-full" : "w-4/5 "
-                  }`}
-                  onClick={() => {
-                    handleNext();
-                  }}
-                >
-                  {step === 1 ? "Get Started" : "Next"}
-                </button>
-              )}
-              {step === 6 && (
-                <button
-                  type="submit"
-                  className="rounded-md h-full btn bg-primary text-white capitalize font-normal w-4/5 btn-primary"
-                >
-                  Submit
-                </button>
-              )}
-            </div>
+            {formSubmitted && !error ? (
+              <div className="flex justify-center items-center flex-col">
+                <Lottie
+                  style={{ width: 300, textAlign: "center" }}
+                  animationData={PaperPlane}
+                  loop
+                />
+                <p className="text-sm">
+                  Thank you for reaching out, your message is on its way.
+                </p>
+              </div>
+            ) : (
+              <div>
+                <form action="" onSubmit={handleSubmit(onSubmit)}>
+                  {forms[step - 1]}
+                  <div className="mt-10 flex items-center justify-center h-16 gap-5">
+                    {step >= 2 && (
+                      <div
+                        className="rounded-md w-1/4 p-2 h-full bg-[#2e2e2e] cursor-pointer flex justify-center items-center"
+                        onClick={handlePrev}
+                      >
+                        <ArrowLeftIcon className="w-5 h-5 " />
+                      </div>
+                    )}
+                    {step != 6 && (
+                      <button
+                        className={`rounded-md h-full btn bg-primary text-white capitalize font-normal btn-primary ${
+                          step === 1 ? "w-full" : "w-4/5 "
+                        }`}
+                        onClick={() => {
+                          handleNext();
+                        }}
+                      >
+                        {step === 1 ? "Get Started" : "Next"}
+                      </button>
+                    )}
+                    {step === 6 && (
+                      <button
+                        type="submit"
+                        className="rounded-md h-full btn bg-primary text-white capitalize font-normal w-4/5 btn-primary"
+                      >
+                        {loading ? "Submitting..." : "Submit"}
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>
