@@ -18,8 +18,14 @@ const MapView = ({ cafe }: any) => {
   const [popUpData, setPopupData] = useState<any>();
 
   const [viewState, setViewState] = useState({
-    latitude: popUpData?.attributes.Latitute || cafe[0].attributes.Latitute,
-    longitude: popUpData?.attributes.Longitude || cafe[0].attributes.Longitude,
+    latitude:
+      popUpData?.attributes.Latitute ||
+      cafe?.[0]?.attributes.Latitute ||
+      -33.870453,
+    longitude:
+      popUpData?.attributes.Longitude ||
+      cafe?.[0]?.attributes.Longitude ||
+      151.208755,
     zoom: 11,
   });
 
