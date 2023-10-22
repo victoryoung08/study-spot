@@ -20,7 +20,7 @@ export default function TwoColumnCtaImageLeft({
   return (
     <Container>
       <div className="grid lg:grid-cols-2 gap-10">
-        <div>
+        <div data-aos="zoom-in-right">
           <Image
             src={image?.data?.attributes?.url}
             alt={title || ""}
@@ -29,7 +29,10 @@ export default function TwoColumnCtaImageLeft({
             className="mx-auto h-96 w-96 lg:h-auto lg:w-auto rounded-xl"
           />
         </div>
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+        <div
+          data-aos="zoom-in-left"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left"
+        >
           <h2 className="mt-5 text-2xl font-semibold leading-tight lg:mt-0 lg:text-left lg:text-3xl">
             {title || ""}
           </h2>

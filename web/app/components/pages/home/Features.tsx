@@ -7,7 +7,7 @@ export default function Features({ item }: any) {
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-20">
         {item?.map((feature: any) => {
           return (
-            <div key={item.id} className="text-center">
+            <div data-aos="zoom-in" key={item.id} className="text-center">
               <Image
                 src={feature.image?.data?.attributes?.url}
                 alt={feature.title}

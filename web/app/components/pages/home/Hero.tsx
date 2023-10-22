@@ -23,18 +23,29 @@ export default function Hero({
     <Container>
       <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row lg:justify-center gap-10 text-center lg:text-left">
         <div>
-          {section_title && <p className="text-sm mb-3">{section_title}</p>}
-          <h1 className="text-4xl capitalize font-bold leading-snug text-white md:text-5xl lg:text-6xl">
+          {section_title && (
+            <p data-aos="zoom-in-right" className="text-sm mb-3">
+              {section_title}
+            </p>
+          )}
+          <h1
+            data-aos="zoom-in-right"
+            className="text-4xl capitalize font-bold leading-snug text-white md:text-5xl lg:text-6xl"
+          >
             {title || ""}
           </h1>
           {description && (
-            <p className="w-3/4 mx-auto lg:w-auto my-5 lg:my-10 text-base text-white lg:text-xl">
+            <p
+              data-aos="zoom-in-right"
+              className="w-3/4 mx-auto lg:w-auto my-5 lg:my-10 text-base text-white lg:text-xl"
+            >
               {description || ""}
             </p>
           )}
 
           {cta_link && (
             <Link
+              data-aos="zoom-in-right"
               href={cta_link || "/"}
               type="button"
               className="btn btn-primary rounded-xl border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
@@ -43,7 +54,7 @@ export default function Hero({
             </Link>
           )}
         </div>
-        <div className="relative">
+        <div data-aos="zoom-in-left" className="relative">
           <Image
             src={image?.data?.attributes?.url}
             alt="Hero image"

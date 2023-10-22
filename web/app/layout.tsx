@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Main } from "./Main";
 import type { Metadata } from "next";
+import { AOSInit } from "@/helpers/AosAnimate";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.png" sizes="any" />
+      <AOSInit />
       <body className={inter.className}>
         <Main>{children}</Main>
       </body>

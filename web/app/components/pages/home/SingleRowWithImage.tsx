@@ -13,7 +13,7 @@ export default function SingleRowWithImage({
 }: singleRowImageType) {
   return (
     <Container>
-      <div className="lg:my-20">
+      <div data-aos="fade-up" className="lg:my-20">
         <div className="space-y-5 text-center">
           <h2 className="text-3xl font-bold lg:text-4xl">{title || ""}</h2>
           <p className="text-base lg:text-lg">{description || ""}</p>
