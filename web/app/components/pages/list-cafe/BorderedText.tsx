@@ -37,7 +37,7 @@ export default function BorderedText({ section_title, item }: any) {
                   <h2 className="font-semibold text-3xl">{item.title}</h2>
                   <p className="my-5 text-sm">{item.description}</p>
                 </div>
-                {item.image.data && (
+                {item?.image?.data && (
                   <div className="relative mt-10">
                     <Image
                       src={item.image.data?.attributes.url}

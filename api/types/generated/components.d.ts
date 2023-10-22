@@ -218,12 +218,12 @@ export interface ComponentListItem extends Schema.Component {
 export interface ComponentListVersion extends Schema.Component {
   collectionName: 'components_component_list_versions';
   info: {
-    displayName: 'list_version';
-    icon: 'alien';
+    displayName: 'List_version';
+    icon: 'arrowDown';
   };
   attributes: {
-    isCurrent: Attribute.Boolean;
     version_number: Attribute.String;
+    isCurrent: Attribute.Boolean;
     item: Attribute.Component<'component.version-description', true>;
   };
 }
@@ -388,8 +388,11 @@ export interface ComponentVersions extends Schema.Component {
   info: {
     displayName: 'versions';
     icon: 'alien';
+    description: '';
   };
   attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
     version: Attribute.Component<'component.list-version', true>;
   };
 }

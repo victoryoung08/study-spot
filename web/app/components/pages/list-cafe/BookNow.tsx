@@ -76,7 +76,7 @@ export default function BookNow({
 
   return (
     <Container>
-      <div className="text-center lg:py-20">
+      <div className="text-center lg:py-20" id="book-now">
         <h2 className="text-3xl font-semibold text-white md:text-4xl lg:text-5xl">
           {title || ""}
         </h2>

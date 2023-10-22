@@ -1,5 +1,6 @@
 import { Container } from "../components/common/Container";
 import * as component from "../components/common/ComponentSelector";
+import ErrorPage from "../components/common/ErrorPage";
 
 type componentsType = "Hero" | "AboutUs" | "TwoColumnText" | "CtaCenter";
 
@@ -17,7 +18,7 @@ export default async function About() {
   if (response.ok) {
     data = await response.json();
   } else {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   const componentLists = data.data.attributes.components

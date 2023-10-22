@@ -8,10 +8,16 @@ export default function TwoColumnImagewithBorder({ library }: any) {
       <div className="space-y-10">
         {library?.data?.map((item: any) => {
           return (
-            <div key={item?.id} className="flex border rounded-3xl ">
+            <Link
+              href={`/library/${item.attributes.slug}`}
+              key={item?.id}
+              className="flex border rounded-3xl "
+            >
               <div>
                 <Image
-                  src={item?.attributes?.library_image?.data?.attributes?.url || ""}
+                  src={
+                    item?.attributes?.library_image?.data?.attributes?.url || ""
+                  }
                   alt={
                     item.attributes.library_image.data.attributes
                       .alternativeText || item.attributes.title
@@ -29,15 +35,14 @@ export default function TwoColumnImagewithBorder({ library }: any) {
                   {item?.attributes.short_description || ""}
                 </p>
                 <div className="flex justify-end mt-5">
-                  <Link
-                    href={`/library/${item.attributes.slug}`}
+                  <p
                     className="text-sm font-bold"
                   >
                     Read more
-                  </Link>
+                  </p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

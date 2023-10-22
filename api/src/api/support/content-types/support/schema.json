@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "supports",
+  "info": {
+    "singularName": "support",
+    "pluralName": "supports",
+    "displayName": "Support"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "cafe_name": {
+      "type": "string"
+    },
+    "inquiry": {
+      "type": "text"
+    }
+  }
+}

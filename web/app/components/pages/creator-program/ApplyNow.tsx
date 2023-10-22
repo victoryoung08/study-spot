@@ -283,7 +283,7 @@ export default function ApplyNow() {
   ];
   return (
     <Container>
-      <div>
+      <div id="apply-now">
         <div className="text-center">
           <h2 className="text-4xl lg:text-5xl font-semibold">Apply Now</h2>
           <p className="text-xl mt-5">

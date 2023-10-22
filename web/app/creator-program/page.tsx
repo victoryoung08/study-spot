@@ -1,6 +1,7 @@
 import { Container } from "../components/common/Container";
 import * as component from "../components/common/ComponentSelector";
 import ApplyNow from "../components/pages/creator-program/ApplyNow";
+import ErrorPage from "../components/common/ErrorPage";
 
 type componentsType = "Hero" | "AboutUs" | "TwoColumnText" | "CtaCenter";
 
@@ -9,16 +10,16 @@ export default async function CreatorProgram() {
     `${process.env.STRAPI_API_ENDPOINT}/be-a-creator?populate=deep`,
     {
       next: { revalidate: 1 },
-      // headers: {
-      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      },
     }
   );
   let data = [];
   if (response.ok) {
     data = await response.json();
   } else {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   const componentLists = data.data.attributes.components

@@ -1,5 +1,12 @@
+import { Metadata } from "next";
 import { Container } from "../components/common/Container";
 import TwoColumnImagewithBorder from "../components/pages/library/twoColumnImageWithBorder";
+
+export const metadata: Metadata = {
+  title: "Library",
+  description: "Study Spot - Find the Best Study Spot",
+};
+
 
 export default async function library() {
   const response = await fetch(
