@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Cafe({ cafe }: any) {
   return (
-    <div>
+    <div className="">
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-10">
         {cafe?.map((item: any) => {
           return (
