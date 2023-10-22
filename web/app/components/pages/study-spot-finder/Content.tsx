@@ -48,7 +48,7 @@ export default function Content({
 
   return (
     <>
-      <div className="flex justify-end gap-2 lg:mx-10 mb-5 items-center">
+      <div className=" flex justify-end gap-2 mx-5 lg:mx-10 mb-5 items-center">
         <label className="label cursor-pointer">
           <input
             type="checkbox"
@@ -68,8 +68,8 @@ export default function Content({
         </label>
       </div>
 
-      <div className="mx-5 lg:mx-10 flex gap-5 lg:gap-10">
-        <div className="hidden md:block w-72">
+      <div className="flex gap-5 lg:gap-10 relative">
+        <div className="w-full md:w-72 fixed md:left-5 lg:left-10 bottom-0 md:relative z-10">
           <Filter
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
@@ -78,7 +78,11 @@ export default function Content({
             styles={styles}
           />
         </div>
-        <div className={`flex-1 ${view === "map" ? "h-[800px]" : ""}`}>
+        <div
+          className={`flex-1 px-5 ${
+            view === "map" ? "h-[800px]" : "container mx-auto "
+          }`}
+        >
           {
             {
               grid: <Cafe cafe={filteredCafe} />,
