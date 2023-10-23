@@ -24,7 +24,9 @@ export default function Content({
 }: ContentProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const filter = selectedTags.map((item: any) => item.item);
-
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   /**
    * Create a new array of cafes with tags
    */
@@ -46,10 +48,9 @@ export default function Content({
     return filter.every((tag) => item.tags.includes(tag));
   });
 
-  const [view, setView] = useState<"grid" | "map">("grid");
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const [view, setView] = useState<"grid" | "map">(
+    (searchParams.get("view") as "grid" | "map") || "grid"
+  );
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
