@@ -8,7 +8,7 @@ export type commonDataType = {
   title: string;
   description: string;
   cta_text: string;
-  cta_link: string;
+  cta_link?: string;
   promo_code: string;
   image?: any;
 };
@@ -26,7 +26,7 @@ export default function CtaCenter({
     setDisplayCode(true);
   };
   const pathname = usePathname();
-  
+
   return (
     <Container>
       <div className="lg:py-20 text-center">

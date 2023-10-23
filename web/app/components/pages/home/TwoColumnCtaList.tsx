@@ -12,6 +12,7 @@ export default function TwoColumnCtaList({
   return (
     <Container>
       <div
+        data-aos="zoom-in-right"
         className={
           libraries.data.length === 0
             ? "flex items-center justify-center text-center"
@@ -36,6 +37,7 @@ export default function TwoColumnCtaList({
             ?.map((library: any) => {
               return (
                 <Link
+                  data-aos="zoom-in-left"
                   href={`/library/${library.attributes.slug}`}
                   key={library.id}
                   className="flex flex-col sm:flex-row items-center border border-white rounded-2xl md:w-3/4 lg:w-auto"
