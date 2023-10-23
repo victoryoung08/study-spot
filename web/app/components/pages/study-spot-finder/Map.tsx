@@ -57,7 +57,7 @@ const MapView = ({ cafe }: any) => {
         {...viewState}
         style={{
           width: "100%",
-          height: "60vh",
+          height: vieportWidth < 768 ? "55vh" : "60vh",
           borderRadius: "20px",
           borderColor: "white",
           borderWidth: "3px",
