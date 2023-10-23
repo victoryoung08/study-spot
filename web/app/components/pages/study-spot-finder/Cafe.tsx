@@ -17,7 +17,7 @@ export default function Cafe({ cafe }: any) {
                 alt={item?.attributes?.cafe_name}
                 width={400}
                 height={400}
-                className="w-full h-44 lg:h-60 xl:h-72"
+                className="w-full h-[250px] object-cover"
               />
               <div className="p-5 ">
                 <h2 className="font-semibold text-xl">
