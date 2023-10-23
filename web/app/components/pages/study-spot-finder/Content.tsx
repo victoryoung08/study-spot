@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Cafe from "./Cafe";
 import Filter from "./Filter";
 import MapView from "./Map";
@@ -66,10 +66,16 @@ export default function Content({
     const newView = view === "grid" ? "map" : "grid";
     setView(newView);
 
-    // Replace the URL without triggering a full page reload
-    // router.push(`/study-spot-finder?view=${newView}`);
-    // router.push(pathname + "?" + createQueryString("view", newView));
+    router.push(pathname + "?" + createQueryString("view", newView));
   };
+
+  useEffect(() => {
+    // Get the view from the URL
+    const view = searchParams.get("view");
+
+    // Set the view state
+    setView(view === "map" ? "map" : "grid");
+  }, []);
 
   return (
     <>
