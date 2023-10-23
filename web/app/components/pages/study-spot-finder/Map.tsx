@@ -54,7 +54,7 @@ const MapView = ({ cafe }: any) => {
         mapboxAccessToken="pk.eyJ1Ijoic3R1ZHlzcG90Y2FmZSIsImEiOiJjbG5qOWV1aGMxZzVtMmxsZnZyNmxlc2djIn0.vJPppkgvvnh0nz90LgpWmQ"
         mapLib={import("mapbox-gl")}
         onMove={(evt) => setViewState(evt.viewState)}
-        // {...viewState}
+        {...viewState}
         style={{
           width: "100%",
           height: vieportWidth < 768 ? "55vh" : "75vh",
