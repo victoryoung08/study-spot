@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -12,11 +13,12 @@ import mapboxgl from "mapbox-gl";
 import Image from "next/image";
 import pinIcon from "@/public/images/pin.svg";
 import Link from "next/link";
+import useViewportWidth from "@/hooks/getViewportWidth";
 
 const MapView = ({ cafe }: any) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popUpData, setPopupData] = useState<any>();
-
+  const vieportWidth = useViewportWidth();
   const [viewState, setViewState] = useState({
     latitude:
       popUpData?.attributes.Latitute ||
@@ -36,7 +38,7 @@ const MapView = ({ cafe }: any) => {
       e.originalEvent.stopPropagation();
 
       setViewState({
-        latitude: item.attributes.Latitute,
+        latitude: item.attributes.Latitute + -0.03,
         longitude: item.attributes.Longitude,
         zoom: 11,
       });
@@ -55,7 +57,7 @@ const MapView = ({ cafe }: any) => {
         {...viewState}
         style={{
           width: "100%",
-          height: "100%",
+          height: "60vh",
           borderRadius: "20px",
           borderColor: "white",
           borderWidth: "3px",
@@ -75,7 +77,7 @@ const MapView = ({ cafe }: any) => {
             latitude={popUpData?.attributes?.Latitute}
           >
             <div className=" bg-[#454545] p-4 z-50 border-2 rounded-3xl border-white">
-              <div>
+              <div className="">
                 <Link href={`/cafes/${popUpData.attributes.slug}`}>
                   <img
                     className="border-2 border-white  rounded-xl w-full h-full"
@@ -192,7 +194,9 @@ const MapView = ({ cafe }: any) => {
                   //   anchor="bottom"
                 >
                   <img
-                    className="h-20 w-20 z-0"
+                    className={`${
+                      vieportWidth < 768 ? "h-16 w-16 " : "h-20 w-20"
+                    }z-0`}
                     alt="marker"
                     src={
                       popUpData

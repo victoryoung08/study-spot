@@ -26,7 +26,7 @@ export default function Filter({
   };
 
   return (
-    <div className="md:border border-white md:rounded-3xl py-10 px-5 md:p-4 bg-[#252525] flex flex-row md:flex-col gap-3 overflow-y-auto no-scrollbar">
+    <div className="md:border border-white md:rounded-3xl py-4 px-5 md:p-4 bg-[#252525] flex flex-row md:flex-col gap-3 overflow-y-auto no-scrollbar">
       {features && (
         <div className="flex flex-row md:grid grid-cols-2 gap-3">
           {features.map((item: any) => {
@@ -34,7 +34,7 @@ export default function Filter({
               <button
                 onClick={() => handleTagClick(item)}
                 key={item.item}
-                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-20 w-20 md:h-auto md:w-auto ${
+                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-16  md:h-auto md:w-auto ${
                   selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >
@@ -60,7 +60,7 @@ export default function Filter({
                 <button
                   onClick={() => handleTagClick(item)}
                   key={item.item}
-                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-20 w-20 md:h-auto md:w-auto ${
+                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-16 md:h-auto md:w-auto ${
                     selectedTags.includes(item) ? "bg-primary" : ""
                   }`}
                 >
@@ -87,7 +87,7 @@ export default function Filter({
                 <button
                   onClick={() => handleTagClick(item)}
                   key={item.item}
-                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-20 w-20 md:h-auto md:w-auto ${
+                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-16 md:h-auto md:w-auto ${
                     selectedTags.includes(item) ? "bg-primary" : ""
                   }`}
                 >

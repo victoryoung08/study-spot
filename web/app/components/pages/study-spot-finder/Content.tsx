@@ -80,7 +80,7 @@ export default function Content({
         </div>
         <div
           className={`flex-1 px-5 ${
-            view === "map" ? "h-[800px]" : "container mx-auto "
+            view === "map" ? "" : "container mx-auto "
           }`}
         >
           {

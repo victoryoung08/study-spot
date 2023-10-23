@@ -1,10 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/images/logo.webp";
 
 export function Footer() {
   return (
-    <div className="py-16 text-white mx-5 lg:mx-0">
+    <div className={` py-16 text-white mx-5 lg:mx-0`}>
       <div className="max-w-screen-lg mx-auto">
         <div className="grid text-center md:text-left grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-5">
           <div className="sm:col-span-2 flex items-center justify-center">
