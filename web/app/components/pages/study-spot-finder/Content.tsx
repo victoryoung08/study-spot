@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Cafe from "./Cafe";
 import Filter from "./Filter";
 import MapView from "./Map";
 // import { set } from "lodash";
 // import Lottie from "lottie-react";
 import { MapIcon, MapPinIcon } from "@heroicons/react/24/solid";
+import { usePathname, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 type ContentProps = {
   features: any;
@@ -45,6 +47,35 @@ export default function Content({
   });
 
   const [view, setView] = useState<"grid" | "map">("grid");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const toggleView = () => {
+    // Toggle the view state
+    const newView = view === "grid" ? "map" : "grid";
+    setView(newView);
+
+    router.push(pathname + "?" + createQueryString("view", newView));
+  };
+
+  useEffect(() => {
+    // Get the view from the URL
+    const view = searchParams.get("view");
+
+    // Set the view state
+    setView(view === "map" ? "map" : "grid");
+  }, []);
 
   return (
     <>
@@ -53,7 +84,7 @@ export default function Content({
           <input
             type="checkbox"
             className="toggle toggle-base toggle-lg"
-            onChange={() => setView(view === "map" ? "grid" : "map")}
+            onChange={toggleView}
             checked={view === "map" ? true : false}
           />
 

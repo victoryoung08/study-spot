@@ -1,27 +1,30 @@
-import "./globals.css";
+"use client";
 
+import "./globals.css";
 import type { ReactNode } from "react";
 import Navbar from "./components/common/Navbar";
 import { Footer } from "./components/common/Footer";
+import { usePathname } from "next/navigation";
 
 type IMainProps = {
   children: ReactNode;
 };
 
-const Main = (props: IMainProps) => (
-  <div className="w-full !bg-[#181818] text-gray-700 antialiased h-full">
-    <div className="">
-      <header className=" bg-[#181818]">
-        <Navbar />
-      </header>
+const Main = (props: IMainProps) => {
+  const pathname = usePathname();
 
-      <main className="content text-xl text-white">{props.children}</main>
+  return (
+    <div className="w-full !bg-[#181818] text-gray-700 antialiased h-full">
+      <div className="">
+        <header className=" bg-[#181818]">
+          <Navbar />
+        </header>
 
-      <header className="">
-        <Footer />
-      </header>
+        <main className="content text-xl text-white">{props.children}</main>
+
+        {pathname != "/study-spot-finder" && <Footer />}
+      </div>
     </div>
-  </div>
-);
-
+  );
+};
 export { Main };
