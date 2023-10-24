@@ -42,6 +42,7 @@ const MapView = ({ cafe }: any) => {
       //@ts-expect-error - mapRef.current is not null
       mapRef.current?.flyTo({
         center: [item.attributes.Longitude, item.attributes.Latitute],
+        zoom: 11,
       });
     } else {
       // Handle the case where latitude or longitude is missing or undefined
