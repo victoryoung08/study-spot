@@ -31,16 +31,17 @@ const MapView = ({ cafe }: any) => {
     zoom: 11,
   });
 
+  const mapRef = useRef(null);
+
   const handleMarkerClick = (item: any, e: any) => {
     if (item.attributes.Latitute && item.attributes.Longitude) {
       setShowPopup(true);
       setPopupData(item);
       e.originalEvent.stopPropagation();
 
-      setViewState({
-        latitude: item.attributes.Latitute + -0.03,
-        longitude: item.attributes.Longitude,
-        zoom: 11,
+      //@ts-expect-error - mapRef.current is not null
+      mapRef.current?.flyTo({
+        center: [item.attributes.Longitude, item.attributes.Latitute],
       });
     } else {
       // Handle the case where latitude or longitude is missing or undefined
@@ -51,6 +52,7 @@ const MapView = ({ cafe }: any) => {
   return (
     <>
       <Map
+        ref={mapRef}
         mapboxAccessToken="pk.eyJ1Ijoic3R1ZHlzcG90Y2FmZSIsImEiOiJjbG5qOWV1aGMxZzVtMmxsZnZyNmxlc2djIn0.vJPppkgvvnh0nz90LgpWmQ"
         mapLib={import("mapbox-gl")}
         onMove={(evt) => setViewState(evt.viewState)}
