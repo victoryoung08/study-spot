@@ -65,7 +65,11 @@ export default function HeaderWithGridImage({
             autoplay={true}
             loop={true}
             slides-per-view={
-              viewPortWidth > 1100 ? 3 : viewPortWidth > 768 ? 2 : 1
+              viewPortWidth && viewPortWidth > 1100
+                ? 3
+                : viewPortWidth && viewPortWidth > 768
+                ? 2
+                : 1
             }
           >
             {images.data.map((img: any) => {
