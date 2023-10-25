@@ -34,7 +34,7 @@ export default function Filter({
               <button
                 onClick={() => handleTagClick(item)}
                 key={item.item}
-                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-16  md:h-auto md:w-auto ${
+                className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-32  md:h-auto md:w-auto ${
                   selectedTags.includes(item) ? "bg-primary" : ""
                 }`}
               >
@@ -60,7 +60,7 @@ export default function Filter({
                 <button
                   onClick={() => handleTagClick(item)}
                   key={item.item}
-                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-16 md:h-auto md:w-auto ${
+                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-32 md:h-auto md:w-auto ${
                     selectedTags.includes(item) ? "bg-primary" : ""
                   }`}
                 >
@@ -87,7 +87,7 @@ export default function Filter({
                 <button
                   onClick={() => handleTagClick(item)}
                   key={item.item}
-                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-16 md:h-auto md:w-auto ${
+                  className={`border border-white flex flex-col justify-center items-center p-3 rounded-xl h-16 w-32 md:h-auto md:w-auto ${
                     selectedTags.includes(item) ? "bg-primary" : ""
                   }`}
                 >

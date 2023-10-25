@@ -54,3 +54,7 @@ body {
 .mapboxgl-popup-close-button {
   display: none !important;
 }
+
+.mapboxgl-popup {
+  margin: -25px 0px 0px 0px !important;
+}

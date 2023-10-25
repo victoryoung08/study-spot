@@ -111,8 +111,8 @@ export default function Content({
           />
         </div>
         <div
-          className={`flex-1 px-5 ${
-            view === "map" ? "" : "container mx-auto "
+          className={`flex-1   ${
+            view === "map" ? "md:px-5" : "container mx-auto px-5"
           }`}
         >
           {

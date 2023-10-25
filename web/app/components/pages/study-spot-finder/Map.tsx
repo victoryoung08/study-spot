@@ -41,7 +41,7 @@ const MapView = ({ cafe }: any) => {
 
       //@ts-expect-error - mapRef.current is not null
       mapRef.current?.flyTo({
-        center: [item.attributes.Longitude, item.attributes.Latitute],
+        center: [item.attributes.Longitude, item.attributes.Latitute + 0.04],
         zoom: 11,
       });
     } else {
@@ -49,6 +49,8 @@ const MapView = ({ cafe }: any) => {
       console.error("Invalid latitude or longitude for marker:", item);
     }
   };
+
+  console.log(vieportWidth);
 
   return (
     <>
@@ -60,7 +62,7 @@ const MapView = ({ cafe }: any) => {
         {...viewState}
         style={{
           width: "100%",
-          height: vieportWidth < 768 ? "55vh" : "75vh",
+          height: vieportWidth && vieportWidth < 768 ? "55vh" : "75vh",
           borderRadius: "20px",
           borderColor: "white",
           borderWidth: "3px",
@@ -74,8 +76,8 @@ const MapView = ({ cafe }: any) => {
               setPopupData(null);
             }}
             style={{ padding: 0, margin: 0 }}
-            className=" w-[500px]  p-0 m-0 z-50 "
-            anchor="top"
+            className=" w-[500px]  p-0 m-0 z-50  "
+            anchor="bottom"
             longitude={popUpData?.attributes?.Longitude}
             latitude={popUpData?.attributes?.Latitute}
           >
@@ -108,97 +110,86 @@ const MapView = ({ cafe }: any) => {
                         </span>
                       </a>
                     </div>
-
-                    <div className="flex gap-2 mt-2">
-                      {popUpData?.attributes?.features?.data?.map(
-                        (item: any) => {
-                          return (
-                            <div
-                              key={item.id}
-                              className="border p-1 rounded-xl bg-primary tooltip"
-                              data-tip={item?.attributes?.item}
-                            >
-                              <Image
-                                width={5}
-                                height={5}
-                                src={
-                                  item?.attributes?.svg_icon?.data?.attributes
-                                    ?.url
-                                }
-                                alt={item?.attributes?.item}
-                                className="w-5 h-5"
-                              />
-                            </div>
-                          );
-                        }
-                      )}
-                      {popUpData?.attributes?.vibes?.data?.map((item: any) => {
-                        return (
-                          <div
-                            key={item.id}
-                            className="border p-1 rounded-xl bg-primary tooltip"
-                            data-tip={item?.attributes?.item}
-                          >
-                            <Image
-                              width={5}
-                              height={5}
-                              src={
-                                item?.attributes?.svg_icon?.data?.attributes
-                                  ?.url
-                              }
-                              alt={item?.attributes?.item}
-                              className="w-5 h-5"
-                            />
-                          </div>
-                        );
-                      })}
-                      {popUpData?.attributes?.styles?.data?.map((item: any) => {
-                        return (
-                          <div
-                            key={item.id}
-                            className="border p-1 rounded-xl bg-primary tooltip"
-                            data-tip={item?.attributes?.item}
-                          >
-                            <Image
-                              width={5}
-                              height={5}
-                              src={
-                                item?.attributes?.svg_icon?.data?.attributes
-                                  ?.url
-                              }
-                              alt={item?.attributes?.item}
-                              className="w-5 h-5"
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
                   </div>
                 </Link>
+
+                <div className="flex gap-2 mt-2">
+                  {popUpData?.attributes?.features?.data?.map((item: any) => {
+                    return (
+                      <div
+                        key={item.id}
+                        className="border p-1 rounded-xl bg-primary tooltip"
+                        data-tip={item?.attributes?.item}
+                      >
+                        <Image
+                          width={5}
+                          height={5}
+                          src={
+                            item?.attributes?.svg_icon?.data?.attributes?.url
+                          }
+                          alt={item?.attributes?.item}
+                          className="w-5 h-5"
+                        />
+                      </div>
+                    );
+                  })}
+                  {popUpData?.attributes?.vibes?.data?.map((item: any) => {
+                    return (
+                      <div
+                        key={item.id}
+                        className="border p-1 rounded-xl bg-primary tooltip"
+                        data-tip={item?.attributes?.item}
+                      >
+                        <Image
+                          width={5}
+                          height={5}
+                          src={
+                            item?.attributes?.svg_icon?.data?.attributes?.url
+                          }
+                          alt={item?.attributes?.item}
+                          className="w-5 h-5"
+                        />
+                      </div>
+                    );
+                  })}
+                  {popUpData?.attributes?.styles?.data?.map((item: any) => {
+                    return (
+                      <div
+                        key={item.id}
+                        className="border p-1 rounded-xl bg-primary tooltip"
+                        data-tip={item?.attributes?.item}
+                      >
+                        <Image
+                          width={5}
+                          height={5}
+                          src={
+                            item?.attributes?.svg_icon?.data?.attributes?.url
+                          }
+                          alt={item?.attributes?.item}
+                          className="w-5 h-5"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </Popup>
         )}
         {cafe.map((item: any) => {
           return (
-            <>
+            <div key={item.id}>
               {item.attributes.Latitute && item.attributes.Longitude && (
                 <Marker
-                  // onClick={(e) => {
-                  //   e.originalEvent.stopPropagation();
-                  //   setShowPopup(true);
-                  //   setPopupData(item);
-                  // }}
                   onClick={(e) => handleMarkerClick(item, e)}
-                  key={item.id}
                   latitude={item.attributes.Latitute}
                   longitude={item.attributes.Longitude}
-
-                  //   anchor="bottom"
                 >
                   <img
                     className={`${
-                      vieportWidth < 768 ? "h-16 w-16 " : "h-20 w-20"
+                      vieportWidth && vieportWidth < 768
+                        ? "h-16 w-16 "
+                        : "h-20 w-20"
                     }z-0`}
                     alt="marker"
                     src={
@@ -211,7 +202,7 @@ const MapView = ({ cafe }: any) => {
                   />
                 </Marker>
               )}
-            </>
+            </div>
           );
         })}
       </Map>
