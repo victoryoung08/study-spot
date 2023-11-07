@@ -705,7 +705,8 @@ export interface ApiAboutAbout extends Schema.SingleType {
         'component.two-column-cta-list',
         'component.two-column-image-left',
         'component.two-column-text',
-        'seo.seo'
+        'seo.seo',
+        'component.partner-list-item'
       ]
     >;
     createdAt: Attribute.DateTime;
@@ -1051,6 +1052,54 @@ export interface ApiListCafeListCafe extends Schema.SingleType {
   };
 }
 
+export interface ApiPagePage extends Schema.CollectionType {
+  collectionName: 'pages';
+  info: {
+    singularName: 'page';
+    pluralName: 'pages';
+    displayName: 'Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Attribute.DynamicZone<
+      [
+        'component.about-us',
+        'component.book-now',
+        'component.bordered-text',
+        'component.cta-center',
+        'component.features',
+        'component.four-column-grid',
+        'component.header-with-grid-image',
+        'component.hero-center',
+        'component.hero-with-background',
+        'component.hero',
+        'component.partners',
+        'component.single-row-with-image',
+        'component.three-grid-circle',
+        'component.two-column-cta-image-left',
+        'component.two-column-cta-list',
+        'component.two-column-image-left',
+        'component.two-column-text',
+        'component.versions',
+        'component.videos',
+        'seo.seo'
+      ]
+    >;
+    title: Attribute.String;
+    path: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiStudyLengthStudyLength extends Schema.CollectionType {
   collectionName: 'study_lengths';
   info: {
@@ -1264,6 +1313,7 @@ declare module '@strapi/types' {
       'api::lead.lead': ApiLeadLead;
       'api::library.library': ApiLibraryLibrary;
       'api::list-cafe.list-cafe': ApiListCafeListCafe;
+      'api::page.page': ApiPagePage;
       'api::study-length.study-length': ApiStudyLengthStudyLength;
       'api::study-spot.study-spot': ApiStudySpotStudySpot;
       'api::style.style': ApiStyleStyle;

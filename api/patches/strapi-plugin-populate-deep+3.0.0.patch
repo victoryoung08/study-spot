@@ -1,37 +1,64 @@
 diff --git a/node_modules/strapi-plugin-populate-deep/server/helpers/index.js b/node_modules/strapi-plugin-populate-deep/server/helpers/index.js
-index 7f026b8..647630c 100644
+index 7f026b8..b12b51a 100644
 --- a/node_modules/strapi-plugin-populate-deep/server/helpers/index.js
 +++ b/node_modules/strapi-plugin-populate-deep/server/helpers/index.js
-@@ -1,4 +1,21 @@
+@@ -1,24 +1,36 @@
 -const { isEmpty, merge } = require("lodash/fp");
 +const { isEmpty } = require("lodash/fp");
 +
 +const deepAssign = (target, source) => {
 +    for (const key in source) {
-+     if (Object.prototype.hasOwnProperty.call(source, key)) {
-+       if (typeof source[key] === 'object' && source[key] !== null) {
++      if (Object.prototype.hasOwnProperty.call(source, key)) {
++        if (typeof source[key] === 'object' && source[key] !== null) {
 +         if (!target[key] || typeof target[key] !== 'object' || target[key] === null) {
 +           target[key] = source[key];
 +         }
-+        deepAssign(target[key], source[key]);
-+} else if (!target[key] || typeof target[key] !== 'object' || target[key] === null) {
-+         target[key] = source[key];
-+       }
-+     }
-+   }
-+  return target;
++          deepAssign(target[key], source[key]);
++        } else if (!target[key] || typeof target[key] !== 'object' || target[key] === null) {
++          target[key] = source[key];
++        }
++      }
++    }
++    return target;
 +}
-+
  
  const getModelPopulationAttributes = (model) => {
    if (model.uid === "plugin::upload.file") {
-@@ -32,7 +49,8 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
+     const { related, ...attributes } = model.attributes;
+     return attributes;
+   }
+-
+   return model.attributes;
+ };
+-
+ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
+   const skipCreatorFields = strapi.plugin('strapi-plugin-populate-deep')?.config('skipCreatorFields');
+-
+   if (maxDepth <= 1) {
+     return true;
+   }
+   if (modelUid === "admin::user" && skipCreatorFields) {
+     return undefined;
+   }
+-
+   const populate = {};
+   const model = strapi.getModel(modelUid);
+   if (ignore && !ignore.includes(model.collectionName)) ignore.push(model.collectionName)
+@@ -32,7 +44,7 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
        } else if (value.type === "dynamiczone") {
          const dynamicPopulate = value.components.reduce((prev, cur) => {
            const curPopulate = getFullPopulateObject(cur, maxDepth - 1);
 -          return curPopulate === true ? prev : merge(prev, curPopulate);
-+          // return curPopulate === true ? prev : merge(prev, curPopulate);
 +          return curPopulate === true ? prev : deepAssign(prev, curPopulate);
          }, {});
          populate[key] = isEmpty(dynamicPopulate) ? true : dynamicPopulate;
        } else if (value.type === "relation") {
+@@ -51,7 +63,6 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
+   }
+   return isEmpty(populate) ? true : { populate };
+ };
+-
+ module.exports = {
+   getFullPopulateObject
+ }
+\ No newline at end of file

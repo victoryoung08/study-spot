@@ -7,6 +7,8 @@ export default async function CreatorProgram(searchParams: any) {
 
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${params.slug}&populate=deep`,
+    // `${process.env.STRAPI_API_ENDPOINT}/{collection-name}?filters[slug][$eq]=${params.slug}&populate=deep`,
+
     {
       next: { revalidate: 1 },
       headers: {

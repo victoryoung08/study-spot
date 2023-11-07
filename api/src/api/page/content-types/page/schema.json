@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "abouts",
+  "kind": "collectionType",
+  "collectionName": "pages",
   "info": {
-    "singularName": "about",
-    "pluralName": "abouts",
-    "displayName": "About",
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Page",
     "description": ""
   },
   "options": {
@@ -16,22 +16,32 @@
       "type": "dynamiczone",
       "components": [
         "component.about-us",
-        "component.column-image",
+        "component.book-now",
+        "component.bordered-text",
         "component.cta-center",
-        "component.feature-item",
         "component.features",
+        "component.four-column-grid",
+        "component.header-with-grid-image",
         "component.hero-center",
+        "component.hero-with-background",
         "component.hero",
-        "component.list-item",
+        "component.partners",
         "component.single-row-with-image",
-        "component.text-column",
+        "component.three-grid-circle",
         "component.two-column-cta-image-left",
         "component.two-column-cta-list",
         "component.two-column-image-left",
         "component.two-column-text",
-        "seo.seo",
-        "component.partner-list-item"
+        "component.versions",
+        "component.videos",
+        "seo.seo"
       ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
     }
   }
 }
