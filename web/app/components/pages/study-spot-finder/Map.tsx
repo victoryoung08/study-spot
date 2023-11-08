@@ -50,7 +50,6 @@ const MapView = ({ cafe }: any) => {
     }
   };
 
-  console.log(vieportWidth);
 
   return (
     <>

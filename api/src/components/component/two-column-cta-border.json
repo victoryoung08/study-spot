@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_component_two_column_cta_borders",
+  "info": {
+    "displayName": "two_column_cta_border",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "libraries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::library.library"
+    }
+  }
+}

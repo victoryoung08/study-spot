@@ -1,17 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Container } from "../../components/common/Container";
 import * as component from "../../components/common/ComponentSelector";
+import ErrorPage from "@/app/components/common/ErrorPage";
 
 export default async function CreatorProgram(searchParams: any) {
   const { params } = searchParams;
-
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${params.slug}&populate=deep`,
+    // `${process.env.STRAPI_API_ENDPOINT}/{collection-name}?filters[slug][$eq]=${params.slug}&populate=deep`,
+
     {
       next: { revalidate: 1 },
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      // },
     }
   );
 
@@ -19,7 +21,7 @@ export default async function CreatorProgram(searchParams: any) {
   if (response.ok) {
     data = await response.json();
   } else {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   const headerWithGridImageProps = {

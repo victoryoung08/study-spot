@@ -17,6 +17,8 @@ import BookNow from "../pages/list-cafe/BookNow";
 import Videos from "../pages/list-cafe/Videos";
 import HeaderWithGridImage from "../pages/cafe/HeaderWithGridImage";
 import FourColumnGrid from "../pages/cafe/FourColumnGrid";
+import TwoColumnCtaBorder from "../pages/library/twoColumnCtaBorder";
+import SpotFinder from "../pages/study-spot-finder/SpotFinder";
 
 export {
   Hero,
@@ -38,4 +40,6 @@ export {
   Videos,
   HeaderWithGridImage, // remove this component in strapi it will cause error when used
   FourColumnGrid,
+  TwoColumnCtaBorder,
+  SpotFinder,
 };

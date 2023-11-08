@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * list-cafe controller
+ * page controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::list-cafe.list-cafe');
+module.exports = createCoreController('api::page.page');

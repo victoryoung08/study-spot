@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_component_spot_finders",
+  "info": {
+    "displayName": "spot_finder",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "study_spots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::study-spot.study-spot"
+    }
+  }
+}

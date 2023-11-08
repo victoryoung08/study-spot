@@ -677,134 +677,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutAbout extends Schema.SingleType {
-  collectionName: 'abouts';
-  info: {
-    singularName: 'about';
-    pluralName: 'abouts';
-    displayName: 'About';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'component.about-us',
-        'component.column-image',
-        'component.cta-center',
-        'component.feature-item',
-        'component.features',
-        'component.hero-center',
-        'component.hero',
-        'component.list-item',
-        'component.single-row-with-image',
-        'component.text-column',
-        'component.two-column-cta-image-left',
-        'component.two-column-cta-list',
-        'component.two-column-image-left',
-        'component.two-column-text',
-        'seo.seo'
-      ]
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBeACreatorBeACreator extends Schema.SingleType {
-  collectionName: 'be_a_creators';
-  info: {
-    singularName: 'be-a-creator';
-    pluralName: 'be-a-creators';
-    displayName: 'BeACreator';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'component.about-us',
-        'component.column-image',
-        'component.cta-center',
-        'component.feature-item',
-        'component.features',
-        'component.hero-center',
-        'component.hero',
-        'component.list-item',
-        'component.single-row-with-image',
-        'component.text-column',
-        'component.two-column-cta-image-left',
-        'component.two-column-cta-list',
-        'component.two-column-image-left',
-        'component.two-column-text',
-        'seo.seo'
-      ]
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::be-a-creator.be-a-creator',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::be-a-creator.be-a-creator',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCafeCafe extends Schema.SingleType {
-  collectionName: 'cafes';
-  info: {
-    singularName: 'cafe';
-    pluralName: 'cafes';
-    displayName: 'cafe';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'component.header-with-grid-image',
-        'component.four-column-grid',
-        'component.cta-center',
-        'seo.seo'
-      ]
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::cafe.cafe', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::cafe.cafe', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCreatorCreator extends Schema.CollectionType {
   collectionName: 'creators';
   info: {
@@ -1009,12 +881,13 @@ export interface ApiLibraryLibrary extends Schema.CollectionType {
   };
 }
 
-export interface ApiListCafeListCafe extends Schema.SingleType {
-  collectionName: 'list_cafes';
+export interface ApiPagePage extends Schema.CollectionType {
+  collectionName: 'pages';
   info: {
-    singularName: 'list-cafe';
-    pluralName: 'list-cafes';
-    displayName: 'list-cafe';
+    singularName: 'page';
+    pluralName: 'pages';
+    displayName: 'Page';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1022,31 +895,38 @@ export interface ApiListCafeListCafe extends Schema.SingleType {
   attributes: {
     components: Attribute.DynamicZone<
       [
+        'component.about-us',
+        'component.book-now',
+        'component.bordered-text',
+        'component.cta-center',
+        'component.features',
+        'component.four-column-grid',
+        'component.header-with-grid-image',
+        'component.hero-center',
         'component.hero-with-background',
+        'component.hero',
         'component.partners',
         'component.single-row-with-image',
-        'component.bordered-text',
         'component.three-grid-circle',
+        'component.two-column-cta-image-left',
+        'component.two-column-cta-list',
+        'component.two-column-image-left',
+        'component.two-column-text',
         'component.versions',
         'component.videos',
-        'component.book-now',
-        'seo.seo'
+        'seo.seo',
+        'component.two-column-cta-border',
+        'component.spot-finder'
       ]
     >;
+    title: Attribute.String;
+    path: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::list-cafe.list-cafe',
-      'oneToOne',
-      'admin::user'
-    > &
+    createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::list-cafe.list-cafe',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1254,16 +1134,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::about.about': ApiAboutAbout;
-      'api::be-a-creator.be-a-creator': ApiBeACreatorBeACreator;
-      'api::cafe.cafe': ApiCafeCafe;
       'api::creator.creator': ApiCreatorCreator;
       'api::feature.feature': ApiFeatureFeature;
       'api::genre.genre': ApiGenreGenre;
       'api::home.home': ApiHomeHome;
       'api::lead.lead': ApiLeadLead;
       'api::library.library': ApiLibraryLibrary;
-      'api::list-cafe.list-cafe': ApiListCafeListCafe;
+      'api::page.page': ApiPagePage;
       'api::study-length.study-length': ApiStudyLengthStudyLength;
       'api::study-spot.study-spot': ApiStudySpotStudySpot;
       'api::style.style': ApiStyleStyle;

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * list-cafe service
+ * page service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::list-cafe.list-cafe');
+module.exports = createCoreService('api::page.page');
