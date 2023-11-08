@@ -34,7 +34,9 @@
         "component.two-column-text",
         "component.versions",
         "component.videos",
-        "seo.seo"
+        "seo.seo",
+        "component.two-column-cta-border",
+        "component.spot-finder"
       ]
     },
     "title": {

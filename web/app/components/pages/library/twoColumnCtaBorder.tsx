@@ -2,11 +2,17 @@ import { Container } from "../../common/Container";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function TwoColumnImagewithBorder({ library }: any) {
+export default function TwoColumnCtaBorder({ libraries }: any) {
   return (
     <Container>
+    
+      <div className="text-center mb-10">
+        <h2 className="font-bold text-4xl lg:text-5xl">
+          Explore the Cafe Library
+        </h2>
+      </div>
       <div className="space-y-10">
-        {library?.data?.map((item: any) => {
+        {libraries?.data?.map((item: any) => {
           return (
             <Link
               href={`/library/${item.attributes.slug}`}
@@ -35,11 +41,7 @@ export default function TwoColumnImagewithBorder({ library }: any) {
                   {item?.attributes.short_description || ""}
                 </p>
                 <div className="flex justify-end mt-5">
-                  <p
-                    className="text-sm font-bold"
-                  >
-                    Read more
-                  </p>
+                  <p className="text-sm font-bold">Read more</p>
                 </div>
               </div>
             </Link>

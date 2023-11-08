@@ -1,11 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Container } from "../components/common/Container";
 import * as component from "../components/common/ComponentSelector";
 import ErrorPage from "../components/common/ErrorPage";
-
 export default async function Page(searchParams: any) {
   const { params } = searchParams;
-
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
     {
@@ -37,8 +34,7 @@ export default async function Page(searchParams: any) {
         .join("");
 
       if (componentName === "Seo") return;
-      const Component = component[componentName as componentsType];
-
+      const Component = component[componentName];
       return { ...item, Component };
     })
     .filter((item: any) => item);
@@ -53,35 +49,39 @@ export default async function Page(searchParams: any) {
   );
 }
 
-// // generate dynamic metadata
-// export async function generateMetadata({ params }: any) {
-//   try {
-//     const seo = await fetch(
-//       `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${params.slug}&populate=deep`,
-//       {
-//         next: { revalidate: 1 },
-//         headers: {
-//           Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-//         },
-//       }
-//     );
-//     const data = await seo.json();
-//     if (!data) {
-//       return {
-//         title: "Not Found",
-//         description: "The page you are looking for does not exist.",
-//       };
-//     }
+// generate dynamic metadata
+export async function generateMetadata({ params }: any) {
+  try {
+    const seo = await fetch(
+      `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
+      {
+        next: { revalidate: 1 },
+        // headers: {
+        //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+        // },
+      }
+    );
+    const data = await seo.json();
+    if (!data) {
+      return {
+        title: "Not Found",
+        description: "The page you are looking for does not exist.",
+      };
+    }
 
-//     return {
-//       title: data.data[0].attributes.cafe_name,
-//       description: data.data[0].attributes.cafe_name,
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     return {
-//       title: "Not Found",
-//       description: "The page you are looking for does not exist.",
-//     };
-//   }
-// }
+    const seoData2 = data.data[0].attributes.components.filter((item: any) => {
+      return item.__component === "seo.seo";
+    })[0];
+
+    return {
+      title: seoData2.title,
+      description: seoData2.description,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      title: "Not Found",
+      description: "The page you are looking for does not exist.",
+    };
+  }
+}

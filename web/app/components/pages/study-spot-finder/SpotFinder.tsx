@@ -8,20 +8,27 @@ import MapView from "./Map";
 import { MapIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import getUniqueValues from "@/hooks/getUniqueValues";
 
 type ContentProps = {
-  features: any;
-  vibes: any;
-  styles: any;
-  cafe: any;
+  study_spots: any;
 };
 
-export default function Content({
-  features,
-  vibes,
-  styles,
-  cafe,
-}: ContentProps) {
+export default function SpotFinder({ study_spots }: ContentProps) {
+  const featuresRaw = study_spots.data.map((item: any) => {
+    return item.attributes.features;
+  });
+  const vibesRaw = study_spots.data.map((item: any) => {
+    return item.attributes.vibes;
+  });
+  const stylesRaw = study_spots.data.map((item: any) => {
+    return item.attributes.styles;
+  });
+  const features = getUniqueValues(featuresRaw);
+  const vibes = getUniqueValues(vibesRaw);
+  const styles = getUniqueValues(stylesRaw);
+  const cafe = study_spots.data;
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const filter = selectedTags.map((item: any) => item.item);
   const router = useRouter();

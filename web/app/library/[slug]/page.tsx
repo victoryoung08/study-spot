@@ -4,15 +4,14 @@ import Markdown from "markdown-to-jsx";
 
 export default async function LibrarySlug(searchParams: any) {
   const { params } = searchParams;
-
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/libraries?filters[slug][$eq]=${params.slug}&populate=deep`,
 
     {
       next: { revalidate: 1 },
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      },
+      //   headers: {
+      //     Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      //   },
     }
   );
   const library = await response.json();

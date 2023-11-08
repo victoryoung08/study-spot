@@ -69,6 +69,7 @@ export interface ComponentCtaCenter extends Schema.Component {
   info: {
     displayName: 'cta_center';
     icon: 'alien';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
@@ -264,6 +265,21 @@ export interface ComponentSingleRowWithImage extends Schema.Component {
   };
 }
 
+export interface ComponentSpotFinder extends Schema.Component {
+  collectionName: 'components_component_spot_finders';
+  info: {
+    displayName: 'spot_finder';
+    icon: 'apps';
+  };
+  attributes: {
+    study_spots: Attribute.Relation<
+      'component.spot-finder',
+      'oneToMany',
+      'api::study-spot.study-spot'
+    >;
+  };
+}
+
 export interface ComponentTags extends Schema.Component {
   collectionName: 'components_component_tags';
   info: {
@@ -311,6 +327,22 @@ export interface ComponentThreeGridCircle extends Schema.Component {
     title: Attribute.String;
     description: Attribute.RichText;
     item: Attribute.Component<'component.circle-item', true>;
+  };
+}
+
+export interface ComponentTwoColumnCtaBorder extends Schema.Component {
+  collectionName: 'components_component_two_column_cta_borders';
+  info: {
+    displayName: 'two_column_cta_border';
+    icon: 'apps';
+  };
+  attributes: {
+    title: Attribute.String;
+    libraries: Attribute.Relation<
+      'component.two-column-cta-border',
+      'oneToMany',
+      'api::library.library'
+    >;
   };
 }
 
@@ -457,10 +489,12 @@ declare module '@strapi/types' {
       'component.partner-list-item': ComponentPartnerListItem;
       'component.partners': ComponentPartners;
       'component.single-row-with-image': ComponentSingleRowWithImage;
+      'component.spot-finder': ComponentSpotFinder;
       'component.tags': ComponentTags;
       'component.text-column': ComponentTextColumn;
       'component.text-image-item': ComponentTextImageItem;
       'component.three-grid-circle': ComponentThreeGridCircle;
+      'component.two-column-cta-border': ComponentTwoColumnCtaBorder;
       'component.two-column-cta-image-left': ComponentTwoColumnCtaImageLeft;
       'component.two-column-cta-list': ComponentTwoColumnCtaList;
       'component.two-column-image-left': ComponentTwoColumnImageLeft;
