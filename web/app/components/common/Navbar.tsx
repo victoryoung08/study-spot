@@ -34,7 +34,7 @@ export default function Navbar({ navigationData }: any) {
           <Link href="/" className="text-white hover:border-none">
             Home
           </Link>
-          {navigationData.map((item: any) => {
+          {navigationData.slice(0, 5).map((item: any) => {
             return (
               <Link
                 key={item.id}
@@ -61,7 +61,7 @@ export default function Navbar({ navigationData }: any) {
           >
             Home
           </Link>
-          {navigationData.map((item: any) => {
+          {navigationData.slice(0, 5).map((item: any) => {
             return (
               <Link
                 key={item.id}

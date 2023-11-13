@@ -14,9 +14,6 @@ export default async function Main(props: IMainProps) {
     `${process.env.STRAPI_API_ENDPOINT}/pages?populate=deep`,
     {
       next: { revalidate: 1 },
-      // headers: {
-      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      // },
     }
   );
 

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import * as component from "../components/common/ComponentSelector";
 import ErrorPage from "../components/common/ErrorPage";
 export default async function Page(searchParams: any) {
@@ -7,9 +6,6 @@ export default async function Page(searchParams: any) {
     `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
     {
       next: { revalidate: 1 },
-      // headers: {
-      //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      // },
     }
   );
 
@@ -29,11 +25,12 @@ export default async function Page(searchParams: any) {
       const componentNameParts = name.split("-");
       // Capitalize each part and join them
 
-      const componentName = componentNameParts
+      const componentName: string = componentNameParts
         .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
         .join("");
 
       if (componentName === "Seo") return;
+      //@ts-expect-error ignore
       const Component = component[componentName];
       return { ...item, Component };
     })
@@ -56,9 +53,6 @@ export async function generateMetadata({ params }: any) {
       `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
       {
         next: { revalidate: 1 },
-        // headers: {
-        //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-        // },
       }
     );
     const data = await seo.json();
