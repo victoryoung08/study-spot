@@ -4,7 +4,7 @@ module.exports = {
   async afterCreate(event) {
     // Connected to "Save" button in admin panel
     const { result } = event;
-
+    console.log("trigger here result", result);
     try {
       const response = await axios.post(
         "https://connect.mailerlite.com/api/subscribers",
