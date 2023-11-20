@@ -94,7 +94,7 @@ export default function Navbar({ navigationData }: any) {
           </div>
 
           <Link
-            href="/"
+            href="/study-spot-finder"
             className="capitalize btn btn-primary border-white hover:border-white"
           >
             Find A Study Spot
