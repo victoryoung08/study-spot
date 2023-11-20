@@ -5,7 +5,7 @@ export default async function Page(searchParams: any) {
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
     {
-      next: { revalidate: 1 },
+      next: { revalidate: 0 },
     }
   );
 
