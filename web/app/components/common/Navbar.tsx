@@ -75,7 +75,7 @@ export default function Navbar({ navigationData }: any) {
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              className="dropdown-content z-[1] menu p-2 shadow bg-[#505050] rounded-box w-52"
             >
               {dropDownNavigation.map((item: any) => {
                 return (
@@ -83,7 +83,9 @@ export default function Navbar({ navigationData }: any) {
                     <Link
                       key={item.id}
                       href={item.path}
-                      className={"text-white hover:border-none z-50"}
+                      className={
+                        "text-white hover:text-white hover:border-none z-50"
+                      }
                     >
                       {item.title}
                     </Link>
