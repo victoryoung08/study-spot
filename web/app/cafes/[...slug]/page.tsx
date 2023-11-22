@@ -10,7 +10,7 @@ export default async function CreatorProgram(searchParams: any) {
     // `${process.env.STRAPI_API_ENDPOINT}/{collection-name}?filters[slug][$eq]=${params.slug}&populate=deep`,
 
     {
-      next: { revalidate: 1 },
+      next: { revalidate: 0 },
       // headers: {
       //   Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
       // },
