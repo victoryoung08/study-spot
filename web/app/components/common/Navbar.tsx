@@ -9,8 +9,6 @@ import { usePathname } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 export default function Navbar({ navigationData }: any) {
-  const pathname = usePathname();
-
   const [navHandler, setNavHandler] = useState(false);
   const handleNav = () => {
     setNavHandler((current) => !current);
@@ -52,7 +50,7 @@ export default function Navbar({ navigationData }: any) {
           {mainNavigation.map((item: any) => {
             return (
               <Link
-                key={item.id}
+                key={item.path}
                 href={item.path}
                 className={
                   item.path === "/study-spot-finder"
@@ -79,7 +77,7 @@ export default function Navbar({ navigationData }: any) {
             >
               {dropDownNavigation.map((item: any) => {
                 return (
-                  <li key={item.id}>
+                  <li key={item.path}>
                     <Link
                       key={item.id}
                       href={item.path}
@@ -121,8 +119,6 @@ export default function Navbar({ navigationData }: any) {
                     ? "capitalize btn btn-primary border-white hover:border-white"
                     : "w-full rounded-lg p-2 text-center text-white hover:border-none hover:bg-gray"
                 }
-
-                // className="text-white hover:border-none"
               >
                 {item.title}
               </Link>

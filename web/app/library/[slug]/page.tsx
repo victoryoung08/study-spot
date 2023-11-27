@@ -4,17 +4,7 @@ import Markdown from "markdown-to-jsx";
 
 export default async function LibrarySlug(searchParams: any) {
   const { params } = searchParams;
-  const response = await fetch(
-    `${process.env.STRAPI_API_ENDPOINT}/libraries?filters[slug][$eq]=${params.slug}&populate=deep`,
-
-    {
-      next: { revalidate: 0 },
-      //   headers: {
-      //     Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      //   },
-    }
-  );
-  const library = await response.json();
+  const { library } = await getArticles(params);
   return (
     <Container>
       <div>
@@ -96,13 +86,13 @@ export default async function LibrarySlug(searchParams: any) {
   );
 }
 
-// generate dynamic metadata
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata(params: { slug: string }): Promise<any> {
   try {
     const seo = await fetch(
       `${process.env.STRAPI_API_ENDPOINT}/libraries?filters[slug][$eq]=${params.slug}&populate=deep`,
       {
-        next: { revalidate: 1 },
+        next: { revalidate: 0 },
+        cache: "no-cache",
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
         },
@@ -126,5 +116,22 @@ export async function generateMetadata({ params }: any) {
       title: "Not Found",
       description: "The page you are looking for does not exist.",
     };
+  }
+}
+
+async function getArticles(params: { slug: string }) {
+  try {
+    const response = await fetch(
+      `${process.env.STRAPI_API_ENDPOINT}/libraries?filters[slug][$eq]=${params.slug}&populate=deep`,
+
+      {
+        next: { revalidate: 0 },
+        cache: "no-cache",
+      }
+    );
+    const library = await response.json();
+    return { library };
+  } catch (error) {
+    return {};
   }
 }

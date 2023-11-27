@@ -13,7 +13,8 @@ export default async function Main(props: IMainProps) {
   const response = await fetch(
     `${process.env.STRAPI_API_ENDPOINT}/pages?populate=deep`,
     {
-      next: { revalidate: 1 },
+      next: { revalidate: 0 },
+      cache: "no-cache",
     }
   );
 

@@ -6,6 +6,7 @@ export default async function Page(searchParams: any) {
     `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
     {
       next: { revalidate: 0 },
+      cache: "no-cache",
     }
   );
 
