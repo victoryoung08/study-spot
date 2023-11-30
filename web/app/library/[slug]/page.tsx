@@ -86,7 +86,7 @@ export default async function LibrarySlug(searchParams: any) {
   );
 }
 
-export async function generateMetadata(params: { slug: string }): Promise<any> {
+export async function generateMetadata(params: any): Promise<any> {
   try {
     const seo = await fetch(
       `${process.env.STRAPI_API_ENDPOINT}/libraries?filters[slug][$eq]=${params.slug}&populate=deep`,
