@@ -8,6 +8,7 @@ import * as z from "zod";
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import { PaperPlane } from "@/animations/paperplane";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 type bookNowType = {
   title: string;
@@ -64,6 +65,11 @@ export default function BookNow({
     );
 
     if (response.ok) {
+      pushDataLayer({
+        name: "Book Now",
+        path: "/list-cafe",
+        data,
+      });
       setLoading(false);
       setFormSubmitted(true);
       reset();

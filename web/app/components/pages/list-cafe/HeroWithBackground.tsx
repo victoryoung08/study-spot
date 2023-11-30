@@ -1,3 +1,5 @@
+"use client";
+import { pushDataLayer } from "@/app/lib/gtm";
 import { Container } from "../../common/Container";
 import { commonDataType } from "../about/CtaCenter";
 import Link from "next/link";
@@ -22,6 +24,12 @@ export default function HeroWithBackground({
         </p>
 
         <Link
+          onClick={() =>
+            pushDataLayer({
+              name: cta_text,
+              path: cta_link,
+            })
+          }
           href={cta_link || "/"}
           type="button"
           className="mt-5 btn btn-primary rounded-xl border border-white py-2 text-base capitalize"

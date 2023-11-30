@@ -1,15 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Map, {
-  FullscreenControl,
-  Marker,
-  Popup,
-  ScaleControl,
-} from "react-map-gl";
-import mapboxgl from "mapbox-gl";
+import { useRef, useState } from "react";
+import Map, { Marker, Popup } from "react-map-gl";
 import Image from "next/image";
 import pinIcon from "@/public/images/pin.svg";
 import Link from "next/link";
@@ -49,7 +42,6 @@ const MapView = ({ cafe }: any) => {
       console.error("Invalid latitude or longitude for marker:", item);
     }
   };
-
 
   return (
     <>
@@ -176,36 +168,52 @@ const MapView = ({ cafe }: any) => {
           </Popup>
         )}
         {cafe.map((item: any) => {
-          return (
-            <div key={item.id}>
-              {item.attributes.Latitute && item.attributes.Longitude && (
-                <Marker
-                  onClick={(e) => handleMarkerClick(item, e)}
-                  latitude={item.attributes.Latitute}
-                  longitude={item.attributes.Longitude}
-                >
-                  <img
-                    className={`${
-                      vieportWidth && vieportWidth < 768
-                        ? "h-16 w-16 "
-                        : "h-20 w-20"
-                    }z-0`}
-                    alt="marker"
-                    src={
-                      popUpData
-                        ? item.id === popUpData.id
-                          ? "https://res.cloudinary.com/dz9t8ncms/image/upload/v1697819184/purple_marker_86dbd3e393.png"
-                          : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1696963244/graymarker_8a7239412c.svg"
-                        : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1697819184/purple_marker_86dbd3e393.png"
-                    }
-                  />
-                </Marker>
-              )}
-            </div>
+          const isValid = isValidCoordinates(
+            item.attributes.Latitute,
+            item.attributes.Longitude
           );
+          if (isValid) {
+            return (
+              <div key={item.id}>
+                {item.attributes.Latitute && item.attributes.Longitude && (
+                  <Marker
+                    onClick={(e) => handleMarkerClick(item, e)}
+                    latitude={item.attributes.Latitute || -33.870453}
+                    longitude={item.attributes.Longitude || 151.208755}
+                  >
+                    <img
+                      className={`${
+                        vieportWidth && vieportWidth < 768
+                          ? "h-16 w-16 "
+                          : "h-20 w-20"
+                      }z-0`}
+                      alt="marker"
+                      src={
+                        popUpData
+                          ? item.id === popUpData.id
+                            ? "https://res.cloudinary.com/dz9t8ncms/image/upload/v1697819184/purple_marker_86dbd3e393.png"
+                            : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1696963244/graymarker_8a7239412c.svg"
+                          : "https://res.cloudinary.com/dz9t8ncms/image/upload/v1697819184/purple_marker_86dbd3e393.png"
+                      }
+                    />
+                  </Marker>
+                )}
+              </div>
+            );
+          }
         })}
       </Map>
     </>
   );
 };
 export default MapView;
+
+function isValidCoordinates(latitude: number, longitude: number) {
+  if (latitude < -90 || latitude > 90) {
+    return false; // Latitude is invalid
+  }
+  if (longitude < -180 || longitude > 180) {
+    return false; // Longitude is invalid
+  }
+  return true; // Both latitude and longitude are valid
+}

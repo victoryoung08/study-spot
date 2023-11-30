@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Lottie from "lottie-react";
 import { PaperPlane } from "@/animations/paperplane";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 type Inputs = {
   name: string;
@@ -96,6 +97,10 @@ export default function ApplyNow() {
     );
 
     if (response.ok) {
+      pushDataLayer({
+        name: "Become Creator Form Submit",
+        data,
+      });
       setLoading(false);
       setFormSubmitted(true);
       reset();

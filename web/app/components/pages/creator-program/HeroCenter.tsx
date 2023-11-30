@@ -1,6 +1,8 @@
+"use client";
 import Link from "next/link";
 import { Container } from "../../common/Container";
 import { commonDataType } from "../about/CtaCenter";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 export default function HeroCenter({
   title,
@@ -16,6 +18,12 @@ export default function HeroCenter({
           {description || ""}
         </p>
         <Link
+          onClick={() =>
+            pushDataLayer({
+              name: cta_text,
+              path: cta_link,
+            })
+          }
           href={cta_link || "/"}
           type="button"
           className="btn btn-primary rounded-xl border border-white hover:border-white bg-btnColor px-7 capitalize text-base"

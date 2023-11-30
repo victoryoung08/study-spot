@@ -1,4 +1,5 @@
 "use client";
+import { pushDataLayer } from "@/app/lib/gtm";
 import { Container } from "../../common/Container";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +19,12 @@ export default function TwoColumnCtaBorder({ libraries }: any) {
         {currentLibraries?.map((item: any) => {
           return (
             <Link
+              onClick={() =>
+                pushDataLayer({
+                  name: item?.attributes.title,
+                  path: `/library/${item.attributes.slug}`,
+                })
+              }
               href={`/library/${item.attributes.slug}`}
               key={item?.id}
               className="flex border rounded-3xl "

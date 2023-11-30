@@ -1,3 +1,5 @@
+"use client";
+import { pushDataLayer } from "@/app/lib/gtm";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,6 +10,12 @@ export default function Cafe({ cafe }: any) {
         {cafe?.map((item: any) => {
           return (
             <Link
+              onClick={() =>
+                pushDataLayer({
+                  name: item?.attributes?.cafe_name,
+                  path: `/cafes/${item?.attributes?.slug}`,
+                })
+              }
               href={`/cafes/${item?.attributes?.slug}`}
               key={item.id}
               className="rounded-3xl border border-white overflow-hidden hover:bg-primary transition-all ease-in-out delay-100 duration-500"

@@ -7,6 +7,7 @@ import { useState } from "react";
 import logo from "@/public/images/logo.webp";
 import { usePathname } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 export default function Navbar({ navigationData }: any) {
   const [navHandler, setNavHandler] = useState(false);
@@ -29,7 +30,15 @@ export default function Navbar({ navigationData }: any) {
   return (
     <div className="max-w-screen-lg z-10 mx-auto px-5 lg:px-0">
       <div className=" flex items-center justify-between">
-        <Link href="/">
+        <Link
+          onClick={() =>
+            pushDataLayer({
+              name: "Home",
+              path: "/",
+            })
+          }
+          href="/"
+        >
           <Image src={logo} alt="Logo" className="w-32 h-32" priority />
         </Link>
         <button
@@ -43,13 +52,28 @@ export default function Navbar({ navigationData }: any) {
           <div className="h-0.5 w-5 rounded-full bg-white" />
         </button>
         <div className="hidden gap-10 lg:flex items-center">
-          <Link href="/" className="text-white hover:border-none">
+          <Link
+            onClick={() =>
+              pushDataLayer({
+                name: "Home",
+                path: "/",
+              })
+            }
+            href="/"
+            className="text-white hover:border-none"
+          >
             Home
           </Link>
 
           {mainNavigation.map((item: any) => {
             return (
               <Link
+                onClick={() =>
+                  pushDataLayer({
+                    name: item.title,
+                    path: item.path,
+                  })
+                }
                 key={item.path}
                 href={item.path}
                 className={
@@ -79,6 +103,12 @@ export default function Navbar({ navigationData }: any) {
                 return (
                   <li key={item.path}>
                     <Link
+                      onClick={() =>
+                        pushDataLayer({
+                          name: item.title,
+                          path: item.path,
+                        })
+                      }
                       key={item.id}
                       href={item.path}
                       className={
@@ -94,6 +124,12 @@ export default function Navbar({ navigationData }: any) {
           </div>
 
           <Link
+            onClick={() =>
+              pushDataLayer({
+                name: "Find A Study Spot",
+                path: "/study-spot-finder",
+              })
+            }
             href="/study-spot-finder"
             className="capitalize btn btn-primary border-white hover:border-white"
           >
@@ -112,6 +148,12 @@ export default function Navbar({ navigationData }: any) {
           {navigationData.map((item: any) => {
             return (
               <Link
+                onClick={() =>
+                  pushDataLayer({
+                    name: item.title,
+                    path: item.path,
+                  })
+                }
                 key={item.id}
                 href={item.path}
                 className={

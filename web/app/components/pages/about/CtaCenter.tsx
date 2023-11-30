@@ -3,6 +3,7 @@ import { Container } from "../../common/Container";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 export type commonDataType = {
   title: string;
@@ -38,7 +39,13 @@ export default function CtaCenter({
           <>
             {cta_text && !displayCode ? (
               <button
-                onClick={displayPromoCode}
+                onClick={() => {
+                  displayPromoCode();
+                  pushDataLayer({
+                    name: cta_text,
+                    path: "/cafe",
+                  });
+                }}
                 type="button"
                 className="btn btn-primary rounded-xl border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
               >
@@ -52,6 +59,12 @@ export default function CtaCenter({
           <>
             {cta_link && cta_text && (
               <Link
+                onClick={() =>
+                  pushDataLayer({
+                    name: cta_text,
+                    path: cta_link,
+                  })
+                }
                 href={cta_link || ""}
                 className="btn btn-primary rounded-xl border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
               >

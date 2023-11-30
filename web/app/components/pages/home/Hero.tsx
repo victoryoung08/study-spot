@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import { Container } from "../../common/Container";
 import Link from "next/link";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 type heroType = {
   title: string;
@@ -35,8 +37,8 @@ export default function Hero({
 
           {cta_link && (
             <Link
+              onClick={() => pushDataLayer({ name: cta_text || "" })}
               href={cta_link || "/"}
-              type="button"
               className="btn btn-primary rounded-xl border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
             >
               {cta_text || ""}

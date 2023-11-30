@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import { Container } from "../../common/Container";
 import Link from "next/link";
+import { pushDataLayer } from "@/app/lib/gtm";
 
 type TwoColumnCtaImageLeftType = {
   title: string;
@@ -36,6 +38,7 @@ export default function TwoColumnCtaImageLeft({
           <p className="mt-5 mb-5 text-sm lg:text-base">{description || ""}</p>
           {cta_link && (
             <Link
+              onClick={() => pushDataLayer({ name: cta_text || "" })}
               href={cta_link || "/"}
               type="button"
               className="mt-5 lg:mt-10 btn bg-[#505050] hover:bg-primary rounded-xl text-white border border-white hover:border-white bg-btnColor px-7 capitalize text-base"
