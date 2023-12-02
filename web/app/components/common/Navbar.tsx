@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 import logo from "@/public/images/logo.webp";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { pushDataLayer } from "@/app/lib/gtm";
 
 export default function Navbar({ navigationData }: any) {
+  const searchParams = useSearchParams();
   const [navHandler, setNavHandler] = useState(false);
   const handleNav = () => {
     setNavHandler((current) => !current);
@@ -26,11 +27,28 @@ export default function Navbar({ navigationData }: any) {
   const dropDownNavigation = navigationData
     .filter((el: any) => !mainNavigation.includes(el))
     .filter((item: any) => item.path !== "/study-spot-finder");
+  const view = searchParams.get("view");
 
   return (
-    <div className="max-w-screen-lg z-10 mx-auto px-5 lg:px-0">
-      <div className=" flex items-center justify-between">
+    <div
+      className={`
+        ${
+          view != "map"
+            ? " max-w-screen-lg z-10 mx-auto px-5 lg:px-0"
+            : "absolute md:relative z-40 max-w-screen-lg mx-auto top-0 right-0 left-0"
+        }
+        ${navHandler ? "bg-black/60 !z-50" : "bg-transparent"}
+      `}
+    >
+      <div
+        className={
+          view != "map"
+            ? "flex items-center justify-between px-10 "
+            : "flex items-center justify-center md:justify-between"
+        }
+      >
         <Link
+          className="z-40"
           onClick={() =>
             pushDataLayer({
               name: "Home",
@@ -39,19 +57,28 @@ export default function Navbar({ navigationData }: any) {
           }
           href="/"
         >
-          <Image src={logo} alt="Logo" className="w-32 h-32" priority />
+          <Image
+            src={logo}
+            alt="Logo"
+            className="w-44 h-44 lg:w-32 lg:h-32 "
+            priority
+          />
         </Link>
         <button
           aria-label="Menu"
           type="button"
-          className="flex cursor-pointer flex-col space-y-1 bg-transparent hover:bg-transparent lg:hidden"
+          className={
+            view != "map"
+              ? "flex cursor-pointer flex-col space-y-1 bg-transparent hover:bg-transparent lg:hidden"
+              : "absolute right-10 flex flex-col space-y-1 lg:hidden"
+          }
           onClick={handleNav}
         >
           <div className="h-0.5 w-5 rounded-full bg-white" />
           <div className="h-0.5 w-5 rounded-full bg-white" />
           <div className="h-0.5 w-5 rounded-full bg-white" />
         </button>
-        <div className="hidden gap-10 lg:flex items-center">
+        <div className="hidden gap-10 lg:flex items-center ">
           <Link
             onClick={() =>
               pushDataLayer({
@@ -138,7 +165,7 @@ export default function Navbar({ navigationData }: any) {
         </div>
       </div>
       {navHandler && (
-        <div className="lg:hidden flex flex-col items-center gap-5 py-10">
+        <div className="lg:hidden flex flex-col items-center gap-5 py-10 ">
           <Link
             href="/"
             className="w-full rounded-lg p-2 text-center text-white hover:border-none hover:bg-gray"

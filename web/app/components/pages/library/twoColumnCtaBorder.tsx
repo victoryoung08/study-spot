@@ -27,9 +27,9 @@ export default function TwoColumnCtaBorder({ libraries }: any) {
               }
               href={`/library/${item.attributes.slug}`}
               key={item?.id}
-              className="flex border rounded-3xl "
+              className="flex flex-col sm:flex-row border rounded-3xl sm:h-52 lg:h-80"
             >
-              <div>
+              <div className="sm:w-2/4 lg:w-auto">
                 <Image
                   src={
                     item?.attributes?.library_image?.data?.attributes?.url || ""
@@ -40,14 +40,14 @@ export default function TwoColumnCtaBorder({ libraries }: any) {
                   }
                   width={500}
                   height={350}
-                  className="rounded-tl-3xl rounded-bl-3xl"
+                  className="rounded-tl-3xl w-full h-full rounded-bl-3xl"
                 />
               </div>
-              <div className="flex-1 m-10">
-                <h2 className="font-medium text-3xl">
+              <div className="flex flex-col flex-1 justify-center m-10">
+                <h2 className="font-medium text-2xl lg:text-3xl">
                   {item?.attributes.title || ""}
                 </h2>
-                <p className="text-base mt-5">
+                <p className="text-base mt-5 hidden lg:block">
                   {item?.attributes.short_description || ""}
                 </p>
                 <div className="flex justify-end mt-5">

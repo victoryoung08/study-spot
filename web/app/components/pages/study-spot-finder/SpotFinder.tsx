@@ -81,11 +81,18 @@ export default function SpotFinder({ study_spots }: ContentProps) {
 
     // Set the view state
     setView(view === "map" ? "map" : "grid");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <div className=" flex justify-end gap-2 mx-5 lg:mx-10 mb-5 items-center">
+      <div
+        className={
+          view == "map"
+            ? "absolute top-32 right-0 z-40 md:top-0 md:relative flex justify-end gap-2 mx-5 lg:mx-10 mb-5 items-center"
+            : "flex justify-end gap-2 mx-5 lg:mx-10 mb-5 items-center"
+        }
+      >
         <label className="label cursor-pointer">
           <input
             type="checkbox"
@@ -96,7 +103,9 @@ export default function SpotFinder({ study_spots }: ContentProps) {
 
           <span
             className={`label-text ml-2 flex gap-1 ${
-              view == "map" ? "text-primary" : "text-white"
+              view == "map"
+                ? "text-white bg-primary/80 p-2 rounded-2xl  md:bg-transparent md:text-primary"
+                : "text-white"
             }`}
           >
             <MapPinIcon className="w-5 h-5" />
