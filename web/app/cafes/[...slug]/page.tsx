@@ -6,7 +6,6 @@ import ErrorPage from "@/app/components/common/ErrorPage";
 export default async function CreatorProgram(searchParams: any) {
   const { params } = searchParams;
   const { data } = await getCafeData(params);
-
   const headerWithGridImageProps = {
     title: data.data[0].attributes.cafe_name,
     location: data.data[0].attributes.location,
@@ -51,8 +50,13 @@ export default async function CreatorProgram(searchParams: any) {
 
 export async function generateMetadata({ params }: any) {
   try {
+    const suburb = params.slug[0]
+      .split("-")
+      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join("%20");
+    const cafeName = params.slug[1];
     const seo = await fetch(
-      `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${params.slug}&populate=deep`,
+      `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${cafeName}&filters[suburb][$eq]=${suburb}&populate=deep`,
       {
         next: { revalidate: 0 },
         cache: "no-cache",
@@ -83,8 +87,13 @@ export async function generateMetadata({ params }: any) {
 }
 
 async function getCafeData(params: { slug: string }): Promise<any> {
+  const suburb = params.slug[0]
+    .split("-")
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("%20");
+  const cafeName = params.slug[1];
   const response = await fetch(
-    `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${params.slug}&populate=deep`,
+    `${process.env.STRAPI_API_ENDPOINT}/study-spots?filters[slug][$eq]=${cafeName}&filters[suburb][$eq]=${suburb}&populate=deep`,
     {
       cache: "no-cache",
       next: { revalidate: 0 },

@@ -56,7 +56,7 @@ const MapView = ({ cafe }: any) => {
           height: vieportWidth && vieportWidth < 768 ? "100vh" : "75vh",
           borderRadius: "20px",
           borderColor: "white",
-          borderWidth: "3px",
+          borderWidth: vieportWidth && vieportWidth < 768 ? "" : "3px",
         }}
         mapStyle="mapbox://styles/studyspotcafe/cljwdrlf2008w01pygx57dfve"
       >
