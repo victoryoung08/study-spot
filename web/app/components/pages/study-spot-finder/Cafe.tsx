@@ -12,7 +12,6 @@ export default function Cafe({ cafe }: any) {
             .split(" ")
             .join("-")
             .toLowerCase();
-          console.log(suburb);
           return (
             <Link
               onClick={() =>

@@ -42,7 +42,10 @@ const MapView = ({ cafe }: any) => {
       console.error("Invalid latitude or longitude for marker:", item);
     }
   };
-
+  const suburb = popUpData?.attributes.suburb
+    .split(" ")
+    .join("-")
+    .toLowerCase();
   return (
     <>
       <Map
@@ -74,7 +77,7 @@ const MapView = ({ cafe }: any) => {
           >
             <div className=" bg-[#454545] p-4 z-50 border-2 rounded-3xl border-white">
               <div className="">
-                <Link href={`/cafes/${popUpData.attributes.slug}`}>
+                <Link href={`/cafes/${suburb}/${popUpData.attributes.slug}`}>
                   <img
                     className="border-2 border-white  rounded-xl w-full h-full"
                     alt="marker"
