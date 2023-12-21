@@ -21,7 +21,7 @@ export default async function LibrarySlug(searchParams: any) {
                 }
                 height={50}
                 width={50}
-                className="rounded-full h-12 w-12"
+                className="rounded-full h-12 w-12 object-cover"
                 alt={library?.data[0]?.attributes?.title || "Library Image"}
               />
             </div>
@@ -29,11 +29,11 @@ export default async function LibrarySlug(searchParams: any) {
               <p className="text-base font-bold">
                 {library?.data[0]?.attributes?.author || ""}
               </p>
-              <p className="text-base">Founder</p>
+              <p className="text-base">Author</p>
             </div>
           </div>
 
-          <div className="mt-20 w-3/4  mx-auto">
+          <div className="mt-20 w-3/4 mx-auto overflow-hidden">
             <Markdown
               options={{
                 overrides: {
