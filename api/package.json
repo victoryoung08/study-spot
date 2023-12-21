@@ -19,7 +19,8 @@
     "better-sqlite3": "8.6.0",
     "patch-package": "^8.0.0",
     "pg": "^8.11.3",
-    "strapi-plugin-populate-deep": "^3.0.0"
+    "strapi-plugin-populate-deep": "^3.0.0",
+    "strapi-plugin-sitemap": "^3.0.6"
   },
   "author": {
     "name": "A Strapi developer"
