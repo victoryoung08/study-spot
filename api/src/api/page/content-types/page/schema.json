@@ -40,10 +40,12 @@
       ]
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "path": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "page_path": {
       "type": "uid",

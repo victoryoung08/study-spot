@@ -29,7 +29,7 @@ export default function TwoColumnCtaBorder({ libraries }: any) {
               key={item?.id}
               className="flex flex-col sm:flex-row border rounded-3xl sm:h-52 lg:h-80"
             >
-              <div className="sm:w-2/4 lg:w-auto">
+              <div className="sm:w-2/4 ">
                 <Image
                   src={
                     item?.attributes?.library_image?.data?.attributes?.url || ""

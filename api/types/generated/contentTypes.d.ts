@@ -962,13 +962,13 @@ export interface ApiLibraryLibrary extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    author: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+    author: Attribute.String & Attribute.Required;
     author_image: Attribute.Media & Attribute.Required;
-    description: Attribute.RichText;
+    description: Attribute.RichText & Attribute.Required;
     library_image: Attribute.Media & Attribute.Required;
     short_description: Attribute.String;
-    slug: Attribute.UID<'api::library.library', 'title'>;
+    slug: Attribute.UID<'api::library.library', 'title'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1028,8 +1028,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'component.spot-finder'
       ]
     >;
-    title: Attribute.String;
-    path: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+    path: Attribute.String & Attribute.Required;
     page_path: Attribute.UID<'api::page.page', 'path'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1104,10 +1104,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
       'oneToMany',
       'api::vibe.vibe'
     >;
-    cafe_name: Attribute.String;
-    location: Attribute.String;
-    slug: Attribute.UID<'api::study-spot.study-spot', 'cafe_name'>;
-    images: Attribute.Media;
+    cafe_name: Attribute.String & Attribute.Required;
+    location: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::study-spot.study-spot', 'cafe_name'> &
+      Attribute.Required;
+    images: Attribute.Media & Attribute.Required;
     loudness: Attribute.Integer &
       Attribute.SetMinMax<{
         max: 100;
@@ -1124,9 +1125,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     google_map_link: Attribute.String;
     tiktok_embed: Attribute.String;
     tiktok_link: Attribute.String;
-    suburb: Attribute.String;
-    Longitude: Attribute.Float;
-    Latitute: Attribute.Float;
+    suburb: Attribute.String & Attribute.Required;
+    Longitude: Attribute.Float & Attribute.Required;
+    Latitute: Attribute.Float & Attribute.Required;
+    suburb_key: Attribute.UID<'api::study-spot.study-spot', 'suburb'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

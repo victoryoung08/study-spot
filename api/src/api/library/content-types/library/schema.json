@@ -13,10 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "author": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "author_image": {
       "type": "media",
@@ -27,7 +29,8 @@
       ]
     },
     "description": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "library_image": {
       "type": "media",
@@ -42,7 +45,8 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     }
   }
 }
