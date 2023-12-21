@@ -8,5 +8,6 @@
     "devDependencies": {
         "@types/node": "^20.10.5",
         "concurrently": "^8.2.1"
-    }
+    },
+    "dependencies": {}
 }

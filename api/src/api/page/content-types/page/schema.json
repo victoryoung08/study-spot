@@ -44,6 +44,11 @@
     },
     "path": {
       "type": "string"
+    },
+    "page_path": {
+      "type": "uid",
+      "targetField": "path",
+      "required": true
     }
   }
 }
