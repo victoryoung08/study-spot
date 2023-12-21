@@ -457,11 +457,12 @@ export interface SeoSeo extends Schema.Component {
   info: {
     displayName: 'SEO';
     icon: 'alien';
+    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    keywords: Attribute.Text;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    keywords: Attribute.Text & Attribute.Required;
     image: Attribute.Media;
   };
 }

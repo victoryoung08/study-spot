@@ -2,25 +2,30 @@
   "collectionName": "components_seo_seos",
   "info": {
     "displayName": "SEO",
-    "icon": "alien"
+    "icon": "alien",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "keywords": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
