@@ -8,15 +8,19 @@ export default function Cafe({ cafe }: any) {
     <div className="pb-10">
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-10">
         {cafe?.map((item: any) => {
+          const suburb = item?.attributes.suburb
+            .split(" ")
+            .join("-")
+            .toLowerCase();
           return (
             <Link
               onClick={() =>
                 pushDataLayer({
                   name: item?.attributes?.cafe_name,
-                  path: `/cafes/${item?.attributes?.slug}`,
+                  path: `/cafes/${suburb}/${item?.attributes?.slug}`,
                 })
               }
-              href={`/cafes/${item?.attributes?.slug}`}
+              href={`/cafes/${suburb}/${item?.attributes?.slug}`}
               key={item.id}
               className="rounded-3xl border border-white overflow-hidden hover:bg-primary transition-all ease-in-out delay-100 duration-500"
             >

@@ -6,6 +6,7 @@
         "setup": "yarn install && cd web && yarn install && cd ../api && yarn install"
     },
     "devDependencies": {
+        "@types/node": "^20.10.5",
         "concurrently": "^8.2.1"
     }
 }
