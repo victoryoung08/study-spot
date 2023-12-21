@@ -21,7 +21,7 @@ export default async function LibrarySlug(searchParams: any) {
                 }
                 height={50}
                 width={50}
-                className="rounded-full"
+                className="rounded-full h-12 w-12"
                 alt={library?.data[0]?.attributes?.title || "Library Image"}
               />
             </div>

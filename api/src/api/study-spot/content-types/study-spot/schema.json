@@ -28,19 +28,22 @@
       "target": "api::vibe.vibe"
     },
     "cafe_name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "location": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "cafe_name"
+      "targetField": "cafe_name",
+      "required": true
     },
     "images": {
       "type": "media",
       "multiple": true,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ]
@@ -79,13 +82,21 @@
       "type": "string"
     },
     "suburb": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "Longitude": {
-      "type": "float"
+      "type": "float",
+      "required": true
     },
     "Latitute": {
-      "type": "float"
+      "type": "float",
+      "required": true
+    },
+    "suburb_key": {
+      "type": "uid",
+      "targetField": "suburb",
+      "required": true
     }
   }
 }
