@@ -92,11 +92,6 @@
     "Latitute": {
       "type": "float",
       "required": true
-    },
-    "suburb_key": {
-      "type": "uid",
-      "targetField": "suburb",
-      "required": true
     }
   }
 }
