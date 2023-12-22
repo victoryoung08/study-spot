@@ -485,6 +485,91 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   };
 }
 
+export interface PluginSitemapSitemap extends Schema.CollectionType {
+  collectionName: 'sitemap';
+  info: {
+    singularName: 'sitemap';
+    pluralName: 'sitemaps';
+    displayName: 'sitemap';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    sitemap_string: Attribute.Text & Attribute.Required;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'default'>;
+    type: Attribute.Enumeration<['default_hreflang', 'index']> &
+      Attribute.DefaultTo<'default_hreflang'>;
+    delta: Attribute.Integer & Attribute.DefaultTo<1>;
+    link_count: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::sitemap.sitemap',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::sitemap.sitemap',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginSitemapSitemapCache extends Schema.CollectionType {
+  collectionName: 'sitemap_cache';
+  info: {
+    singularName: 'sitemap-cache';
+    pluralName: 'sitemap-caches';
+    displayName: 'sitemap-cache';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    sitemap_json: Attribute.JSON & Attribute.Required;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'default'>;
+    sitemap_id: Attribute.Integer & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::sitemap.sitemap-cache',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::sitemap.sitemap-cache',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginI18NLocale extends Schema.CollectionType {
   collectionName: 'i18n_locale';
   info: {
@@ -680,91 +765,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     sitemap_exclude: Attribute.Boolean &
       Attribute.Private &
       Attribute.DefaultTo<false>;
-  };
-}
-
-export interface PluginSitemapSitemap extends Schema.CollectionType {
-  collectionName: 'sitemap';
-  info: {
-    singularName: 'sitemap';
-    pluralName: 'sitemaps';
-    displayName: 'sitemap';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    sitemap_string: Attribute.Text & Attribute.Required;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'default'>;
-    type: Attribute.Enumeration<['default_hreflang', 'index']> &
-      Attribute.DefaultTo<'default_hreflang'>;
-    delta: Attribute.Integer & Attribute.DefaultTo<1>;
-    link_count: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::sitemap.sitemap',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::sitemap.sitemap',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginSitemapSitemapCache extends Schema.CollectionType {
-  collectionName: 'sitemap_cache';
-  info: {
-    singularName: 'sitemap-cache';
-    pluralName: 'sitemap-caches';
-    displayName: 'sitemap-cache';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    sitemap_json: Attribute.JSON & Attribute.Required;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'default'>;
-    sitemap_id: Attribute.Integer & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::sitemap.sitemap-cache',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::sitemap.sitemap-cache',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
   };
 }
 
@@ -1128,8 +1128,6 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     suburb: Attribute.String & Attribute.Required;
     Longitude: Attribute.Float & Attribute.Required;
     Latitute: Attribute.Float & Attribute.Required;
-    suburb_key: Attribute.UID<'api::study-spot.study-spot', 'suburb'> &
-      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1261,12 +1259,12 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
+      'plugin::sitemap.sitemap': PluginSitemapSitemap;
+      'plugin::sitemap.sitemap-cache': PluginSitemapSitemapCache;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::sitemap.sitemap': PluginSitemapSitemap;
-      'plugin::sitemap.sitemap-cache': PluginSitemapSitemapCache;
       'api::creator.creator': ApiCreatorCreator;
       'api::feature.feature': ApiFeatureFeature;
       'api::genre.genre': ApiGenreGenre;
