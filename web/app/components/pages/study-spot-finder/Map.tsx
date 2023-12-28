@@ -56,7 +56,6 @@ const MapView = ({ cafe }: any) => {
   }, [locationLatitude, locationLongitude, popUpData, cafe]);
 
   const mapRef = useRef(null);
-
   const handleMarkerClick = (item: any, e: any) => {
     if (item.attributes.Latitute && item.attributes.Longitude) {
       setShowPopup(true);
