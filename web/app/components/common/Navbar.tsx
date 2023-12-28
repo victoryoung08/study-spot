@@ -5,12 +5,17 @@ import Link from "next/link";
 import { useState } from "react";
 
 import logo from "@/public/images/logo.webp";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { pushDataLayer } from "@/app/lib/gtm";
+import SignupForm from "./SignupForm";
+import SigninForm from "./SigninForm";
+import { useSession } from "next-auth/react";
 
 export default function Navbar({ navigationData }: any) {
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
+  const pathname = usePathname();
   const [navHandler, setNavHandler] = useState(false);
   const handleNav = () => {
     setNavHandler((current) => !current);
@@ -27,7 +32,7 @@ export default function Navbar({ navigationData }: any) {
   const dropDownNavigation = navigationData
     .filter((el: any) => !mainNavigation.includes(el))
     .filter((item: any) => item.path !== "/study-spot-finder");
-  const view = searchParams.get("view");
+  const view = searchParams?.get("view");
 
   return (
     <div
@@ -38,6 +43,7 @@ export default function Navbar({ navigationData }: any) {
             : "absolute md:relative z-40 max-w-screen-lg mx-auto top-0 right-0 left-0"
         }
         ${navHandler ? "bg-black/60 !z-50" : "bg-transparent"}
+        ${pathname === "/dashboard" ? "hidden" : ""}
       `}
     >
       <div
@@ -149,7 +155,26 @@ export default function Navbar({ navigationData }: any) {
               })}
             </ul>
           </div>
-
+          {!session && (
+            <>
+              <SigninForm buttonText="Sign In" />
+              <SignupForm buttonText="Sign Up" />
+            </>
+          )}
+          {session && (
+            <Link
+              onClick={() =>
+                pushDataLayer({
+                  name: "Dashboard",
+                  path: "/dashboard",
+                })
+              }
+              href="/dashboard"
+              className="capitalize text-white"
+            >
+              Dashboard
+            </Link>
+          )}
           <Link
             onClick={() =>
               pushDataLayer({
