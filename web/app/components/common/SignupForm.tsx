@@ -46,7 +46,6 @@ const SignupForm = ({ buttonText }: SignupFormTypes) => {
         }
       );
       const resp = await response.json();
-      console.log(resp); // Log the response for debugging
 
       // if there's an error, display the error message
       if (resp.error) {
@@ -58,6 +57,11 @@ const SignupForm = ({ buttonText }: SignupFormTypes) => {
 
       // if there's no error, display success message
       toast.success("Account created successfully");
+
+      // reload page
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       // Handle any unexpected errors and display an error message
       console.error(error);

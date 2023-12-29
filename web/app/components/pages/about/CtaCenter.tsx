@@ -35,7 +35,7 @@ export default function CtaCenter({
         <p className="text-base lg:text-lg lg:w-3/4 mx-auto my-7">
           {description || ""}
         </p>
-        {pathname.includes("/cafe") ? (
+        {pathname?.includes("/cafe") ? (
           <>
             {cta_text && !displayCode ? (
               <button
