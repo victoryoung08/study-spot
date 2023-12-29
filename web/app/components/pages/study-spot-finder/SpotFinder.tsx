@@ -54,15 +54,19 @@ export default function SpotFinder({ study_spots }: ContentProps) {
   });
 
   const [view, setView] = useState<"grid" | "map">(
-    (searchParams.get("view") as "grid" | "map") || "grid"
+    (searchParams?.get("view") as "grid" | "map") || "grid"
   );
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
+      // const params = new URLSearchParams(searchParams);
+      const params = searchParams
+        ? new URLSearchParams(searchParams)
+        : undefined;
 
-      return params.toString();
+      params?.set(name, value);
+
+      return params?.toString();
     },
     [searchParams]
   );
@@ -77,7 +81,7 @@ export default function SpotFinder({ study_spots }: ContentProps) {
 
   useEffect(() => {
     // Get the view from the URL
-    const view = searchParams.get("view");
+    const view = searchParams?.get("view");
 
     // Set the view state
     setView(view === "map" ? "map" : "grid");
