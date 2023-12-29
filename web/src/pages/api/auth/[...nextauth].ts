@@ -61,13 +61,10 @@ export const authOptions: NextAuthOptions = {
           /**
            * Authenticate user with the API
            */
-          console.log(
-            "API Endpoint:",
-            process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT
-          );
+          console.log("API Endpoint:", process.env.STRAPI_API_ENDPOINT);
 
           const resp = await fetch(
-            `${process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT}/auth/local`,
+            `${process.env.STRAPI_API_ENDPOINT}/auth/local`,
             requestOptions
           );
           const JWT_TOKEN = await resp.json();
