@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useRef, useState } from "react";
-import Map, { Marker, Popup } from "react-map-gl";
+import { useEffect, useRef, useState } from "react";
+import Map, { Marker, Popup, GeolocateControl } from "react-map-gl";
 import Image from "next/image";
 import pinIcon from "@/public/images/pin.svg";
 import Link from "next/link";
@@ -12,20 +12,50 @@ const MapView = ({ cafe }: any) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popUpData, setPopupData] = useState<any>();
   const vieportWidth = useViewportWidth();
-  const [viewState, setViewState] = useState({
-    latitude:
-      popUpData?.attributes.Latitute ||
-      cafe?.[0]?.attributes.Latitute ||
-      -33.870453,
-    longitude:
-      popUpData?.attributes.Longitude ||
-      cafe?.[0]?.attributes.Longitude ||
-      151.208755,
-    zoom: 11,
-  });
+  const [viewState, setViewState] = useState({});
+
+  // State variables to hold the user's location
+  const [locationLatitude, setLocationLatitude] = useState<any>();
+  const [locationLongitude, setlocationLongitude] = useState<any>();
+
+  // Effect to get the user's current location when the component mounts
+  useEffect(() => {
+    const getCurrentLocation = () => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setLocationLatitude(pos.coords.latitude);
+          setlocationLongitude(pos.coords.longitude);
+        },
+        (error) => {
+          console.error("Error getting current position:", error);
+        }
+      );
+    };
+
+    getCurrentLocation();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  // Effect to update the view state based on the user's location and other data
+  useEffect(() => {
+    setViewState({
+      // Latitude value based on user's location, popUpData, and cafe
+      latitude:
+        locationLatitude ||
+        popUpData?.attributes.Latitute ||
+        (cafe && cafe[0]?.attributes.Latitute) ||
+        0, // Set a default value if none of the options have a value
+
+      // Longitude value based on user's location, popUpData, and cafe
+      longitude:
+        locationLongitude ||
+        popUpData?.attributes.Longitude ||
+        (cafe && cafe[0]?.attributes.Longitude) ||
+        0, // Set a default value if none of the options have a value
+      zoom: 11,
+    });
+  }, [locationLatitude, locationLongitude, popUpData, cafe]);
 
   const mapRef = useRef(null);
-
   const handleMarkerClick = (item: any, e: any) => {
     if (item.attributes.Latitute && item.attributes.Longitude) {
       setShowPopup(true);
@@ -53,6 +83,7 @@ const MapView = ({ cafe }: any) => {
         mapboxAccessToken="pk.eyJ1Ijoic3R1ZHlzcG90Y2FmZSIsImEiOiJjbG5qOWV1aGMxZzVtMmxsZnZyNmxlc2djIn0.vJPppkgvvnh0nz90LgpWmQ"
         mapLib={import("mapbox-gl")}
         onMove={(evt) => setViewState(evt.viewState)}
+        // initialViewState={viewport}
         {...viewState}
         style={{
           width: "100%",
@@ -63,6 +94,11 @@ const MapView = ({ cafe }: any) => {
         }}
         mapStyle="mapbox://styles/studyspotcafe/cljwdrlf2008w01pygx57dfve"
       >
+        <GeolocateControl
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+          showUserLocation={true}
+        />
         {showPopup && (
           <Popup
             onClose={() => {
@@ -70,13 +106,13 @@ const MapView = ({ cafe }: any) => {
               setPopupData(null);
             }}
             style={{ padding: 0, margin: 0 }}
-            className=" w-[500px]  p-0 m-0 z-50  "
+            className="w-[500px] p-0 m-0 z-50"
             anchor="bottom"
             longitude={popUpData?.attributes?.Longitude}
             latitude={popUpData?.attributes?.Latitute}
           >
             <div className=" bg-[#454545] p-4 z-50 border-2 rounded-3xl border-white">
-              <div className="">
+              <div>
                 <Link href={`/cafes/${suburb}/${popUpData.attributes.slug}`}>
                   <img
                     className="border-2 border-white  rounded-xl w-full h-full"
