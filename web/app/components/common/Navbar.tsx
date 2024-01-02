@@ -134,47 +134,56 @@ export default function Navbar({ navigationData }: any) {
             >
               {dropDownNavigation.map((item: any) => {
                 return (
-                  <li key={item.path}>
-                    <Link
-                      onClick={() =>
-                        pushDataLayer({
-                          name: item.title,
-                          path: item.path,
-                        })
-                      }
-                      key={item.id}
-                      href={item.path}
-                      className={
-                        "text-white hover:text-white hover:border-none z-50"
-                      }
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
+                  <>
+                    <li key={item.path}>
+                      <Link
+                        onClick={() =>
+                          pushDataLayer({
+                            name: item.title,
+                            path: item.path,
+                          })
+                        }
+                        key={item.id}
+                        href={item.path}
+                        className={
+                          "text-white hover:text-white hover:border-none z-50 cursor-pointer"
+                        }
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  </>
                 );
               })}
+              {session && (
+                <li>
+                  <Link
+                    onClick={() =>
+                      pushDataLayer({
+                        name: "Dashboard",
+                        path: "/dashboard",
+                      })
+                    }
+                    href="/dashboard"
+                    className="capitalize text-white"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+              {!session && (
+                <>
+                  <li>
+                    <SigninForm buttonText="Sign In" />
+                  </li>
+                  <li>
+                    <SignupForm buttonText="Sign Up" />
+                  </li>
+                </>
+              )}
             </ul>
           </div>
-          {!session && (
-            <>
-              <SigninForm buttonText="Sign In" />
-              <SignupForm buttonText="Sign Up" />
-            </>
-          )}
-          {session && (
-            <Link
-              onClick={() =>
-                pushDataLayer({
-                  name: "Dashboard",
-                  path: "/dashboard",
-                })
-              }
-              href="/dashboard"
-              className="capitalize text-white"
-            >
-              Dashboard
-            </Link>
-          )}
+
           <Link
             onClick={() =>
               pushDataLayer({
@@ -218,6 +227,26 @@ export default function Navbar({ navigationData }: any) {
               </Link>
             );
           })}
+          {session && (
+            <Link
+              onClick={() =>
+                pushDataLayer({
+                  name: "Dashboard",
+                  path: "/dashboard",
+                })
+              }
+              href="/dashboard"
+              className="capitalize text-white"
+            >
+              Dashboard
+            </Link>
+          )}
+          {!session && (
+            <>
+              <SigninForm buttonText="Sign In" />
+              <SignupForm buttonText="Sign Up" />
+            </>
+          )}
         </div>
       )}
     </div>

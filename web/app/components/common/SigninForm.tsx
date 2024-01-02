@@ -88,8 +88,8 @@ const SigninForm = ({ buttonText }: SigninFormProps) => {
       open={open}
       setOpen={setOpen}
       ButtonTrigger={
-        <div className="flex justify-center items-center">
-          <button className="text-white hover:text-primary transition-all delay-50 ease-in-out ">
+        <div className="">
+          <button className="text-white">
             <span>{buttonText}</span>
           </button>
         </div>

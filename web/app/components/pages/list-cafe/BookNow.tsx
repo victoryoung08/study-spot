@@ -197,7 +197,7 @@ export default function BookNow({
                   <input
                     type="text"
                     {...register("path")}
-                    value={pathname}
+                    value={pathname || ""}
                     hidden
                   />
                 </div>
