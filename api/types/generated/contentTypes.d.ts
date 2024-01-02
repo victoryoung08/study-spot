@@ -937,6 +937,7 @@ export interface ApiLeadLead extends Schema.CollectionType {
       ['First ', 'Second', 'Third', 'Fourth', 'Fifth']
     >;
     lead_notes: Attribute.RichText;
+    path: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
