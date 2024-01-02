@@ -13,9 +13,13 @@ interface UserData {
 const getSession = () => {
   const session: { user: UserData } = useSession().data as any;
 
-  setCookie("user", JSON.stringify(session));
+  if (session) {
+    setCookie("user", JSON.stringify(session));
 
-  return { session };
+    return { session };
+  } else {
+    return { session: null };
+  }
 };
 
 export default getSession;
