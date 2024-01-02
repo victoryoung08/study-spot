@@ -36,6 +36,10 @@
     },
     "lead_notes": {
       "type": "richtext"
+    },
+    "path": {
+      "type": "string",
+      "required": false
     }
   }
 }

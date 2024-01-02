@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import { PaperPlane } from "@/animations/paperplane";
 import { pushDataLayer } from "@/app/lib/gtm";
+import { usePathname } from "next/navigation";
 
 type bookNowType = {
   title: string;
@@ -21,6 +22,7 @@ type Inputs = {
   cafe_name: string;
   email: string;
   phone: string;
+  path: string;
 };
 
 const schema = z.object({
@@ -28,6 +30,7 @@ const schema = z.object({
   cafe_name: z.string().min(1, { message: "Please input cafe name" }),
   email: z.string().min(1, { message: "Please input email address" }),
   phone: z.string().min(1, { message: "Please input phone number" }),
+  path: z.string(),
 });
 
 const resolver = zodResolver(schema);
@@ -40,16 +43,18 @@ export default function BookNow({
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
   const [loading, setLoading] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const pathname = usePathname();
+
   const [error, setError] = useState(false);
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     setError(false);
+    console.log(data);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT}/leads`,
       {
@@ -67,7 +72,7 @@ export default function BookNow({
     if (response.ok) {
       pushDataLayer({
         name: "Book Now",
-        path: "/list-cafe",
+        path: pathname,
         data,
       });
       setLoading(false);
@@ -188,6 +193,12 @@ export default function BookNow({
                     {...register("phone")}
                     placeholder="Your best contact number"
                     className="input input-bordered w-full  rounded-2xl border-white text-sm bg-[#3a3939] focus:border-primary"
+                  />
+                  <input
+                    type="text"
+                    {...register("path")}
+                    value={pathname}
+                    hidden
                   />
                 </div>
                 {error && (
