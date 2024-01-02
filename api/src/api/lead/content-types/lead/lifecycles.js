@@ -1,5 +1,5 @@
 const axios = require("axios");
-
+//
 module.exports = {
   async afterCreate(event) {
     // Connected to "Save" button in admin panel
@@ -16,6 +16,7 @@ module.exports = {
             company: result.cafe_name,
             phone: result.phone,
             first_name: result.first_name,
+            path: result.path,
           },
           groups: ["98370701210159093"],
         },
