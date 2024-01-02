@@ -12,27 +12,26 @@ interface CustomCredentials {
 /*
  * Function to get user details from the API after successful signin
  */
-// const requestUserDetails = async (accessToken: string) => {
-//   try {
-//     const res = await fetch(endpoint + "/v1/auth/users/me/", {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Token ${accessToken}`,
-//       },
-//     });
+const requestUserDetails = async (accessToken: string) => {
+  try {
+    const res = await fetch(`${process.env.STRAPI_API_ENDPOINT}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-//     const user = await res.json();
+    const user = await res.json();
+    if (!res.ok) {
+      return { error: true, message: user };
+    }
 
-//     if (!res.ok) {
-//       return { error: true, message: user };
-//     }
-
-//     return { user };
-//   } catch (error) {
-//     return { error: true, message: error };
-//   }
-// };
+    return { user };
+  } catch (error) {
+    return { error: true, message: error };
+  }
+};
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -73,14 +72,13 @@ export const authOptions: NextAuthOptions = {
             console.log(resp);
             return null;
           }
-
           // user found in the database
           if (resp.ok) {
-            // const { user } = await requestUserDetails(JWT_TOKEN.auth_token);
-            // if (user.error) return null;
-            const user = { ...JWT_TOKEN.user, jwt: JWT_TOKEN.jwt };
+            const { user } = await requestUserDetails(JWT_TOKEN.jwt);
+            if (user.error) return null;
+            // const user = { ...JWT_TOKEN.user, jwt: JWT_TOKEN.jwt };
 
-            // user.access = JWT_TOKEN.auth_token;
+            user.access = JWT_TOKEN.jwt;
             return user;
           } else {
             console.log("Authentication failed:", resp.status, resp.statusText);

@@ -31,13 +31,13 @@ function Topbar() {
               className="rounded-full !bg-gray-500"
             /> */}
             <AvatarFallback className="text-black text-sm font-bold">
-              {session?.user?.username?.slice(0, 1).toUpperCase()}
+              {session?.username?.slice(0, 1).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <div className="hidden sm:flex items-center gap-2">
             <span className="">
               <span className="text-sm font-bold !px-0 text-white dark:text-white">
-                {session?.user?.username}
+                {session?.username}
               </span>
             </span>
             <svg
@@ -70,16 +70,16 @@ function Topbar() {
                   className="rounded-full !bg-gray-500"
                 />
                 <AvatarFallback className="text-black !px-0">
-                  {session?.user?.username?.slice(0, 1).toUpperCase()}
+                  {session?.username?.slice(0, 1).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
                 <span className="text-sm text-black">
                   {/* {currentUser?.first_name} {currentUser?.last_name}  */}
-                  {session?.user?.username}
+                  {session?.username}
                 </span>
                 <span className="text-xs text-primary-gray">
-                  {session?.user?.email}
+                  {session?.email}
                 </span>
               </div>
             </div>
