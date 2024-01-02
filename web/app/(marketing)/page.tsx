@@ -1,62 +1,73 @@
+import { Container } from "../components/common/Container";
 import * as component from "../components/common/ComponentSelector";
 import ErrorPage from "../components/common/ErrorPage";
-export default async function Page(searchParams: any) {
-  const { params } = searchParams;
+
+type componentsType =
+  | "Hero"
+  | "SingleRowWithImage"
+  | "TwoColumnCtaImageLeft"
+  | "Features"
+  | "TwoColumnCtaList";
+
+export default async function Home() {
   const response = await fetch(
-    `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
+    `${process.env.STRAPI_API_ENDPOINT}/home?populate=deep`,
     {
       next: { revalidate: 0 },
       cache: "no-cache",
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      },
     }
   );
-
   let data = [];
   if (response.ok) {
     data = await response.json();
-    if (data.data.length === 0) {
-      return <ErrorPage />;
-    }
   } else {
     return <ErrorPage />;
   }
 
-  const componentLists = data.data[0].attributes.components
+  const componentLists = data.data.attributes.components
     .map((item: any) => {
       const name = item.__component.split(".")[1];
       const componentNameParts = name.split("-");
       // Capitalize each part and join them
 
-      const componentName: string = componentNameParts
+      const componentName = componentNameParts
         .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
         .join("");
 
       if (componentName === "Seo") return;
-      //@ts-expect-error ignore
-      const Component = component[componentName];
+      const Component = component[componentName as componentsType];
+
       return { ...item, Component };
     })
     .filter((item: any) => item);
 
   return (
-    <div>
+    <Container>
       {componentLists.map((item: any) => {
         const { __component, Component, ...rest } = item;
         return <Component key={item.id} {...rest} />;
       })}
-    </div>
+    </Container>
   );
 }
 
 // generate dynamic metadata
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata() {
   try {
     const seo = await fetch(
-      `${process.env.STRAPI_API_ENDPOINT}/pages?filters[path][$eq]=/${params.pages}&populate=deep`,
+      `${process.env.STRAPI_API_ENDPOINT}/home?populate=deep`,
       {
         next: { revalidate: 1 },
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+        },
       }
     );
     const data = await seo.json();
+
     if (!data) {
       return {
         title: "Not Found",
@@ -64,7 +75,7 @@ export async function generateMetadata({ params }: any) {
       };
     }
 
-    const seoData2 = data.data[0].attributes.components.filter((item: any) => {
+    const seoData2 = data.data.attributes.components.filter((item: any) => {
       return item.__component === "seo.seo";
     })[0];
 

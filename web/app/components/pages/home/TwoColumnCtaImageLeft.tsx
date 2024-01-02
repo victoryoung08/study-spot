@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Container } from "../../common/Container";
 import Link from "next/link";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 
 type TwoColumnCtaImageLeftType = {
   title: string;

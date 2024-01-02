@@ -5,16 +5,16 @@ import {
   ChartBarIcon,
   Cog8ToothIcon,
   CursorArrowRippleIcon,
-  UserIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
 
-import React, { memo } from "react";
+import React from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.webp";
 import { usePathname } from "next/navigation";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
+import { deleteCookie } from "cookies-next";
 
 const navLinks = [
   {
@@ -24,21 +24,27 @@ const navLinks = [
     text: "dashboard",
   },
   {
-    href: "/dashboard/pageclicks",
+    href: "/dashboard",
+    // href: "/dashboard/pageclicks",
     icon: CursorArrowRippleIcon,
-    activePath: "/dashboard/pageclicks",
+    activePath: "/dashboard",
+    // activePath: "/dashboard/pageclicks",
     text: "Page Clicks",
   },
   {
-    href: "/dashboard/pageviews",
+    href: "/dashboard",
+    // href: "/dashboard/pageviews",
     icon: WindowIcon,
-    activePath: "/dashboard/pageviews",
+    activePath: "/dashboard",
+    // activePath: "/dashboard/pageviews",
     text: "Page Views",
   },
   {
-    href: "/dashboard/setting",
+    // href: "/dashboard/setting",
+    href: "/dashboard",
     icon: Cog8ToothIcon,
-    activePath: "/dashboard/setting",
+    activePath: "/dashboard",
+    // activePath: "/dashboard/setting",
     text: "Settings",
   },
 ];
@@ -69,11 +75,14 @@ function Sidebar() {
             </Link>
           ))}
         </div>
-        <div className="mt-auto">
-          <div
-            onClick={() => signOut()}
-            className="flex gap-5 justify-center text-base"
-          >
+        <div
+          className="mt-auto cursor-pointer"
+          onClick={() => {
+            deleteCookie("user");
+            signOut();
+          }}
+        >
+          <div className="flex gap-5 justify-center text-base">
             <ArrowRightOnRectangleIcon className="w-7 h-7" />
             Logout
           </div>

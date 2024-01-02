@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import * as UserSchema from "../../validation/schemas/UserSchemas";
+import * as UserSchema from "../../../src/validation/schemas/UserSchemas";
 
 type SignupFormTypes = {
   buttonText: string;

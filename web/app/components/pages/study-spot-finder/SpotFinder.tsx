@@ -6,7 +6,7 @@ import MapView from "./Map";
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import getUniqueValues from "@/hooks/getUniqueValues";
+import getUniqueValues from "@/src/hooks/getUniqueValues";
 
 type ContentProps = {
   study_spots: any;

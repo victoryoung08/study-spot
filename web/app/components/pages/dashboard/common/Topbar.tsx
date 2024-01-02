@@ -14,12 +14,11 @@ import {
   DropdownMenuSeparator,
 } from "@/app/components/ui/dropdown-menu";
 import Link from "next/link";
-// import getCurrentUserSession from "app/queries/getCurrentUserSession";
-// import { deleteCookie } from "cookies-next";
-import { memo } from "react";
+import getSession from "@/src/helper/getSession";
+import { deleteCookie } from "cookies-next";
 
 function Topbar() {
-  //   const { currentUser } = getCurrentUserSession();
+  const { session } = getSession();
 
   return (
     <DropdownWrapper
@@ -32,14 +31,13 @@ function Topbar() {
               className="rounded-full !bg-gray-500"
             /> */}
             <AvatarFallback className="text-black text-sm font-bold">
-              J{/* {currentUser?.first_name?.slice(0, 1).toUpperCase()} */}
+              {session?.user?.username?.slice(0, 1).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <div className="hidden sm:flex items-center gap-2">
             <span className="">
               <span className="text-sm font-bold !px-0 text-white dark:text-white">
-                {/* {currentUser?.first_name} {currentUser?.last_name} */} John
-                Doe
+                {session?.user?.username}
               </span>
             </span>
             <svg
@@ -72,17 +70,16 @@ function Topbar() {
                   className="rounded-full !bg-gray-500"
                 />
                 <AvatarFallback className="text-black !px-0">
-                  J{/* {currentUser?.first_name?.slice(0, 1).toUpperCase()} */}
+                  {session?.user?.username?.slice(0, 1).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
                 <span className="text-sm text-black">
                   {/* {currentUser?.first_name} {currentUser?.last_name}  */}
-                  John Doe
+                  {session?.user?.username}
                 </span>
                 <span className="text-xs text-primary-gray">
-                  {/* {currentUser?.email} */}
-                  johndoe@gmail.com
+                  {session?.user?.email}
                 </span>
               </div>
             </div>
@@ -102,7 +99,7 @@ function Topbar() {
           <DropdownMenuItem>
             <div
               onClick={() => {
-                // deleteCookie("user");
+                deleteCookie("user");
                 signOut();
               }}
               className="flex items-center"

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Lottie from "lottie-react";
 import { PaperPlane } from "@/animations/paperplane";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 
 type Inputs = {
   name: string;

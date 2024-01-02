@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Container } from "../../common/Container";
 import { commonDataType } from "../about/CtaCenter";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 
 export default function HeroCenter({
   title,

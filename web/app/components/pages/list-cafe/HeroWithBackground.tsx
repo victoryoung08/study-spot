@@ -1,5 +1,5 @@
 "use client";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 import { Container } from "../../common/Container";
 import { commonDataType } from "../about/CtaCenter";
 import Link from "next/link";

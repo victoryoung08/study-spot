@@ -8,7 +8,7 @@ import * as z from "zod";
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import { PaperPlane } from "@/animations/paperplane";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 import { usePathname } from "next/navigation";
 
 type bookNowType = {

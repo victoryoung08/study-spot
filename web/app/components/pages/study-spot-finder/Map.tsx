@@ -6,7 +6,7 @@ import Map, { Marker, Popup } from "react-map-gl";
 import Image from "next/image";
 import pinIcon from "@/public/images/pin.svg";
 import Link from "next/link";
-import useViewportWidth from "@/hooks/getViewportWidth";
+import useViewportWidth from "@/src/hooks/getViewportWidth";
 
 const MapView = ({ cafe }: any) => {
   const [showPopup, setShowPopup] = useState(false);
