@@ -63,7 +63,7 @@ function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className="flex gap-5 text-base capitalize items-center justify-center lg:justify-start "
+              className="flex text-white gap-5 text-base capitalize items-center justify-center lg:justify-start "
             >
               {React.createElement(link.icon, {
                 className:
@@ -82,7 +82,7 @@ function Sidebar() {
             signOut();
           }}
         >
-          <div className="flex gap-5 justify-center text-base">
+          <div className="flex gap-5 justify-center text-base text-white">
             <ArrowRightOnRectangleIcon className="w-7 h-7" />
             Logout
           </div>
