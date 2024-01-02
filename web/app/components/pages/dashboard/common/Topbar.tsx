@@ -19,7 +19,6 @@ import { deleteCookie } from "cookies-next";
 
 function Topbar() {
   const { session } = getSession();
-
   return (
     <DropdownWrapper
       ButtonTrigger={
@@ -31,13 +30,13 @@ function Topbar() {
               className="rounded-full !bg-gray-500"
             /> */}
             <AvatarFallback className="text-black text-sm font-bold">
-              {session?.username?.slice(0, 1).toUpperCase()}
+              {session?.user?.username?.slice(0, 1).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <div className="hidden sm:flex items-center gap-2">
             <span className="">
               <span className="text-sm font-bold !px-0 text-white dark:text-white">
-                {session?.username}
+                {session?.user?.username}
               </span>
             </span>
             <svg
@@ -70,16 +69,16 @@ function Topbar() {
                   className="rounded-full !bg-gray-500"
                 />
                 <AvatarFallback className="text-black !px-0">
-                  {session?.username?.slice(0, 1).toUpperCase()}
+                  {session?.user?.username?.slice(0, 1).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
                 <span className="text-sm text-black">
                   {/* {currentUser?.first_name} {currentUser?.last_name}  */}
-                  {session?.username}
+                  {session?.user?.username}
                 </span>
                 <span className="text-xs text-primary-gray">
-                  {session?.email}
+                  {session?.user?.email}
                 </span>
               </div>
             </div>

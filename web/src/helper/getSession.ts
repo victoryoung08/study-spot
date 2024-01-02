@@ -29,11 +29,14 @@ import { setCookie } from "cookies-next";
 import { useSession } from "next-auth/react";
 
 interface UserData {
-  id: string;
-  email: string;
-  username: string;
-  confirmed: boolean;
-  updatedAt: string;
+  user: {
+    id: string;
+    email: string;
+    username: string;
+    confirmed: boolean;
+    updatedAt: string;
+  };
+  expires: string;
 }
 
 const getSession = () => {
