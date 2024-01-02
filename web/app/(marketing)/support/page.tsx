@@ -1,12 +1,11 @@
 "use client";
-import { Container } from "../components/common/Container";
+import { Container } from "../../components/common/Container";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import { PaperPlane } from "@/animations/paperplane";
-
 
 type Inputs = {
   name: string;
@@ -79,7 +78,11 @@ export default function Support() {
             </p>
           </div>
         ) : (
-          <form action="" className="text-center" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            action=""
+            className="text-center"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <h2 className="text-4x; lg:text-5xl font-bold">
               Study Spot Support
             </h2>

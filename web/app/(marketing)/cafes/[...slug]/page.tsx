@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Container } from "../../components/common/Container";
-import * as component from "../../components/common/ComponentSelector";
+import { Container } from "../../../components/common/Container";
+import * as component from "../../../components/common/ComponentSelector";
 import ErrorPage from "@/app/components/common/ErrorPage";
 
 export default async function CreatorProgram(searchParams: any) {

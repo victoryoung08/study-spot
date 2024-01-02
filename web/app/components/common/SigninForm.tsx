@@ -36,7 +36,6 @@ const SigninForm = ({ buttonText }: SigninFormProps) => {
 
     // Step 2: Extract email and password from the form data
     const { email, password } = data;
-    console.log(email, password);
     try {
       // Step 3: Attempt to sign in using the provided credentials
       const signInResponse = await signIn("credentials", {

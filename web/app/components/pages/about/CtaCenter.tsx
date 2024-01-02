@@ -3,7 +3,7 @@ import { Container } from "../../common/Container";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 
 export type commonDataType = {
   title: string;

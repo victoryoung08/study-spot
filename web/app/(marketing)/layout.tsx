@@ -1,15 +1,15 @@
-import "./globals.css";
+import "../globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Analytics from "./components/analytics";
+import Analytics from "../components/analytics";
 import { Toaster } from "react-hot-toast";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../src/pages/api/auth/[...nextauth]";
-import Provider from "./context/client-provider";
-import ErrorPage from "./components/common/ErrorPage";
-import Navbar from "./components/common/Navbar";
-import { Footer } from "./components/common/Footer";
+import { authOptions } from "../../src/pages/api/auth/[...nextauth]";
+import Provider from "../context/client-provider";
+import ErrorPage from "../components/common/ErrorPage";
+import Navbar from "../components/common/Navbar";
+import { Footer } from "../components/common/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 

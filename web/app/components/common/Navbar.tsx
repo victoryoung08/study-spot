@@ -7,7 +7,7 @@ import { useState } from "react";
 import logo from "@/public/images/logo.webp";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 import SignupForm from "./SignupForm";
 import SigninForm from "./SigninForm";
 import { useSession } from "next-auth/react";
@@ -84,7 +84,7 @@ export default function Navbar({ navigationData }: any) {
           <div className="h-0.5 w-5 rounded-full bg-white" />
           <div className="h-0.5 w-5 rounded-full bg-white" />
         </button>
-        <div className="hidden gap-10 lg:flex items-center ">
+        <div className="hidden gap-6 lg:flex items-center ">
           <Link
             onClick={() =>
               pushDataLayer({
