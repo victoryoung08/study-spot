@@ -172,14 +172,28 @@ export default function Navbar({ navigationData }: any) {
                 </li>
               )}
               {!session && (
-                <>
-                  <li>
-                    <SigninForm buttonText="Sign In" />
-                  </li>
-                  <li>
-                    <SignupForm buttonText="Sign Up" />
-                  </li>
-                </>
+                // <>
+                //   <li>
+                //     <SigninForm buttonText="Sign In" />
+                //   </li>
+                //   <li>
+                //     <SignupForm buttonText="Sign Up" />
+                //   </li>
+                // </>
+                <li>
+                  <Link
+                    onClick={() =>
+                      pushDataLayer({
+                        name: "Cafe",
+                        path: "/cafe",
+                      })
+                    }
+                    href="/cafe"
+                    className="text-white hover:text-white hover:border-none z-50 cursor-pointer"
+                  >
+                    Cafes
+                  </Link>
+                </li>
               )}
             </ul>
           </div>
