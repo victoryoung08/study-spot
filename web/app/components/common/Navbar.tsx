@@ -248,20 +248,18 @@ export default function Navbar({ navigationData }: any) {
             </Link>
           )}
           {!session && (
-            <li>
-              <Link
-                onClick={() =>
-                  pushDataLayer({
-                    name: "Cafe",
-                    path: "/cafe",
-                  })
-                }
-                href="/cafe"
-                className="text-white hover:text-white hover:border-none z-50 cursor-pointer"
-              >
-                Cafes
-              </Link>
-            </li>
+            <Link
+              onClick={() =>
+                pushDataLayer({
+                  name: "Cafe",
+                  path: "/cafe",
+                })
+              }
+              href="/cafe"
+              className="text-white hover:text-white hover:border-none z-50 cursor-pointer"
+            >
+              Cafes
+            </Link>
           )}
         </div>
       )}
