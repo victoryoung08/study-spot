@@ -1,4 +1,4 @@
-import { Container } from "../../components/common/Container";
+import { Container } from "../../../components/common/Container";
 import Image from "next/image";
 import Markdown from "markdown-to-jsx";
 

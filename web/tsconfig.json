@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "./types/swiper.d.ts"
+    "./types/swiper.d.ts",
+    "Marketing/cafes/**/*.tsx" // Add this line for the new path
   ],
   "exclude": ["node_modules"]
 }

@@ -6,7 +6,7 @@ import pinIcon from "@/public/images/pin.svg";
 import { register } from "swiper/element/bundle";
 import { useEffect } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-import useViewportWidth from "@/hooks/getViewportWidth";
+import useViewportWidth from "@/src/hooks/getViewportWidth";
 
 export default function HeaderWithGridImage({
   title,

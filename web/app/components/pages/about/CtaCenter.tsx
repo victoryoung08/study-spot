@@ -3,7 +3,7 @@ import { Container } from "../../common/Container";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 
 export type commonDataType = {
   title: string;
@@ -35,7 +35,7 @@ export default function CtaCenter({
         <p className="text-base lg:text-lg lg:w-3/4 mx-auto my-7">
           {description || ""}
         </p>
-        {pathname.includes("/cafe") ? (
+        {pathname?.includes("/cafe") ? (
           <>
             {cta_text && !displayCode ? (
               <button

@@ -5,12 +5,17 @@ import Link from "next/link";
 import { useState } from "react";
 
 import logo from "@/public/images/logo.webp";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
+import SignupForm from "./SignupForm";
+import SigninForm from "./SigninForm";
+import { useSession } from "next-auth/react";
 
 export default function Navbar({ navigationData }: any) {
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
+  const pathname = usePathname();
   const [navHandler, setNavHandler] = useState(false);
   const handleNav = () => {
     setNavHandler((current) => !current);
@@ -27,7 +32,7 @@ export default function Navbar({ navigationData }: any) {
   const dropDownNavigation = navigationData
     .filter((el: any) => !mainNavigation.includes(el))
     .filter((item: any) => item.path !== "/study-spot-finder");
-  const view = searchParams.get("view");
+  const view = searchParams?.get("view");
 
   return (
     <div
@@ -38,6 +43,7 @@ export default function Navbar({ navigationData }: any) {
             : "absolute md:relative z-40 max-w-screen-lg mx-auto top-0 right-0 left-0"
         }
         ${navHandler ? "bg-black/60 !z-50" : "bg-transparent"}
+        ${pathname === "/dashboard" ? "hidden" : ""}
       `}
     >
       <div
@@ -78,7 +84,7 @@ export default function Navbar({ navigationData }: any) {
           <div className="h-0.5 w-5 rounded-full bg-white" />
           <div className="h-0.5 w-5 rounded-full bg-white" />
         </button>
-        <div className="hidden gap-10 lg:flex items-center ">
+        <div className="hidden gap-6 lg:flex items-center ">
           <Link
             onClick={() =>
               pushDataLayer({
@@ -128,25 +134,53 @@ export default function Navbar({ navigationData }: any) {
             >
               {dropDownNavigation.map((item: any) => {
                 return (
-                  <li key={item.path}>
-                    <Link
-                      onClick={() =>
-                        pushDataLayer({
-                          name: item.title,
-                          path: item.path,
-                        })
-                      }
-                      key={item.id}
-                      href={item.path}
-                      className={
-                        "text-white hover:text-white hover:border-none z-50"
-                      }
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
+                  <>
+                    <li key={item.path}>
+                      <Link
+                        onClick={() =>
+                          pushDataLayer({
+                            name: item.title,
+                            path: item.path,
+                          })
+                        }
+                        key={item.id}
+                        href={item.path}
+                        className={
+                          "text-white hover:text-white hover:border-none z-50 cursor-pointer"
+                        }
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  </>
                 );
               })}
+              {session && (
+                <li>
+                  <Link
+                    onClick={() =>
+                      pushDataLayer({
+                        name: "Dashboard",
+                        path: "/dashboard",
+                      })
+                    }
+                    href="/dashboard"
+                    className="capitalize text-white"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+              {!session && (
+                <>
+                  <li>
+                    <SigninForm buttonText="Sign In" />
+                  </li>
+                  <li>
+                    <SignupForm buttonText="Sign Up" />
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 
@@ -193,6 +227,26 @@ export default function Navbar({ navigationData }: any) {
               </Link>
             );
           })}
+          {session && (
+            <Link
+              onClick={() =>
+                pushDataLayer({
+                  name: "Dashboard",
+                  path: "/dashboard",
+                })
+              }
+              href="/dashboard"
+              className="capitalize text-white"
+            >
+              Dashboard
+            </Link>
+          )}
+          {!session && (
+            <>
+              <SigninForm buttonText="Sign In" />
+              <SignupForm buttonText="Sign Up" />
+            </>
+          )}
         </div>
       )}
     </div>

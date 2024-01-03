@@ -1,6 +1,6 @@
 "use client";
 
-import { pushDataLayer } from "@/app/lib/gtm";
+import { pushDataLayer } from "@/src/lib/gtm";
 import { Container } from "../../common/Container";
 import Image from "next/image";
 import Link from "next/link";
