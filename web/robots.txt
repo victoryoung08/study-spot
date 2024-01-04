@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://study-spot-production.up.railway.app/api/sitemap/index.xml
