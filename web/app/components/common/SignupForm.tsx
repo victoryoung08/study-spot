@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import ModalWrapper from "./ModalWrapper";
 import { DialogClose } from "../ui/dialog";
 import { Label } from "../ui/label";
@@ -8,17 +10,17 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import * as UserSchema from "../../../src/validation/schemas/UserSchemas";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type SignupFormTypes = {
-  buttonText: string;
+  toggleView: (query: "signin" | "signup") => void;
 };
 
 export type SignupFormType = z.infer<typeof UserSchema.SignupFormSchema>;
 
 const resolver = zodResolver(UserSchema.SignupFormSchema);
 
-const SignupForm = ({ buttonText }: SignupFormTypes) => {
-  const [open, setOpen] = useState(false);
+const SignupForm = ({ toggleView }: SignupFormTypes) => {
   type FormData = SignupFormType;
   const { handleSubmit, register, formState, reset } = useForm<FormData>({
     resolver,
@@ -69,15 +71,34 @@ const SignupForm = ({ buttonText }: SignupFormTypes) => {
       toast.error("An unexpected error occurred");
     }
   };
+  const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+  const displaysignup = useSearchParams()?.get("view") === "signup";
+
+  // check if the params has view=sigin
+  // if true, display signin modal
+  useEffect(() => {
+    if (displaysignup) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [displaysignup]);
+
   return (
     <ModalWrapper
-      ButtonTrigger={
-        <div className="">
-          <button className="text-white ">
-            <span className="">{buttonText}</span>
-          </button>
-        </div>
-      }
+      open={open}
+      setOpen={(newOpen) => {
+        // Optionally, remove "view" parameter when closing the modal
+        if (!newOpen) {
+          const { pathname } = window.location;
+          const urlWithoutParams = pathname.split("?")[0];
+          router.replace(urlWithoutParams);
+        }
+        // Set the open state
+        setOpen(newOpen);
+      }}
     >
       <div>
         <div className="border-b pb-5 mb-6 border-black">
@@ -142,19 +163,24 @@ const SignupForm = ({ buttonText }: SignupFormTypes) => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-2/5 mb-5 mx-auto btn btn-primary text-white "
+              className="w-2/5 mx-auto btn btn-primary text-white "
             >
               {loading ? "Signing up..." : "Sign Up"}
             </button>
           </div>
 
-          <DialogClose asChild>
-            {/* <SignupForm
-              buttonText="Sign Up"
-              displayButton={false}
-              displaySignUp={true}
-            /> */}
-          </DialogClose>
+          <div className="text-center text-sm">
+            <p className="cursor-default">
+              Have an account?
+              <span
+                className="text-primary cursor-pointer"
+                onClick={() => toggleView("signin")}
+              >
+                {" "}
+                Sign in
+              </span>
+            </p>
+          </div>
         </form>
       </div>
     </ModalWrapper>

@@ -36,7 +36,6 @@ export default async function CreatorProgram(searchParams: any) {
       <component.CtaCenter {...ctaCenterProps} />
       <div>
         <h6 className="text-center text-3xl font-bold mb-2">
-          {" "}
           Support your Study Spot ✨
         </h6>
         <p className="text-center">

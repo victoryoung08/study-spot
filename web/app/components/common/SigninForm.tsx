@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -6,7 +8,7 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ModalWrapper from "./ModalWrapper";
 
 const schema = z.object({
@@ -17,10 +19,10 @@ const schema = z.object({
 const resolver = zodResolver(schema);
 
 type SigninFormProps = {
-  buttonText: string;
+  toggleView: (query: "signin" | "signup") => void;
 };
 
-const SigninForm = ({ buttonText }: SigninFormProps) => {
+const SigninForm = ({ toggleView }: SigninFormProps) => {
   const router = useRouter();
   type FormData = z.infer<typeof schema>;
   const { handleSubmit, register, formState, reset } = useForm<FormData>({
@@ -73,27 +75,32 @@ const SigninForm = ({ buttonText }: SigninFormProps) => {
   };
 
   const [open, setOpen] = useState(false);
+  const displaysignin = useSearchParams()?.get("view") === "signin";
 
-  // check if the params has verified=true
-  // const isAuthorize = useSearchParams()?.get("authorized") === "false";
-  // useEffect(() => {
-  //   if (isAuthorize) {
-  //     toast.error("Please login");
-  //     setOpen(true);
-  //   }
-  // }, [isAuthorize]);
+  // check if the params has view=sigin
+  // if true, display signin modal
+  useEffect(() => {
+    if (displaysignin) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [displaysignin, router]);
 
   return (
     <ModalWrapper
       open={open}
-      setOpen={setOpen}
-      ButtonTrigger={
-        <div className="">
-          <button className="text-white">
-            <span>{buttonText}</span>
-          </button>
-        </div>
-      }
+      // if open = false, remove params
+      setOpen={(newOpen) => {
+        // Optionally, remove "view" parameter when closing the modal
+        if (!newOpen) {
+          const { pathname } = window.location;
+          const urlWithoutParams = pathname.split("?")[0];
+          router.replace(urlWithoutParams);
+        }
+        // Set the open state
+        setOpen(newOpen);
+      }}
     >
       <div>
         <div className="border-b pb-5 border-neutral-gray-dark">
@@ -152,9 +159,18 @@ const SigninForm = ({ buttonText }: SigninFormProps) => {
             </button>
           </div>
 
-          {/* <DialogClose asChild>
-            <SignupForm buttonText="Sign Up" />
-          </DialogClose> */}
+          <div className="text-center text-sm">
+            <p className="cursor-default">
+              Don&apos;t have an account?
+              <span
+                className="text-primary cursor-pointer"
+                onClick={() => toggleView("signup")}
+              >
+                {" "}
+                Sign Up
+              </span>
+            </p>
+          </div>
         </form>
       </div>
     </ModalWrapper>

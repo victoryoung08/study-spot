@@ -93,7 +93,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   pages: {
-    signIn: "/",
+    signIn: "/cafe",
   },
   callbacks: {
     async session({ session, token }: any) {
