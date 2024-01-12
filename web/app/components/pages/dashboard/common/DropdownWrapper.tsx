@@ -15,7 +15,9 @@ const DropdownWrapper = ({ ButtonTrigger, children }: dropdownWrapper) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>{ButtonTrigger}</DropdownMenuTrigger>
-      <DropdownMenuContent>{children}</DropdownMenuContent>
+      <DropdownMenuContent className="mx-5 rounded-xl">
+        {children}
+      </DropdownMenuContent>
     </DropdownMenu>
   );
 };

@@ -32,13 +32,13 @@ export default async function RootLayout({
           <Suspense>
             <Analytics />
           </Suspense>
-          <div className=" flex h-screen ">
+          <div className="flex h-screen ">
             <Sidebar />
             <div className="w-auto flex-1  overflow-x-auto !h-screen relative">
-              <div className=" p-5 lg:px-10 lg:py-5 flex gap-3 justify-end">
+              <div className="border-b border-gray-600 p-5 lg:px-10 lg:py-5 flex gap-3 justify-end">
                 <Topbar />
               </div>
-              <div>{children}</div>
+              <div className="p-10 h-[90%]">{children}</div>
             </div>
           </div>
         </Provider>
