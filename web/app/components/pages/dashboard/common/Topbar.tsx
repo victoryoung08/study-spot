@@ -22,7 +22,7 @@ function Topbar() {
   return (
     <DropdownWrapper
       ButtonTrigger={
-        <div className="w-72 flex gap-3 justify-end bg-transparent outline-none hover:bg-transparent">
+        <div className="w-auto flex gap-3 justify-end bg-transparent outline-none hover:bg-transparent">
           <Avatar className="w-10 h-10 ">
             {/* <AvatarImage
               src={currentUser?.ticket_holder_data?.avatar || ""}
@@ -59,7 +59,7 @@ function Topbar() {
       }
     >
       <div className="">
-        <div className="w-64 m-4">
+        <div className=" sm:w-64 m-4">
           <DropdownMenuLabel className="!px-0 !pt-0 !pb-1">
             <div className="flex justify-start items-center gap-2 px-0">
               <Avatar className="w-8 h-8">

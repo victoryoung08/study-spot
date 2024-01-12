@@ -51,13 +51,14 @@ export default async function RootLayout({
     <html lang="en" className="!bg-[#181818]">
       <link rel="icon" href="/favicon.png" sizes="any" />
       <body className={inter.className}>
+        <Suspense>
+          <Analytics />
+        </Suspense>
         <Provider session={session}>
           <header className=" bg-[#181818]">
             <Navbar navigationData={navigationData} />
           </header>
-          <Suspense>
-            <Analytics />
-          </Suspense>
+
           <Toaster />
 
           <main className="text-xl text-white">{children}</main>
