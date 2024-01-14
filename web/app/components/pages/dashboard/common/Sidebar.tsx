@@ -1,12 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ChartBarIcon,
-  Cog8ToothIcon,
-  CursorArrowRippleIcon,
-  WindowIcon,
-} from "@heroicons/react/24/outline";
 
 import React from "react";
 import Image from "next/image";
@@ -16,37 +10,36 @@ import { usePathname } from "next/navigation";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { deleteCookie } from "cookies-next";
+import dashboardIcon from "@/public/images/dashboard-icon.svg";
+import analyticsIcon from "@/public/images/analytics-icon.svg";
+import profileIcon from "@/public/images/profile-icon.svg";
+import supportIcon from "@/public/images/support-icon.svg";
+import { Button } from "@/app/components/ui/button";
 
-const navLinks = [
+export const navLinks = [
   {
     href: "/dashboard",
-    icon: ChartBarIcon,
+    icon: dashboardIcon.src,
     activePath: "/dashboard",
     text: "dashboard",
   },
   {
-    href: "/dashboard",
-    // href: "/dashboard/pageclicks",
-    icon: CursorArrowRippleIcon,
-    activePath: "/dashboard",
-    // activePath: "/dashboard/pageclicks",
-    text: "Page Clicks",
+    href: "/dashboard/analytics",
+    icon: analyticsIcon.src,
+    activePath: "/dashboard/analytics",
+    text: "Analytics",
   },
   {
-    href: "/dashboard",
-    // href: "/dashboard/pageviews",
-    icon: WindowIcon,
-    activePath: "/dashboard",
-    // activePath: "/dashboard/pageviews",
-    text: "Page Views",
+    href: "/dashboard/profile",
+    icon: profileIcon.src,
+    activePath: "/dashboard/profile",
+    text: "Profile",
   },
   {
-    // href: "/dashboard/setting",
-    href: "/dashboard",
-    icon: Cog8ToothIcon,
-    activePath: "/dashboard",
-    // activePath: "/dashboard/setting",
-    text: "Settings",
+    href: "/dashboard/support",
+    icon: supportIcon.src,
+    activePath: "/dashboard/support",
+    text: "Support",
   },
 ];
 
@@ -54,8 +47,8 @@ function Sidebar() {
   const path = usePathname();
 
   return (
-    <div className="">
-      <div className="border-r border-gray-600  h-full p-10 sm:px-5 sm:py-10 xl:p-10 w-full flex flex-col items-center xl:py-10 xl:px-10">
+    <div className="h-screen hidden lg:flex">
+      <div className="h-full flex p-10 sm:px-5 sm:py-10 xl:p-10 w-full flex-col items-center xl:py-10 xl:px-10">
         <Link href="/dashboard">
           <Image
             src={logo}
@@ -69,22 +62,29 @@ function Sidebar() {
         </Link>
         <div className="mt-16 flex flex-col gap-5 justify-center">
           {navLinks.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className="flex text-white gap-5 text-base capitalize items-center justify-start "
-            >
-              {React.createElement(link.icon, {
+            <Link key={index} href={link.href}>
+              {/* {React.createElement(link.icon.src, {
                 className:
                   path === link.activePath
                     ? "text-white h-7 w-7"
                     : "text-white h-7 w-7",
-              })}
-              <span className="hidden sm:block">{link.text}</span>
+              })} */}
+              <Button
+                className={`flex text-white gap-4 text-base capitalize items-center justify-start  hover:bg-primary border-2 border-transparent w-full px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl
+            ${
+              path === link.activePath
+                ? "bg-primary border-white"
+                : "bg-transparent"
+            }`}
+              >
+                <Image src={link.icon} alt={link.text} width={30} height={30} />
+
+                <span className="hidden sm:block">{link.text}</span>
+              </Button>
             </Link>
           ))}
         </div>
-        <div
+        {/* <div
           className="mt-auto cursor-pointer pt-5"
           onClick={() => {
             deleteCookie("user");
@@ -95,7 +95,7 @@ function Sidebar() {
             <ArrowRightOnRectangleIcon className="w-7 h-7" />
             <span className="hidden sm:block">Logout</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

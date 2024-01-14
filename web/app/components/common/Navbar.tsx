@@ -39,7 +39,7 @@ export default function Navbar({ navigationData }: any) {
       className={`
         ${
           view != "map"
-            ? " max-w-screen-lg z-10 mx-auto px-5 lg:px-0"
+            ? " max-w-screen-lg z-10 mx-auto px-5 lg:px-0 py-5"
             : "absolute md:relative z-40 max-w-screen-lg mx-auto top-0 right-0 left-0"
         }
         ${navHandler ? "bg-black/60 !z-50" : "bg-transparent"}
@@ -63,12 +63,7 @@ export default function Navbar({ navigationData }: any) {
           }
           href="/"
         >
-          <Image
-            src={logo}
-            alt="Logo"
-            className="w-44 h-44 lg:w-32 lg:h-32 "
-            priority
-          />
+          <Image src={logo} alt="Logo" className="w-40 sm:w-44 " priority />
         </Link>
         <button
           aria-label="Menu"
