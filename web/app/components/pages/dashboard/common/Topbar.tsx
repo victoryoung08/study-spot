@@ -43,7 +43,7 @@ function Topbar() {
           </SheetTrigger>
           <SheetContent
             side={"left"}
-            className="w-5/6 sm:w-72 bg-black border-r-0"
+            className="w-4/6 sm:w-72 bg-black border-r-0"
           >
             <SheetHeader className="justify-center">
               <SheetClose asChild>

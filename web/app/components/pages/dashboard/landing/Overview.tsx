@@ -75,14 +75,16 @@ export const data = {
 export default function Overview() {
   return (
     <div className="w-full border-2 border-white rounded-2xl p-10">
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center mb-5 gap-5 sm:gap-0">
         <h2 className="text-xl font-medium">Overview</h2>
-        <SelectComponent />
+        <div className="ml-auto">
+          <SelectComponent />
+        </div>
       </div>
       <div className="h-[350px]">
         <Line options={options} data={data} />
       </div>
-      <div className="mt-5 w-2/4 mx-auto">
+      <div className="mt-5 sm:w-2/4 mx-auto">
         <Link href="/dashboard">
           <Button className="bg-primary border-2 w-full px-4 py-5 font-medium hover:bg-primary border-white rounded-2xl">
             Upgrade to see more
