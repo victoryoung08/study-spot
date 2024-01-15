@@ -2,10 +2,12 @@
 import { Container } from "@/app/components/common/Container";
 import SigninForm from "@/app/components/common/SigninForm";
 import SignupForm from "@/app/components/common/SignupForm";
-import darkbg from "@/public/images/dark-bg.png";
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import Logo from "@/public/images/study-spot-logo.svg";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Cafe() {
   const router = useRouter();
@@ -54,38 +56,34 @@ export default function Cafe() {
   }, []);
 
   return (
-    <Container backgroundImage={darkbg.src}>
-      <div className="bg-gradient-to-t  from-[#181818] absolute top-0 right-0 bottom-0 left-0 z-10"></div>
-      <div className="lg:py-20 z-50 text-center relative">
-        <h2 className="text-4xl font-bold leading-snug text-white md:text-5xl lg:text-6xl lg:w-3/4 mx-auto">
-          Fill up your café with more foot traffic
-        </h2>
-        <p className="my-5 text-base text-white lg:text-xl">
-          Study Spot connects you with students, remote workers and digital
-          nomads. <br /> Meaning more coffee and food orders (and a greater word
-          of mouth presence!)
-        </p>
-        <div className="flex gap-8 justify-center">
-          {/* button for signin */}
+    <div className="flex justify-center text-center relative h-screen">
+      <div className="flex flex-col gap-20 justify-center">
+        <div>
+          <Link href="/">
+            <Image src={Logo} alt="Logo" />
+          </Link>
+        </div>
+        {/* button for signin */}
+        <div className="flex flex-col gap-5">
           <button
-            onClick={() => toggleView("signin")}
-            className="btn btn-primary hover:bg-transparent hover:border-white transition-all delay-50 hover:scale-105 ease-in-out duration-500 text-white px-10 rounded-2xl"
+            onClick={() => toggleView("signup")}
+            className="w-56 mx-auto btn border-2 border-white btn-primary hover:bg-transparent hover:border-white transition-all delay-50 hover:scale-105 ease-in-out duration-500 text-white px-10 rounded-2xl"
           >
-            Sign in
+            Get Started
           </button>
 
           {/* button for signup */}
           <button
-            onClick={() => toggleView("signup")}
-            className="btn bg-transparent hover:btn-primary hover:!bg-primary transition-all delay-50 hover:scale-105 ease-in-out duration-500 text-white px-10 rounded-2xl text-white px-10 rounded-2xl"
+            onClick={() => toggleView("signin")}
+            className="w-56 mx-auto btn border-2 border-white bg-transparent hover:btn-primary hover:!bg-primary hover:!border-white transition-all delay-50 hover:scale-105 ease-in-out duration-500  text-white px-10 rounded-2xl"
           >
-            Sign Up
+            Sign In
           </button>
 
           <SigninForm toggleView={toggleView} />
           <SignupForm toggleView={toggleView} />
         </div>
       </div>
-    </Container>
+    </div>
   );
 }

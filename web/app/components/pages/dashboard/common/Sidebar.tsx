@@ -7,7 +7,6 @@ import Image from "next/image";
 import logo from "@/public/images/logo.webp";
 import x from "@/public/favicon.png";
 import { usePathname } from "next/navigation";
-import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { deleteCookie } from "cookies-next";
 import dashboardIcon from "@/public/images/dashboard-icon.svg";
@@ -15,6 +14,7 @@ import analyticsIcon from "@/public/images/analytics-icon.svg";
 import profileIcon from "@/public/images/profile-icon.svg";
 import supportIcon from "@/public/images/support-icon.svg";
 import { Button } from "@/app/components/ui/button";
+import Logout from "@/public/images/logout.svg";
 
 export const navLinks = [
   {
@@ -47,7 +47,7 @@ function Sidebar() {
   const path = usePathname();
 
   return (
-    <div className="h-screen hidden lg:flex">
+    <div className="z-50 fixed h-screen hidden lg:flex">
       <div className="h-full flex p-10 sm:px-5 sm:py-10 xl:p-10 w-full flex-col items-center xl:py-10 xl:px-10">
         <Link href="/dashboard">
           <Image
@@ -84,18 +84,18 @@ function Sidebar() {
             </Link>
           ))}
         </div>
-        {/* <div
+        <div
           className="mt-auto cursor-pointer pt-5"
           onClick={() => {
             deleteCookie("user");
             signOut();
           }}
         >
-          <div className="flex gap-5 justify-center text-base text-white">
-            <ArrowRightOnRectangleIcon className="w-7 h-7" />
+          <Button className="flex text-white gap-4 text-base capitalize items-center justify-start  bg-transparent hover:bg-primary border-2 border-transparent w-full px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl">
+            <Image src={Logout} alt="Logout icon" />
             <span className="hidden sm:block">Logout</span>
-          </div>
-        </div> */}
+          </Button>
+        </div>
       </div>
     </div>
   );

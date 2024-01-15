@@ -28,14 +28,15 @@ import { Button } from "@/app/components/ui/button";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "@/public/images/logo.webp";
+import Logout from "@/public/images/logout.svg";
 
 function Topbar() {
   const { session } = getSession();
   const path = usePathname();
 
   return (
-    <div className="flex justify-between w-full lg:justify-end">
-      <div className="flex lg:hidden ">
+    <div className="flex justify-between w-full lg:justify-end ">
+      <div className="flex lg:hidden">
         <Sheet>
           <SheetTrigger className="flex cursor-pointer flex-col space-y-1 bg-transparent hover:bg-transparent p-5">
             <div className="h-0.5 w-5 rounded-full bg-white" />
@@ -52,31 +53,46 @@ function Topbar() {
                 </div>
               </SheetClose>
             </SheetHeader>
-            <div className="mt-10 flex flex-col gap-5">
-              {navLinks.map((item) => {
-                return (
-                  <div key={item.href} className="flex flex-col items-center">
-                    <Link legacyBehavior href={item.href}>
-                      <Button
-                        className={`flex gap-2 w-full justify-start bg-transparent hover:bg-primary border-2 border-transparent px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl  
+            <div className="mt-10 flex flex-col h-5/6 justify-between ">
+              <div className="flex flex-col justify-between gap-5">
+                {navLinks.map((item) => {
+                  return (
+                    <div key={item.href} className="flex flex-col items-center">
+                      <Link legacyBehavior href={item.href}>
+                        <Button
+                          className={`flex gap-2 w-full justify-start bg-transparent hover:bg-primary border-2 border-transparent px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl  
                       ${
                         path === item.activePath
                           ? "bg-primary border-white"
                           : "bg-transparent"
                       }`}
-                      >
-                        <Image
-                          src={item.icon}
-                          alt={item.text}
-                          width={20}
-                          height={20}
-                        />
-                        {item.text}
-                      </Button>
-                    </Link>
-                  </div>
-                );
-              })}
+                        >
+                          <Image
+                            src={item.icon}
+                            alt={item.text}
+                            width={20}
+                            height={20}
+                          />
+                          {item.text}
+                        </Button>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div
+                className="cursor-pointer "
+                onClick={() => {
+                  deleteCookie("user");
+                  signOut();
+                }}
+              >
+                <Button className="flex text-white gap-4 text-base capitalize items-center justify-start  bg-transparent hover:bg-primary border-2 border-transparent w-full px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl">
+                  <Image src={Logout} alt="Logout icon" />
+                  <span className="">Logout</span>
+                </Button>
+              </div>
             </div>
           </SheetContent>
         </Sheet>

@@ -168,7 +168,7 @@ export default function Navbar({ navigationData }: any) {
               )}
               {!session && (
                 <li>
-                  <Link
+                  <a
                     onClick={() =>
                       pushDataLayer({
                         name: "Cafe",
@@ -176,10 +176,11 @@ export default function Navbar({ navigationData }: any) {
                       })
                     }
                     href="/cafe"
+                    target="_blank"
                     className="text-white hover:text-white hover:border-none z-50 cursor-pointer"
                   >
                     Cafes
-                  </Link>
+                  </a>
                 </li>
               )}
             </ul>

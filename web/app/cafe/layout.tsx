@@ -13,8 +13,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Study Spot - Dashboard",
+  title: "Cafe - Study Spot",
+  description: "Cafe - Study Spot",
 };
 
 export default async function RootLayout({
@@ -32,17 +32,7 @@ export default async function RootLayout({
           <Suspense>
             <Analytics />
           </Suspense>
-          <div className="flex">
-            <div className="lg:w-64">
-              <Sidebar />
-            </div>
-            <div className="w-auto flex-1 overflow-x-auto relative">
-              <div className="p-5 lg:px-10 lg:py-5 flex gap-3 justify-end">
-                <Topbar />
-              </div>
-              <div className="p-5 lg:p-10">{children}</div>
-            </div>
-          </div>
+          <main className="">{children}</main>
         </Provider>
       </body>
     </html>
