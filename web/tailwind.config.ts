@@ -22,13 +22,10 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#9055ea",
+        secondary: "#F38BB5",
         grey: "#444545",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

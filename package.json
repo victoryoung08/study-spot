@@ -10,6 +10,8 @@
         "concurrently": "^8.2.1"
     },
     "dependencies": {
-        "cookies-next": "^4.1.0"
+        "chart.js": "^4.4.1",
+        "cookies-next": "^4.1.0",
+        "react-chartjs-2": "^5.2.0"
     }
 }
