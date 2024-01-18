@@ -1,3 +1,4 @@
+import Impressions from "./Impressions";
 import ProfileVisits from "./ProfileVisits";
 import TabsWrapper from "./TabsWrapper";
 
@@ -9,6 +10,7 @@ export default function Analytics() {
       </div>
       <TabsWrapper>
         <ProfileVisits />
+        <Impressions />
       </TabsWrapper>
     </div>
   );

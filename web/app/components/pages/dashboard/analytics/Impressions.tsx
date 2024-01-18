@@ -1,13 +1,12 @@
 import { TabsContent } from "@/app/components/ui/tabs";
 import OverviewCount from "./OverviewCount";
 import Linechart from "../common/Linechart";
-import { data, genderData } from "../common/Data";
+import { PiechartData2, data, trafficSources } from "../common/Data";
 import PieChart from "../common/PieChart";
-import { PiechartData1 } from "../common/Data";
 
-export default function ProfileVisits() {
+export default function Impressions() {
   return (
-    <TabsContent value="Profile Visit" className="space-y-5 lg:space-y-10">
+    <TabsContent value="Impressions" className="space-y-5 lg:space-y-10">
       <div>
         <OverviewCount />
       </div>
@@ -16,10 +15,10 @@ export default function ProfileVisits() {
       </div>
       <div>
         <PieChart
-          data={genderData}
-          title="More Insights"
-          sectionTitle="Gender"
-          datasets={PiechartData1}
+          data={trafficSources}
+          title="Traffic Sources"
+          sectionTitle="Total Traffic Sources"
+          datasets={PiechartData2}
         />
       </div>
     </TabsContent>
