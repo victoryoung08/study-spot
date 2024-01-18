@@ -2,8 +2,14 @@ import BasicInformation from "@/app/components/pages/dashboard/profile/BasicInfo
 import CafeDetails from "@/app/components/pages/dashboard/profile/CafeDetails";
 import Links from "@/app/components/pages/dashboard/profile/Links";
 import Promotion from "@/app/components/pages/dashboard/profile/Promotion";
+import { Metadata } from "next";
 
-export default function Support() {
+export const metadata: Metadata = {
+  title: "Dashboard - Profile",
+  description: "Study Spot - Profile",
+};
+
+export default function Profile() {
   return (
     <div className="text-white space-y-10">
       <BasicInformation />

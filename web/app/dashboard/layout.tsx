@@ -25,7 +25,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en" className="!bg-[#181818]">
+    <html lang="en" className="!bg-[#181818] text-white">
       <link rel="icon" href="/favicon.png" sizes="any" />
       <body className={inter.className}>
         <Provider session={session}>
