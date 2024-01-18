@@ -17,19 +17,19 @@ export default function AnalyticsCard({
   twoColumn,
 }: analyticscardtype) {
   return (
-    <div className="bg-grey border-2 border-white rounded-2xl w-full p-5">
+    <div className="bg-grey border-2 border-white rounded-2xl w-full p-4 xs:p-5">
       <div>
         <div
           className={` ${
             twoColumn
               ? "grid grid-cols-2 items-center justify-center text-center"
-              : "space-y-5"
+              : "space-y-4 md:space-y-5"
           }`}
         >
-          <h2 className="font-medium">{title}</h2>
+          <h2 className="text-xs xs:text-base font-medium pr-2">{title}</h2>
           <div
-            className={`text-5xl font-black flex items-end gap-1 ${
-              twoColumn ? "justify-center border-l" : ""
+            className={`text-4xl md:text-5xl font-black flex items-end gap-1 ${
+              twoColumn ? "justify-center border-l pl-2" : ""
             }`}
           >
             <h3>{number}</h3>
@@ -45,7 +45,7 @@ export default function AnalyticsCard({
 
         <div className="mt-5">
           <Link href="/dashboard">
-            <Button className="bg-primary border-2 px-4 py-5 w-full font-medium hover:bg-primary border-white rounded-2xl">
+            <Button className="bg-primary border-2 text-xs xs:text-base py-3 xs:px-4 xs:py-5 w-full font-medium hover:bg-primary border-white rounded-2xl">
               {buttonText}
             </Button>
           </Link>

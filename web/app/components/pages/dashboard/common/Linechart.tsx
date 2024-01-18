@@ -24,6 +24,7 @@ import {
 } from "chart.js";
 import Link from "next/link";
 import { Line } from "react-chartjs-2";
+import DatePIcker from "./DatePIcker";
 Chart.defaults.color = "#fff";
 
 ChartJS.register(
@@ -57,40 +58,38 @@ export const options = {
   },
 };
 
-const labels = ["January 10 2024", "January 12 2024", "January 14 2024"];
+type LinechartTypes = { overview: boolean; displayButton?: boolean; data: any };
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      data: labels.map(() => Math.floor(Math.random() * 1000)),
-      borderColor: "rgb(243, 139, 181)",
-      backgroundColor: "rgba(243, 139, 181)",
-      borderWidth: 1,
-      pointRadius: 5,
-    },
-  ],
-};
-
-export default function Overview() {
+export default function Linechart({
+  overview,
+  displayButton,
+  data,
+}: LinechartTypes) {
   return (
-    <div className="w-full border-2 border-white rounded-2xl p-10">
-      <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center mb-5 gap-5 sm:gap-0">
-        <h2 className="text-xl font-medium">Overview</h2>
-        <div className="ml-auto">
-          <SelectComponent />
+    <div className="w-full border-2 border-white rounded-2xl p-5 lg:p-10">
+      {overview && (
+        <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center mb-5 gap-5 sm:gap-0">
+          <h2 className="text-xl font-medium">Overview</h2>
+          <div className="ml-auto">
+            <SelectComponent />
+          </div>
         </div>
-      </div>
+      )}
+      {!overview && <DatePIcker />}
+
       <div className="h-[350px]">
         <Line options={options} data={data} />
       </div>
-      <div className="mt-5 sm:w-2/4 mx-auto">
-        <Link href="/dashboard">
-          <Button className="bg-primary border-2 w-full px-4 py-5 font-medium hover:bg-primary border-white rounded-2xl">
-            Upgrade to see more
-          </Button>
-        </Link>
-      </div>
+      {displayButton && (
+        <div className="mt-5 sm:w-2/4 mx-auto">
+          {/* if paid, display link. If free display button that will direct to subscribe for paid membership */}
+          <Link href="/dashboard">
+            <Button className="bg-primary border-2 text-xs xs:text-base py-3 xs:px-4 xs:py-5 w-full font-medium hover:bg-primary border-white rounded-2xl">
+              Upgrade to see more
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
@@ -98,7 +97,7 @@ export default function Overview() {
 const SelectComponent = () => {
   return (
     <Select>
-      <SelectTrigger className="w-[180px] bg-grey border-2 rounded-2xl">
+      <SelectTrigger className="w-[196px] xs:w-[180px] bg-grey border-2 rounded-2xl text-xs xs:text-base ">
         <SelectValue placeholder="Profile Visits" />
       </SelectTrigger>
       {/* <SelectContent>

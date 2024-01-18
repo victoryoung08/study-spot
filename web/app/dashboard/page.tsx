@@ -1,6 +1,7 @@
 import AnalyticsCard from "../components/pages/dashboard/common/AnalyticsCard";
 import DashboardCafe from "../components/pages/dashboard/landing/DashboardCafe";
-import Overview from "../components/pages/dashboard/landing/Overview";
+import Linechart from "../components/pages/dashboard/common/Linechart";
+import { data } from "../components/pages/dashboard/common/Data";
 
 export default function Dashboard() {
   return (
@@ -20,7 +21,7 @@ export default function Dashboard() {
           buttonText="Upgrade to see more"
         />
       </div>
-      <Overview />
+      <Linechart overview={true} displayButton={true} data={data} />
       <div className="lg:w-2/5">
         <AnalyticsCard
           twoColumn={true}

@@ -1,8 +1,16 @@
-export default function Analytics() {
+import Analytics from "@/app/components/pages/dashboard/analytics/Analytics";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard - Analytics",
+  description: "Study Spot - Analytics",
+};
+
+export default function Page() {
   return (
     <div>
       <div>
-        <h1 className="text-3xl text-white font-medium">Analytics content</h1>
+        <Analytics />
       </div>
     </div>
   );
