@@ -69,7 +69,7 @@ export default function Linechart({
     <div className="w-full border-2 border-white rounded-2xl p-5 lg:p-10">
       {overview && (
         <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center mb-5 gap-5 sm:gap-0">
-          <h2 className="text-xl font-medium">Overview</h2>
+          <h2 className="text-xl font-bold">Overview</h2>
           <div className="ml-auto">
             <SelectComponent />
           </div>
