@@ -14,9 +14,9 @@ export const data = {
 };
 
 export const genderData = [
-  { gender: "Male", percent: 30, color: "#F38BB5" },
-  { gender: "Female", percent: 60, color: "#8F54EA" },
-  { gender: "Other", percent: 10, color: "#FCC950" },
+  { title: "Male", percent: 30, color: "#F38BB5" },
+  { title: "Female", percent: 60, color: "#8F54EA" },
+  { title: "Other", percent: 10, color: "#FCC950" },
 ];
 
 export const PiechartData1 = {
@@ -36,14 +36,14 @@ export const PiechartData1 = {
 };
 
 export type trafficSourcesTypes = {
-  gender: string;
+  title: string;
   percent: number;
   color: string;
 };
 
 export const trafficSources = [
-  { gender: "External Sites or App", percent: 50, color: "#FCC950" },
-  { gender: "Search Terms", percent: 50, color: "#8F54EA" },
+  { title: "External Sites or App", percent: 50, color: "#FCC950" },
+  { title: "Search Terms", percent: 50, color: "#8F54EA" },
 ];
 
 export const PiechartData2 = {
@@ -61,3 +61,19 @@ export const PiechartData2 = {
     },
   ],
 };
+
+export const pageViewsLocations = [
+  { name: "Sydney", percentage: 60 },
+  { name: "Melbourne", percentage: 20 },
+  { name: "Canberra", percentage: 20 },
+];
+
+export const externalTraffics = [
+  { name: "Instagram", percentage: 30 },
+  { name: "TikTok", percentage: 30 },
+];
+
+export const SearchTerms = [
+  { name: "study cafe in sydney", percentage: 30 },
+  { name: "study spots near me", percentage: 30 },
+];

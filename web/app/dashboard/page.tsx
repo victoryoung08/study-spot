@@ -1,6 +1,6 @@
-import AnalyticsCard from "../components/pages/dashboard/common/AnalyticsCard";
+import AnalyticsCard from "../components/pages/dashboard/common/analytics/AnalyticsCard";
 import DashboardCafe from "../components/pages/dashboard/landing/DashboardCafe";
-import Linechart from "../components/pages/dashboard/common/Linechart";
+import Linechart from "../components/pages/dashboard/common/analytics/Linechart";
 import { data } from "../components/pages/dashboard/common/Data";
 
 export default function Dashboard() {

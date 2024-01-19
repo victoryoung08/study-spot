@@ -35,32 +35,32 @@ export default function PieChart({
         <div className="w-32 h-1.5 mt-2 bg-primary rounded-lg" />
       </div>
       <div className="md:w-2/4 mt-10 border-2 border-white rounded-2xl p-5 lg:p-10">
-        {sectionTitle && (
-          <h2 className="text-xl font-medium">{sectionTitle}</h2>
-        )}
+        {sectionTitle && <h2 className="text-xl font-bold">{sectionTitle}</h2>}
         <div className="h-72 mx-auto">
           <Pie data={datasets} options={options} />
         </div>
-        <div className="flex justify-center gap-5 sm:gap-10 w-full mt-10">
+        <div className="flex justify-center gap-5 sm:gap-10 w-full mt-5 xs:mt-10">
           {data.map((item: any, index: number) => {
             return (
               <div
                 key={index}
                 // className={index != 0 ? "border-l pl-10" : ""}
               >
-                <div>
-                  <p className="text-base sm:text-lg text-right">
+                <div className="">
+                  <p className="text-sm xs:text-base sm:text-lg text-right">
                     {item.percent}%
                   </p>
                   <div
-                    className={`flex gap-2 items-center mt-1 ${
+                    className={`flex gap-2 items-center xs:mt-1 ${
                       index != 0 ? "sm:border-l sm:pl-10" : ""
                     }`}
                   >
                     <div
                       className={`h-3 w-3 rounded-full bg-[${item.color}] `}
                     />
-                    <p className="text-xs xs:text-sm">{item.gender}</p>
+                    <p className="text-xs xs:text-sm text-right">
+                      {item.title}
+                    </p>
                   </div>
                 </div>
               </div>
