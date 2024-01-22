@@ -15,6 +15,7 @@ import profileIcon from "@/public/images/profile-icon.svg";
 import supportIcon from "@/public/images/support-icon.svg";
 import { Button } from "@/app/components/ui/button";
 import Logout from "@/public/images/logout.svg";
+import getSession from "@/src/helper/getSession";
 
 export const navLinks = [
   {
@@ -45,7 +46,7 @@ export const navLinks = [
 
 function Sidebar() {
   const path = usePathname();
-
+  const { session } = getSession();
   return (
     <div className="z-50 fixed h-screen hidden lg:flex">
       <div className="h-full flex p-10 sm:px-5 sm:py-10 xl:p-10 w-full flex-col items-center xl:py-10 xl:px-10">
@@ -61,28 +62,28 @@ function Sidebar() {
           <Image src={x} alt="Study Spot" className="block sm:hidden w-8" />
         </Link>
         <div className="mt-16 flex flex-col gap-5 justify-center">
-          {navLinks.map((link, index) => (
-            <Link key={index} href={link.href}>
-              {/* {React.createElement(link.icon.src, {
-                className:
-                  path === link.activePath
-                    ? "text-white h-7 w-7"
-                    : "text-white h-7 w-7",
-              })} */}
-              <Button
-                className={`flex text-white gap-4 text-base capitalize items-center justify-start  hover:bg-primary border-2 border-transparent w-full px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl
-            ${
-              path === link.activePath
-                ? "bg-primary border-white"
-                : "bg-transparent"
-            }`}
-              >
-                <Image src={link.icon} alt={link.text} width={30} height={30} />
-
-                <span className="hidden sm:block">{link.text}</span>
-              </Button>
-            </Link>
-          ))}
+          {navLinks
+            .filter((link) => session?.user.isPaid || link.text !== "Analytics")
+            .map((link, index) => (
+              <Link key={index} href={link.href}>
+                <Button
+                  className={`flex text-white gap-4 text-base capitalize items-center justify-start hover:bg-primary border-2 border-transparent w-full px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl
+        ${
+          path === link.activePath
+            ? "bg-primary border-white"
+            : "bg-transparent"
+        }`}
+                >
+                  <Image
+                    src={link.icon}
+                    alt={link.text}
+                    width={30}
+                    height={30}
+                  />
+                  <span className="hidden sm:block">{link.text}</span>
+                </Button>
+              </Link>
+            ))}
         </div>
         <div
           className="mt-auto cursor-pointer pt-5"

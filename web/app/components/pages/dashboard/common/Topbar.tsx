@@ -33,7 +33,7 @@ import Logout from "@/public/images/logout.svg";
 function Topbar() {
   const { session } = getSession();
   const path = usePathname();
-
+  console.log(session);
   return (
     <div className="flex justify-between w-full lg:justify-end ">
       <div className="flex lg:hidden">
