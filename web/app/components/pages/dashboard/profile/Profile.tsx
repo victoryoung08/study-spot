@@ -1,35 +1,40 @@
-"use client";
-import { useEffect, useState } from "react";
+import getUserDetails from "@/src/queries/getUserDetails";
 import BasicInformation from "./BasicInformation";
 import CafeDetails from "./CafeDetails";
 import Links from "./Links";
 import Promotion from "./Promotion";
-import ErrorPage from "@/app/components/common/ErrorPage";
 
-export default function Profile() {
-  const [userData, setUserData] = useState();
+// export default async function Profile() {
+//   const userData = await getUserDetails();
+//   if (userData?.error) {
+//     return <div>Error</div>;
+//   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/getUserDetails");
-        if (response.ok) {
-          const data = await response.json();
-          setUserData(data);
-        } else {
-          console.error("Failed to fetch user details");
-        }
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    };
+//   // Todo use suspense while waiting for data
+//   if (!userData?.data) {
+//     return <div>Loading...</div>;
+//   }
+//   return (
+//     <div className="text-white space-y-10">
+//       <BasicInformation cafeDetails={userData} />
+//       <div className="flex flex-col md:flex-row gap-10 lg:gap-32">
+//         <CafeDetails cafeDetails={userData} />
+//         <div className="space-y-10 md:w-2/4">
+//           <Links cafeDetails={userData} />
+//           <Promotion cafeDetails={userData} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
-    fetchData();
-  }, []); // Empty dependency array to run the effect only once on mount
-  console.log(userData);
+// Fetch data on the server side before rendering the component
+
+// Profile component receives data as props
+export default function Profile({ userData }: any) {
   return (
     <div className="text-white space-y-10">
-      <BasicInformation cafeDetails={userData} />
+      <BasicInformation cafeDetails={userData.cafe} />
       <div className="flex flex-col md:flex-row gap-10 lg:gap-32">
         <CafeDetails cafeDetails={userData} />
         <div className="space-y-10 md:w-2/4">
@@ -40,22 +45,3 @@ export default function Profile() {
     </div>
   );
 }
-
-// async function getCafeData(id: number): Promise<any> {
-//   const response = await fetch(
-//     `${process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT}/users?filters[id][$eq]=${id}&populate=deep`,
-//     {
-//       next: { revalidate: 0 },
-//       cache: "no-cache",
-//     }
-//   );
-//   let data = [];
-//   if (response.ok) {
-//     data = await response.json();
-//     console.log(data);
-
-//     return { data };
-//   } else {
-//     return <ErrorPage />;
-//   }
-// }

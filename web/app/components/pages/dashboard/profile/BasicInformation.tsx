@@ -76,7 +76,7 @@ export default function BasicInformation({ cafeDetails }: any) {
         <div>
           <p>Cafe Name</p>
           <div className="mt-1 xs:mt-0 xs:ml-5 flex items-center md:w-2/4 justify-between">
-            {cafeDetails && <p>{cafeDetails[0]?.cafe?.cafe_name || ""}</p>}
+            {cafeDetails && <p>{cafeDetails?.cafe_name || ""}</p>}
             <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
               Edit
             </Button>
@@ -86,7 +86,7 @@ export default function BasicInformation({ cafeDetails }: any) {
         <div>
           <p>Cafe Address</p>
           <div className="mt-1 xs:mt-0 xs:ml-5 flex items-center md:w-2/4 justify-between">
-            {cafeDetails && <p>{cafeDetails[0]?.cafe?.location || ""}</p>}
+            {cafeDetails && <p>{cafeDetails?.location || ""}</p>}
             <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
               Edit
             </Button>
