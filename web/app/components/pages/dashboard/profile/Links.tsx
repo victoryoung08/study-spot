@@ -17,7 +17,7 @@ const links = [
   { id: 3, social: "TikTok", image: tiktok },
 ];
 
-export default function Links() {
+export default function Links({ cafeDetails }: any) {
   return (
     <div>
       <div>
@@ -58,18 +58,18 @@ export default function Links() {
             </div>
           );
         })}
-        <div>
+        {/* <div>
           <Select>
             <SelectTrigger className="ring-offset-[#181818] focus:ring-0 w-32 bg-transparent border-none text-base">
               <SelectValue placeholder="View More" />
             </SelectTrigger>
-            {/* <SelectContent>
+            <SelectContent>
               <SelectItem value="light">Light</SelectItem>
               <SelectItem value="dark">Dark</SelectItem>
               <SelectItem value="system">System</SelectItem>
-            </SelectContent> */}
+            </SelectContent>
           </Select>
-        </div>
+        </div> */}
       </div>
     </div>
   );

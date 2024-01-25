@@ -1,7 +1,4 @@
-import BasicInformation from "@/app/components/pages/dashboard/profile/BasicInformation";
-import CafeDetails from "@/app/components/pages/dashboard/profile/CafeDetails";
-import Links from "@/app/components/pages/dashboard/profile/Links";
-import Promotion from "@/app/components/pages/dashboard/profile/Promotion";
+import Profile from "@/app/components/pages/dashboard/profile/Profile";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,17 +6,10 @@ export const metadata: Metadata = {
   description: "Study Spot - Profile",
 };
 
-export default function Profile() {
+export default function Page() {
   return (
-    <div className="text-white space-y-10">
-      <BasicInformation />
-      <div className="flex flex-col md:flex-row gap-10 lg:gap-32">
-        <CafeDetails />
-        <div className="space-y-10 md:w-2/4">
-          <Links />
-          <Promotion />
-        </div>
-      </div>
+    <div>
+      <Profile />
     </div>
   );
 }

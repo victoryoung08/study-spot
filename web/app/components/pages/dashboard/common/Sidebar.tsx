@@ -63,7 +63,10 @@ function Sidebar() {
         </Link>
         <div className="mt-16 flex flex-col gap-5 justify-center">
           {navLinks
-            .filter((link) => session?.user.isPaid || link.text !== "Analytics")
+            .filter(
+              (link) =>
+                session?.user?.hasMembership || link.text !== "Analytics"
+            )
             .map((link, index) => (
               <Link key={index} href={link.href}>
                 <Button

@@ -93,11 +93,11 @@
       "type": "float",
       "required": true
     },
-    "user": {
+    "owner": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "mappedBy": "study_spot"
+      "mappedBy": "cafe"
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Slider } from "@/app/components/ui/slider";
 import { Switch } from "@/app/components/ui/switch";
 
-export default function CafeDetails() {
+export default function CafeDetails({ cafeDetails }: any) {
   return (
     <div className="md:w-2/4 lg:w-2/6">
       <div className="space-y-6">

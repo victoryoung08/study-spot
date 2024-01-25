@@ -7,7 +7,7 @@ interface User {
   email: string;
   username: string;
   confirmed: boolean;
-  isPaid?: boolean;
+  hasMembership?: boolean;
   updatedAt: string;
 }
 
@@ -21,8 +21,20 @@ const getSession = () => {
 
   if (session && session.data) {
     const { user, expires } = session.data as SessionData;
-    setCookie("user", JSON.stringify({ user, expires }));
-    return { session: { user, expires } };
+
+    // Extract only the required properties from the user object
+    const { id, email, username, hasMembership } = user;
+
+    setCookie(
+      "user",
+      JSON.stringify({ id, email, username, hasMembership, expires })
+    );
+    return {
+      session: {
+        user: { id, email, username, hasMembership },
+        expires,
+      },
+    };
   } else {
     return { session: null };
   }

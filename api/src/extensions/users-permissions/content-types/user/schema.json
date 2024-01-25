@@ -65,15 +65,15 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "isPaid": {
+    "hasMembership": {
       "type": "boolean",
       "default": false
     },
-    "study_spot": {
+    "cafe": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::study-spot.study-spot",
-      "inversedBy": "user"
+      "inversedBy": "owner"
     }
   }
 }

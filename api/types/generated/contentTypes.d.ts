@@ -747,7 +747,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    isPaid: Attribute.Boolean & Attribute.DefaultTo<false>;
+    hasMembership: Attribute.Boolean & Attribute.DefaultTo<false>;
+    cafe: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::study-spot.study-spot'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1129,6 +1134,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     suburb: Attribute.String & Attribute.Required;
     Longitude: Attribute.Float & Attribute.Required;
     Latitute: Attribute.Float & Attribute.Required;
+    owner: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

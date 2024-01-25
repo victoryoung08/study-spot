@@ -14,7 +14,7 @@ const images = [
   { id: 4, image: sampleImage, alt: "Sample Image" },
 ];
 
-export default function BasicInformation() {
+export default function BasicInformation({ cafeDetails }: any) {
   const viewPortWidth = useViewportWidth();
   useEffect(() => {
     register();
@@ -76,7 +76,7 @@ export default function BasicInformation() {
         <div>
           <p>Cafe Name</p>
           <div className="mt-1 xs:mt-0 xs:ml-5 flex items-center md:w-2/4 justify-between">
-            <p>Cafe Name</p>
+            {cafeDetails && <p>{cafeDetails[0]?.cafe?.cafe_name || ""}</p>}
             <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
               Edit
             </Button>
@@ -86,7 +86,7 @@ export default function BasicInformation() {
         <div>
           <p>Cafe Address</p>
           <div className="mt-1 xs:mt-0 xs:ml-5 flex items-center md:w-2/4 justify-between">
-            <p>Cafe Address</p>
+            {cafeDetails && <p>{cafeDetails[0]?.cafe?.location || ""}</p>}
             <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
               Edit
             </Button>

@@ -1,6 +1,6 @@
 import { Button } from "@/app/components/ui/button";
 
-export default function Promotion() {
+export default function Promotion({ cafeDetails }: any) {
   return (
     <div>
       <div>
