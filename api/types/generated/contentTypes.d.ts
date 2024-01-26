@@ -1115,17 +1115,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     slug: Attribute.UID<'api::study-spot.study-spot', 'cafe_name'> &
       Attribute.Required;
     images: Attribute.Media & Attribute.Required;
-    loudness: Attribute.Integer &
+    quietness: Attribute.Integer &
       Attribute.SetMinMax<{
-        max: 100;
+        max: 10;
       }> &
-      Attribute.DefaultTo<50>;
-    study_lengths: Attribute.Relation<
-      'api::study-spot.study-spot',
-      'oneToMany',
-      'api::study-length.study-length'
-    >;
-    Study_duration: Attribute.Enumeration<['Short', 'Medium', 'Long']>;
+      Attribute.DefaultTo<5>;
     show: Attribute.Boolean;
     discount: Attribute.String;
     google_map_link: Attribute.String;

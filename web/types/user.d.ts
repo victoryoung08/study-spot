@@ -4,5 +4,5 @@ export type User = {
   username: string;
   confirmed: boolean;
   updatedAt: string;
-  cafe: [];
+  cafe: {};
 };

@@ -1,10 +1,11 @@
 "use client";
 
 import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
 import sampleImage from "@/public/images/become-contributor.png";
 import useViewportWidth from "@/src/hooks/getViewportWidth";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { register } from "swiper/element";
 
 const images = [
@@ -14,11 +15,22 @@ const images = [
   { id: 4, image: sampleImage, alt: "Sample Image" },
 ];
 
-export default function BasicInformation({ cafeDetails }: any) {
+export default function BasicInformation({ cafeData }: any) {
+  const [cafeName, setCafeName] = useState(true);
+  const [cafeAddress, setcafeAddress] = useState(true);
+
   const viewPortWidth = useViewportWidth();
   useEffect(() => {
     register();
   }, []);
+
+  const editCafeName = () => {
+    setCafeName((current) => !current);
+  };
+  const editCafeAddress = () => {
+    setcafeAddress((current) => !current);
+  };
+
   return (
     <div>
       <h2 className="text-4xl font-black">Profile</h2>
@@ -29,16 +41,22 @@ export default function BasicInformation({ cafeDetails }: any) {
         </div>
         <div className="space-y-5">
           <div className="hidden md:flex gap-5">
-            {images.map((item) => {
+            {cafeData.images.map((item: any) => {
               return (
-                <div key={item.id} className="w-64 h-auto">
-                  <Image src={item.image} alt={item.alt} />
+                <div key={item.id} className="w-64 h-64">
+                  <Image
+                    src={item.url}
+                    width={250}
+                    height={250}
+                    alt={item.alternativeText || "Image"}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               );
             })}
           </div>
           <div className="block md:hidden">
-            {images.length > 2 && (
+            {viewPortWidth && viewPortWidth < 900 && images.length > 2 && (
               <swiper-container
                 speed={500}
                 autoplay={true}
@@ -51,15 +69,15 @@ export default function BasicInformation({ cafeDetails }: any) {
                     : 1
                 }
               >
-                {images.map((img: any) => {
+                {cafeData?.images?.map((img: any) => {
                   return (
                     <swiper-slide key={img.id}>
                       <Image
-                        src={img.image}
-                        width={200}
-                        height={200}
-                        className="h-full sm:h-[250px] w-full sm:w-[330px]"
-                        alt={img.alt || "Image"}
+                        src={img.url}
+                        width={150}
+                        height={150}
+                        className="h-full sm:h-[250px] w-full sm:w-[330px] object-cover"
+                        alt={img.alternativeText || "Image"}
                       />
                     </swiper-slide>
                   );
@@ -75,22 +93,65 @@ export default function BasicInformation({ cafeDetails }: any) {
 
         <div>
           <p>Cafe Name</p>
-          <div className="mt-1 xs:mt-0 xs:ml-5 flex items-center md:w-2/4 justify-between">
-            {cafeDetails && <p>{cafeDetails?.cafe_name || ""}</p>}
-            <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
-              Edit
-            </Button>
-          </div>
+          {cafeName ? (
+            <div className="mt-2 xs:pl-5 flex items-center md:w-2/4 justify-between text-sm">
+              {cafeData && <p>{cafeData?.cafe_name || ""}</p>}
+              <Button
+                onClick={editCafeName}
+                className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+              >
+                Edit
+              </Button>
+            </div>
+          ) : (
+            <div className="mt-2  flex justify-between items-center  md:w-2/4 ">
+              <Input
+                type="text"
+                //   {...register("cafe_name")}
+                placeholder="Cafe Name"
+                defaultValue={cafeData.cafe_name}
+                className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0 w-2/4 rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+              />
+              <Button
+                onClick={editCafeName}
+                className="border-2  bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+              >
+                Save
+              </Button>
+            </div>
+          )}
         </div>
 
         <div>
           <p>Cafe Address</p>
-          <div className="mt-1 xs:mt-0 xs:ml-5 flex items-center md:w-2/4 justify-between">
-            {cafeDetails && <p>{cafeDetails?.location || ""}</p>}
-            <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
-              Edit
-            </Button>
-          </div>
+
+          {cafeAddress ? (
+            <div className="mt-2 xs:pl-5 flex items-center md:w-2/4 justify-between text-sm">
+              {cafeData && <p>{cafeData?.location || ""}</p>}
+              <Button
+                onClick={editCafeAddress}
+                className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+              >
+                Edit
+              </Button>
+            </div>
+          ) : (
+            <div className="mt-2  flex justify-between items-center md:w-2/4 ">
+              <Input
+                type="text"
+                //   {...register("cafe_name")}
+                placeholder="Cafe Location"
+                defaultValue={cafeData.location}
+                className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0 w-2/4 rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+              />
+              <Button
+                onClick={editCafeAddress}
+                className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+              >
+                Save
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>
