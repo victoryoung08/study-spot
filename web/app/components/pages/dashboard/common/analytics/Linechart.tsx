@@ -1,15 +1,7 @@
 "use client";
 
 import { Button } from "@/app/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/app/components/ui/select";
+import { Select, SelectTrigger, SelectValue } from "@/app/components/ui/select";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -58,38 +50,53 @@ export const options = {
   },
 };
 
-type LinechartTypes = { overview: boolean; displayButton?: boolean; data: any };
+type LinechartTypes = {
+  overview: boolean;
+  displayButton?: boolean;
+  data: any;
+  title?: string;
+};
 
 export default function Linechart({
   overview,
   displayButton,
   data,
+  title,
 }: LinechartTypes) {
   return (
-    <div className="w-full border-2 border-white rounded-2xl p-5 lg:p-10">
-      {overview && (
-        <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center mb-5 gap-5 sm:gap-0">
-          <h2 className="text-xl font-bold">Overview</h2>
-          <div className="ml-auto">
-            <SelectComponent />
-          </div>
+    <div>
+      {title && (
+        <div>
+          <h3 className="text-2xl font-bold">{title}</h3>
+          <div className="w-32 h-1.5 mt-2 bg-primary rounded-lg" />
         </div>
       )}
-      {!overview && <DatePIcker />}
 
-      <div className="h-[350px]">
-        <Line options={options} data={data} />
-      </div>
-      {displayButton && (
-        <div className="mt-5 sm:w-2/4 mx-auto">
-          {/* if paid, display link. If free display button that will direct to subscribe for paid membership */}
-          <Link href="/dashboard">
-            <Button className="bg-primary border-2 text-xs xs:text-base py-3 xs:px-4 xs:py-5 w-full font-medium hover:bg-primary border-white rounded-2xl">
-              Upgrade to see more
-            </Button>
-          </Link>
+      <div className="w-full mt-10 border-2 border-white rounded-2xl p-5 lg:p-10">
+        {overview && (
+          <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center mb-5 gap-5 sm:gap-0">
+            <h2 className="text-xl font-bold">Overview</h2>
+            <div className="ml-auto">
+              <SelectComponent />
+            </div>
+          </div>
+        )}
+        {!overview && <DatePIcker />}
+
+        <div className="h-[350px]">
+          <Line options={options} data={data} />
         </div>
-      )}
+        {displayButton && (
+          <div className="mt-5 sm:w-2/4 mx-auto">
+            {/* if paid, display link. If free display button that will direct to subscribe for paid membership */}
+            <Link href="/dashboard">
+              <Button className="bg-primary border-2 text-xs xs:text-base py-3 xs:px-4 xs:py-5 w-full font-medium hover:bg-primary border-white rounded-2xl">
+                Upgrade to see more
+              </Button>
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

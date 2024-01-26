@@ -1,3 +1,4 @@
+import Clicks from "./Clicks";
 import Impressions from "./Impressions";
 import ProfileVisits from "./ProfileVisits";
 import TabsWrapper from "./TabsWrapper";
@@ -11,6 +12,7 @@ export default function Analytics() {
       <TabsWrapper>
         <ProfileVisits />
         <Impressions />
+        <Clicks />
       </TabsWrapper>
     </div>
   );
