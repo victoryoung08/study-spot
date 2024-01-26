@@ -95,7 +95,7 @@ export default function CafeDetails({ cafeData }: any) {
             <p>Cafe Chatter</p>
             <Slider
               id="charging"
-              defaultValue={[cafeData?.quietness] || [0]}
+              defaultValue={[cafeData?.quietness] || [1]}
               // defaultValue={cafeData.quietness}
               max={10}
               step={1}

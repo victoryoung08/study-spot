@@ -36,7 +36,7 @@ export default function Links({ cafeData }: any) {
             <div>
               <Input
                 type="text"
-                defaultValue={cafeData.instagram_link}
+                defaultValue={cafeData?.instagram_link || ""}
                 //   {...register("cafe_name")}
                 placeholder="Instagram Account"
                 className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
@@ -59,7 +59,7 @@ export default function Links({ cafeData }: any) {
             <div>
               <Input
                 type="text"
-                defaultValue={cafeData.facebook_link}
+                defaultValue={cafeData?.facebook_link || ""}
                 //   {...register("cafe_name")}
                 placeholder="Facebook Account"
                 className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
@@ -99,7 +99,7 @@ export default function Links({ cafeData }: any) {
             <div>
               <Input
                 type="text"
-                defaultValue={cafeData.tiktok_link}
+                defaultValue={cafeData?.tiktok_link || ""}
                 //   {...register("cafe_name")}
                 placeholder="Tiktok Account"
                 className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "

@@ -1,14 +1,15 @@
 "use client";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Promotion({ cafeData }: any) {
+export default function Promotion({ cafeData, setUpCafe }: any) {
   const [promoCode, setPromoCode] = useState(true);
 
   const editPromoCode = () => {
     setPromoCode((current) => !current);
   };
+
   return (
     <div>
       <div>
@@ -18,9 +19,9 @@ export default function Promotion({ cafeData }: any) {
       <div className="mt-6">
         <div className="xs:flex items-center justify-between">
           <p>Promo Code:</p>
-          {promoCode ? (
+          {promoCode && !setUpCafe ? (
             <div className="xs:w-3/4 gap-5 flex items-center justify-between">
-              <p>{cafeData.discount || "No promo code"}</p>
+              <p>{cafeData?.discount || "No promo code"}</p>
               <Button
                 onClick={editPromoCode}
                 className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
@@ -34,15 +35,18 @@ export default function Promotion({ cafeData }: any) {
                 type="text"
                 //   {...register("cafe_name")}
                 placeholder="Promo Code"
-                defaultValue={cafeData.discount}
-                className="w-auto focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+                defaultValue={cafeData?.discount || ""}
+                className="w-full
+               focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
               />
-              <Button
-                onClick={editPromoCode}
-                className="border-2  bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
-              >
-                Save
-              </Button>
+              {!setUpCafe && (
+                <Button
+                  onClick={editPromoCode}
+                  className="border-2  bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+                >
+                  Save
+                </Button>
+              )}
             </div>
           )}
         </div>
