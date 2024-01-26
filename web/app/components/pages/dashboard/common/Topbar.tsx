@@ -54,30 +54,38 @@ function Topbar() {
             </SheetHeader>
             <div className="mt-10 flex flex-col h-5/6 justify-between ">
               <div className="flex flex-col justify-between gap-5">
-                {navLinks.map((item) => {
-                  return (
-                    <div key={item.href} className="flex flex-col items-center">
-                      <Link legacyBehavior href={item.href}>
-                        <Button
-                          className={`flex gap-2 w-full justify-start bg-transparent hover:bg-primary border-2 border-transparent px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl  
+                {navLinks
+                  .filter(
+                    (link) =>
+                      session?.user?.hasMembership || link.text !== "Analytics"
+                  )
+                  .map((item) => {
+                    return (
+                      <div
+                        key={item.href}
+                        className="flex flex-col items-center"
+                      >
+                        <Link legacyBehavior href={item.href}>
+                          <Button
+                            className={`flex gap-2 w-full justify-start bg-transparent hover:bg-primary border-2 border-transparent px-6 py-5 transition-all ease-in-out delay-50 duration-500 hover:border-white rounded-2xl  
                       ${
                         path === item.activePath
                           ? "bg-primary border-white"
                           : "bg-transparent"
                       }`}
-                        >
-                          <Image
-                            src={item.icon}
-                            alt={item.text}
-                            width={20}
-                            height={20}
-                          />
-                          {item.text}
-                        </Button>
-                      </Link>
-                    </div>
-                  );
-                })}
+                          >
+                            <Image
+                              src={item.icon}
+                              alt={item.text}
+                              width={20}
+                              height={20}
+                            />
+                            {item.text}
+                          </Button>
+                        </Link>
+                      </div>
+                    );
+                  })}
               </div>
 
               <div
