@@ -18,6 +18,7 @@ const images = [
 export default function BasicInformation({ cafeData, setUpCafe }: any) {
   const [cafeName, setCafeName] = useState(true);
   const [cafeAddress, setcafeAddress] = useState(true);
+  const [file, setFile] = useState({});
 
   const viewPortWidth = useViewportWidth();
   useEffect(() => {
@@ -31,6 +32,10 @@ export default function BasicInformation({ cafeData, setUpCafe }: any) {
     setcafeAddress((current) => !current);
   };
 
+  const handleInputChange = (event: any) => {
+    setFile(event.target.files);
+  };
+  console.log(file);
   return (
     <div>
       <h2 className="text-4xl font-black">Profile</h2>
@@ -41,13 +46,24 @@ export default function BasicInformation({ cafeData, setUpCafe }: any) {
         </div>
         <div className="space-y-5">
           {setUpCafe && (
-            <Button className="w-2/4 h-56 bg-grey hover:bg-grey border-2 border-white rounded-2xl flex flex-col items-center">
-              <Image src={addImageIcon} alt="add image" className="w-14" />
-              <p className="text-xs mt-2">
-                Add image file (JPG or PNG) <br /> Recommended aspect ration:
-                (1080px X 1350px)
-              </p>
-            </Button>
+            <div>
+              <div className="md:w-2/4 relative">
+                <Button className="w-full h-56 bg-grey hover:bg-grey border-2 border-white rounded-2xl flex flex-col items-center">
+                  <Image src={addImageIcon} alt="add image" className="w-14" />
+                  <p className="text-xs mt-2">
+                    Add image file (JPG or PNG) <br /> Recommended aspect
+                    ration: <br />
+                    (1080px X 1350px)
+                  </p>
+                </Button>
+                <Input
+                  type="file"
+                  multiple
+                  onChange={handleInputChange}
+                  className=" absolute top-0 opacity-0 h-full cursor-pointer"
+                />
+              </div>
+            </div>
           )}
           {!setUpCafe && (
             <>
