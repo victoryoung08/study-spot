@@ -18,10 +18,7 @@ export const CafeSetupSchema = z.object({
     .number()
     .min(1, { message: "Cafe quiteness must be at least 1" })
     .max(10, { message: "Cafe quiteness must be below or equal to 10" }),
-  //   hasCharging: z.string({
-  //     required_error: "Charging is required",
-  //     invalid_type_error: "Charging must be a string",
-  //   }),
+
   hasCharging: z.boolean(),
   hasWifi: z.boolean(),
   isChill: z.boolean(),
