@@ -6,3 +6,13 @@ export type User = {
   updatedAt: string;
   cafe: {};
 };
+
+// export interface CafeFormTypes {
+//   control: Control<CafeProfileType>;
+//   cafeData: any;
+//   setUpCafe?: boolean;
+//   placeholder?: string;
+//   handleInputChange?: any;
+//   inputValue?: string | number | boolean | any;
+//   name: string;
+// }

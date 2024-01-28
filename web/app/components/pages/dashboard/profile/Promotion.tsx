@@ -2,8 +2,15 @@
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { useEffect, useState } from "react";
+import UseFormField from "./useFormField";
+import { CafeFormTypes } from "@/types/cafe";
 
-export default function Promotion({ cafeData, setUpCafe }: any) {
+export default function Promotion({
+  cafeData,
+  setUpCafe,
+  control,
+}: // control,
+CafeFormTypes) {
   const [promoCode, setPromoCode] = useState(true);
 
   const editPromoCode = () => {
@@ -31,13 +38,12 @@ export default function Promotion({ cafeData, setUpCafe }: any) {
             </div>
           ) : (
             <div className="xs:w-3/4 gap-5 flex items-center justify-between">
-              <Input
-                type="text"
-                //   {...register("cafe_name")}
+              <UseFormField
+                control={control}
+                name="promocode"
+                // empty string for now
+                cafeData={""}
                 placeholder="Promo Code"
-                defaultValue={cafeData?.discount || ""}
-                className="w-full
-               focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
               />
               {!setUpCafe && (
                 <Button

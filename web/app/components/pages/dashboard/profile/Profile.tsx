@@ -10,18 +10,9 @@ import useCafeProfileFormSubmit from "./useCafeProfileFormSubmit";
 import { Form } from "@/app/components/ui/form";
 import { Control } from "react-hook-form";
 
-export interface CafeFormTypes {
-  control: Control<CafeProfileType>;
-  cafeData: any;
-  setUpCafe?: boolean;
-  placeholder?: string;
-  handleInputChange?: any;
-  inputValue?: string | number | boolean | any;
-}
-
 export default function Profile({ cafeData }: any) {
   const [setupCafe, SetSetupCafe] = useState(false);
-  const { form, errors, watchAllFields } = useCafeProfileForm();
+  const { form, watchAllFields } = useCafeProfileForm();
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
 
   console.log(watchAllFields);

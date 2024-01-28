@@ -4,8 +4,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/app/components/ui/form";
-import { CafeFormTypes } from "./Profile";
 import { Input } from "@/app/components/ui/input";
+import { Slider } from "@/app/components/ui/slider";
+import { Switch } from "@/app/components/ui/switch";
+import { CafeFormTypes } from "@/types/cafe";
 
 /**
  * Cafe Form Field Component.
@@ -25,22 +27,32 @@ export default function UseFormField({
   placeholder,
   inputValue,
   handleInputChange,
+  name,
+  isSelect,
 }: CafeFormTypes) {
   return (
     <FormField
       control={control}
-      name="cafe_name"
+      name={name || ""}
       render={({ field }) => (
         <FormItem className=" w-full ">
           <FormControl>
-            <Input
-              type="text"
-              {...field}
-              placeholder={placeholder}
-              //   value={inputValue}
-              //   onChange={handleInputChange}
-              className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
-            />
+            {isSelect ? (
+              <Switch
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
+              />
+            ) : (
+              <Input
+                type="text"
+                {...field}
+                placeholder={placeholder}
+                //   value={inputValue}
+                //   onChange={handleInputChange}
+                className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+              />
+            )}
           </FormControl>
           <FormMessage />
         </FormItem>

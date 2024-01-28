@@ -16,8 +16,8 @@ const images = [
   { id: 4, image: sampleImage, alt: "Sample Image" },
 ];
 
-import { CafeFormTypes } from "./Profile";
 import UseFormField from "./useFormField";
+import { CafeFormTypes } from "@/types/cafe";
 
 export default function BasicInformation({
   cafeData,
@@ -154,6 +154,7 @@ CafeFormTypes) {
                 control={control}
                 // empty string for now
                 cafeData={""}
+                name="cafe_name"
                 placeholder="Cafe Name"
                 // inputValue={cafe}
                 // handleInputChange={handlecafenameChange}
@@ -186,6 +187,7 @@ CafeFormTypes) {
             <div className="mt-2  flex justify-between items-center md:w-2/4 ">
               <UseFormField
                 control={control}
+                name="cafe_address"
                 // empty string for now
                 cafeData={""}
                 placeholder="Cafe Address"
