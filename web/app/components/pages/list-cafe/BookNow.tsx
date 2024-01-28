@@ -54,7 +54,6 @@ export default function BookNow({
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     setError(false);
-    console.log(data);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_API_ENDPOINT}/leads`,
       {

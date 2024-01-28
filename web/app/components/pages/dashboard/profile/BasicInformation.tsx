@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { register } from "swiper/element";
 import addImageIcon from "@/public/images/add-image.svg";
+
 const images = [
   { id: 1, image: sampleImage, alt: "Sample Image" },
   { id: 2, image: sampleImage, alt: "Sample Image" },
@@ -15,10 +16,25 @@ const images = [
   { id: 4, image: sampleImage, alt: "Sample Image" },
 ];
 
-export default function BasicInformation({ cafeData, setUpCafe }: any) {
+import { CafeFormTypes } from "./Profile";
+import UseFormField from "./useFormField";
+
+export default function BasicInformation({
+  cafeData,
+  setUpCafe,
+  control,
+}: // control,
+CafeFormTypes) {
   const [cafeName, setCafeName] = useState(true);
   const [cafeAddress, setcafeAddress] = useState(true);
   const [file, setFile] = useState({});
+
+  // display the default value of that input field when there's data coming from the database/api
+  // const [cafe, setCafe] = useState(cafeData?.cafe_name || "");
+  // const handlecafenameChange = (event: any) => {
+  //   setCafe(event?.target?.value);
+  //   console.log(event.target.value);
+  // };
 
   const viewPortWidth = useViewportWidth();
   useEffect(() => {
@@ -35,7 +51,6 @@ export default function BasicInformation({ cafeData, setUpCafe }: any) {
   const handleInputChange = (event: any) => {
     setFile(event.target.files);
   };
-  console.log(file);
   return (
     <div>
       <h2 className="text-4xl font-black">Profile</h2>
@@ -135,12 +150,13 @@ export default function BasicInformation({ cafeData, setUpCafe }: any) {
             </div>
           ) : (
             <div className="mt-2  flex justify-between items-center  md:w-2/4 ">
-              <Input
-                type="text"
-                //   {...register("cafe_name")}
+              <UseFormField
+                control={control}
+                // empty string for now
+                cafeData={""}
                 placeholder="Cafe Name"
-                defaultValue={cafeData?.cafe_name || ""}
-                className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0 md:w-2/4 rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+                // inputValue={cafe}
+                // handleInputChange={handlecafenameChange}
               />
               {!setUpCafe && (
                 <Button
@@ -168,12 +184,14 @@ export default function BasicInformation({ cafeData, setUpCafe }: any) {
             </div>
           ) : (
             <div className="mt-2  flex justify-between items-center md:w-2/4 ">
-              <Input
-                type="text"
-                //   {...register("cafe_name")}
-                placeholder="Cafe Location"
-                defaultValue={cafeData?.location || ""}
-                className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0 md:w-2/4 rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+              <UseFormField
+                control={control}
+                // empty string for now
+                cafeData={""}
+                placeholder="Cafe Address"
+
+                // inputValue={cafe}
+                // handleInputChange={handlecafenameChange}
               />
               {!setUpCafe && (
                 <Button
