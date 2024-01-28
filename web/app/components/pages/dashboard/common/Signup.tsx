@@ -68,7 +68,7 @@ const SignupForm = () => {
       // if there's no error, display success message
       toast.success("Account created successfully");
 
-      // reload page
+      // direct to profile & cafe setup
       setTimeout(() => {
         router.push("signin");
       }, 500);

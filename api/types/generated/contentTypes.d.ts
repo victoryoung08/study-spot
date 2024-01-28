@@ -719,7 +719,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -747,6 +746,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    hasMembership: Attribute.Boolean & Attribute.DefaultTo<false>;
+    cafe: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::study-spot.study-spot'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1110,17 +1115,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     slug: Attribute.UID<'api::study-spot.study-spot', 'cafe_name'> &
       Attribute.Required;
     images: Attribute.Media & Attribute.Required;
-    loudness: Attribute.Integer &
+    quietness: Attribute.Integer &
       Attribute.SetMinMax<{
-        max: 100;
+        max: 10;
       }> &
-      Attribute.DefaultTo<50>;
-    study_lengths: Attribute.Relation<
-      'api::study-spot.study-spot',
-      'oneToMany',
-      'api::study-length.study-length'
-    >;
-    Study_duration: Attribute.Enumeration<['Short', 'Medium', 'Long']>;
+      Attribute.DefaultTo<5>;
     show: Attribute.Boolean;
     discount: Attribute.String;
     google_map_link: Attribute.String;
@@ -1129,6 +1128,11 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     suburb: Attribute.String & Attribute.Required;
     Longitude: Attribute.Float & Attribute.Required;
     Latitute: Attribute.Float & Attribute.Required;
+    owner: Attribute.Relation<
+      'api::study-spot.study-spot',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

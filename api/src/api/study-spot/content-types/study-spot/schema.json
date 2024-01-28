@@ -48,23 +48,10 @@
         "images"
       ]
     },
-    "loudness": {
+    "quietness": {
       "type": "integer",
-      "max": 100,
-      "default": 50
-    },
-    "study_lengths": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::study-length.study-length"
-    },
-    "Study_duration": {
-      "type": "enumeration",
-      "enum": [
-        "Short",
-        "Medium",
-        "Long"
-      ]
+      "max": 10,
+      "default": 5
     },
     "show": {
       "type": "boolean"
@@ -92,6 +79,12 @@
     "Latitute": {
       "type": "float",
       "required": true
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "cafe"
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Slider } from "@/app/components/ui/slider";
 import { Switch } from "@/app/components/ui/switch";
 
-export default function CafeDetails() {
+export default function CafeDetails({ cafeData }: any) {
   return (
     <div className="md:w-2/4 lg:w-2/6">
       <div className="space-y-6">
@@ -15,14 +15,14 @@ export default function CafeDetails() {
             <div className="flex flex-col xs:flex-row gap-2  xs:gap-0 justify-between">
               <p>Charging</p>
               <Switch
-                id="charging"
+                id="Charging"
                 className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
               />
             </div>
             <div className="flex flex-col xs:flex-row gap-2 xs:gap-0 justify-between">
-              <p>Charging</p>
+              <p>Wifi</p>
               <Switch
-                id="charging"
+                id="Wifi"
                 className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
               />
             </div>
@@ -35,21 +35,21 @@ export default function CafeDetails() {
               <div className="flex justify-between">
                 <p>Chill</p>
                 <Switch
-                  id="charging"
+                  id="Chill"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
               <div className="flex justify-between">
                 <p>Cozy</p>
                 <Switch
-                  id="charging"
+                  id="Cozy"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
               <div className="flex justify-between">
                 <p>Upbeat</p>
                 <Switch
-                  id="charging"
+                  id="Upbeat"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
@@ -61,28 +61,28 @@ export default function CafeDetails() {
               <div className="flex justify-between">
                 <p>Minimal</p>
                 <Switch
-                  id="charging"
+                  id="Minimal"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
               <div className="flex justify-between">
                 <p>Nature</p>
                 <Switch
-                  id="charging"
+                  id="Nature"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
               <div className="flex justify-between">
                 <p>Artistic</p>
                 <Switch
-                  id="charging"
+                  id="Artistic"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
               <div className="flex justify-between">
                 <p>Vintage</p>
                 <Switch
-                  id="charging"
+                  id="Vintage"
                   className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                 />
               </div>
@@ -95,7 +95,8 @@ export default function CafeDetails() {
             <p>Cafe Chatter</p>
             <Slider
               id="charging"
-              defaultValue={[7]}
+              defaultValue={[cafeData?.quietness] || [1]}
+              // defaultValue={cafeData.quietness}
               max={10}
               step={1}
               className="mt-2 sm:mt-0 sm:w-4/6 data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
