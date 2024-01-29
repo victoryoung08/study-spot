@@ -83,8 +83,7 @@
     "owner": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "mappedBy": "cafe"
+      "target": "plugin::users-permissions.user"
     }
   }
 }

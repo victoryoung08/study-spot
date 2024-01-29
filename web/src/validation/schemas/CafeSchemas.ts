@@ -14,16 +14,16 @@ export const CafeSetupSchema = z.object({
       invalid_type_error: "Cafe address must be a string",
     })
     .min(3, { message: "Cafe address must be at least 3 characters long" }),
-  quiteness: z
-    .number()
-    .min(1, { message: "Cafe quiteness must be at least 1" })
-    .max(10, { message: "Cafe quiteness must be below or equal to 10" }),
+  // quiteness: z
+  //   .number()
+  //   .min(1, { message: "Cafe quiteness must be at least 1" })
+  //   .max(10, { message: "Cafe quiteness must be below or equal to 10" }),
 
   hasCharging: z.boolean(),
   hasWifi: z.boolean(),
   isChill: z.boolean(),
   isCozy: z.boolean(),
-  isIpbeat: z.boolean(),
+  isUpbeat: z.boolean(),
   isMinimal: z.boolean(),
   isNature: z.boolean(),
   isArtistic: z.boolean(),
@@ -63,7 +63,7 @@ export const resolver = zodResolver(CafeSetupSchema);
 export const defaultValues = {
   cafe_name: "",
   cafe_address: "",
-  quietness: [],
+  // quietness: 0,
   hasCharging: false,
   hasWifi: false,
   isChill: false,

@@ -748,11 +748,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.role'
     >;
     hasMembership: Attribute.Boolean & Attribute.DefaultTo<false>;
-    cafe: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::study-spot.study-spot'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

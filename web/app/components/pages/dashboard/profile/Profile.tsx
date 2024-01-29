@@ -12,11 +12,11 @@ import { Control } from "react-hook-form";
 
 export default function Profile({ cafeData }: any) {
   const [setupCafe, SetSetupCafe] = useState(false);
-  const { form, watchAllFields } = useCafeProfileForm();
+  const { form, watchAllFields, errors } = useCafeProfileForm();
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
 
-  console.log(watchAllFields);
-
+  //console.log(watchAllFields);
+  console.log("errors", errors);
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
       SetSetupCafe(true);
@@ -46,7 +46,10 @@ export default function Profile({ cafeData }: any) {
             </div>
           </div>
           <div className="flex justify-center">
-            <Button className="border-2 bg-primary hover:bg-primary rounded-2xl h-8 xs:h-auto w-2/4 sm:w-1/4 mx-auto">
+            <Button
+              type="submit"
+              className="border-2 bg-primary hover:bg-primary rounded-2xl h-8 xs:h-auto w-2/4 sm:w-1/4 mx-auto"
+            >
               Save
             </Button>
           </div>

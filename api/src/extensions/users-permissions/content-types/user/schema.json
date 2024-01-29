@@ -68,12 +68,6 @@
     "hasMembership": {
       "type": "boolean",
       "default": false
-    },
-    "cafe": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::study-spot.study-spot",
-      "inversedBy": "owner"
     }
   }
 }
