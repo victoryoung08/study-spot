@@ -11,12 +11,17 @@ export default function Promotion({
   control,
 }: // control,
 CafeFormTypes) {
+  const [discount, setDiscount] = useState(cafeData?.discount || "");
   const [promoCode, setPromoCode] = useState(true);
 
   const editPromoCode = () => {
     setPromoCode((current) => !current);
   };
 
+  const handlePromocodeChange = (event: any) => {
+    setDiscount(event?.target?.value);
+    // console.log(event.target.value);
+  };
   return (
     <div>
       <div>
@@ -28,7 +33,7 @@ CafeFormTypes) {
           <p>Promo Code:</p>
           {promoCode && !setUpCafe ? (
             <div className="xs:w-3/4 gap-5 flex items-center justify-between">
-              <p>{cafeData?.discount || "No promo code"}</p>
+              <p>{discount || "No promo code"}</p>
               <Button
                 onClick={editPromoCode}
                 className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
@@ -40,10 +45,12 @@ CafeFormTypes) {
             <div className="xs:w-3/4 gap-5 flex items-center justify-between">
               <UseFormField
                 control={control}
-                name="promocode"
+                name="discount"
                 // empty string for now
-                cafeData={""}
+                // cafeData={""}
                 placeholder="Promo Code"
+                inputValue={discount}
+                handleInputChange={handlePromocodeChange}
               />
               {!setUpCafe && (
                 <Button

@@ -5,28 +5,30 @@ import CafeDetails from "./CafeDetails";
 import Links from "./Links";
 import Promotion from "./Promotion";
 import { Button } from "@/app/components/ui/button";
-import useCafeProfileForm, { CafeProfileType } from "./useCafeProfileForm";
+import useCafeProfileForm from "./useCafeProfileForm";
 import useCafeProfileFormSubmit from "./useCafeProfileFormSubmit";
 import { Form } from "@/app/components/ui/form";
-import { Control } from "react-hook-form";
 
 export default function Profile({ cafeData }: any) {
   const [setupCafe, SetSetupCafe] = useState(false);
   const { form, watchAllFields, errors } = useCafeProfileForm();
-  const { onSubmit, ...rest } = useCafeProfileFormSubmit();
-
-  //console.log(watchAllFields);
-  console.log("errors", errors);
+  console.log(watchAllFields);
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
       SetSetupCafe(true);
     }
   }, [cafeData]);
 
+  const { onSubmit, ...rest } = useCafeProfileFormSubmit();
+  // console.log("cafeData", cafeData);
   return (
     <div className="text-white">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          encType="multipart/form-data"
+          className="space-y-10"
+        >
           <BasicInformation
             cafeData={cafeData}
             setUpCafe={setupCafe}

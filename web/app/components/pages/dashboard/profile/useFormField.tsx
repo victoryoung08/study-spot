@@ -22,7 +22,6 @@ import { CafeFormTypes } from "@/types/cafe";
  */
 
 export default function UseFormField({
-  //   cafeData,
   control,
   placeholder,
   inputValue,
@@ -39,8 +38,11 @@ export default function UseFormField({
           <FormControl>
             {isSelect ? (
               <Switch
-                checked={field.value}
-                onCheckedChange={field.onChange}
+                checked={inputValue !== undefined ? inputValue : field.value}
+                onCheckedChange={(e) => {
+                  field.onChange(e);
+                  handleInputChange(e);
+                }}
                 className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
               />
             ) : (
@@ -48,8 +50,11 @@ export default function UseFormField({
                 type="text"
                 {...field}
                 placeholder={placeholder}
-                //   value={inputValue}
-                //   onChange={handleInputChange}
+                value={inputValue !== undefined ? inputValue : field.value}
+                onChange={(e) => {
+                  field.onChange(e);
+                  handleInputChange(e);
+                }}
                 className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
               />
             )}

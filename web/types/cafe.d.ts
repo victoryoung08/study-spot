@@ -1,5 +1,5 @@
 export interface CafeFormTypes {
-  cafeData: any;
+  cafeData?: any;
   setUpCafe?: boolean;
   placeholder?: string;
   handleInputChange?: any;

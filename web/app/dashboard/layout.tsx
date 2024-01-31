@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Analytics from "../components/analytics";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default async function RootLayout({
               <div className="p-5 lg:p-10">{children}</div>
             </div>
           </div>
+          <Toaster />
         </Provider>
       </body>
     </html>

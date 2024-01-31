@@ -748,6 +748,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.role'
     >;
     hasMembership: Attribute.Boolean & Attribute.DefaultTo<false>;
+    study_spot: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::study-spot.study-spot'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1118,8 +1123,7 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     show: Attribute.Boolean;
     discount: Attribute.String;
     google_map_link: Attribute.String;
-    tiktok_embed: Attribute.String;
-    tiktok_link: Attribute.String;
+    tiktok: Attribute.String;
     suburb: Attribute.String & Attribute.Required;
     Longitude: Attribute.Float & Attribute.Required;
     Latitute: Attribute.Float & Attribute.Required;
@@ -1128,6 +1132,8 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    facebook: Attribute.String;
+    instagram: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

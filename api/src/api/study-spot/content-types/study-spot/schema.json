@@ -62,10 +62,7 @@
     "google_map_link": {
       "type": "string"
     },
-    "tiktok_embed": {
-      "type": "string"
-    },
-    "tiktok_link": {
+    "tiktok": {
       "type": "string"
     },
     "suburb": {
@@ -83,7 +80,14 @@
     "owner": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "study_spot"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
     }
   }
 }

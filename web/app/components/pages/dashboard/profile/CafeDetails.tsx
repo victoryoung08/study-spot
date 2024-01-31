@@ -1,6 +1,4 @@
 import { Slider } from "@/app/components/ui/slider";
-import { Switch } from "@/app/components/ui/switch";
-import UseFormField from "./useFormField";
 import { CafeFormTypes } from "@/types/cafe";
 import {
   FormControl,
@@ -8,11 +6,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/app/components/ui/form";
-import { Input } from "@/app/components/ui/input";
+import CafeTags from "./CafeTags";
 
 export default function CafeDetails({
   cafeData,
-  setUpCafe,
   control,
 }: // control,
 CafeFormTypes) {
@@ -26,125 +23,78 @@ CafeFormTypes) {
         <div className="border-2 rounded-2xl p-5">
           <p className="font-bold text-xl">Features</p>
           <div className="grid grid-cols-2 gap-5 md:gap-10 mt-2">
-            <div className="flex flex-col xs:flex-row gap-2  xs:gap-0 justify-between">
-              <p>Charging</p>
-              <div>
-                <UseFormField
-                  control={control}
-                  name="hasCharging"
-                  // empty string for now
-                  cafeData={""}
-                  isSelect={true}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col xs:flex-row gap-2 xs:gap-0 justify-between">
-              <p>Wifi</p>
-              <div>
-                <UseFormField
-                  control={control}
-                  name="hasWifi"
-                  // empty string for now
-                  cafeData={""}
-                  isSelect={true}
-                />
-              </div>
-            </div>
+            <CafeTags
+              tagName="charging"
+              name="hasCharging"
+              control={control}
+              tags={cafeData?.features}
+            />
+            <CafeTags
+              tagName="wifi"
+              name="hasWifi"
+              control={control}
+              tags={cafeData?.features}
+            />
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-5 md:gap-10">
           <div className="w-full border-2 rounded-2xl p-5">
             <p className="font-bold text-xl">Vibe</p>
             <div className="space-y-2 mt-3">
-              <div className="flex justify-between">
-                <p>Chill</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isChill"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p>Cozy</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isCozy"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p>Upbeat</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isUpbeat"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
+              <CafeTags
+                tagName="chill"
+                name="isChill"
+                control={control}
+                tags={cafeData?.vibes}
+              />
+              <CafeTags
+                tagName="fast"
+                name="isFast"
+                control={control}
+                tags={cafeData?.vibes}
+              />
+
+              <CafeTags
+                tagName="cozy"
+                name="isCozy"
+                control={control}
+                tags={cafeData?.vibes}
+              />
+              <CafeTags
+                tagName="Upbeat"
+                name="isUpbeat"
+                control={control}
+                tags={cafeData?.vibes}
+              />
             </div>
           </div>
           <div className="w-full border-2 rounded-2xl p-5">
             <p className="font-bold text-xl">Styles</p>
             <div className="space-y-2 mt-3">
-              <div className="flex justify-between">
-                <p>Minimal</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isMinimal"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p>Nature</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isNature"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p>Artistic</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isArtistic"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p>Vintage</p>
-                <div>
-                  <UseFormField
-                    control={control}
-                    name="isVintage"
-                    // empty string for now
-                    cafeData={""}
-                    isSelect={true}
-                  />
-                </div>
-              </div>
+              <CafeTags
+                tagName="minimal"
+                name="isMinimal"
+                control={control}
+                tags={cafeData?.styles}
+              />
+              <CafeTags
+                tagName="nature"
+                name="isNature"
+                control={control}
+                tags={cafeData?.styles}
+              />
+              <CafeTags
+                tagName="artistic"
+                name="isArtistic"
+                control={control}
+                tags={cafeData?.styles}
+              />
+              <CafeTags
+                tagName="Vintage"
+                name="isVintage"
+                control={control}
+                tags={cafeData?.styles}
+              />
             </div>
           </div>
         </div>
@@ -163,7 +113,7 @@ CafeFormTypes) {
                         max={10}
                         step={1}
                         value={[field.value]}
-                        onValueChange={field.onChange}
+                        onValueChange={(values) => field.onChange(values[0])} // Extract the value from the array
                         className="mt-2 sm:mt-0 w-full data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                       />
                     </FormControl>
