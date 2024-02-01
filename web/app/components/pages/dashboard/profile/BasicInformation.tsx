@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { CafeFormTypes } from "@/types/cafe";
 
-import { CafeImages } from "./CafeImage";
+import CafeImages from "./CafeImage";
 import { CafeAddress, CafeSuburb } from "./CafeLocation";
 import { LongitudeAndLatitude } from "./CafeLatitudeAndLongitude";
 import { CafeName } from "./CafeName";

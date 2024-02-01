@@ -13,8 +13,11 @@ import {
   FormItem,
   FormMessage,
 } from "@/app/components/ui/form";
-import useCafeProfileForm, { CafeProfileType } from "./useCafeProfileForm";
+import useCafeProfileForm from "./useCafeProfileForm";
 import ImagePreview from "./ImagePreview";
+import uploadImage from "@/src/queries/uploadImages";
+import { useForm, useWatch } from "react-hook-form";
+
 const images = [
   { id: 1, image: sampleImage, alt: "Sample Image" },
   { id: 2, image: sampleImage, alt: "Sample Image" },
@@ -22,61 +25,110 @@ const images = [
   { id: 4, image: sampleImage, alt: "Sample Image" },
 ];
 
-export const CafeImages = ({ cafeData, setUpCafe, control }: any) => {
+export default function CafeImages({ cafeData, setUpCafe, control }: any) {
+  // const cafeDetails = await getCafeDetails();
+
   const [images, setImages] = useState<File[]>([]);
   const { form } = useCafeProfileForm();
 
-  const viewPortWidth = useViewportWidth();
+  const [imageId, setImageId] = useState<string>();
 
+  const viewPortWidth = useViewportWidth();
   useEffect(() => {
     register();
   }, []);
 
-  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      //convert `FileList` to `File[]`
-      const _files = Array.from(e.target.files);
-      setImages(_files);
-      form.setValue("images", _files);
+      // convert `FileList` to `File[]`
+      const files = Array.from(e.target.files);
+      setImages(files);
     }
   };
 
-  // console.log("file", images);
-  console.log(form.getValues("images"));
+  const uploadImages = async () => {
+    try {
+      const imageIds = await uploadImage(images);
 
+      // setting values for "images"
+      if (imageIds) {
+        // Join the imageIds array into a string
+        const joinedImageIds = imageIds.join(", ");
+
+        // Set the joinedImageIds using setImageId
+        setImageId(joinedImageIds);
+        // setImageId(imageIds);
+      }
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
+  };
+  // console.log(imageId?.join(", ").toString());
   return (
     <div className="space-y-5">
       {setUpCafe && (
         <div>
           <div className="md:w-2/4 relative">
-            <Button className="w-full h-56 bg-grey hover:bg-grey border-2 border-white rounded-2xl flex flex-col items-center">
-              <Image src={addImageIcon} alt="add image" className="w-14" />
-              <p className="text-xs mt-2">
-                Add image file (JPG or PNG) <br /> Recommended aspect ration:{" "}
-                <br />
-                (1080px X 1350px)
-              </p>
-            </Button>
-            <FormField
-              control={control}
-              name="images"
-              render={({ field }) => (
-                <FormItem className=" w-full ">
-                  <FormControl>
-                    <Input
-                      type="file"
-                      multiple
-                      {...field}
-                      accept="image/*"
-                      onChange={handleFileSelected}
-                      className=" absolute top-0 opacity-0 h-full cursor-pointer"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {images.length === 0 && (
+              <>
+                <Button className="w-full h-56 bg-grey hover:bg-grey border-2 border-white rounded-2xl flex flex-col items-center">
+                  <Image src={addImageIcon} alt="add image" className="w-14" />
+                  <p className="text-xs mt-2">
+                    Add image file (JPG or PNG) <br /> Recommended aspect
+                    ration: <br />
+                    (1080px X 1350px)
+                  </p>
+                </Button>
+
+                <Input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleFileSelected}
+                  className=" absolute top-0 opacity-0 h-full cursor-pointer"
+                />
+              </>
+            )}
+
             <ImagePreview images={images} />
+            {images.length > 0 && (
+              <div className="flex gap-5">
+                <Button className="mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
+                  Add Image
+                </Button>
+                <Button className="mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
+                  Delete Image
+                </Button>
+                <div className="relative">
+                  <Button
+                    type="button"
+                    onClick={uploadImages}
+                    className=" mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+                  >
+                    Upload
+                  </Button>
+                  <FormField
+                    name="images"
+                    render={({ field }) => (
+                      <FormItem className=" w-full ">
+                        <FormControl>
+                          <Input
+                            type="text"
+                            {...field}
+                            value={
+                              imageId !== undefined ? imageId : field.value
+                            }
+                            // readOnly // Make the input read-only to prevent user interaction
+                            className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -136,4 +188,4 @@ export const CafeImages = ({ cafeData, setUpCafe, control }: any) => {
       )}
     </div>
   );
-};
+}

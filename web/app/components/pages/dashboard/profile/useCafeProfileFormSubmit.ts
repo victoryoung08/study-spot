@@ -15,10 +15,10 @@ export default function useCafeProfileFormSubmit() {
   async function onSubmit(data: CafeProfileType) {
     try {
       setLoading(true);
+
       const features = getFeaturesArray(data);
       const styles = getStyleArray(data);
       const vibes = getVibesArray(data);
-
       const cafeData = {
         data: {
           ...data,
@@ -27,29 +27,31 @@ export default function useCafeProfileFormSubmit() {
           features: features.length > 0 ? features : null,
           styles: styles.length > 0 ? styles : null,
           vibes: vibes.length > 0 ? vibes : null,
+          // images: { data: data.images },
         },
       };
+      console.log("cafedata", cafeData.data);
 
-      const response = await fetchWrapper({
-        endpoint: "study-spots",
-        options: {
-          method: "POST",
-          data: cafeData,
-        },
-      });
-      // console.log(response);
-      if (response.error) {
-        toast.error(`${response.error.error}`);
-        setLoading(false);
-        return;
-      }
+      // const response = await fetchWrapper({
+      //   endpoint: "study-spots",
+      //   options: {
+      //     method: "POST",
+      //     data: cafeData,
+      //   },
+      // });
+      // // console.log("response", response);
+      // if (response.error) {
+      //   toast.error(`${response.error.error}`);
+      //   setLoading(false);
+      //   return;
+      // }
 
-      // change toast message
-      toast.success("Cafe Details submitted successfully");
-      setIsSubmitted(true);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 500);
+      // // change toast message
+      // toast.success("Cafe Details submitted successfully");
+      // setIsSubmitted(true);
+      // // setTimeout(() => {
+      // //   window.location.reload();
+      // // }, 500);
     } catch (error) {
       console.error("An error occurred:", error);
 

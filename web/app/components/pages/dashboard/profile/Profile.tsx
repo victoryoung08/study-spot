@@ -12,7 +12,7 @@ import { Form } from "@/app/components/ui/form";
 export default function Profile({ cafeData }: any) {
   const [setupCafe, SetSetupCafe] = useState(false);
   const { form, watchAllFields, errors } = useCafeProfileForm();
-  console.log(watchAllFields);
+  // console.log(watchAllFields);
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
       SetSetupCafe(true);
