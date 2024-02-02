@@ -56,13 +56,11 @@ export const CafeSetupSchema = z.object({
     invalid_type_error: "Promo code must be a string",
   }),
   // images: z.array(z.instanceof(File)),
-  images: z.string(),
 });
 
 export const resolver = zodResolver(CafeSetupSchema);
 export const defaultValues = {
   cafe_name: "",
-  location: "",
   suburb: "",
   Longitude: 0,
   Latitute: 0,
@@ -81,7 +79,7 @@ export const defaultValues = {
   facebook: "",
   tiktok: "",
   discount: "",
-  images: "",
+  images: [],
 };
 
 // const FileObject = z.object({

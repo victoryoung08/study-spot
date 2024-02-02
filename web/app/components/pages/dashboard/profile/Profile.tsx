@@ -20,15 +20,12 @@ export default function Profile({ cafeData }: any) {
   }, [cafeData]);
 
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
+
   // console.log("cafeData", cafeData);
   return (
     <div className="text-white">
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          encType="multipart/form-data"
-          className="space-y-10"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
           <BasicInformation
             cafeData={cafeData}
             setUpCafe={setupCafe}

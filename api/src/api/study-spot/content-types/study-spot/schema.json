@@ -77,12 +77,6 @@
       "type": "float",
       "required": true
     },
-    "owner": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "study_spot"
-    },
     "facebook": {
       "type": "string"
     },

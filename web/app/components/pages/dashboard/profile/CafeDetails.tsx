@@ -7,12 +7,17 @@ import {
   FormMessage,
 } from "@/app/components/ui/form";
 import CafeTags from "./CafeTags";
+import { useState } from "react";
 
 export default function CafeDetails({
   cafeData,
   control,
 }: // control,
 CafeFormTypes) {
+  const [cafeQuietness, setCafeQuietness] = useState<Number>();
+  const handleCafeQuietnesschange = (event: any) => {
+    setCafeQuietness(event?.target?.value);
+  };
   return (
     <div className="md:w-2/4 lg:w-2/6">
       <div className="space-y-6">
@@ -112,8 +117,11 @@ CafeFormTypes) {
                       <Slider
                         max={10}
                         step={1}
-                        value={[field.value]}
-                        onValueChange={(values) => field.onChange(values[0])} // Extract the value from the array
+                        value={cafeQuietness ? [cafeQuietness] : [field.value]}
+                        onValueChange={(values) => {
+                          field.onChange(values[0]);
+                          handleCafeQuietnesschange(values[0]);
+                        }} // Extract the value from the array
                         className="mt-2 sm:mt-0 w-full data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                       />
                     </FormControl>

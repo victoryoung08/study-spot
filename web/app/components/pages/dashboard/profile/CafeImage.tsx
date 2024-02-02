@@ -17,6 +17,7 @@ import useCafeProfileForm from "./useCafeProfileForm";
 import ImagePreview from "./ImagePreview";
 import uploadImage from "@/src/queries/uploadImages";
 import { useForm, useWatch } from "react-hook-form";
+import { useCreateImage } from "@/app/store/imageUpload";
 
 const images = [
   { id: 1, image: sampleImage, alt: "Sample Image" },
@@ -31,7 +32,8 @@ export default function CafeImages({ cafeData, setUpCafe, control }: any) {
   const [images, setImages] = useState<File[]>([]);
   const { form } = useCafeProfileForm();
 
-  const [imageId, setImageId] = useState<string>();
+  const [imageId, setImageId] = useState<number[]>([]);
+  const setImage = useCreateImage((state) => state.setImage);
 
   const viewPortWidth = useViewportWidth();
   useEffect(() => {
@@ -43,27 +45,10 @@ export default function CafeImages({ cafeData, setUpCafe, control }: any) {
       // convert `FileList` to `File[]`
       const files = Array.from(e.target.files);
       setImages(files);
+      setImage(files);
     }
   };
 
-  const uploadImages = async () => {
-    try {
-      const imageIds = await uploadImage(images);
-
-      // setting values for "images"
-      if (imageIds) {
-        // Join the imageIds array into a string
-        const joinedImageIds = imageIds.join(", ");
-
-        // Set the joinedImageIds using setImageId
-        setImageId(joinedImageIds);
-        // setImageId(imageIds);
-      }
-    } catch (error) {
-      console.error("Error uploading images:", error);
-    }
-  };
-  // console.log(imageId?.join(", ").toString());
   return (
     <div className="space-y-5">
       {setUpCafe && (
@@ -99,34 +84,6 @@ export default function CafeImages({ cafeData, setUpCafe, control }: any) {
                 <Button className="mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
                   Delete Image
                 </Button>
-                <div className="relative">
-                  <Button
-                    type="button"
-                    onClick={uploadImages}
-                    className=" mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
-                  >
-                    Upload
-                  </Button>
-                  <FormField
-                    name="images"
-                    render={({ field }) => (
-                      <FormItem className=" w-full ">
-                        <FormControl>
-                          <Input
-                            type="text"
-                            {...field}
-                            value={
-                              imageId !== undefined ? imageId : field.value
-                            }
-                            // readOnly // Make the input read-only to prevent user interaction
-                            className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
               </div>
             )}
           </div>

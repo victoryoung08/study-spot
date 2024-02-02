@@ -69,11 +69,10 @@
       "type": "boolean",
       "default": false
     },
-    "study_spot": {
+    "cafe": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::study-spot.study-spot",
-      "mappedBy": "owner"
+      "target": "api::study-spot.study-spot"
     }
   }
 }
