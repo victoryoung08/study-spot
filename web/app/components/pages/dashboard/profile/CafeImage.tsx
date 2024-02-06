@@ -7,32 +7,16 @@ import sampleImage from "@/public/images/become-contributor.png";
 import addImageIcon from "@/public/images/add-image.svg";
 import { Input } from "@/app/components/ui/input";
 import { Button } from "@/app/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/app/components/ui/form";
-import useCafeProfileForm from "./useCafeProfileForm";
+
+import useCafeProfileForm from "./form/useCafeProfileForm";
 import ImagePreview from "./ImagePreview";
-import uploadImage from "@/src/queries/uploadImages";
-import { useForm, useWatch } from "react-hook-form";
 import { useCreateImage } from "@/app/store/imageUpload";
+import { useCafeData } from "@/app/store/cafeData";
 
-const images = [
-  { id: 1, image: sampleImage, alt: "Sample Image" },
-  { id: 2, image: sampleImage, alt: "Sample Image" },
-  { id: 3, image: sampleImage, alt: "Sample Image" },
-  { id: 4, image: sampleImage, alt: "Sample Image" },
-];
-
-export default function CafeImages({ cafeData, setUpCafe, control }: any) {
-  // const cafeDetails = await getCafeDetails();
+export default function CafeImages({ setUpCafe }: any) {
+  const cafeData = useCafeData((state) => state.cafe);
 
   const [images, setImages] = useState<File[]>([]);
-  const { form } = useCafeProfileForm();
-
-  const [imageId, setImageId] = useState<number[]>([]);
   const setImage = useCreateImage((state) => state.setImage);
 
   const viewPortWidth = useViewportWidth();

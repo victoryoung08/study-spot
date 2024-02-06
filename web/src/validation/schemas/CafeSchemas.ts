@@ -1,3 +1,4 @@
+import getCafeDetails from "@/src/queries/getCafeDetails";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -55,10 +56,10 @@ export const CafeSetupSchema = z.object({
   discount: z.string({
     invalid_type_error: "Promo code must be a string",
   }),
-  // images: z.array(z.instanceof(File)),
 });
 
 export const resolver = zodResolver(CafeSetupSchema);
+
 export const defaultValues = {
   cafe_name: "",
   suburb: "",
@@ -81,12 +82,3 @@ export const defaultValues = {
   discount: "",
   images: [],
 };
-
-// const FileObject = z.object({
-//   name: z.string(),
-//   size: z.number(),
-//   type: z.string(),
-//   lastModified: z.number(),
-//   // ... add other properties of the File type as needed
-// });
-// images: z.array(FileObject),

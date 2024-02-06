@@ -10,14 +10,10 @@ import CafeTags from "./CafeTags";
 import { useState } from "react";
 
 export default function CafeDetails({
-  cafeData,
   control,
 }: // control,
 CafeFormTypes) {
-  const [cafeQuietness, setCafeQuietness] = useState<Number>();
-  const handleCafeQuietnesschange = (event: any) => {
-    setCafeQuietness(event?.target?.value);
-  };
+  // console.log(cafeData.features);
   return (
     <div className="md:w-2/4 lg:w-2/6">
       <div className="space-y-6">
@@ -28,78 +24,32 @@ CafeFormTypes) {
         <div className="border-2 rounded-2xl p-5">
           <p className="font-bold text-xl">Features</p>
           <div className="grid grid-cols-2 gap-5 md:gap-10 mt-2">
-            <CafeTags
-              tagName="charging"
-              name="hasCharging"
-              control={control}
-              tags={cafeData?.features}
-            />
-            <CafeTags
-              tagName="wifi"
-              name="hasWifi"
-              control={control}
-              tags={cafeData?.features}
-            />
+            <CafeTags tagName="charging" name="hasCharging" control={control} />
+            <CafeTags tagName="wifi" name="hasWifi" control={control} />
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-5 md:gap-10">
           <div className="w-full border-2 rounded-2xl p-5">
             <p className="font-bold text-xl">Vibe</p>
             <div className="space-y-2 mt-3">
-              <CafeTags
-                tagName="chill"
-                name="isChill"
-                control={control}
-                tags={cafeData?.vibes}
-              />
-              <CafeTags
-                tagName="fast"
-                name="isFast"
-                control={control}
-                tags={cafeData?.vibes}
-              />
+              <CafeTags tagName="chill" name="isChill" control={control} />
+              <CafeTags tagName="fast" name="isFast" control={control} />
 
-              <CafeTags
-                tagName="cozy"
-                name="isCozy"
-                control={control}
-                tags={cafeData?.vibes}
-              />
-              <CafeTags
-                tagName="Upbeat"
-                name="isUpbeat"
-                control={control}
-                tags={cafeData?.vibes}
-              />
+              <CafeTags tagName="cozy" name="isCozy" control={control} />
+              <CafeTags tagName="Upbeat" name="isUpbeat" control={control} />
             </div>
           </div>
           <div className="w-full border-2 rounded-2xl p-5">
             <p className="font-bold text-xl">Styles</p>
             <div className="space-y-2 mt-3">
-              <CafeTags
-                tagName="minimal"
-                name="isMinimal"
-                control={control}
-                tags={cafeData?.styles}
-              />
-              <CafeTags
-                tagName="nature"
-                name="isNature"
-                control={control}
-                tags={cafeData?.styles}
-              />
+              <CafeTags tagName="minimal" name="isMinimal" control={control} />
+              <CafeTags tagName="nature" name="isNature" control={control} />
               <CafeTags
                 tagName="artistic"
                 name="isArtistic"
                 control={control}
-                tags={cafeData?.styles}
               />
-              <CafeTags
-                tagName="Vintage"
-                name="isVintage"
-                control={control}
-                tags={cafeData?.styles}
-              />
+              <CafeTags tagName="Vintage" name="isVintage" control={control} />
             </div>
           </div>
         </div>
@@ -117,10 +67,9 @@ CafeFormTypes) {
                       <Slider
                         max={10}
                         step={1}
-                        value={cafeQuietness ? [cafeQuietness] : [field.value]}
+                        value={[field.value]}
                         onValueChange={(values) => {
                           field.onChange(values[0]);
-                          handleCafeQuietnesschange(values[0]);
                         }} // Extract the value from the array
                         className="mt-2 sm:mt-0 w-full data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
                       />

@@ -1,6 +1,6 @@
 import { Control } from "react-hook-form";
-import { CafeProfileType } from "./useCafeProfileForm";
-import UseFormField from "./useFormField";
+import { CafeProfileType } from "./form/useCafeProfileForm";
+import UseFormField from "./form/useFormField";
 import { useEffect, useState } from "react";
 
 type CafeTagsTypes = {
@@ -8,40 +8,18 @@ type CafeTagsTypes = {
   name: string;
   control: Control;
   // tagName: string;
-  tags: any[];
 };
 
-export default function CafeTags({
-  name,
-  control,
-  tagName,
-  tags,
-}: CafeTagsTypes) {
+export default function CafeTags({ name, control, tagName }: CafeTagsTypes) {
   const [hasTag, setHasTag] = useState(false);
 
   /**
    * The function checks if a specific cafe tag  is included in an array of tags.
    * @returns The function `checkTags` returns the value of the variable `tagIncluded`.
    */
-
-  const checkTags = () => {
-    if (tags !== undefined && tags !== null) {
-      const tagIncluded = tags.some((tag) => tag.item === tagName);
-      // setHasTag(tagIncluded);
-      return tagIncluded;
-    }
-    return false;
+  const handleSwitchChange = () => {
+    setHasTag((current) => !current);
   };
-
-  const handleSwitchChange = (isChecked: boolean) => {
-    setHasTag(isChecked);
-  };
-
-  useEffect(() => {
-    // Update state only when necessary
-    setHasTag(checkTags());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tags, tagName]);
 
   return (
     <div className="flex flex-col xs:flex-row gap-2  xs:gap-0 justify-between">
@@ -51,7 +29,7 @@ export default function CafeTags({
           control={control}
           name={name}
           // empty string for now
-          inputValue={hasTag}
+          // inputValue={hasTag}
           handleInputChange={handleSwitchChange}
           isSelect={true}
         />

@@ -1,14 +1,51 @@
 export interface CafeFormTypes {
-  cafeData?: any;
+  cafeData?: CafeData;
   setUpCafe?: boolean;
   placeholder?: string;
   handleInputChange?: any;
   inputValue?: string | number | boolean | any;
-  control: Control<CafeProfileType>;
+  control?: Control<CafeProfileType>;
   name?: string;
   isSelect?: boolean;
 }
+export interface CafeData {
+  id?: number;
+  images?: [];
+  cafe_name?: string;
+  location?: string;
+  suburb?: string;
+  Longitude?: number;
+  Latitute?: number;
+  quietness?: number;
+  features?: string[]; // Assuming features, vibes, and styles are arrays of strings
+  vibes?: string[];
+  styles?: string[];
+  discount?: string;
+  instagram?: string;
+  tiktok?: string;
+  facebook?: string;
+}
 
-// export interface formFieldTypes {
-//   control: Control<CafeProfileType>;
-// }
+export interface CafeDefaultValues {
+  cafe_name: string;
+  location: string;
+  suburb: string;
+  Longitude: number;
+  Latitute: number;
+  quietness: number;
+  hasCharging: boolean;
+  hasWifi: boolean;
+  isChill: boolean;
+  isFast: boolean;
+  isCozy: boolean;
+  isUpbeat: boolean;
+  isMinimal: boolean;
+  isNature: boolean;
+  isArtistic: boolean;
+  isVintage: boolean;
+  discount: string;
+  tiktok: string;
+  facebook: string;
+  instagram: string;
+  // Add other properties as needed
+}

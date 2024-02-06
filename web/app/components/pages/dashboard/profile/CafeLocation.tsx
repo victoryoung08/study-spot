@@ -1,26 +1,28 @@
 import { Button } from "@/app/components/ui/button";
-import UseFormField from "./useFormField";
+import UseFormField from "./form/useFormField";
 import { useState } from "react";
+import { useCafeData } from "@/app/store/cafeData";
 
-export const CafeSuburb = ({ setUpCafe, cafeData, control }: any) => {
+export const CafeSuburb = ({ setUpCafe, control }: any) => {
+  const cafeData = useCafeData((state) => state.cafe);
+
   const [editCafeSuburb, setEditCafeSuburb] = useState(true);
 
   const cafeSuburbHandler = () => {
     setEditCafeSuburb((current) => !current);
   };
   const [cafeSuburb, setCafeSuburb] = useState(cafeData?.suburb || "");
-
-  // display the default value of that input field when there's data coming from the database/api
   const handleCafeSuburbChange = (event: any) => {
     setCafeSuburb(event?.target?.value);
     // console.log(event.target.value);
   };
+
   return (
     <div className="w-full">
       <p>Cafe Suburb</p>
       {editCafeSuburb && !setUpCafe ? (
         <div className="mt-2 xs:pl-5 flex items-center justify-between text-sm">
-          {cafeData && <p>{cafeSuburb || ""}</p>}
+          {cafeData && <p>{cafeSuburb || cafeData.suburb || ""}</p>}
           <Button
             type="button"
             onClick={cafeSuburbHandler}
@@ -35,10 +37,7 @@ export const CafeSuburb = ({ setUpCafe, cafeData, control }: any) => {
             <UseFormField
               control={control}
               name="suburb"
-              // empty string for now
-              cafeData={""}
               placeholder="Cafe Suburb"
-              inputValue={cafeSuburb}
               handleInputChange={handleCafeSuburbChange}
             />
           </div>
@@ -58,25 +57,24 @@ export const CafeSuburb = ({ setUpCafe, cafeData, control }: any) => {
   );
 };
 
-export const CafeAddress = ({ setUpCafe, cafeData, control }: any) => {
+export const CafeAddress = ({ setUpCafe, control }: any) => {
+  const cafeData = useCafeData((state) => state.cafe);
+
   const [editCafeAddress, setEditCafeAddress] = useState(true);
   const cafeAddressEditHandler = () => {
     setEditCafeAddress((current) => !current);
   };
 
   const [cafeAddress, setCafeAddress] = useState(cafeData?.location || "");
-
-  // display the default value of that input field when there's data coming from the database/api
   const handleCafeAddressChange = (event: any) => {
     setCafeAddress(event?.target?.value);
   };
-
   return (
     <div className="w-full">
       <p>Cafe Address</p>
       {editCafeAddress && !setUpCafe ? (
         <div className="mt-2 xs:pl-5 flex items-center  justify-between text-sm">
-          {cafeData && <p>{cafeAddress || ""}</p>}
+          {cafeData && <p>{cafeAddress || cafeData?.location || ""}</p>}
           <Button
             type="button"
             onClick={cafeAddressEditHandler}
@@ -91,10 +89,7 @@ export const CafeAddress = ({ setUpCafe, cafeData, control }: any) => {
             <UseFormField
               control={control}
               name="location"
-              // empty string for now
-              cafeData={""}
               placeholder="Cafe Address"
-              inputValue={cafeAddress}
               handleInputChange={handleCafeAddressChange}
             />
           </div>

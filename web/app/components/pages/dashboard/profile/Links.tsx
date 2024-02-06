@@ -4,7 +4,7 @@ import facebook from "@/public/images/facebook.svg";
 import tiktok from "@/public/images/TikTok.svg";
 import Image from "next/image";
 import { CafeFormTypes } from "@/types/cafe";
-import UseFormField from "./useFormField";
+import UseFormField from "./form/useFormField";
 
 const links = [
   { id: 1, social: "Instagram", image: instagram },
@@ -40,8 +40,6 @@ CafeFormTypes) {
               <UseFormField
                 control={control}
                 name="instagram"
-                // empty string for now
-                cafeData={""}
                 placeholder="Instagram Account"
               />
             </div>
@@ -63,8 +61,6 @@ CafeFormTypes) {
               <UseFormField
                 control={control}
                 name="facebook"
-                // empty string for now
-                cafeData={""}
                 placeholder="Facebook Account"
               />
             </div>
@@ -86,8 +82,6 @@ CafeFormTypes) {
               <UseFormField
                 control={control}
                 name="tiktok"
-                // empty string for now
-                cafeData={""}
                 placeholder="Tiktok Account"
               />
             </div>

@@ -5,43 +5,41 @@ import CafeDetails from "./CafeDetails";
 import Links from "./Links";
 import Promotion from "./Promotion";
 import { Button } from "@/app/components/ui/button";
-import useCafeProfileForm from "./useCafeProfileForm";
-import useCafeProfileFormSubmit from "./useCafeProfileFormSubmit";
+import useCafeProfileForm from "./form/useCafeProfileForm";
+import useCafeProfileFormSubmit from "./form/useCafeProfileFormSubmit";
 import { Form } from "@/app/components/ui/form";
+import { CafeFormTypes } from "@/types/cafe";
+import generateDefaultValues from "@/src/hooks/generateDefaultValues";
+import { useCafeData } from "@/app/store/cafeData";
 
-export default function Profile({ cafeData }: any) {
+export default function Profile({ cafeData }: CafeFormTypes) {
   const [setupCafe, SetSetupCafe] = useState(false);
   const { form, watchAllFields, errors } = useCafeProfileForm();
-  // console.log(watchAllFields);
+  const setCafe = useCafeData((state) => state.setCafe);
+
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
       SetSetupCafe(true);
+    } else {
+      // get the defaultValues when there's data coming from api
+      const defaultValues = generateDefaultValues(cafeData);
+      form.reset(defaultValues);
+      setCafe(cafeData);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cafeData]);
-
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
 
-  // console.log("cafeData", cafeData);
   return (
     <div className="text-white">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-          <BasicInformation
-            cafeData={cafeData}
-            setUpCafe={setupCafe}
-            {...form}
-            {...rest}
-          />
+          <BasicInformation setUpCafe={setupCafe} {...form} {...rest} />
           <div className="flex flex-col md:flex-row gap-10 lg:gap-32">
-            <CafeDetails cafeData={cafeData} {...form} {...rest} />
+            <CafeDetails {...form} {...rest} />
             <div className="space-y-10 md:w-2/4">
-              <Links cafeData={cafeData} {...form} {...rest} />
-              <Promotion
-                cafeData={cafeData}
-                setUpCafe={setupCafe}
-                {...form}
-                {...rest}
-              />
+              <Links {...form} {...rest} />
+              <Promotion setUpCafe={setupCafe} {...form} {...rest} />
             </div>
           </div>
           <div className="flex justify-center">

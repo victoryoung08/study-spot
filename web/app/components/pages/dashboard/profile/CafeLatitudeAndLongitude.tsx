@@ -6,9 +6,13 @@ import {
   FormMessage,
 } from "@/app/components/ui/form";
 import { Input } from "@/app/components/ui/input";
+import { useCafeData } from "@/app/store/cafeData";
 import { useState } from "react";
+import { number } from "zod";
 
-export const LongitudeAndLatitude = ({ setUpCafe, cafeData, control }: any) => {
+export const LongitudeAndLatitude = ({ setUpCafe, control }: any) => {
+  const cafeData = useCafeData((state) => state.cafe);
+
   const [editCafeLatitude, setEditCafeLatitude] = useState(true);
   const [cafeLatitude, setCafeLatitude] = useState(cafeData?.Latitute || "");
 
@@ -23,7 +27,6 @@ export const LongitudeAndLatitude = ({ setUpCafe, cafeData, control }: any) => {
     setEditCafeLongitude((current) => !current);
   };
 
-  // display the default value of that input field when there's data coming from the database/api
   const handleCafeLatitudeChange = (event: any) => {
     setCafeLatitude(event?.target?.value);
   };
@@ -31,13 +34,18 @@ export const LongitudeAndLatitude = ({ setUpCafe, cafeData, control }: any) => {
   const handleCafeLongitudeChange = (event: any) => {
     setCafeLongitude(event?.target?.value);
   };
+
   return (
     <div className="grid md:grid-cols-2 gap-5">
       <div className="w-full">
         <p>Address Latitude</p>
         {editCafeLatitude && !setUpCafe ? (
           <div className="mt-2 xs:pl-5 flex items-center  justify-between text-sm">
-            {cafeData && <p className="w-3/4">{cafeLatitude || ""}</p>}
+            {cafeData && (
+              <p className="w-3/4">
+                {cafeLatitude || cafeData?.Latitute || ""}
+              </p>
+            )}
             <Button
               onClick={cafeLatitudeEditHandler}
               type="button"
@@ -59,11 +67,7 @@ export const LongitudeAndLatitude = ({ setUpCafe, cafeData, control }: any) => {
                         type="number"
                         {...field}
                         placeholder="Latitude"
-                        value={
-                          cafeLatitude !== undefined
-                            ? cafeLatitude
-                            : field.value
-                        }
+                        value={field.value}
                         onChange={(e) => {
                           field.onChange(Number(e.target.value));
                           handleCafeLatitudeChange(e);
@@ -93,7 +97,11 @@ export const LongitudeAndLatitude = ({ setUpCafe, cafeData, control }: any) => {
         <p>Address Longitude</p>
         {editCafeLongitude && !setUpCafe ? (
           <div className="mt-2 xs:pl-5 flex items-center justify-between text-sm">
-            {cafeData && <p className="w-3/4">{cafeLongitude || ""}</p>}
+            {cafeData && (
+              <p className="w-3/4">
+                {cafeLongitude || cafeData?.Longitude || ""}
+              </p>
+            )}
             <Button
               type="button"
               onClick={cafeLongitudeEditHandler}
@@ -115,11 +123,7 @@ export const LongitudeAndLatitude = ({ setUpCafe, cafeData, control }: any) => {
                         type="number"
                         {...field}
                         placeholder="Longitude"
-                        value={
-                          cafeLongitude !== undefined
-                            ? cafeLongitude
-                            : field.value
-                        }
+                        value={field.value}
                         onChange={(e) => {
                           field.onChange(Number(e.target.value));
                           handleCafeLongitudeChange(e);

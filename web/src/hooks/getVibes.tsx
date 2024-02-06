@@ -1,4 +1,4 @@
-import { CafeProfileType } from "@/app/components/pages/dashboard/profile/useCafeProfileForm";
+import { CafeProfileType } from "@/app/components/pages/dashboard/profile/form/useCafeProfileForm";
 
 export default function getVibesArray(data: CafeProfileType) {
   // Conditionally set the features field based on hasCharging and hasWifi values
