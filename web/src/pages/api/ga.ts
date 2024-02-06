@@ -16,7 +16,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // const specificPagePath = "August Coffee";
-
   const { cafe } = _req.query;
 
   // 👇 Running a simple report
@@ -33,12 +32,20 @@ export default async function handler(
       ],
       dimensions: [
         {
-          name: "month",
+          name: "date",
         },
-        {
-          name: "pageTitle",
-        },
+        // {
+        //   name: "pageTitle",
+        // },
       ],
+      dimensionFilter: {
+        filter: {
+          fieldName: "pageTitle",
+          stringFilter: {
+            value: `${cafe}`,
+          },
+        },
+      },
       metrics: [
         {
           name: "screenPageViews", // Use "pageViews" metric for page views
@@ -47,14 +54,14 @@ export default async function handler(
     });
 
     // Extracting page views from the response
-    const filteredResponse =
-      response.rows
-        ?.filter((item) => item?.dimensionValues?.[1]?.value === cafe)
-        .map((item) => item) ?? [];
+    // const filteredResponse =
+    //   response.rows
+    //     ?.filter((item) => item?.dimensionValues?.[1]?.value === cafe)
+    //     .map((item) => item) ?? [];
 
     return res.status(200).json({
-      filteredResponse,
-      // response,
+      // filteredResponse,
+      response,
     });
   } catch (error) {
     console.error("Error fetching analytics data:", error);
