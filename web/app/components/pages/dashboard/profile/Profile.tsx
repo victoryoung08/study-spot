@@ -47,7 +47,7 @@ export default function Profile({ cafeData }: CafeFormTypes) {
               type="submit"
               className="border-2 bg-primary hover:bg-primary rounded-2xl h-8 xs:h-auto w-2/4 sm:w-1/4 mx-auto"
             >
-              Save
+              {rest.loading ? "Submitting...." : "Submit"}
             </Button>
           </div>
         </form>

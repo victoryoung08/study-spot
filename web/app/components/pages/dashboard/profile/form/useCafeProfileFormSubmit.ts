@@ -32,54 +32,53 @@ export default function useCafeProfileFormSubmit() {
         data: {
           ...data,
           ...(cafeDetails ? { id: cafeDetails.id } : {}),
+          // Add slug only if cafeDetails is not present
           ...(cafeDetails
             ? {}
-            : { slug: data.cafe_name.toLowerCase().replace(/\s+/g, "-") }), // Add slug only if cafeDetails is not present
+            : { slug: data.cafe_name.toLowerCase().replace(/\s+/g, "-") }),
           features: features.length > 0 ? features : null,
           styles: styles.length > 0 ? styles : null,
           vibes: vibes.length > 0 ? vibes : null,
         },
       };
 
-      // console.log(cafeData);
-      // const accessToken = await getAccessToken();
-      // if (!accessToken) {
-      //   throw new Error("Failed to fetch access token");
-      // }
-      // console.log(accessToken);
-      // const response: Record<string, any> = await fetchWrapper({
-      //   endpoint: cafeDetails ? `study-spots/${cafeDetails.id}` : "study-spots",
-      //   options: {
-      //     method: cafeDetails ? "PUT" : "POST",
-      //     headers: {
-      //       Authorization: `Bearer  ${accessToken}`,
-      //     },
-      //     data: cafeData,
-      //   },
-      // });
-      // if (response.error) {
-      //   toast.error(`${response.error.error}`);
-      //   setLoading(false);
-      //   return;
-      // }
+      const accessToken = await getAccessToken();
+      if (!accessToken) {
+        throw new Error("Failed to fetch access token");
+      }
+      const response: Record<string, any> = await fetchWrapper({
+        endpoint: cafeDetails ? `study-spots/${cafeDetails.id}` : "study-spots",
+        options: {
+          method: cafeDetails ? "PUT" : "POST",
+          headers: {
+            Authorization: `Bearer  ${accessToken}`,
+          },
+          data: cafeData,
+        },
+      });
+      if (response.error) {
+        toast.error(`${response.error.error}`);
+        setLoading(false);
+        return;
+      }
 
-      // const cafeId = response?.data?.data?.id;
+      const cafeId = response?.data?.data?.id;
 
-      // if (cafeId && !cafeDetails) {
-      //   if (image.length > 0) {
-      //     await uploadImage(image, cafeId);
-      //   }
-      //   if (session?.user?.id) {
-      //     await setUserCafe(cafeId, session?.user?.id);
-      //   }
-      // }
+      if (cafeId && !cafeDetails) {
+        if (image.length > 0) {
+          await uploadImage(image, cafeId);
+        }
+        if (session?.user?.id) {
+          await setUserCafe(cafeId, session?.user?.id);
+        }
+      }
 
-      // toast.success("Cafe Details submitted successfully");
-      // setIsSubmitted(true);
+      toast.success("Cafe Details submitted successfully");
+      setIsSubmitted(true);
 
-      // // setTimeout(() => {
-      // //   window.location.reload();
-      // // }, 500);
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       console.error("An error occurred:", error);
 
