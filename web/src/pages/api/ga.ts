@@ -16,7 +16,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // const specificPagePath = "August Coffee";
-  const { cafe } = _req.query;
+  const { cafe, startDate, endDate } = _req.query;
 
   // 👇 Running a simple report
   try {
@@ -26,16 +26,20 @@ export default async function handler(
       dateRanges: [
         {
           // 5daysAgo, 7daysAgo or 2023-12-24
-          startDate: "30daysAgo",
-          endDate: "today",
+          startDate: `${startDate ? startDate : "5daysAgo"}`,
+          endDate: `${endDate ? endDate : "today"}`,
         },
       ],
       dimensions: [
         {
           name: "date",
         },
+        {
+          name: "city",
+        },
         // {
-        //   name: "pageTitle",
+        //   name: "userAgeBracket",
+        // userGender,
         // },
       ],
       dimensionFilter: {
@@ -50,6 +54,9 @@ export default async function handler(
         {
           name: "screenPageViews", // Use "pageViews" metric for page views
         },
+        // {
+        //   name: "organicGoogleSearchClicks		", // Use "pageViews" metric for page views
+        // },
       ],
     });
 
@@ -60,7 +67,6 @@ export default async function handler(
     //     .map((item) => item) ?? [];
 
     return res.status(200).json({
-      // filteredResponse,
       response,
     });
   } catch (error) {
