@@ -3,9 +3,8 @@ import instagram from "@/public/images/Instagram.svg";
 import facebook from "@/public/images/facebook.svg";
 import tiktok from "@/public/images/TikTok.svg";
 import Image from "next/image";
-import { Input } from "@/app/components/ui/input";
-import { XMarkIcon } from "@heroicons/react/24/solid";
-import { Button } from "@/app/components/ui/button";
+import { CafeFormTypes } from "@/types/cafe";
+import UseFormField from "./form/useFormField";
 
 const links = [
   { id: 1, social: "Instagram", image: instagram },
@@ -13,7 +12,11 @@ const links = [
   { id: 3, social: "TikTok", image: tiktok },
 ];
 
-export default function Links({ cafeData }: any) {
+export default function Links({
+  cafeData,
+  control,
+}: // control,
+CafeFormTypes) {
   return (
     <div>
       <div>
@@ -34,12 +37,10 @@ export default function Links({ cafeData }: any) {
           </div>
           <div>
             <div>
-              <Input
-                type="text"
-                defaultValue={cafeData?.instagram_link || ""}
-                //   {...register("cafe_name")}
+              <UseFormField
+                control={control}
+                name="instagram"
                 placeholder="Instagram Account"
-                className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
               />
             </div>
           </div>
@@ -57,12 +58,10 @@ export default function Links({ cafeData }: any) {
           </div>
           <div>
             <div>
-              <Input
-                type="text"
-                defaultValue={cafeData?.facebook_link || ""}
-                //   {...register("cafe_name")}
+              <UseFormField
+                control={control}
+                name="facebook"
                 placeholder="Facebook Account"
-                className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
               />
             </div>
           </div>
@@ -79,30 +78,11 @@ export default function Links({ cafeData }: any) {
             </div>
           </div>
           <div>
-            {/* {cafeData.tiktok_link ? (
-              <div className="flex justify-between items-center gap-20">
-                <p>{cafeData.tiktok_link}</p>
-                <Button className="bg-transparent hover:bg-transparent ">
-                  <XMarkIcon className="w-5 h-5" />
-                </Button>
-              </div>
-            ) : (
-              <div>
-                <Input
-                  type="text"
-                  //   {...register("cafe_name")}
-                  placeholder="Enter Username"
-                  className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
-                />
-              </div>
-            )} */}
             <div>
-              <Input
-                type="text"
-                defaultValue={cafeData?.tiktok_link || ""}
-                //   {...register("cafe_name")}
+              <UseFormField
+                control={control}
+                name="tiktok"
                 placeholder="Tiktok Account"
-                className="w-full focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
               />
             </div>
           </div>

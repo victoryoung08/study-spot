@@ -2,14 +2,27 @@
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { useEffect, useState } from "react";
+import UseFormField from "./form/useFormField";
+import { CafeFormTypes } from "@/types/cafe";
+import { useCafeData } from "@/app/store/cafeData";
 
-export default function Promotion({ cafeData, setUpCafe }: any) {
+export default function Promotion({
+  setUpCafe,
+  control,
+}: // control,
+CafeFormTypes) {
+  const cafeData = useCafeData((state) => state.cafe);
+
+  const [discount, setDiscount] = useState(cafeData?.discount || "");
   const [promoCode, setPromoCode] = useState(true);
 
   const editPromoCode = () => {
     setPromoCode((current) => !current);
   };
-
+  const handlePromocodeChange = (event: any) => {
+    setDiscount(event?.target?.value);
+    // console.log(event.target.value);
+  };
   return (
     <div>
       <div>
@@ -21,9 +34,10 @@ export default function Promotion({ cafeData, setUpCafe }: any) {
           <p>Promo Code:</p>
           {promoCode && !setUpCafe ? (
             <div className="xs:w-3/4 gap-5 flex items-center justify-between">
-              <p>{cafeData?.discount || "No promo code"}</p>
+              <p>{discount || cafeData?.discount || "No promo code"}</p>
               <Button
                 onClick={editPromoCode}
+                type="button"
                 className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
               >
                 Edit
@@ -31,17 +45,16 @@ export default function Promotion({ cafeData, setUpCafe }: any) {
             </div>
           ) : (
             <div className="xs:w-3/4 gap-5 flex items-center justify-between">
-              <Input
-                type="text"
-                //   {...register("cafe_name")}
+              <UseFormField
+                control={control}
+                name="discount"
                 placeholder="Promo Code"
-                defaultValue={cafeData?.discount || ""}
-                className="w-full
-               focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+                handleInputChange={handlePromocodeChange}
               />
               {!setUpCafe && (
                 <Button
                   onClick={editPromoCode}
+                  type="button"
                   className="border-2  bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
                 >
                   Save

@@ -72,8 +72,7 @@
     "cafe": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::study-spot.study-spot",
-      "inversedBy": "owner"
+      "target": "api::study-spot.study-spot"
     }
   }
 }

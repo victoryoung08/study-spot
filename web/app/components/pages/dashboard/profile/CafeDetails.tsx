@@ -1,7 +1,19 @@
 import { Slider } from "@/app/components/ui/slider";
-import { Switch } from "@/app/components/ui/switch";
+import { CafeFormTypes } from "@/types/cafe";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/app/components/ui/form";
+import CafeTags from "./CafeTags";
+import { useState } from "react";
 
-export default function CafeDetails({ cafeData }: any) {
+export default function CafeDetails({
+  control,
+}: // control,
+CafeFormTypes) {
+  // console.log(cafeData.features);
   return (
     <div className="md:w-2/4 lg:w-2/6">
       <div className="space-y-6">
@@ -12,80 +24,32 @@ export default function CafeDetails({ cafeData }: any) {
         <div className="border-2 rounded-2xl p-5">
           <p className="font-bold text-xl">Features</p>
           <div className="grid grid-cols-2 gap-5 md:gap-10 mt-2">
-            <div className="flex flex-col xs:flex-row gap-2  xs:gap-0 justify-between">
-              <p>Charging</p>
-              <Switch
-                id="Charging"
-                className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-              />
-            </div>
-            <div className="flex flex-col xs:flex-row gap-2 xs:gap-0 justify-between">
-              <p>Wifi</p>
-              <Switch
-                id="Wifi"
-                className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-              />
-            </div>
+            <CafeTags tagName="charging" name="hasCharging" control={control} />
+            <CafeTags tagName="wifi" name="hasWifi" control={control} />
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-5 md:gap-10">
           <div className="w-full border-2 rounded-2xl p-5">
             <p className="font-bold text-xl">Vibe</p>
             <div className="space-y-2 mt-3">
-              <div className="flex justify-between">
-                <p>Chill</p>
-                <Switch
-                  id="Chill"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
-              <div className="flex justify-between">
-                <p>Cozy</p>
-                <Switch
-                  id="Cozy"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
-              <div className="flex justify-between">
-                <p>Upbeat</p>
-                <Switch
-                  id="Upbeat"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
+              <CafeTags tagName="chill" name="isChill" control={control} />
+              <CafeTags tagName="fast" name="isFast" control={control} />
+
+              <CafeTags tagName="cozy" name="isCozy" control={control} />
+              <CafeTags tagName="Upbeat" name="isUpbeat" control={control} />
             </div>
           </div>
           <div className="w-full border-2 rounded-2xl p-5">
             <p className="font-bold text-xl">Styles</p>
             <div className="space-y-2 mt-3">
-              <div className="flex justify-between">
-                <p>Minimal</p>
-                <Switch
-                  id="Minimal"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
-              <div className="flex justify-between">
-                <p>Nature</p>
-                <Switch
-                  id="Nature"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
-              <div className="flex justify-between">
-                <p>Artistic</p>
-                <Switch
-                  id="Artistic"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
-              <div className="flex justify-between">
-                <p>Vintage</p>
-                <Switch
-                  id="Vintage"
-                  className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-                />
-              </div>
+              <CafeTags tagName="minimal" name="isMinimal" control={control} />
+              <CafeTags tagName="nature" name="isNature" control={control} />
+              <CafeTags
+                tagName="artistic"
+                name="isArtistic"
+                control={control}
+              />
+              <CafeTags tagName="Vintage" name="isVintage" control={control} />
             </div>
           </div>
         </div>
@@ -93,14 +57,28 @@ export default function CafeDetails({ cafeData }: any) {
           <p className="font-bold text-xl">Quietness</p>
           <div className="sm:flex gap-5 md:gap-10 mt-2">
             <p>Cafe Chatter</p>
-            <Slider
-              id="charging"
-              defaultValue={[cafeData?.quietness] || [1]}
-              // defaultValue={cafeData.quietness}
-              max={10}
-              step={1}
-              className="mt-2 sm:mt-0 sm:w-4/6 data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
-            />
+            <div className="sm:w-4/6">
+              <FormField
+                control={control}
+                name="quietness"
+                render={({ field }) => (
+                  <FormItem className=" w-full ">
+                    <FormControl>
+                      <Slider
+                        max={10}
+                        step={1}
+                        value={[field.value]}
+                        onValueChange={(values) => {
+                          field.onChange(values[0]);
+                        }} // Extract the value from the array
+                        className="mt-2 sm:mt-0 w-full data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import Profile from "@/app/components/pages/dashboard/profile/Profile";
 import getCafeDetails from "@/src/queries/getCafeDetails";
 import getUserDetails from "@/src/queries/getUserDetails";
+import uploadImages from "@/src/queries/uploadImages";
 import { Metadata } from "next";
 import { useState } from "react";
 
@@ -20,6 +21,9 @@ export default async function Page() {
   if (!cafeData) {
     return <div>Loading...</div>;
   }
+
+  //   const uploadedImageIds = await uploadImages(cafeData);
+  // console.log(uploadedImageIds);
 
   return (
     <div>
