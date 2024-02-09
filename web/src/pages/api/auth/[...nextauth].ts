@@ -60,7 +60,6 @@ export const authOptions: NextAuthOptions = {
           /**
            * Authenticate user with the API
            */
-          console.log("API Endpoint:", process.env.STRAPI_API_ENDPOINT);
 
           const resp = await fetch(
             `${process.env.STRAPI_API_ENDPOINT}/auth/local`,

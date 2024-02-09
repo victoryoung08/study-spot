@@ -64,15 +64,17 @@ export default function DatePIcker() {
             <SelectItem value="-1">Yesterday</SelectItem>
             <SelectItem value="-5">Last 5 days</SelectItem>
             <SelectItem value="-14">Last 14 days</SelectItem>
-            <SelectItem value="calendar">Custom</SelectItem>
+            <SelectItem value="-28">Last 28 days</SelectItem>
+
+            {/* <SelectItem value="calendar">Custom</SelectItem> */}
             {/* <SelectItem value="7">In a week</SelectItem> */}
           </SelectContent>
         </Select>
-        {displayCalendar && (
+        {/* {displayCalendar && (
           <div className="rounded-md border">
             <Calendar mode="single" selected={date} onSelect={setDate} />
           </div>
-        )}
+        )} */}
       </PopoverContent>
     </Popover>
   );
