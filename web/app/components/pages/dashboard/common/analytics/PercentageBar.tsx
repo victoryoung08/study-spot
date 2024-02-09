@@ -19,8 +19,8 @@ export default function PercentageBar({
           {title && <p className="text-xs sm:text-base">{title}</p>}
           {data.map((item: any) => {
             return (
-              <div className="" key={item.name}>
-                <p className="mb-1 text-xs xs:text-sm">{item.name}</p>
+              <div className="" key={item.city}>
+                <p className="mb-1 text-xs xs:text-sm">{item.city}</p>
                 <div className="flex justify-between items-center gap-3 md:gap-5">
                   <Progress value={item.percentage} />
                   <p className="text-sm sm:text-lg">{item.percentage}%</p>

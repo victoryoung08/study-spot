@@ -26,8 +26,8 @@ export default async function handler(
       dateRanges: [
         {
           // 5daysAgo, 7daysAgo or 2023-12-24
-          startDate: `${startDate ? startDate : "5daysAgo"}`,
-          endDate: `${endDate ? endDate : "today"}`,
+          startDate: `${startDate ? startDate : "yesterday"}`,
+          endDate: `${endDate ? endDate : "yesterday"}`,
         },
       ],
       dimensions: [
