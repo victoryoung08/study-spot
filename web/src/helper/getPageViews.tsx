@@ -1,5 +1,7 @@
+import { useCafeData } from "@/app/store/cafeData";
 import getPageViewsByCity from "../hooks/getPageViewsByCity";
 import getPageViewsByDate from "../hooks/getPageViewsByDate";
+import comparePageViews from "../hooks/comparePageViews";
 
 type PageViewsType = {
   cafeName: string;
@@ -28,8 +30,7 @@ export default async function getPageViews({
     // const yesterday = new Date();
     // yesterday.setDate(yesterday.getDate() - 1); // Get yesterday's date
     // const formattedYesterday = yesterday.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
-
-    const startDateParam = startDate ? startDate : "yesterday";
+    const startDateParam = startDate ? startDate : "5daysAgo";
     const endDateParam = endDate ? endDate : "yesterday";
 
     // Construct the fetch URL with query parameters
@@ -39,12 +40,12 @@ export default async function getPageViews({
     if (!response.ok) {
       throw new Error("Failed to fetch analytics");
     }
+
     const data: ApiResponse = await response.json();
     if (data.response && data.response.rows) {
       const rows: Row[] = data.response.rows;
       const pageViewsByDate = getPageViewsByDate(rows);
       const pageViewsByCity = getPageViewsByCity(rows);
-
       return { pageViewsByDate, pageViewsByCity };
     } else {
       console.error("No rows found in the response.");

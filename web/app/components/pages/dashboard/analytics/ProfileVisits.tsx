@@ -8,29 +8,49 @@ import PieChart from "../common/analytics/PieChart";
 import { PiechartData1 } from "../common/Data";
 import PercentageBar from "../common/analytics/PercentageBar";
 import { useEffect, useState } from "react";
-import getPageViewsByDate from "@/src/helper/getPageViews";
+import getPageViews from "@/src/helper/getPageViews";
 import { ChartData, PercentageData } from "@/types/chart";
+import { useCafeData } from "@/app/store/cafeData";
+import getPageViewsAlgorithm from "@/src/helper/getPageViewsAlgorithm";
 
-export default function ProfileVisits() {
+export default function ProfileVisits(cafeName: any) {
   const [pageViewsByDate, setPageViewsByDate] = useState<ChartData>();
   const [pageViewsByCity, setPageViewsByCity] = useState<PercentageData[]>([]);
+  const [overviewCount, setOverViewCount] = useState<Number>();
+  const [overViewPercentage, setOverviewPercentage] = useState<String>();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getPageViewsByDate({
-          cafeName: "August Coffee",
-        }); // Fetch data using getPageViews function
-        if (response) {
-          setPageViewsByDate(response.pageViewsByDate);
-          setPageViewsByCity(response.pageViewsByCity);
-        } else {
-          console.error("No rows found in the response.");
+        if (cafeName) {
+          // get page views
+          const pageViewsResponse = await getPageViews({
+            cafeName: cafeName.cafeName,
+          }); // Fetch data using getPageViews function
+          if (pageViewsResponse) {
+            setPageViewsByDate(pageViewsResponse.pageViewsByDate);
+            setPageViewsByCity(pageViewsResponse.pageViewsByCity);
+          }
+
+          // fetch page views comparison
+          const pageViewAlgorithmResponse = await getPageViewsAlgorithm({
+            cafeName: cafeName.cafeName,
+          });
+
+          if (pageViewAlgorithmResponse) {
+            setOverViewCount(
+              pageViewAlgorithmResponse.camparedData.currentTotal
+            );
+            setOverviewPercentage(
+              pageViewAlgorithmResponse.camparedData.percentageDifference
+            );
+          }
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData(); // Call the fetchData function
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!pageViewsByDate || !pageViewsByCity) {
@@ -40,7 +60,10 @@ export default function ProfileVisits() {
   return (
     <TabsContent value="Profile Visit" className="space-y-5 lg:space-y-10">
       <div>
-        <OverviewCount />
+        <OverviewCount
+          totalCount={overviewCount}
+          percentage={overViewPercentage}
+        />
       </div>
       <div>
         <Linechart overview={false} data={pageViewsByDate} />
