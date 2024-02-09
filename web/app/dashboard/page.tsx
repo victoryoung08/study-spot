@@ -21,8 +21,9 @@ export default function Dashboard() {
           buttonText="Upgrade to see more"
         />
       </div>
+
       <Linechart overview={true} displayButton={true} data={data} />
-      <div className="lg:w-2/5">
+      <div className="lg:w-2/5 ">
         <AnalyticsCard
           twoColumn={true}
           title="Attempted Clicks"
