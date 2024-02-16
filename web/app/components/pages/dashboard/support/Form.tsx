@@ -12,51 +12,6 @@ export default function SupportForm() {
       <div>
         <form action="" className="lg:w-2/4 mx-auto space-y-5">
           <div>
-            {/* {errors.cafe_name && (
-              <div className="flex justify-start ml-4 mb-1">
-                <span className="text-xs text-red-400">
-                  {errors.cafe_name.message}
-                </span>
-              </div>
-            )} */}
-            <input
-              type="text"
-              //   {...register("cafe_name")}
-              placeholder="Your First Name"
-              className="input input-bordered w-full rounded-2xl border-2 border-white text-sm bg-[#3a3939] focus:border-primary"
-            />
-          </div>
-          <div>
-            {/* {errors.cafe_name && (
-              <div className="flex justify-start ml-4 mb-1">
-                <span className="text-xs text-red-400">
-                  {errors.cafe_name.message}
-                </span>
-              </div>
-            )} */}
-            <input
-              type="text"
-              //   {...register("cafe_name")}
-              placeholder="Your Email"
-              className="input input-bordered w-full rounded-2xl border-2 border-white text-sm bg-[#3a3939] focus:border-primary"
-            />
-          </div>
-          <div>
-            {/* {errors.cafe_name && (
-              <div className="flex justify-start ml-4 mb-1">
-                <span className="text-xs text-red-400">
-                  {errors.cafe_name.message}
-                </span>
-              </div>
-            )} */}
-            <input
-              type="text"
-              //   {...register("cafe_name")}
-              placeholder="Your Cafe Name"
-              className="input input-bordered w-full rounded-2xl border-2 border-white text-sm bg-[#3a3939] focus:border-primary"
-            />
-          </div>
-          <div>
             <textarea
               //   {...register("inquiry")}
               className="textarea textarea-bordered w-full rounded-2xl border-2 border-white focus:border-primary bg-[#3a3939]"

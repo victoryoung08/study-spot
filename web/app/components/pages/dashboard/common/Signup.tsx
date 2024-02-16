@@ -21,6 +21,7 @@ import personIcon from "@/public/images/person.svg";
 import emailIcon from "@/public/images/email.svg";
 import { Button } from "@/app/components/ui/button";
 import { Checkbox } from "@/app/components/ui/checkbox";
+import { signIn } from "next-auth/react";
 
 export type SignupFormType = z.infer<typeof UserSchema.SignupFormSchema>;
 
@@ -52,6 +53,7 @@ const SignupForm = () => {
           },
           body: JSON.stringify({
             ...data,
+            username: data.email,
           }),
         }
       );
@@ -67,11 +69,25 @@ const SignupForm = () => {
 
       // if there's no error, display success message
       toast.success("Account created successfully");
-
-      // direct to profile & cafe setup
-      setTimeout(() => {
-        router.push("signin");
-      }, 500);
+      const email = data.email;
+      const password = data.password;
+      const signInResponse = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      if (signInResponse?.ok) {
+        // Set the user details in the global state
+        // toast.success("Login Successfully!");
+        setLoading(false);
+        reset();
+        router.push("/dashboard");
+      } else {
+        // Step 6: If there was an error during sign-in, set loading state to false
+        // and display an error message using toast
+        setLoading(false);
+        toast.error(signInResponse?.error || "An Error Occurred");
+      }
     } catch (error) {
       // Handle any unexpected errors and display an error message
       console.error(error);
@@ -87,7 +103,7 @@ const SignupForm = () => {
     setDisplayPassword((current) => !current);
   };
 
-  const [isTermsChecked, setIsTermsChecked] = useState(false);
+  // const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   return (
     <div>
@@ -105,7 +121,7 @@ const SignupForm = () => {
         className="pt-4 pb-5 flex flex-col gap-5"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col gap-3 relative">
+        {/* <div className="flex flex-col gap-3 relative">
           <div className="absolute left-3 top-3 ">
             <Image src={personIcon} alt="Person Icon" />
           </div>
@@ -116,13 +132,13 @@ const SignupForm = () => {
             placeholder="Username"
             className="px-10 py-5 bg-grey border-2 border-white rounded-xl text-white focus-visible:ring-offset-0 focus-visible:ring-transparent"
           />
-          {/* Check if forms has error */}
+          Check if forms has error
           {errors.username && (
             <span className="text-red-500 text-sm">
               Please check your username.
             </span>
           )}
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-3 relative">
           <div className="absolute left-3 top-3 ">
@@ -171,7 +187,7 @@ const SignupForm = () => {
             )}
           </Button>
         </div>
-        <div className="flex flex-col gap-3 text-gray-400">
+        {/* <div className="flex flex-col gap-3 text-gray-400">
           <div className="flex items-center gap-2">
             <Checkbox
               id="terms"
@@ -186,10 +202,10 @@ const SignupForm = () => {
               Accept terms and conditions
             </Label>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-center">
           <Button
-            disabled={!isTermsChecked}
+            // disabled={!isTermsChecked}
             type="submit"
             className="w-full sm:w-96 border-2 border-white mx-auto h-12 font-bold text-base text-white hover:border-white bg-primary rounded-xl hover:bg-primary"
           >

@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { Line } from "react-chartjs-2";
 import DatePIcker from "./DatePIcker";
+import getSession from "@/src/helper/getSession";
 Chart.defaults.color = "#fff";
 
 ChartJS.register(
@@ -63,6 +64,8 @@ export default function Linechart({
   data,
   title,
 }: LinechartTypes) {
+  const session = getSession();
+  const hasMembership = session?.session?.user?.hasMembership;
   return (
     <div>
       {title && (
@@ -83,8 +86,8 @@ export default function Linechart({
         )}
         {!overview && <DatePIcker />}
 
-        <div className="h-[350px]">
-          {data && <Line options={options} data={data} />}
+        <div className={`h-[350px] ${hasMembership ? "" : "blur-sm"} `}>
+          <Line options={options} data={data} />
         </div>
         {displayButton && (
           <div className="mt-5 sm:w-2/4 mx-auto">
