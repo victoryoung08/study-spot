@@ -44,6 +44,7 @@ export default async function getPageViews({
     const data: ApiResponse = await response.json();
     if (data.response && data.response.rows) {
       const rows: Row[] = data.response.rows;
+      console.log(rows);
       const pageViewsByDate = getPageViewsByDate(rows);
       const pageViewsByCity = getPageViewsByCity(rows);
       return { pageViewsByDate, pageViewsByCity };

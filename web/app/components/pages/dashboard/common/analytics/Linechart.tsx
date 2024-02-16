@@ -84,7 +84,7 @@ export default function Linechart({
         {!overview && <DatePIcker />}
 
         <div className="h-[350px]">
-          <Line options={options} data={data} />
+          {data && <Line options={options} data={data} />}
         </div>
         {displayButton && (
           <div className="mt-5 sm:w-2/4 mx-auto">

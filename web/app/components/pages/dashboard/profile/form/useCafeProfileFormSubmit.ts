@@ -9,7 +9,6 @@ import getVibesArray from "@/src/hooks/getVibes";
 import { useCreateImage } from "@/app/store/imageUpload";
 import uploadImage from "@/src/queries/uploadImages";
 import setUserCafe from "@/src/queries/setUserCafe";
-import getCafeDetails from "@/src/queries/getCafeDetails";
 import getAccessToken from "@/src/helper/getAccessToken";
 import { useCafeData } from "@/app/store/cafeData";
 

@@ -60,13 +60,6 @@ export default async function handler(
         {
           name: "screenPageViews", // Use "pageViews" metric for page views
         },
-
-        // {
-        //   name: "organicGoogleSearchImpressions",
-        // },
-        // {
-        //   name: "organicGoogleSearchClicks		", // Use "pageViews" metric for page views
-        // },
       ],
     });
 

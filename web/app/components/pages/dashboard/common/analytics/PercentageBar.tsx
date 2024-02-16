@@ -28,6 +28,11 @@ export default function PercentageBar({
               </div>
             );
           })}
+          {data.length == 0 && (
+            <h2 className="text-2xl md:text-3xl  font-black text-center">
+              No Data Available
+            </h2>
+          )}
         </div>
       </div>
     </div>

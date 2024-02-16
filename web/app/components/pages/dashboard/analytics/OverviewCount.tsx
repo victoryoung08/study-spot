@@ -3,6 +3,7 @@ import Morethan from "@/public/images/morethanusual.svg";
 import Lessthan from "@/public/images/lessthanusual.svg";
 import Typical from "@/public/images/typical.svg";
 export default function OverviewCount({ totalCount, percentage }: any) {
+  console.log(totalCount, percentage);
   return (
     <div>
       {totalCount && percentage && (
@@ -24,6 +25,7 @@ export default function OverviewCount({ totalCount, percentage }: any) {
               alt="Icon"
               className="w-5 h-5"
             />
+
             <p className="text-xs md:text-base">
               {percentage}% {percentage > 50 ? "more than" : "less than"}{" "}
               previous 28 days

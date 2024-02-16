@@ -20,13 +20,10 @@ const comparePageViews = (currentData: Row[], oldData: Row[]) => {
     0
   );
 
-  console.log(currentTotal, "-", pastTotal);
-
   // Calculate the percentage difference
-  const percentageDifference: string = (
-    ((currentTotal - pastTotal) / currentTotal) *
-    100
-  ).toFixed(0);
+  const percentageDifference = parseFloat(
+    (((currentTotal - pastTotal) / currentTotal) * 100).toFixed(0)
+  );
 
   return { percentageDifference, currentTotal };
 };

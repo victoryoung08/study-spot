@@ -29,10 +29,12 @@ const getPageViewsByCity = (
   );
 
   // Step 3: Calculate the percentage of page views for each city and return the result
-  return Array.from(aggregatedData.entries()).map(([city, value]) => ({
+  const updated = Array.from(aggregatedData.entries()).map(([city, value]) => ({
     city,
-    percentage: (value / totalPageViews) * 100,
+    percentage: parseFloat(((value / totalPageViews) * 100).toFixed(0)),
   }));
+
+  return updated;
 };
 
 export default getPageViewsByCity;

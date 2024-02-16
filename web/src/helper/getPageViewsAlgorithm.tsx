@@ -3,15 +3,11 @@ import { ApiResponse, Row } from "./getPageViews";
 
 type PageViewsType = {
   cafeName: string;
-  startDate?: string;
-  endDate?: string;
 };
 
 export default async function getPageViewsAlgorithm({
   cafeName,
-}: //   startDate,
-//   endDate,
-PageViewsType) {
+}: PageViewsType) {
   try {
     // fetch all page views starting from 28 days ago to yesterday
     const currentData = await fetch(
