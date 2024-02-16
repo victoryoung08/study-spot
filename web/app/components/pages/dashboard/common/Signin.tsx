@@ -63,7 +63,7 @@ const SigninForm = () => {
         toast.success("Login Successfully!");
         setLoading(false);
         reset();
-        router.push("/dashboard");
+        router.push("/dashboard/profile");
       } else {
         // Step 6: If there was an error during sign-in, set loading state to false
         // and display an error message using toast

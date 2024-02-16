@@ -1,7 +1,7 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import {
   Avatar,
   AvatarFallback,
@@ -113,32 +113,10 @@ function Topbar() {
               alt="John Doe"
               className="rounded-full !bg-gray-500"
             /> */}
-              <AvatarFallback className="text-black text-sm font-bold">
+              <AvatarFallback className="text-white bg-primary text-sm font-bold">
                 {session?.user?.username?.slice(0, 1).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            {/* <div className="hidden sm:flex items-center gap-2">
-            <span className="">
-              <span className="text-sm font-bold !px-0 text-white dark:text-white">
-                {session?.user?.username}
-              </span>
-            </span>
-            <svg
-              className="hidden fill-white sm:block"
-              width="12"
-              height="8"
-              viewBox="0 0 12 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"
-                fill=""
-              />
-            </svg>
-          </div> */}
           </div>
         }
       >
@@ -152,13 +130,12 @@ function Topbar() {
                     alt="John Doe"
                     className="rounded-full !bg-gray-500"
                   />
-                  <AvatarFallback className="text-black !px-0">
+                  <AvatarFallback className="text-white bg-primary !px-0">
                     {session?.user?.username?.slice(0, 1).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
                   <span className="text-sm text-black">
-                    {/* {currentUser?.first_name} {currentUser?.last_name}  */}
                     {session?.user?.username}
                   </span>
                   <span className="text-xs text-primary-gray">
@@ -173,14 +150,11 @@ function Topbar() {
                 href="/dashboard/profile"
                 className="flex items-center gap-2"
               >
-                <User className="h-4 w-4" />
+                <User className="h-4 w-4 text-primary" />
                 <span className="">My Account</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-            </DropdownMenuItem>
+
             <DropdownMenuSeparator className=" !bg-[#CBD5E1]" />
             <DropdownMenuItem>
               <div
@@ -188,9 +162,9 @@ function Topbar() {
                   deleteCookie("user");
                   signOut();
                 }}
-                className="flex items-center"
+                className="flex items-center w-full cursor-pointer"
               >
-                <LogOut className="mr-2 h-4 w-4" />
+                <LogOut className="mr-2 h-4 w-4 text-primary" />
                 <span>Log out</span>
               </div>
             </DropdownMenuItem>

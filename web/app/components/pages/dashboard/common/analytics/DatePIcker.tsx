@@ -23,7 +23,6 @@ import { useState } from "react";
 export default function DatePIcker() {
   const [date, setDate] = useState<Date>();
   const [displayCalendar, setDisplayCalendar] = useState(false);
-  console.log(date);
   return (
     <Popover>
       <PopoverTrigger asChild>

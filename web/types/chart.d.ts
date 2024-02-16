@@ -11,5 +11,5 @@ export type ChartData = {
 
 export type PercentageData = {
   city: string;
-  percentage: number;
+  percentage: number | Number;
 };

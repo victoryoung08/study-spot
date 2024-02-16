@@ -2,31 +2,44 @@ import { ChartData } from "@/types/chart";
 import { Row } from "../helper/getPageViews";
 
 const getPageViewsByDate = (rows: Row[]) => {
-  const pageViews = rows.map((row) => ({
-    date: row.dimensionValues[0].value,
-    value: parseInt(row.metricValues[0].value), // Assuming the value is numeric, parse it as integer
-  }));
-  // 20240206 to February 06, 2024
-  const labels = pageViews.map((entry) => {
-    const dateString = entry.date;
-    // Parse the date string into year, month, and day parts
-    const year = dateString.slice(0, 4);
-    const month = dateString.slice(4, 6);
-    const day = dateString.slice(6, 8);
+  // Step 1: Create an object to store values for each date
+  const aggregatedData: { [date: string]: number } = {};
 
-    // Create a new Date object with parsed year, month, and day
-    const date = new Date(`${year}-${month}-${day}`);
+  rows.forEach((row) => {
+    const date = row.dimensionValues[0].value;
+    const value = parseInt(row.metricValues[0].value) || 0; // Parse value as integer or default to 0
 
-    // Format the date using toLocaleDateString() with options for month and day formatting
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long", // Full month name (e.g., "February")
-      day: "2-digit", // Leading zero for single-digit days (e.g., "06")
-    });
+    // If the date already exists, skip adding the value
+    if (!aggregatedData[date]) {
+      aggregatedData[date] = value;
+    }
   });
 
-  const values = pageViews.map((entry) => entry.value);
+  // Step 2: Transform aggregated data into chart data format
+  const labels: string[] = [];
+  const values: number[] = [];
 
+  Object.entries(aggregatedData).forEach(([date, value]) => {
+    // Parse the date string
+    const year = date.slice(0, 4);
+    const month = date.slice(4, 6);
+    const day = date.slice(6, 8);
+    const formattedDate = new Date(`${year}-${month}-${day}`);
+
+    // Add formatted date to labels array
+    labels.push(
+      formattedDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      })
+    );
+
+    // Add value to values array
+    values.push(value);
+  });
+
+  // Step 3: Create chart data object
   const chartData: ChartData = {
     labels,
     datasets: [
@@ -39,6 +52,7 @@ const getPageViewsByDate = (rows: Row[]) => {
       },
     ],
   };
+
   return chartData;
 };
 

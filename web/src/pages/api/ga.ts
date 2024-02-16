@@ -26,7 +26,7 @@ export default async function handler(
       dateRanges: [
         {
           // 5daysAgo, 7daysAgo or 2023-12-24
-          startDate: `${startDate ? startDate : "yesterday"}`,
+          startDate: `${startDate ? startDate : "5daysAgo"}`,
           endDate: `${endDate ? endDate : "yesterday"}`,
         },
       ],
@@ -36,6 +36,12 @@ export default async function handler(
         },
         {
           name: "city",
+        },
+        {
+          name: "sessionDefaultChannelGroup",
+        },
+        {
+          name: "firstUserSource",
         },
         // {
         //   name: "userAgeBracket",
@@ -54,17 +60,8 @@ export default async function handler(
         {
           name: "screenPageViews", // Use "pageViews" metric for page views
         },
-        // {
-        //   name: "organicGoogleSearchClicks		", // Use "pageViews" metric for page views
-        // },
       ],
     });
-
-    // Extracting page views from the response
-    // const filteredResponse =
-    //   response.rows
-    //     ?.filter((item) => item?.dimensionValues?.[1]?.value === cafe)
-    //     .map((item) => item) ?? [];
 
     return res.status(200).json({
       response,

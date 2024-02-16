@@ -7,7 +7,7 @@ type cafeType = {
 };
 
 export const useCafeData = create<cafeType>((set) => ({
-  cafe: null,
+  cafe: [],
 
   //   setCafe: (cafeData) => {
   //     return set((state) => {

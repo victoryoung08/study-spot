@@ -23,6 +23,8 @@ export default async function CreatorProgram(searchParams: any) {
   };
 
   const ctaCenterProps = {
+    cafeName: data.data[0].attributes.cafe_name,
+    suburb: data.data[0].attributes.suburb,
     title: "Promotion",
     description: "Simply share a story or post and tag us!",
     cta_text: "Unlock Now 🎁",

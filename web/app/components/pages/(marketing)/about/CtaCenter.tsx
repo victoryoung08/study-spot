@@ -6,6 +6,8 @@ import Link from "next/link";
 import { pushDataLayer } from "@/src/lib/gtm";
 
 export type commonDataType = {
+  cafeName: string;
+  suburb: string;
   title: string;
   description: string;
   cta_text: string;
@@ -15,6 +17,8 @@ export type commonDataType = {
 };
 
 export default function CtaCenter({
+  cafeName,
+  suburb,
   title,
   description,
   cta_text,
@@ -27,7 +31,10 @@ export default function CtaCenter({
     setDisplayCode(true);
   };
   const pathname = usePathname();
-
+  const suburbLocation = suburb
+    .split("-")
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("%20");
   return (
     <Container>
       <div className="lg:py-20 text-center">
@@ -43,7 +50,7 @@ export default function CtaCenter({
                   displayPromoCode();
                   pushDataLayer({
                     name: cta_text,
-                    path: "/cafe",
+                    path: `/cafe/${suburbLocation}/${cafeName}`,
                   });
                 }}
                 type="button"

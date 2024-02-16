@@ -22,9 +22,6 @@ export default async function Page() {
     return <div>Loading...</div>;
   }
 
-  //   const uploadedImageIds = await uploadImages(cafeData);
-  // console.log(uploadedImageIds);
-
   return (
     <div>
       <Profile cafeData={cafeData.cafeDetails} />
