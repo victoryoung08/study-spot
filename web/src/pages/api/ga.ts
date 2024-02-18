@@ -16,9 +16,9 @@ if (!encodedPrivateKey) {
 }
 
 const privateKey = JSON.parse(
-  Buffer.from(encodedPrivateKey, "base64").toString()
+  Buffer.from(encodedPrivateKey, "base64").toString().replace(/\n/g, "")
 );
-
+// console.log(privateKey);
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
     client_email: decodedEmail,
@@ -81,7 +81,10 @@ export default async function handler(
   } catch (error) {
     console.error("Error fetching analytics data:", error);
     return res.status(500).json({
-      error: error,
+      error: {
+        privateKey: privateKey,
+        email: decodedEmail,
+      },
     });
   }
 }
