@@ -19,10 +19,10 @@ export default function ProfileVisits({ cafeName }: { cafeName: any }) {
       try {
         if (cafeName) {
           const pageViewsResponse = await getPageViews({
-            cafeName: cafeName.cafeName,
+            cafeName: cafeName,
           });
           const pageViewAlgorithmResponse = await getPageViewsAlgorithm({
-            cafeName: cafeName.cafeName,
+            cafeName: cafeName,
           });
 
           if (pageViewsResponse && pageViewAlgorithmResponse) {
@@ -34,7 +34,9 @@ export default function ProfileVisits({ cafeName }: { cafeName: any }) {
             setOverviewPercentage(
               pageViewAlgorithmResponse.camparedData.percentageDifference
             );
-            setIsFetched(true);
+            if (overviewCount != undefined || overviewCount != 0) {
+              setIsFetched(true);
+            }
           }
         }
       } catch (error) {
@@ -48,7 +50,9 @@ export default function ProfileVisits({ cafeName }: { cafeName: any }) {
     return (
       <div>
         <h2 className="pt-5 text-3xl md:text-4xl font-black text-center">
-          No Data Available
+          {overviewCount != 0
+            ? "Loading data...."
+            : "No data available for this cafe yet"}
         </h2>
       </div>
     );

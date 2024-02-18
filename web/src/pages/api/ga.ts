@@ -4,10 +4,17 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data";
 // 👇 Setting PropertyId
 const propertyId = process.env.GA_PROPERTY_ID;
 
+const encodedCredentials = process.env.GA_CREDENTIALS;
+if (!encodedCredentials) {
+  throw new Error("Google Credentials environment variable is not defined");
+}
+const credential = JSON.parse(
+  Buffer.from(encodedCredentials, "base64").toString()
+);
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
-    client_email: process.env.GA_CLIENT_EMAIL,
-    private_key: process.env.GA_PRIVATE_KEY?.replace(/\n/gm, "\n"), // replacing is necessary
+    client_email: credential.client_email,
+    private_key: credential.private_key,
   },
 });
 
@@ -15,7 +22,6 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // const specificPagePath = "August Coffee";
   const { cafe, startDate, endDate } = _req.query;
 
   // 👇 Running a simple report
@@ -43,10 +49,6 @@ export default async function handler(
         {
           name: "firstUserSource",
         },
-        // {
-        //   name: "userAgeBracket",
-        // userGender,
-        // },
       ],
       dimensionFilter: {
         filter: {
@@ -69,7 +71,7 @@ export default async function handler(
   } catch (error) {
     console.error("Error fetching analytics data:", error);
     return res.status(500).json({
-      error: "Internal Server Error",
+      error: error,
     });
   }
 }
