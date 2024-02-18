@@ -14,9 +14,6 @@ import { useCafeData } from "@/app/store/cafeData";
 export default function CafeImages({ setUpCafe }: any) {
   const cafeData = useCafeData((state) => state.cafe);
 
-  const [images, setImages] = useState<File[]>([]);
-  // loop through setUpCafe and add the images into addImage useState store
-
   const addImage = useCreateImage((state) => state.addImage);
 
   const viewPortWidth = useViewportWidth();
@@ -33,10 +30,8 @@ export default function CafeImages({ setUpCafe }: any) {
       // console.log(files);
     }
   };
-  // if (cafeData) {
-  //   addImage(cafeData?.images);
-  // }
 
+  // console.log(cafeData?.images?.length);
   return (
     <div className="space-y-5">
       {setUpCafe && (
@@ -97,41 +92,50 @@ export default function CafeImages({ setUpCafe }: any) {
               );
             })}
           </div>
+
           <div className="block md:hidden">
-            {viewPortWidth && viewPortWidth < 900 && images.length > 2 && (
-              <swiper-container
-                speed={500}
-                autoplay={true}
-                loop={true}
-                slides-per-view={
-                  viewPortWidth && viewPortWidth > 700
-                    ? 2
-                    : viewPortWidth && viewPortWidth > 576
-                    ? 1
-                    : 1
-                }
-              >
-                {setUpCafe &&
-                  cafeData?.images?.map((img: any) => {
-                    return (
-                      <swiper-slide key={img.id}>
-                        <Image
-                          src={img.url}
-                          width={150}
-                          height={150}
-                          className="h-full sm:h-[250px] w-full sm:w-[330px] object-cover"
-                          alt={img.alternativeText || "Image"}
-                        />
-                      </swiper-slide>
-                    );
-                  })}
-              </swiper-container>
-            )}
+            {viewPortWidth &&
+              viewPortWidth < 900 &&
+              cafeData?.images != undefined &&
+              cafeData?.images?.length > 2 && (
+                <swiper-container
+                  speed={500}
+                  autoplay={true}
+                  loop={true}
+                  slides-per-view={
+                    viewPortWidth && viewPortWidth > 700
+                      ? 2
+                      : viewPortWidth && viewPortWidth > 576
+                      ? 1
+                      : 1
+                  }
+                >
+                  {!setUpCafe &&
+                    cafeData?.images?.map((img: any) => {
+                      return (
+                        <swiper-slide key={img.id}>
+                          <Image
+                            src={img.url}
+                            width={150}
+                            height={150}
+                            className="h-full sm:h-[250px] w-full sm:w-[330px] object-cover"
+                            alt={img.alternativeText || "Image"}
+                          />
+                        </swiper-slide>
+                      );
+                    })}
+                </swiper-container>
+              )}
           </div>
 
-          <Button className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
+          {/* 
+          edit button for images
+          <Button
+            type="button"
+            className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
+          >
             Edit
-          </Button>
+          </Button> */}
         </>
       )}
     </div>
