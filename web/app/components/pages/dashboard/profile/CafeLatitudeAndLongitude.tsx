@@ -42,7 +42,7 @@ export const LongitudeAndLatitude = ({ setUpCafe, control }: any) => {
         {editCafeLatitude && !setUpCafe ? (
           <div className="mt-2 xs:pl-5 flex items-center  justify-between text-sm">
             {cafeData && (
-              <p className="w-3/4">
+              <p className="w-3/4 truncate mr-5">
                 {cafeLatitude || cafeData?.Latitute || ""}
               </p>
             )}
@@ -98,7 +98,7 @@ export const LongitudeAndLatitude = ({ setUpCafe, control }: any) => {
         {editCafeLongitude && !setUpCafe ? (
           <div className="mt-2 xs:pl-5 flex items-center justify-between text-sm">
             {cafeData && (
-              <p className="w-3/4">
+              <p className="w-3/4 truncate mr-5">
                 {cafeLongitude || cafeData?.Longitude || ""}
               </p>
             )}
