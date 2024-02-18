@@ -4,10 +4,16 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data";
 // 👇 Setting PropertyId
 const propertyId = process.env.GA_PROPERTY_ID;
 
+const encodedEmail = process.env.GA_CLIENT_EMAIL;
+if (!encodedEmail) {
+  throw new Error("GA_CLIENT_EMAIL environment variable is not defined");
+}
+const decodedEmail = Buffer.from(encodedEmail, "base64").toString("utf-8");
+
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
-    client_email: process.env.GA_CLIENT_EMAIL,
-    private_key: process.env.GA_PRIVATE_KEY?.replace(/\n/g, "\n"), // replacing is necessary
+    client_email: decodedEmail,
+    private_key: process.env.GA_PRIVATE_KEY?.replace(/\n/gm, "\n"), // replacing is necessary
   },
 });
 
@@ -43,10 +49,6 @@ export default async function handler(
         {
           name: "firstUserSource",
         },
-        // {
-        //   name: "userAgeBracket",
-        // userGender,
-        // },
       ],
       dimensionFilter: {
         filter: {
