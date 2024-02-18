@@ -2,13 +2,11 @@ import useViewportWidth from "@/src/hooks/getViewportWidth";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { register } from "swiper/element";
-import sampleImage from "@/public/images/become-contributor.png";
 
 import addImageIcon from "@/public/images/add-image.svg";
 import { Input } from "@/app/components/ui/input";
 import { Button } from "@/app/components/ui/button";
 
-import useCafeProfileForm from "./form/useCafeProfileForm";
 import ImagePreview from "./ImagePreview";
 import { useCreateImage } from "@/app/store/imageUpload";
 import { useCafeData } from "@/app/store/cafeData";
@@ -17,28 +15,34 @@ export default function CafeImages({ setUpCafe }: any) {
   const cafeData = useCafeData((state) => state.cafe);
 
   const [images, setImages] = useState<File[]>([]);
-  const setImage = useCreateImage((state) => state.setImage);
+  // loop through setUpCafe and add the images into addImage useState store
+
+  const addImage = useCreateImage((state) => state.addImage);
 
   const viewPortWidth = useViewportWidth();
   useEffect(() => {
     register();
   }, []);
+  const image = useCreateImage((state) => state.images);
 
   const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       // convert `FileList` to `File[]`
       const files = Array.from(e.target.files);
-      setImages(files);
-      setImage(files);
+      addImage(files);
+      // console.log(files);
     }
   };
+  // if (cafeData) {
+  //   addImage(cafeData?.images);
+  // }
 
   return (
     <div className="space-y-5">
       {setUpCafe && (
         <div>
           <div className="md:w-2/4 relative">
-            {images.length === 0 && (
+            {image.length === 0 && (
               <>
                 <Button className="w-full h-56 bg-grey hover:bg-grey border-2 border-white rounded-2xl flex flex-col items-center">
                   <Image src={addImageIcon} alt="add image" className="w-14" />
@@ -58,19 +62,22 @@ export default function CafeImages({ setUpCafe }: any) {
                 />
               </>
             )}
-
-            <ImagePreview images={images} />
-            {images.length > 0 && (
-              <div className="flex gap-5">
-                <Button className="mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
-                  Add Image
-                </Button>
-                <Button className="mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
-                  Delete Image
-                </Button>
-              </div>
-            )}
           </div>
+          <ImagePreview images={image} />
+          {image.length > 0 && (
+            <div className="flex gap-5">
+              <Button className="relative mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
+                Add Image
+                <Input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleFileSelected}
+                  className=" absolute top-0 opacity-0 h-full cursor-pointer"
+                />
+              </Button>
+            </div>
+          )}
         </div>
       )}
       {!setUpCafe && (
