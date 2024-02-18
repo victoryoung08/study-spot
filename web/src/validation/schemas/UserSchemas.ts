@@ -8,12 +8,12 @@ export const SignupFormSchema = z.object({
       invalid_type_error: "email must be a string",
     })
     .email({ message: "invalid email" }),
-  username: z
-    .string({
-      required_error: "username required",
-      invalid_type_error: "username must be a string",
-    })
-    .min(8, { message: "invalid username" }),
+  // username: z
+  //   .string({
+  //     required_error: "username required",
+  //     invalid_type_error: "username must be a string",
+  //   })
+  //   .min(8, { message: "invalid username" }),
   password: z
     .string({
       required_error: "password required",
@@ -26,5 +26,5 @@ export const resolver = zodResolver(SignupFormSchema);
 export const defaultValues = {
   email: "",
   password: "",
-  username: "",
+  // username: "",
 };

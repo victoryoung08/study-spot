@@ -48,23 +48,10 @@
         "images"
       ]
     },
-    "loudness": {
+    "quietness": {
       "type": "integer",
-      "max": 100,
-      "default": 50
-    },
-    "study_lengths": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::study-length.study-length"
-    },
-    "Study_duration": {
-      "type": "enumeration",
-      "enum": [
-        "Short",
-        "Medium",
-        "Long"
-      ]
+      "max": 10,
+      "default": 5
     },
     "show": {
       "type": "boolean"
@@ -75,10 +62,7 @@
     "google_map_link": {
       "type": "string"
     },
-    "tiktok_embed": {
-      "type": "string"
-    },
-    "tiktok_link": {
+    "tiktok": {
       "type": "string"
     },
     "suburb": {
@@ -92,6 +76,12 @@
     "Latitute": {
       "type": "float",
       "required": true
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
     }
   }
 }

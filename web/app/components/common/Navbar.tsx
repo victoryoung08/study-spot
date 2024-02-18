@@ -8,8 +8,7 @@ import logo from "@/public/images/logo.webp";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { pushDataLayer } from "@/src/lib/gtm";
-import SignupForm from "./SignupForm";
-import SigninForm from "./SigninForm";
+
 import { useSession } from "next-auth/react";
 
 export default function Navbar({ navigationData }: any) {
@@ -20,7 +19,7 @@ export default function Navbar({ navigationData }: any) {
   const handleNav = () => {
     setNavHandler((current) => !current);
   };
-  const mainNavigation = navigationData.filter((item: any) => {
+  const mainNavigation = navigationData?.filter((item: any) => {
     if (
       item.path.includes("/creator-program") ||
       item.path.includes("/library") ||
@@ -30,7 +29,7 @@ export default function Navbar({ navigationData }: any) {
     }
   });
   const dropDownNavigation = navigationData
-    .filter((el: any) => !mainNavigation.includes(el))
+    ?.filter((el: any) => !mainNavigation.includes(el))
     .filter((item: any) => item.path !== "/study-spot-finder");
   const view = searchParams?.get("view");
 
@@ -39,7 +38,7 @@ export default function Navbar({ navigationData }: any) {
       className={`
         ${
           view != "map"
-            ? " max-w-screen-lg z-10 mx-auto px-5 lg:px-0"
+            ? " max-w-screen-lg z-10 mx-auto px-5 lg:px-0 py-5"
             : "absolute md:relative z-40 max-w-screen-lg mx-auto top-0 right-0 left-0"
         }
         ${navHandler ? "bg-black/60 !z-50" : "bg-transparent"}
@@ -63,12 +62,7 @@ export default function Navbar({ navigationData }: any) {
           }
           href="/"
         >
-          <Image
-            src={logo}
-            alt="Logo"
-            className="w-44 h-44 lg:w-32 lg:h-32 "
-            priority
-          />
+          <Image src={logo} alt="Logo" className="w-40 sm:w-44 " priority />
         </Link>
         <button
           aria-label="Menu"
@@ -98,7 +92,7 @@ export default function Navbar({ navigationData }: any) {
             Home
           </Link>
 
-          {mainNavigation.map((item: any) => {
+          {mainNavigation?.map((item: any) => {
             return (
               <Link
                 onClick={() =>
@@ -132,7 +126,7 @@ export default function Navbar({ navigationData }: any) {
               tabIndex={0}
               className="dropdown-content z-[1] menu p-2 shadow bg-[#505050] rounded-box w-52"
             >
-              {dropDownNavigation.map((item: any) => {
+              {dropDownNavigation?.map((item: any) => {
                 return (
                   <>
                     <li key={item.path}>
@@ -173,7 +167,7 @@ export default function Navbar({ navigationData }: any) {
               )}
               {!session && (
                 <li>
-                  <Link
+                  <a
                     onClick={() =>
                       pushDataLayer({
                         name: "Cafe",
@@ -181,10 +175,11 @@ export default function Navbar({ navigationData }: any) {
                       })
                     }
                     href="/cafe"
+                    target="_blank"
                     className="text-white hover:text-white hover:border-none z-50 cursor-pointer"
                   >
                     Cafes
-                  </Link>
+                  </a>
                 </li>
               )}
             </ul>
@@ -212,7 +207,7 @@ export default function Navbar({ navigationData }: any) {
           >
             Home
           </Link>
-          {navigationData.map((item: any) => {
+          {navigationData?.map((item: any) => {
             return (
               <Link
                 onClick={() =>
