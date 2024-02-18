@@ -43,7 +43,7 @@ export default function AnalyticsCard({
             {title || ""}
           </h2>
           <div
-            className={`text-4xl md:text-5xl font-black flex items-end gap-1 ${
+            className={`text-4xl md:text-5xl font-black flex items-end  gap-1 ${
               twoColumn ? "justify-center border-l pl-2" : ""
             }`}
           >
