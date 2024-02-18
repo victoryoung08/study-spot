@@ -10,10 +10,20 @@ if (!encodedEmail) {
 }
 const decodedEmail = Buffer.from(encodedEmail, "base64").toString("utf-8");
 
+const encodedPrivateKey = process.env.GA_PRIVATE_KEY_BASE64;
+if (!encodedPrivateKey) {
+  throw new Error("GA_PRIVATE_KEY_BASE64 environment variable is not defined");
+}
+
+const privateKey = JSON.parse(
+  Buffer.from(encodedPrivateKey, "base64").toString()
+);
+
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
     client_email: decodedEmail,
-    private_key: process.env.GA_PRIVATE_KEY?.replace(/\n/gm, "\n"), // replacing is necessary
+    private_key: privateKey,
+    // private_key: process.env.GA_PRIVATE_KEY?.replace(/\n/g, "\n"), // replacing is necessary
   },
 });
 
