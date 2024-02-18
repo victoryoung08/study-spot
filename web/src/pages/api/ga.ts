@@ -4,25 +4,17 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data";
 // 👇 Setting PropertyId
 const propertyId = process.env.GA_PROPERTY_ID;
 
-const encodedEmail = process.env.GA_CLIENT_EMAIL;
-if (!encodedEmail) {
-  throw new Error("GA_CLIENT_EMAIL environment variable is not defined");
+const encodedCredentials = process.env.GA_CREDENTIALS;
+if (!encodedCredentials) {
+  throw new Error("Google Credentials environment variable is not defined");
 }
-const decodedEmail = Buffer.from(encodedEmail, "base64").toString("utf-8");
-
-const encodedPrivateKey = process.env.GA_PRIVATE_KEY_BASE64;
-if (!encodedPrivateKey) {
-  throw new Error("GA_PRIVATE_KEY_BASE64 environment variable is not defined");
-}
-
-const privateKey = JSON.parse(
-  Buffer.from(encodedPrivateKey, "base64").toString().replace(/\n/g, "")
+const credential = JSON.parse(
+  Buffer.from(encodedCredentials, "base64").toString()
 );
-// console.log(privateKey);
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
-    client_email: decodedEmail,
-    private_key: privateKey,
+    client_email: credential.client_email,
+    private_key: credential.private_key,
     // private_key: process.env.GA_PRIVATE_KEY?.replace(/\n/g, "\n"), // replacing is necessary
   },
 });
@@ -82,8 +74,8 @@ export default async function handler(
     console.error("Error fetching analytics data:", error);
     return res.status(500).json({
       error: {
-        privateKey: privateKey,
-        email: decodedEmail,
+        privateKey: credential.private_key,
+        email: credential.client_email,
       },
     });
   }
