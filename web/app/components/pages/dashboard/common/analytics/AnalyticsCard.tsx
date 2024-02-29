@@ -11,6 +11,7 @@ type AnalyticsCardProps = {
   title: string;
   number: number;
   twoColumn: boolean;
+  hasMembership: boolean | undefined;
   percentage: number;
 };
 
@@ -20,6 +21,7 @@ export default function AnalyticsCard({
   number,
   twoColumn,
   percentage,
+  hasMembership,
 }: AnalyticsCardProps) {
   // Fetch session data
   const { session } = getSession();
@@ -56,16 +58,10 @@ export default function AnalyticsCard({
         {/* Render the "See More" button */}
         <div className="mt-5">
           <Link
-            href={
-              session?.user?.hasMembership
-                ? "/dashboard/analytics"
-                : "/dashboard/support"
-            }
+            href={hasMembership ? "/dashboard/analytics" : "/dashboard/support"}
           >
             <Button className="bg-primary border-2 text-xs xs:text-base py-3 xs:px-4 xs:py-5 w-full font-medium hover:bg-primary border-white rounded-2xl">
-              {session?.user?.hasMembership
-                ? "See More"
-                : "Upgrade to see more"}
+              {hasMembership ? "See More" : "Upgrade to see more"}
             </Button>
           </Link>
         </div>

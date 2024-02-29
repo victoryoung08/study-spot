@@ -65,10 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "hasMembership": {
-      "type": "boolean",
-      "default": false
-    },
     "cafe": {
       "type": "relation",
       "relation": "oneToOne",

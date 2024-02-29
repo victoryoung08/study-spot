@@ -77,6 +77,7 @@ export default function DashboardContent({ cafeData }: CafeFormTypes) {
               twoColumn={false}
               title="Profile Visit"
               number={overviewCount}
+              hasMembership={cafeData?.hasMembership}
               percentage={overviewPercentage}
             />
             {/* <AnalyticsCard
@@ -89,7 +90,12 @@ export default function DashboardContent({ cafeData }: CafeFormTypes) {
         )}
       </div>
       {/* Display line chart */}
-      <Linechart overview={true} displayButton={true} data={pageViewsByDate} />
+      <Linechart
+        overview={true}
+        displayButton={cafeData?.hasMembership === false}
+        data={pageViewsByDate}
+        hasMembership={cafeData?.hasMembership}
+      />
     </div>
   );
 }

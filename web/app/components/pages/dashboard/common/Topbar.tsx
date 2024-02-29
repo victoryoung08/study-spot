@@ -29,8 +29,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "@/public/images/logo.webp";
 import Logout from "@/public/images/logout.svg";
+import { CafeFormTypes } from "@/types/cafe";
 
-function Topbar() {
+function Topbar({ cafeData }: CafeFormTypes) {
   const { session } = getSession();
   const path = usePathname();
   return (
@@ -57,7 +58,7 @@ function Topbar() {
                 {navLinks
                   .filter(
                     (link) =>
-                      session?.user?.hasMembership || link.text !== "Analytics"
+                      cafeData?.hasMembership || link.text !== "Analytics"
                   )
                   .map((item) => {
                     return (

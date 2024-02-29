@@ -21,7 +21,7 @@ export default function Impressions() {
         <OverviewCount />
       </div>
       <div>
-        <Linechart overview={false} data={data} />
+        <Linechart overview={false} data={data} hasMembership={false} />
       </div>
       <div>
         <PieChart

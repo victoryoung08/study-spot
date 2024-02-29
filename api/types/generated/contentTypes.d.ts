@@ -745,7 +745,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    hasMembership: Attribute.Boolean & Attribute.DefaultTo<false>;
     cafe: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
@@ -1127,6 +1126,7 @@ export interface ApiStudySpotStudySpot extends Schema.CollectionType {
     Latitute: Attribute.Float & Attribute.Required;
     facebook: Attribute.String;
     instagram: Attribute.String;
+    hasMembership: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

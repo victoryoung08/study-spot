@@ -21,7 +21,7 @@ export default function Analytics({ cafeData }: CafeFormTypes) {
         <h2 className="text-4xl font-black">Analytics</h2>
       </div>
       <TabsWrapper>
-        <ProfileVisits cafeName={cafeName} />
+        <ProfileVisits cafeData={cafeData} />
         {/* <Impressions />
         <Clicks /> */}
       </TabsWrapper>

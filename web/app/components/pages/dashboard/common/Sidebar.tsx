@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.webp";
 import x from "@/public/favicon.png";
@@ -16,6 +16,8 @@ import supportIcon from "@/public/images/support-icon.svg";
 import { Button } from "@/app/components/ui/button";
 import Logout from "@/public/images/logout.svg";
 import getSession from "@/src/helper/getSession";
+import getCafeDetails from "@/src/queries/getCafeDetails";
+import { CafeFormTypes } from "@/types/cafe";
 
 export const navLinks = [
   {
@@ -44,9 +46,10 @@ export const navLinks = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ cafeData }: CafeFormTypes) {
   const path = usePathname();
   const { session } = getSession();
+
   return (
     <div className="z-50 fixed h-screen hidden lg:flex">
       <div className="h-full flex p-10 sm:px-5 sm:py-10 xl:p-10 w-full flex-col items-center xl:py-10 xl:px-10">
@@ -64,8 +67,7 @@ function Sidebar() {
         <div className="mt-16 flex flex-col gap-5 justify-center">
           {navLinks
             .filter(
-              (link) =>
-                session?.user?.hasMembership || link.text !== "Analytics"
+              (link) => cafeData?.hasMembership || link.text !== "Analytics"
             )
             .map((link, index) => (
               <Link key={index} href={link.href}>
