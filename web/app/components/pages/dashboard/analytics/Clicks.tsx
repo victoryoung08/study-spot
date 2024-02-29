@@ -11,16 +11,36 @@ export default function Clicks() {
         <OverviewCount />
       </div>
       <div>
-        <Linechart title={"Discount Clicks"} overview={false} data={data} />
+        <Linechart
+          title={"Discount Clicks"}
+          overview={false}
+          data={data}
+          hasMembership={false}
+        />
       </div>
       <div>
-        <Linechart title={"Direction Clicks"} overview={false} data={data} />
+        <Linechart
+          title={"Direction Clicks"}
+          overview={false}
+          data={data}
+          hasMembership={false}
+        />
       </div>
       <div>
-        <Linechart title={"Link Clicks"} overview={false} data={data} />
+        <Linechart
+          title={"Link Clicks"}
+          overview={false}
+          data={data}
+          hasMembership={false}
+        />
       </div>
       <div>
-        <Linechart title={"Social Media Clicks"} overview={false} data={data} />
+        <Linechart
+          title={"Social Media Clicks"}
+          overview={false}
+          data={data}
+          hasMembership={false}
+        />
       </div>
       <div className="md:w-2/4">
         <PercentageBar

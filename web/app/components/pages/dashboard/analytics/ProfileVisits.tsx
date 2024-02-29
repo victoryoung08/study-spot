@@ -45,6 +45,7 @@ export default function ProfileVisits({ cafeData }: CafeFormTypes) {
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cafeData]);
 
   if (!isFetched) {
