@@ -19,7 +19,7 @@ export default function BasicInformation({
           <div className="w-32 h-1.5 mt-2 bg-primary rounded-lg" />
         </div>
         <CafeImages setUpCafe={setUpCafe} />
-        <div className="grid md:grid-cols-2 gap-5 lg:w-3/4">
+        <div className="grid md:grid-cols-2 gap-14 lg:w-3/4">
           <CafeName setUpCafe={setUpCafe} control={control} />
           <CafeAddress setUpCafe={setUpCafe} control={control} />
           <CafeSuburb setUpCafe={setUpCafe} control={control} />

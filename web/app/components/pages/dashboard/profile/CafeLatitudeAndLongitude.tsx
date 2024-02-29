@@ -36,9 +36,9 @@ export const LongitudeAndLatitude = ({ setUpCafe, control }: any) => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 gap-5">
+    <div className="grid md:grid-cols-2 gap-10">
       <div className="w-full">
-        <p>Address Latitude</p>
+        <p className="font-bold text-xl">Address Latitude</p>
         {editCafeLatitude && !setUpCafe ? (
           <div className="mt-2 xs:pl-5 flex items-center  justify-between text-sm">
             {cafeData && (
@@ -94,7 +94,7 @@ export const LongitudeAndLatitude = ({ setUpCafe, control }: any) => {
         )}
       </div>
       <div className="w-full">
-        <p>Address Longitude</p>
+        <p className="font-bold text-xl">Address Longitude</p>
         {editCafeLongitude && !setUpCafe ? (
           <div className="mt-2 xs:pl-5 flex items-center justify-between text-sm">
             {cafeData && (
