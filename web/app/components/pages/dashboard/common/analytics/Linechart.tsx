@@ -54,6 +54,7 @@ export const options = {
 type LinechartTypes = {
   overview: boolean;
   displayButton?: boolean;
+  hasMembership: boolean | undefined;
   data: any;
   title?: string;
 };
@@ -63,9 +64,8 @@ export default function Linechart({
   displayButton,
   data,
   title,
+  hasMembership,
 }: LinechartTypes) {
-  const session = getSession();
-  const hasMembership = session?.session?.user?.hasMembership;
   return (
     <div>
       {title && (

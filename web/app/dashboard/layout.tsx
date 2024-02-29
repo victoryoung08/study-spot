@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import Analytics from "../components/analytics";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import getCafeDetails from "@/src/queries/getCafeDetails";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+  const cafeData = await getCafeDetails();
 
   return (
     <html lang="en" className="!bg-[#181818] text-white">
@@ -35,11 +37,11 @@ export default async function RootLayout({
           </Suspense>
           <div className="flex">
             <div className="lg:w-64">
-              <Sidebar />
+              <Sidebar cafeData={cafeData?.cafeDetails} />
             </div>
             <div className="w-auto flex-1 overflow-x-auto relative">
               <div className="p-5 lg:px-10 lg:py-5 flex gap-3 justify-end">
-                <Topbar />
+                <Topbar cafeData={cafeData?.cafeDetails} />
               </div>
               <div className="p-5 lg:p-10">{children}</div>
             </div>

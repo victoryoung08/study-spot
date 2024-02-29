@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import getPageViews from "@/src/helper/getPageViews";
 import getPageViewsAlgorithm from "@/src/helper/getPageViewsAlgorithm";
 import { ChartData, PercentageData } from "@/types/chart";
+import { CafeFormTypes } from "@/types/cafe";
 
-export default function ProfileVisits({ cafeName }: { cafeName: any }) {
+export default function ProfileVisits({ cafeData }: CafeFormTypes) {
   const [pageViewsByDate, setPageViewsByDate] = useState<ChartData>();
   const [pageViewsByCity, setPageViewsByCity] = useState<PercentageData[]>([]);
   const [overviewCount, setOverviewCount] = useState<number>();
@@ -17,12 +18,12 @@ export default function ProfileVisits({ cafeName }: { cafeName: any }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (cafeName) {
+        if (cafeData) {
           const pageViewsResponse = await getPageViews({
-            cafeName: cafeName,
+            cafeName: cafeData.cafe_name,
           });
           const pageViewAlgorithmResponse = await getPageViewsAlgorithm({
-            cafeName: cafeName,
+            cafeName: cafeData.cafe_name,
           });
 
           if (pageViewsResponse && pageViewAlgorithmResponse) {
@@ -44,7 +45,7 @@ export default function ProfileVisits({ cafeName }: { cafeName: any }) {
       }
     };
     fetchData();
-  }, [cafeName]);
+  }, [cafeData]);
 
   if (!isFetched) {
     return (
@@ -67,7 +68,11 @@ export default function ProfileVisits({ cafeName }: { cafeName: any }) {
         />
       </div>
       <div>
-        <Linechart overview={false} data={pageViewsByDate} />
+        <Linechart
+          overview={false}
+          data={pageViewsByDate}
+          hasMembership={cafeData?.hasMembership}
+        />
       </div>
       <div>
         <PercentageBar

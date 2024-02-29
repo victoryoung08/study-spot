@@ -24,6 +24,7 @@ export interface CafeData {
   instagram?: string;
   tiktok?: string;
   facebook?: string;
+  hasMembership?: boolean;
 }
 
 export interface CafeDefaultValues {
@@ -47,5 +48,7 @@ export interface CafeDefaultValues {
   tiktok: string;
   facebook: string;
   instagram: string;
+  hasMembership?: boolean;
+
   // Add other properties as needed
 }

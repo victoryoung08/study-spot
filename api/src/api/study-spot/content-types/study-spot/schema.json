@@ -82,6 +82,10 @@
     },
     "instagram": {
       "type": "string"
+    },
+    "hasMembership": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

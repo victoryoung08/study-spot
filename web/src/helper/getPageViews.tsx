@@ -4,7 +4,7 @@ import getPageViewsByDate from "../hooks/getPageViewsByDate";
 import comparePageViews from "../hooks/comparePageViews";
 
 type PageViewsType = {
-  cafeName: string;
+  cafeName: string | undefined;
   startDate?: string;
   endDate?: string;
 };

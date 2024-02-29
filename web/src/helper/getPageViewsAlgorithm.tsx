@@ -2,7 +2,7 @@ import comparePageViews from "../hooks/comparePageViews";
 import { ApiResponse, Row } from "./getPageViews";
 
 type PageViewsType = {
-  cafeName: string;
+  cafeName: string | undefined;
 };
 
 export default async function getPageViewsAlgorithm({
