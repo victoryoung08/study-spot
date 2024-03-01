@@ -19,7 +19,7 @@ export const CafeSuburb = ({ setUpCafe, control }: any) => {
 
   return (
     <div className="w-full">
-      <p>Cafe Suburb</p>
+      <p className="font-bold text-xl">Cafe Suburb</p>
       {editCafeSuburb && !setUpCafe ? (
         <div className="mt-2 xs:pl-5 flex items-center justify-between text-sm">
           {cafeData && <p>{cafeSuburb || cafeData.suburb || ""}</p>}
@@ -71,7 +71,7 @@ export const CafeAddress = ({ setUpCafe, control }: any) => {
   };
   return (
     <div className="w-full">
-      <p>Cafe Address</p>
+      <p className="font-bold text-xl">Cafe Address</p>
       {editCafeAddress && !setUpCafe ? (
         <div className="mt-2 xs:pl-5 flex items-center  justify-between text-sm">
           {cafeData && <p>{cafeAddress || cafeData?.location || ""}</p>}

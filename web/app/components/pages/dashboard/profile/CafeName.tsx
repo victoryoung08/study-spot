@@ -18,7 +18,7 @@ export const CafeName = ({ setUpCafe, control }: any) => {
   };
   return (
     <div className="w-full">
-      <p>Cafe Name</p>
+      <p className="font-bold text-xl">Cafe Name</p>
       {editCafeName && !setUpCafe ? (
         <div className="mt-2 xs:pl-5 flex items-center  justify-between text-sm">
           {cafeData && <p>{cafeName || cafeData?.cafe_name || ""}</p>}

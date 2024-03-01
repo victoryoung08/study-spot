@@ -11,6 +11,7 @@ import uploadImage from "@/src/queries/uploadImages";
 import setUserCafe from "@/src/queries/setUserCafe";
 import getAccessToken from "@/src/helper/getAccessToken";
 import { useCafeData } from "@/app/store/cafeData";
+import getAddressCoordinates from "@/src/helper/getAddressCoordinates";
 
 export default function useCafeProfileFormSubmit() {
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ export default function useCafeProfileFormSubmit() {
   async function onSubmit(data: CafeProfileType) {
     try {
       setLoading(true);
-
+      const coordinates = await getAddressCoordinates(data.location);
       const features = getFeaturesArray(data);
       const styles = getStyleArray(data);
       const vibes = getVibesArray(data);
@@ -38,6 +39,8 @@ export default function useCafeProfileFormSubmit() {
           features: features.length > 0 ? features : null,
           styles: styles.length > 0 ? styles : null,
           vibes: vibes.length > 0 ? vibes : null,
+          Longitude: coordinates?.longitude || 0,
+          Latitute: coordinates?.latitude || 0,
         },
       };
 
