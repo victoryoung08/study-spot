@@ -67,6 +67,9 @@ const SignupForm = () => {
         return;
       }
 
+      // reset();
+      // router.push("/dashboard/setupCafe");
+
       // if there's no error, display success message
       toast.success("Account created successfully");
       const email = data.email;
@@ -79,9 +82,9 @@ const SignupForm = () => {
       if (signInResponse?.ok) {
         // Set the user details in the global state
         // toast.success("Login Successfully!");
-        setLoading(false);
         reset();
-        router.push("/dashboard");
+        router.push("/setupCafe");
+        setLoading(false);
       } else {
         // Step 6: If there was an error during sign-in, set loading state to false
         // and display an error message using toast

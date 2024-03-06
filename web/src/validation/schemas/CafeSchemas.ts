@@ -1,8 +1,27 @@
 import getCafeDetails from "@/src/queries/getCafeDetails";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+const phoneRegExp = /^(\+)?\d{1,}$/;
 
 export const CafeSetupSchema = z.object({
+  ownerName: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(3, { message: "Name must be at least 3 characters long" }),
+  email: z
+    .string({
+      required_error: "Email is required",
+    })
+    .email({ message: "invalid email" }),
+
+  contact_number: z
+    .string({
+      invalid_type_error: "Contact number must be a string",
+      required_error: "Contact number is required",
+    })
+    .regex(phoneRegExp, { message: "invalid Contact Number" }),
+
   cafe_name: z
     .string({
       required_error: "Cafe name is required",

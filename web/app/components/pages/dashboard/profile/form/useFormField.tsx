@@ -28,6 +28,7 @@ export default function UseFormField({
   handleInputChange,
   name,
   isSelect,
+  setUpCafe,
 }: CafeFormTypes) {
   return (
     <FormField
@@ -57,11 +58,13 @@ export default function UseFormField({
                     handleInputChange(e);
                   }
                 }}
-                className="focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl border-2 border-white text-sm bg-[#3a3939] "
+                className={`focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl  border-white text-sm bg-[#3a3939] ${
+                  setUpCafe ? "border rounded-lg" : "border-2"
+                }`}
               />
             )}
           </FormControl>
-          <FormMessage />
+          <FormMessage className="mt-1" />
         </FormItem>
       )}
     />
