@@ -8,7 +8,8 @@ export interface CafeFormTypes {
   inputValue?: string | number | boolean | any;
   control?: Control<CafeProfileType>;
   name?: string;
-  isSelect?: boolean;
+  isSelect?: { [key: string]: boolean };
+  isChecked?: boolean;
   cafeOwner?: cafeOwner;
 }
 

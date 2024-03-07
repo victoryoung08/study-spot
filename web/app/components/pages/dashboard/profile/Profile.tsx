@@ -11,11 +11,15 @@ import { Form } from "@/app/components/ui/form";
 import { CafeFormTypes } from "@/types/cafe";
 import generateDefaultValues from "@/src/hooks/generateDefaultValues";
 import { useCafeData } from "@/app/store/cafeData";
+import UserInformation from "./UserInformation";
+import getSession from "@/src/helper/getSession";
 
 export default function Profile({ cafeData }: CafeFormTypes) {
   const [setupCafe, SetSetupCafe] = useState(false);
-  const { form, watchAllFields, errors } = useCafeProfileForm();
+  const { form } = useCafeProfileForm();
   const setCafe = useCafeData((state) => state.setCafe);
+  const { onSubmit, ...rest } = useCafeProfileFormSubmit();
+  const { session } = getSession();
 
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
@@ -25,16 +29,33 @@ export default function Profile({ cafeData }: CafeFormTypes) {
       const defaultValues = generateDefaultValues(cafeData);
       form.reset(defaultValues);
       setCafe(cafeData);
+
+      const { user } = session || {};
+
+      if (cafeData.hasMembership !== undefined) {
+        form.setValue("hasMembership", cafeData.hasMembership);
+      }
+
+      if (user) {
+        const { name, email, contact_number } = user;
+        form.setValue("ownerName", name);
+        form.setValue("email", email);
+        form.setValue("contact_number", contact_number);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cafeData]);
-  const { onSubmit, ...rest } = useCafeProfileFormSubmit();
 
   return (
     <div className="text-white">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-          <BasicInformation setUpCafe={setupCafe} {...form} {...rest} />
+          <div>
+            <h2 className="text-4xl font-black mb-10">Profile</h2>
+            {/* <UserInformation setUpCafe={setupCafe} {...form} {...rest} /> */}
+            <BasicInformation setUpCafe={setupCafe} {...form} {...rest} />
+          </div>
+
           <div className="flex flex-col md:flex-row gap-10 lg:gap-32">
             <CafeDetails {...form} {...rest} />
             <div className="space-y-10 md:w-2/4">

@@ -1,11 +1,3 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/app/components/ui/form";
-import { Input } from "@/app/components/ui/input";
-import { SignupFormType } from "../Signup";
 import { Control, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 import { Button } from "@/app/components/ui/button";
 import { CafeProfileType } from "../../profile/form/useCafeProfileForm";
@@ -26,18 +18,13 @@ export default function CafeInformation({
   async function handleStepThree() {
     const isComplete = await trigger(["cafe_name", "location"]);
 
-    console.log(isComplete);
     if (isComplete) {
       setStep(3);
     }
   }
 
-  function handlePrevStep() {
-    setStep(1);
-  }
-
   return (
-    <div>
+    <div className="lg:w-2/4 mx-auto">
       <div className="mb-5">
         <h2 className="text-3xl font-bold">Personal Information</h2>
       </div>
@@ -57,14 +44,12 @@ export default function CafeInformation({
       </div>
       <div className="mt-5 flex justify-between">
         <Button
-          type="button"
-          onClick={handlePrevStep}
+          onClick={() => setStep(1)}
           className="w-1/4 my-5 bg-transparent text-white hover:bg-transparent border border-white"
         >
           Previous
         </Button>
         <Button
-          type="button"
           onClick={handleStepThree}
           className="w-1/4 my-5 bg-primary text-white hover:bg-primary"
         >

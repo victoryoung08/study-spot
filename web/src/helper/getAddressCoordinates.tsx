@@ -7,10 +7,10 @@ export default async function getAddressCoordinates(address: string) {
     );
 
     const location = await response.json();
-
+    const suburb = location.features[0].context[1].text;
     const longitude = location.features[0].center[0];
     const latitude = location.features[0].center[1];
-    return { longitude, latitude };
+    return { longitude, latitude, suburb };
   } catch (error) {
     return { error };
   }

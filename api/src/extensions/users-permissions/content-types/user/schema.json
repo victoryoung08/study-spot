@@ -69,6 +69,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::study-spot.study-spot"
+    },
+    "contact_number": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }

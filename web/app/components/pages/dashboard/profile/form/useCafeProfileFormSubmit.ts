@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { CafeProfileType } from "./useCafeProfileForm";
 import fetchWrapper from "@/src/helper/fetchWrapper";
@@ -12,11 +12,13 @@ import setUserCafe from "@/src/queries/setUserCafe";
 import getAccessToken from "@/src/helper/getAccessToken";
 import { useCafeData } from "@/app/store/cafeData";
 import getAddressCoordinates from "@/src/helper/getAddressCoordinates";
+import { useRouter } from "next/navigation";
 
 export default function useCafeProfileFormSubmit() {
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { session } = getSession();
+  const router = useRouter();
 
   const image = useCreateImage((state) => state.images);
   const cafeDetails = useCafeData((state) => state.cafe);
@@ -24,23 +26,27 @@ export default function useCafeProfileFormSubmit() {
   async function onSubmit(data: CafeProfileType) {
     try {
       setLoading(true);
-      const coordinates = await getAddressCoordinates(data.location);
+      const location = await getAddressCoordinates(data.location);
       const features = getFeaturesArray(data);
       const styles = getStyleArray(data);
       const vibes = getVibesArray(data);
+      // console.log(
+      //   cafeDetails.id ? `study-spots/${cafeDetails?.id}` : "study-spots"
+      // );
       const cafeData = {
         data: {
           ...data,
-          ...(cafeDetails ? { id: cafeDetails.id } : {}),
+          ...(cafeDetails?.id ? { id: cafeDetails?.id } : {}),
           // Add slug only if cafeDetails is not present
-          ...(cafeDetails
+          ...(cafeDetails?.id
             ? {}
             : { slug: data.cafe_name.toLowerCase().replace(/\s+/g, "-") }),
           features: features.length > 0 ? features : null,
           styles: styles.length > 0 ? styles : null,
           vibes: vibes.length > 0 ? vibes : null,
-          Longitude: coordinates?.longitude || 0,
-          Latitute: coordinates?.latitude || 0,
+          Longitude: location?.longitude || 0,
+          Latitute: location?.latitude || 0,
+          suburb: location?.suburb || data.location,
         },
       };
 
@@ -49,9 +55,11 @@ export default function useCafeProfileFormSubmit() {
         throw new Error("Failed to fetch access token");
       }
       const response: Record<string, any> = await fetchWrapper({
-        endpoint: cafeDetails ? `study-spots/${cafeDetails.id}` : "study-spots",
+        endpoint: cafeDetails?.id
+          ? `study-spots/${cafeDetails?.id}`
+          : "study-spots",
         options: {
-          method: cafeDetails ? "PUT" : "POST",
+          method: cafeDetails?.id ? "PUT" : "POST",
           headers: {
             Authorization: `Bearer  ${accessToken}`,
           },
@@ -66,20 +74,25 @@ export default function useCafeProfileFormSubmit() {
 
       const cafeId = response?.data?.data?.id;
 
-      if (cafeId && !cafeDetails) {
+      if (cafeId && !cafeDetails?.id) {
         if (image.length > 0) {
           await uploadImage(image, cafeId);
         }
         if (session?.user?.id) {
-          await setUserCafe(cafeId, session?.user?.id);
+          await setUserCafe(
+            cafeId,
+            session?.user?.id,
+            data?.ownerName,
+            data?.contact_number
+          );
         }
       }
 
       toast.success("Cafe Details submitted successfully");
       setIsSubmitted(true);
-
+      setLoading(false);
       setTimeout(() => {
-        window.location.reload();
+        router.push("/dashboard/profile");
       }, 500);
     } catch (error) {
       console.error("An error occurred:", error);
