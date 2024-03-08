@@ -20,18 +20,11 @@ interface CafeFeaturesFormProps {
 
 export default function CafeFeatures({
   control,
-  trigger,
   setStep,
   setValue,
-  getValues,
 }: CafeFeaturesFormProps) {
   async function handleStepFour() {
-    // const isComplete = await trigger(["isChill", "location"]);
-
-    // console.log(isComplete);
-    // if (isComplete) {
     setStep(4);
-    // }
   }
 
   const [wifi, setWifi] = useState<{ [key: string]: boolean }>({
@@ -46,7 +39,7 @@ export default function CafeFeatures({
     hasNoCharging: false,
   });
 
-  const handleCharingcheckbox = (name: string) => {
+  const handleChargingcheckbox = (name: string) => {
     const updatedState = { ...charging };
 
     // Set the checked state of the clicked checkbox to true
@@ -81,7 +74,6 @@ export default function CafeFeatures({
     });
 
     setWifi(updatedState);
-
     // set form value to false if the selected value is /no charging'
     if (updatedState.hasNoWifi === true) {
       setValue("hasWifi", false);
@@ -150,14 +142,14 @@ export default function CafeFeatures({
               placeholder="Yes"
               name="hasCharging"
               isChecked={charging["hasCharging"]}
-              handleInputChange={() => handleCharingcheckbox("hasCharging")}
+              handleInputChange={() => handleChargingcheckbox("hasCharging")}
             />
             <UseFormFieldCheckbox
               control={control}
               placeholder="No"
               name=""
               isChecked={charging["hasNoCharging"]}
-              handleInputChange={() => handleCharingcheckbox("hasNoCharging")}
+              handleInputChange={() => handleChargingcheckbox("hasNoCharging")}
             />
           </div>
         </div>

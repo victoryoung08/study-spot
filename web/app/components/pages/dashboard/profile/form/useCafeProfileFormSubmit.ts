@@ -12,16 +12,27 @@ import setUserCafe from "@/src/queries/setUserCafe";
 import getAccessToken from "@/src/helper/getAccessToken";
 import { useCafeData } from "@/app/store/cafeData";
 import getAddressCoordinates from "@/src/helper/getAddressCoordinates";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function useCafeProfileFormSubmit() {
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { session } = getSession();
   const router = useRouter();
-
+  const searchParams = useSearchParams();
   const image = useCreateImage((state) => state.images);
   const cafeDetails = useCafeData((state) => state.cafe);
+
+  const [membership, setMembership] = useState<"Free" | "Paid">(
+    (searchParams?.get("type") as "Free" | "Paid") || "Free"
+  );
+  useEffect(() => {
+    // Get the view from the URL
+    const type = searchParams?.get("type");
+    // Set the view state
+    setMembership(type === "Free" ? "Free" : "Paid");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function onSubmit(data: CafeProfileType) {
     try {
@@ -91,9 +102,14 @@ export default function useCafeProfileFormSubmit() {
       toast.success("Cafe Details submitted successfully");
       setIsSubmitted(true);
       setLoading(false);
-      setTimeout(() => {
-        router.push("/dashboard/profile");
-      }, 500);
+
+      if (membership === "Paid") {
+        window.location.href = "https://stripe.com";
+      } else {
+        setTimeout(() => {
+          router.push("/dashboard/profile");
+        }, 500);
+      }
     } catch (error) {
       console.error("An error occurred:", error);
 

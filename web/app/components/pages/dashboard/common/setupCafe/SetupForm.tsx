@@ -17,7 +17,7 @@ export default function SetupForm() {
   }
 
   return (
-    <Container>
+    <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div>
@@ -43,7 +43,7 @@ export default function SetupForm() {
                 {...rest}
               />
               {step === 4 && (
-                <div className="flex justify-between mt-5">
+                <div className=" mx-5 lg:w-3/4 lg:mx-auto flex justify-between mt-5">
                   <Button
                     onClick={handlePrevStep}
                     className="mx-10 lg:mx-20 w-1/5 my-5 bg-transparent text-white hover:bg-transparent border border-white"
@@ -68,6 +68,6 @@ export default function SetupForm() {
           </div>
         </form>
       </Form>
-    </Container>
+    </>
   );
 }

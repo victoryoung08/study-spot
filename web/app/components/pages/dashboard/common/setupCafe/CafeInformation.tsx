@@ -26,7 +26,7 @@ export default function CafeInformation({
   return (
     <div className="lg:w-2/4 mx-auto">
       <div className="mb-5">
-        <h2 className="text-3xl font-bold">Personal Information</h2>
+        <h2 className="text-3xl font-bold">Cafe Information</h2>
       </div>
       <div className="space-y-5">
         <UseFormField

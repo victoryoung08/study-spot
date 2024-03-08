@@ -7,20 +7,23 @@ import { Check } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { CafeProfileType } from "../../dashboard/profile/form/useCafeProfileForm";
 import { UseFormSetValue } from "react-hook-form";
-import { useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 interface ListCafeProps {
   setupCafe?: boolean;
   setValue?: UseFormSetValue<CafeProfileType>;
 }
 
 export default function ListCafe({ setupCafe, setValue }: ListCafeProps) {
-  const [selectMembersip, SetSelectMembership] = useState<"Free" | "Paid">(
-    "Free"
-  );
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const [selectMembersip, SetSelectMembership] = useState<"Free" | "Paid">();
 
   const handleSelectMembership = (membershipType: "Free" | "Paid") => {
     SetSelectMembership(membershipType);
+    toggleView(membershipType);
     if (setValue) {
       if (membershipType === "Free") {
         setValue("hasMembership", false);
@@ -29,6 +32,42 @@ export default function ListCafe({ setupCafe, setValue }: ListCafeProps) {
       }
     }
   };
+
+  const [membership, setMembership] = useState<"Free" | "Paid">(
+    (searchParams?.get("type") as "Free" | "Paid") || "Free"
+  );
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      // const params = new URLSearchParams(searchParams);
+      const params = searchParams
+        ? new URLSearchParams(searchParams)
+        : undefined;
+
+      params?.set(name, value);
+
+      return params?.toString();
+    },
+    [searchParams]
+  );
+
+  const toggleView = (type: "Free" | "Paid") => {
+    // Toggle the view state
+    const newQuery = type === "Free" ? "Free" : "Paid";
+    setMembership(newQuery);
+
+    // router.push(pathname + "?" + createQueryString("type", newQuery));
+    router.replace(pathname + "?" + createQueryString("type", newQuery));
+  };
+
+  useEffect(() => {
+    // Get the view from the URL
+    const type = searchParams?.get("type");
+
+    // Set the view state
+    setMembership(type === "Free" ? "Free" : "Paid");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -94,7 +133,10 @@ export default function ListCafe({ setupCafe, setValue }: ListCafeProps) {
               )}
               {setupCafe && (
                 <div className="text-center">
-                  <Button className="w-56 mx-auto btn border border-white bg-primary hover:bg-primary hover:border-white  text-white px-10 rounded-2xl capitalize">
+                  <Button
+                    type="button"
+                    className="w-56 mx-auto btn border border-white bg-primary hover:bg-primary hover:border-white  text-white px-10 rounded-2xl capitalize"
+                  >
                     {item.ctaText}
                   </Button>
                 </div>
