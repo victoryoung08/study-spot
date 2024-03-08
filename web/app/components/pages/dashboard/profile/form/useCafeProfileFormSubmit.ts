@@ -104,7 +104,7 @@ export default function useCafeProfileFormSubmit() {
       setLoading(false);
 
       if (membership === "Paid") {
-        window.location.href = "https://stripe.com";
+        window.location.href = "https://buy.stripe.com/00g5n0ewI2dOfqo9AE";
       } else {
         setTimeout(() => {
           router.push("/dashboard/profile");

@@ -21,6 +21,7 @@ interface CafeFeaturesFormProps {
 export default function CafeFeatures({
   control,
   setStep,
+  getValues,
   setValue,
 }: CafeFeaturesFormProps) {
   async function handleStepFour() {
@@ -160,6 +161,7 @@ export default function CafeFeatures({
           <div className="flex mx-10 gap-16 items-center">
             <UseFormFieldCheckbox
               control={control}
+              isChecked={getValues("isMinimal")}
               placeholder="Minimal"
               name="isMinimal"
             />
