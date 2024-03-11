@@ -44,7 +44,7 @@ export default function FourColumnGrid({ quietness, items }: any) {
           <progress
             className="progress w-80 progress-primary"
             value={quietness || 0}
-            max="100"
+            max="10"
           ></progress>
           <p className="text-sm">Cafe Chatter</p>
         </div>

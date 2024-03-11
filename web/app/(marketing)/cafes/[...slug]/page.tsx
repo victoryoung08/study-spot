@@ -14,7 +14,7 @@ export default async function CreatorProgram(searchParams: any) {
   };
 
   const fourColumnGridProps = {
-    quietness: 90,
+    quietness: data?.data[0]?.attributes?.quietness || 5,
     items: [
       { name: "Features", tags: data.data[0].attributes.features },
       { name: "Styles", tags: data.data[0].attributes.styles },

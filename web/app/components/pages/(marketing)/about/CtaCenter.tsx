@@ -1,6 +1,6 @@
 "use client";
 import { Container } from "../../../common/Container";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { pushDataLayer } from "@/src/lib/gtm";
@@ -26,15 +26,23 @@ export default function CtaCenter({
   cta_link,
 }: commonDataType) {
   const [displayCode, setDisplayCode] = useState(false);
-
+  const [suburbLocation, setSuburbLocation] = useState<String>();
   const displayPromoCode = () => {
     setDisplayCode(true);
   };
   const pathname = usePathname();
-  const suburbLocation = suburb
-    .split("-")
-    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join("%20");
+
+  useEffect(() => {
+    if (suburb) {
+      const suburbLocation = suburb
+        .split("-")
+        .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join("%20");
+      setSuburbLocation(suburbLocation);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
       <div className="lg:py-20 text-center">
@@ -42,9 +50,9 @@ export default function CtaCenter({
         <p className="text-base lg:text-lg lg:w-3/4 mx-auto my-7">
           {description || ""}
         </p>
-        {pathname?.includes("/cafe") ? (
+        {pathname?.includes("/cafe") && promo_code ? (
           <>
-            {cta_text && !displayCode ? (
+            {cta_text && !displayCode && suburb ? (
               <button
                 onClick={() => {
                   displayPromoCode();
