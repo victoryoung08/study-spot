@@ -1,3 +1,5 @@
+import { string } from "zod";
+
 export interface CafeFormTypes {
   cafeData?: CafeData;
   setUpCafe?: boolean;
@@ -7,6 +9,14 @@ export interface CafeFormTypes {
   control?: Control<CafeProfileType>;
   name?: string;
   isSelect?: boolean;
+  isChecked?: boolean;
+  cafeOwner?: cafeOwner;
+}
+
+export interface cafeOwner {
+  name: string;
+  email: string;
+  contact_number: string;
 }
 export interface CafeData {
   id?: number;

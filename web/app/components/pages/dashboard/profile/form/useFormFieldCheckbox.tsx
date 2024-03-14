@@ -1,53 +1,43 @@
+import { Checkbox } from "@/app/components/ui/checkbox";
 import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/app/components/ui/form";
-import { Input } from "@/app/components/ui/input";
-import { Slider } from "@/app/components/ui/slider";
-import { Switch } from "@/app/components/ui/switch";
 import { CafeFormTypes } from "@/types/cafe";
 
-/**
- * Cafe Form Field Component.
- *
- *
- * @param {CafeFormTypes} props - Component properties.
- * @param {import("react-hook-form").UseFormReturn} props.control - React Hook Form control.
- * @param {string} props.placeholder - Placeholder text for the input field.
- * @param {string} props.inputValue - Value of the input field.
- * @param {Function} props.handleInputChange - Input change handler function.
- * @returns {JSX.Element} React component.
- */
-
-export default function UseFormField({
+export default function UseFormFieldCheckbox({
   control,
   placeholder,
-  inputValue,
-  handleInputChange,
   name,
-  isSelect,
-  setUpCafe,
+  handleInputChange,
+  isChecked,
 }: CafeFormTypes) {
   return (
     <FormField
       control={control}
       name={name || ""}
       render={({ field }) => (
-        <FormItem className=" w-full ">
+        <FormItem className="  ">
           <FormControl>
-            {isSelect ? (
-              <Switch
-                checked={field.value}
+            <div className="flex gap-2 items-center">
+              <Checkbox
+                {...field}
                 onCheckedChange={(e) => {
                   field.onChange(e);
-                  handleInputChange(e);
+                  if (handleInputChange) {
+                    handleInputChange(e);
+                  }
                 }}
-                className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-grey border-white"
+                checked={isChecked}
+                className="bg-transparent data-[state=checked]:bg-primary"
               />
-            ) : (
-              <Input
+              <FormLabel>{placeholder}</FormLabel>
+            </div>
+
+            {/* <Input
                 type="text"
                 {...field}
                 placeholder={placeholder}
@@ -61,8 +51,7 @@ export default function UseFormField({
                 className={`focus-visible:ring-0 px-5 focus-visible:ring-offset-0  rounded-2xl  border-white text-sm bg-[#3a3939] ${
                   setUpCafe ? "border rounded-lg" : "border-2"
                 }`}
-              />
-            )}
+              /> */}
           </FormControl>
           <FormMessage className="mt-1" />
         </FormItem>

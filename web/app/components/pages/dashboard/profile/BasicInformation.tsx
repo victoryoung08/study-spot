@@ -10,8 +10,7 @@ export default function BasicInformation({
 }: CafeFormTypes) {
   return (
     <div>
-      <h2 className="text-4xl font-black">Profile</h2>
-      <div className="mt-10 space-y-10">
+      <div className="space-y-10">
         <div>
           <h3 className="text-xl font-bold">Basic Information</h3>
           <div className="w-32 h-1.5 mt-2 bg-primary rounded-lg" />

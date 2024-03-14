@@ -5,7 +5,12 @@ import fetchWrapper from "../helper/fetchWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../pages/api/auth/[...nextauth]";
 
-export default async function setUserCafe(cafeId: number, userId: string) {
+export default async function setUserCafe(
+  cafeId: number,
+  userId: string,
+  name: string,
+  contact: string
+) {
   const session = await getServerSession(authOptions);
   const { access } = session?.user || {};
 
@@ -22,6 +27,8 @@ export default async function setUserCafe(cafeId: number, userId: string) {
         },
         data: {
           cafe: cafeId,
+          name: name,
+          contact_number: contact,
         },
       },
     });
