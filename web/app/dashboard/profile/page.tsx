@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  // const userData = await getUserDetails();
   const cafeData = await getCafeDetails();
   if (cafeData?.error) {
     return <div>Error: </div>;

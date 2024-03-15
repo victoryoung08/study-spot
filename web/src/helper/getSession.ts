@@ -9,6 +9,7 @@ interface User {
   name: string;
   contact_number: string;
   confirmed: boolean;
+  // hasMembership: boolean;
   updatedAt: string;
 }
 
@@ -27,7 +28,14 @@ const getSession = () => {
 
     setCookie(
       "user",
-      JSON.stringify({ id, email, username, name, contact_number, expires })
+      JSON.stringify({
+        id,
+        email,
+        username,
+        name,
+        contact_number,
+        expires,
+      })
     );
     return {
       session: {

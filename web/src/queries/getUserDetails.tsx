@@ -3,6 +3,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../pages/api/auth/[...nextauth]";
 import fetchWrapper from "../helper/fetchWrapper";
+import { User } from "@/types/user";
 
 export default async function getUserDetails() {
   const session = await getServerSession(authOptions);
@@ -22,11 +23,15 @@ export default async function getUserDetails() {
       },
     });
 
-    if (data) {
+    const userData = data as User;
+
+    if (userData) {
       // console.log(data);
-      return { data };
+      return { userData };
     }
   } catch (error) {
+    console.error("Error fetching user details:", error);
+
     return { error };
   }
 }

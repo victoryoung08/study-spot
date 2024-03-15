@@ -82,8 +82,11 @@ const SignupForm = () => {
       if (signInResponse?.ok) {
         // Set the user details in the global state
         // toast.success("Login Successfully!");
+        setTimeout(() => {
+          router.push("/setup-cafe");
+        }, 500);
         reset();
-        router.push("/setupCafe");
+
         setLoading(false);
       } else {
         // Step 6: If there was an error during sign-in, set loading state to false
