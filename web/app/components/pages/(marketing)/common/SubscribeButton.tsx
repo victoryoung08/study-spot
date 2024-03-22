@@ -20,7 +20,6 @@ export default function SubscribeButton({
   userId,
 }: ManageStripeSubscriptionActionProps) {
   const [isPending, startTransition] = useTransition();
-
   const handleSubscription = () => {
     startTransition(async () => {
       const cafe = await getCafeDetails();

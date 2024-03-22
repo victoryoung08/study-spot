@@ -4,6 +4,7 @@ export default async function updateMembership(
   cafeId: string,
   userId: string,
   access: string,
+  hasMembership: boolean,
   data: any
 ) {
   try {
@@ -29,7 +30,7 @@ export default async function updateMembership(
         },
         data: {
           data: {
-            hasMembership: true,
+            hasMembership: hasMembership,
           },
         },
       },

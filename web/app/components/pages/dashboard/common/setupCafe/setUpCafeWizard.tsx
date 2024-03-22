@@ -39,4 +39,5 @@ export default function SetupCafeWizard({
   if (isSubmitted) {
     return <ListCafe setupCafe={true} />;
   }
+  // return <ListCafe setupCafe={true} />;
 }

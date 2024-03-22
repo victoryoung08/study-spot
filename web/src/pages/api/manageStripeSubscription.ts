@@ -11,7 +11,6 @@ export default async function manageStripeSubscription(
   const { isSubscribed, stripeCustomerId, email, userId, cafeId, access } =
     req.body;
   const billingUrl = absoluteUrl("/dashboard/profile");
-
   try {
     if (isSubscribed && stripeCustomerId) {
       const stripeSession = await stripe.billingPortal.sessions.create({

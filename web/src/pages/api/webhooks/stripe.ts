@@ -28,6 +28,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // Retrieve the accesstoken from Stripe.
       const accessToken = session.metadata.access;
+      // console.log("event.type", event.type);
 
       if (event.type === "checkout.session.completed") {
         // Retrieve the subscription details from Stripe.
@@ -46,6 +47,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           session.metadata.cafeId,
           session.metadata.userId,
           accessToken,
+          true,
           data
         );
       }
@@ -63,6 +65,21 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           session.metadata.cafeId,
           session.metadata.userId,
           accessToken,
+          true,
+          data
+        );
+      }
+      if (event.type === "customer.subscription.deleted") {
+        const data = {
+          stripeSubscriptionID: null,
+          stripeCustomerID: null,
+          stripeCurrentPeriodEnd: null,
+        };
+        await updateMembership(
+          session.metadata.cafeId,
+          session.metadata.userId,
+          accessToken,
+          false,
           data
         );
       }

@@ -37,7 +37,6 @@ export default function ListCafe({ setupCafe }: ListCafeProps) {
 
     getSubscription();
   }, []); // Empty dependency array to only run once on component mount
-
   return (
     <div>
       <div className="flex gap-10 justify-center">
