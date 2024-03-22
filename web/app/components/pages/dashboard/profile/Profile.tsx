@@ -15,7 +15,7 @@ import UserInformation from "./UserInformation";
 import getSession from "@/src/helper/getSession";
 import { Loader2 } from "lucide-react";
 
-export default function Profile({ cafeData }: CafeFormTypes) {
+export default function Profile({ cafeData, cafeUser }: CafeFormTypes) {
   const [setupCafe, SetSetupCafe] = useState(false);
   const { form, watchAllFields, errors } = useCafeProfileForm();
   const setCafe = useCafeData((state) => state.setCafe);
@@ -31,14 +31,12 @@ export default function Profile({ cafeData }: CafeFormTypes) {
       form.reset(defaultValues);
       setCafe(cafeData);
 
-      const { user } = session || {};
-
       if (cafeData.hasMembership !== undefined) {
         form.setValue("hasMembership", cafeData.hasMembership);
       }
 
-      if (user) {
-        const { name, email, contact_number } = user;
+      if (cafeUser) {
+        const { name, email, contact_number } = cafeUser;
         form.setValue("ownerName", name);
         form.setValue("email", email);
         form.setValue("contact_number", contact_number);

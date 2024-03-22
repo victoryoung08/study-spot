@@ -11,29 +11,29 @@ export const config = {
 };
 
 const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-    const buf = await buffer(req);
-    const sig = req.headers["stripe-signature"] as string;
-    let event;
+  try {
+    if (req.method === "POST") {
+      const buf = await buffer(req);
+      const sig = req.headers["stripe-signature"] as string;
 
-    try {
-      event = stripe.webhooks.constructEvent(
+      const event = stripe.webhooks.constructEvent(
         buf,
         sig,
         process.env.STRIPE_WEBHOOK_SECRET || ""
       );
-
       const session = event.data.object as Stripe.Checkout.Session;
-
       if (!session?.metadata?.userId) {
         return res.status(200).end();
       }
 
+      // Retrieve the accesstoken from Stripe.
+      const accessToken = session.metadata.access;
+
       if (event.type === "checkout.session.completed") {
+        // Retrieve the subscription details from Stripe.
         const subscription = await stripe.subscriptions.retrieve(
           session.subscription as string
         );
-
         const data = {
           stripeSubscriptionID: subscription.id,
           stripeCustomerID: subscription.customer as string,
@@ -45,40 +45,33 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
         await updateMembership(
           session.metadata.cafeId,
           session.metadata.userId,
+          accessToken,
           data
         );
       }
-
       if (event.type === "invoice.payment_succeeded") {
         // Retrieve the subscription details from Stripe.
         const subscription = await stripe.subscriptions.retrieve(
           session.subscription as string
         );
-
         const data = {
           stripeCurrentPeriodEnd: new Date(
             subscription.current_period_end * 1000
           ),
         };
-
-        console.log(data);
         await updateMembership(
           session.metadata.cafeId,
           session.metadata.userId,
+          accessToken,
           data
         );
       }
-    } catch (err) {
-      let message = "Unknown Error";
-      if (err instanceof Error) message = err.message;
-      res.status(400).send(`Webhook Error: ${message}`);
-      return;
     }
 
     res.status(200).json({ received: true });
-  } else {
-    res.setHeader("Allow", "POST");
-    res.status(405).end("Method Not Allowed");
+  } catch (error) {
+    console.error("Error handling webhook event:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

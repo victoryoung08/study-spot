@@ -8,7 +8,8 @@ export default async function manageStripeSubscription(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { isSubscribed, stripeCustomerId, email, userId, cafeId } = req.body;
+  const { isSubscribed, stripeCustomerId, email, userId, cafeId, access } =
+    req.body;
   const billingUrl = absoluteUrl("/dashboard/profile");
 
   try {
@@ -19,6 +20,7 @@ export default async function manageStripeSubscription(
       });
       return res.status(200).json({ url: stripeSession.url });
     }
+
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: billingUrl,
       cancel_url: billingUrl,
@@ -35,6 +37,7 @@ export default async function manageStripeSubscription(
       metadata: {
         userId: userId,
         cafeId: cafeId,
+        access: access,
       },
     });
 

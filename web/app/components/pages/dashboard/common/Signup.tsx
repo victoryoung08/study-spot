@@ -22,6 +22,7 @@ import emailIcon from "@/public/images/email.svg";
 import { Button } from "@/app/components/ui/button";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { signIn } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
 export type SignupFormType = z.infer<typeof UserSchema.SignupFormSchema>;
 
@@ -84,8 +85,8 @@ const SignupForm = () => {
         // toast.success("Login Successfully!");
         setTimeout(() => {
           router.push("/setup-cafe");
-        }, 500);
-        reset();
+        }, 300);
+        // reset();
 
         setLoading(false);
       } else {
@@ -109,8 +110,6 @@ const SignupForm = () => {
     setDisplayPassword((current) => !current);
   };
 
-  // const [isTermsChecked, setIsTermsChecked] = useState(false);
-
   return (
     <div>
       <div
@@ -127,25 +126,6 @@ const SignupForm = () => {
         className="pt-4 pb-5 flex flex-col gap-5"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {/* <div className="flex flex-col gap-3 relative">
-          <div className="absolute left-3 top-3 ">
-            <Image src={personIcon} alt="Person Icon" />
-          </div>
-          <Input
-            {...register("username")}
-            id="username"
-            type="text"
-            placeholder="Username"
-            className="px-10 py-5 bg-grey border-2 border-white rounded-xl text-white focus-visible:ring-offset-0 focus-visible:ring-transparent"
-          />
-          Check if forms has error
-          {errors.username && (
-            <span className="text-red-500 text-sm">
-              Please check your username.
-            </span>
-          )}
-        </div> */}
-
         <div className="flex flex-col gap-3 relative">
           <div className="absolute left-3 top-3 ">
             <Image src={emailIcon} alt="Email Icon" />
@@ -193,28 +173,13 @@ const SignupForm = () => {
             )}
           </Button>
         </div>
-        {/* <div className="flex flex-col gap-3 text-gray-400">
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="terms"
-              // {...register("terms")}
-              checked={isTermsChecked}
-              onClick={() => setIsTermsChecked(!isTermsChecked)}
-            />
-            <Label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Accept terms and conditions
-            </Label>
-          </div>
-        </div> */}
         <div className="flex justify-center">
           <Button
-            // disabled={!isTermsChecked}
             type="submit"
             className="w-full sm:w-96 border-2 border-white mx-auto h-12 font-bold text-base text-white hover:border-white bg-primary rounded-xl hover:bg-primary"
           >
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+
             {loading ? "Signing up..." : "Sign Up"}
           </Button>
         </div>

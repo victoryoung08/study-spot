@@ -12,28 +12,16 @@ import setUserCafe from "@/src/queries/setUserCafe";
 import getAccessToken from "@/src/helper/getAccessToken";
 import { useCafeData } from "@/app/store/cafeData";
 import getAddressCoordinates from "@/src/helper/getAddressCoordinates";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function useCafeProfileFormSubmit() {
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { session } = getSession();
   const router = useRouter();
-  // const searchParams = useSearchParams();
   const image = useCreateImage((state) => state.images);
   const cafeDetails = useCafeData((state) => state.cafe);
   const pathname = usePathname();
-
-  // const [membership, setMembership] = useState<"Free" | "Paid">(
-  //   (searchParams?.get("type") as "Free" | "Paid") || "Free"
-  // );
-  // useEffect(() => {
-  //   // Get the view from the URL
-  //   const type = searchParams?.get("type");
-  //   // Set the view state
-  //   setMembership(type === "Free" ? "Free" : "Paid");
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   async function onSubmit(data: CafeProfileType) {
     try {
@@ -42,9 +30,10 @@ export default function useCafeProfileFormSubmit() {
       const features = getFeaturesArray(data);
       const styles = getStyleArray(data);
       const vibes = getVibesArray(data);
-      // console.log(
-      //   cafeDetails.id ? `study-spots/${cafeDetails?.id}` : "study-spots"
-      // );
+      console.log("features", features);
+      console.log("styles", styles);
+      console.log("vibes", vibes.length > 0 ? vibes : null);
+
       const cafeData = {
         data: {
           ...data,
@@ -62,55 +51,56 @@ export default function useCafeProfileFormSubmit() {
         },
       };
 
-      // const accessToken = await getAccessToken();
-      // if (!accessToken) {
-      //   throw new Error("Failed to fetch access token");
-      // }
-      // const response: Record<string, any> = await fetchWrapper({
-      //   endpoint: cafeDetails?.id
-      //     ? `study-spots/${cafeDetails?.id}`
-      //     : "study-spots",
-      //   options: {
-      //     method: cafeDetails?.id ? "PUT" : "POST",
-      //     headers: {
-      //       Authorization: `Bearer  ${accessToken}`,
-      //     },
-      //     data: cafeData,
-      //   },
-      // });
-      // if (response.error) {
-      //   toast.error(`${response.error.error}`);
-      //   setLoading(false);
-      //   return;
-      // }
+      const accessToken = await getAccessToken();
+      if (!accessToken) {
+        throw new Error("Failed to fetch access token");
+      }
+      const response: Record<string, any> = await fetchWrapper({
+        endpoint: cafeDetails?.id
+          ? `study-spots/${cafeDetails?.id}`
+          : "study-spots",
+        options: {
+          method: cafeDetails?.id ? "PUT" : "POST",
+          headers: {
+            Authorization: `Bearer  ${accessToken}`,
+          },
+          data: cafeData,
+        },
+      });
+      if (response.error) {
+        toast.error(`${response.error.error}`);
+        setLoading(false);
+        return;
+      }
 
-      // const cafeId = response?.data?.data?.id;
+      console.log("cafeData", cafeData);
+      // console.log("response", response);
 
-      // if (cafeId && !cafeDetails?.id) {
-      //   if (image.length > 0) {
-      //     await uploadImage(image, cafeId);
-      //   }
-      //   if (session?.user?.id) {
-      //     await setUserCafe(
-      //       cafeId,
-      //       session?.user?.id,
-      //       data?.ownerName,
-      //       data?.contact_number
-      //     );
-      //   }
-      // }
+      const cafeId = response?.data?.data?.id;
 
-      toast.success("Cafe Details submitted successfully");
+      if (cafeId && !cafeDetails?.id) {
+        if (image.length > 0) {
+          await uploadImage(image, cafeId);
+        }
+        if (session?.user?.id) {
+          await setUserCafe(
+            cafeId,
+            session?.user?.id,
+            data?.ownerName,
+            data?.contact_number
+          );
+        }
+      }
+
+      // toast.success("Cafe Details submitted successfully");
       setLoading(false);
 
       setIsSubmitted(true);
 
-      console.log("isSubmitted", isSubmitted);
-
       if (pathname?.includes("/dashboard/profile ")) {
         setTimeout(() => {
           router.push("/dashboard/profile");
-        }, 500);
+        }, 300);
       }
     } catch (error) {
       console.error("An error occurred:", error);

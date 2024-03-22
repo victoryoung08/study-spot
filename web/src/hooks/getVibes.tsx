@@ -3,6 +3,7 @@ import { CafeProfileType } from "@/app/components/pages/dashboard/profile/form/u
 export default function getVibesArray(data: CafeProfileType) {
   // Conditionally set the features field based on hasCharging and hasWifi values
   const vibes = [];
+  console.log("data-------------", data);
   if (data.isChill) {
     vibes.push(1);
   }

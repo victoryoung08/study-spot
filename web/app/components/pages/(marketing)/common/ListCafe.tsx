@@ -88,6 +88,7 @@ export default function ListCafe({ setupCafe }: ListCafeProps) {
                   email={session?.user?.email}
                   isSubscribed={subscriptionPlan?.isSubscribed}
                   stripeCustomerId={subscriptionPlan?.stripeCustomerId}
+                  access={session?.user?.access}
                 />
               ) : (
                 <div className="text-center">

@@ -9,12 +9,14 @@ interface ManageStripeSubscriptionActionProps {
   stripeCustomerId?: string | null;
   email: string;
   userId: string;
+  access: string;
 }
 
 export default function SubscribeButton({
   isSubscribed,
   stripeCustomerId,
   email,
+  access,
   userId,
 }: ManageStripeSubscriptionActionProps) {
   const [isPending, startTransition] = useTransition();
@@ -27,7 +29,8 @@ export default function SubscribeButton({
         stripeCustomerId: stripeCustomerId,
         email: email,
         userId: userId,
-        cafeId: cafe?.cafeDetails.id,
+        cafeId: cafe?.cafeDetails?.id,
+        access: access,
       };
 
       try {

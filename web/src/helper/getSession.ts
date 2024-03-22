@@ -10,6 +10,7 @@ interface User {
   contact_number: string;
   confirmed: boolean;
   // hasMembership: boolean;
+  access: string;
   updatedAt: string;
 }
 
@@ -24,7 +25,7 @@ const getSession = () => {
   if (session && session.data) {
     const { user, expires } = session.data as SessionData;
     // Extract only the required properties from the user object
-    const { id, email, name, username, contact_number } = user;
+    const { id, email, name, username, contact_number, access } = user;
 
     setCookie(
       "user",
@@ -34,12 +35,13 @@ const getSession = () => {
         username,
         name,
         contact_number,
+        access,
         expires,
       })
     );
     return {
       session: {
-        user: { id, email, name, username, contact_number },
+        user: { id, email, name, username, contact_number, access },
         expires,
       },
     };
