@@ -80,7 +80,13 @@ export default function CafeImages({ setUpCafe }: any) {
           <div className="hidden md:flex gap-5">
             {cafeData?.images?.map((item: any) => {
               return (
-                <div key={item.id} className="w-64 h-64">
+                <div
+                  key={item.id}
+                  className="w-64 h-64"
+                  onClick={() => {
+                    console.log(item.id);
+                  }}
+                >
                   <Image
                     src={item.url}
                     width={250}
@@ -127,15 +133,34 @@ export default function CafeImages({ setUpCafe }: any) {
                 </swiper-container>
               )}
           </div>
-
-          {/* 
-          edit button for images
-          <Button
-            type="button"
-            className="border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36"
-          >
-            Edit
+          {/* <Button className="w-full h-56 bg-grey hover:bg-grey border-2 border-white rounded-2xl flex flex-col items-center">
+            <Image src={addImageIcon} alt="add image" className="w-14" />
+            <p className="text-xs mt-2">
+              Add image file (JPG or PNG) <br /> Recommended aspect ration:{" "}
+              <br />
+              (1080px X 1350px)
+            </p>
           </Button> */}
+
+          {/* edit button for images */}
+          <ImagePreview images={image} />
+
+          <div className="flex gap-5">
+            <Button className="relative mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36 cursor-pointer">
+              Add Image
+              <Input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handleFileSelected}
+                className=" absolute top-0 opacity-0 h-full !cursor-pointer"
+              />
+            </Button>
+
+            <Button className="relative mt-2 border-2 bg-primary hover:bg-primary rounded-2xl w-24 h-8 xs:h-auto xs:w-36">
+              Delete
+            </Button>
+          </div>
         </>
       )}
     </div>

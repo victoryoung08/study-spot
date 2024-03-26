@@ -11,17 +11,12 @@ import { Form } from "@/app/components/ui/form";
 import { CafeFormTypes } from "@/types/cafe";
 import generateDefaultValues from "@/src/hooks/generateDefaultValues";
 import { useCafeData } from "@/app/store/cafeData";
-import UserInformation from "./UserInformation";
-import getSession from "@/src/helper/getSession";
-import { Loader2 } from "lucide-react";
 
 export default function Profile({ cafeData, cafeUser }: CafeFormTypes) {
   const [setupCafe, SetSetupCafe] = useState(false);
   const { form, watchAllFields, errors } = useCafeProfileForm();
   const setCafe = useCafeData((state) => state.setCafe);
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
-  const { session } = getSession();
-  console.log(errors);
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
       SetSetupCafe(true);
@@ -30,11 +25,9 @@ export default function Profile({ cafeData, cafeUser }: CafeFormTypes) {
       const defaultValues = generateDefaultValues(cafeData);
       form.reset(defaultValues);
       setCafe(cafeData);
-
       if (cafeData.hasMembership !== undefined) {
         form.setValue("hasMembership", cafeData.hasMembership);
       }
-
       if (cafeUser) {
         const { name, email, contact_number } = cafeUser;
         form.setValue("ownerName", name);
@@ -51,10 +44,8 @@ export default function Profile({ cafeData, cafeUser }: CafeFormTypes) {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
           <div>
             <h2 className="text-4xl font-black mb-10">Profile</h2>
-            {/* <UserInformation setUpCafe={setupCafe} {...form} {...rest} /> */}
             <BasicInformation setUpCafe={setupCafe} {...form} {...rest} />
           </div>
-
           <div className="flex flex-col md:flex-row gap-10 lg:gap-32">
             <CafeDetails {...form} {...rest} />
             <div className="space-y-10 md:w-2/4">
@@ -70,7 +61,6 @@ export default function Profile({ cafeData, cafeUser }: CafeFormTypes) {
               {/* {rest.loading && (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               )} */}
-
               {rest.loading ? "Submitting...." : "Submit"}
             </Button>
           </div>

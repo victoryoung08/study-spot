@@ -1,8 +1,28 @@
 import ModalWrapper from "@/app/components/common/ModalWrapper";
 import { Button } from "@/app/components/ui/button";
 import { DialogClose } from "@/app/components/ui/dialog";
+import SubscribeButton from "../../(marketing)/common/SubscribeButton";
+import { useEffect, useState } from "react";
+import { subscriptionType } from "../../(marketing)/common/ListCafe";
+import getSession from "@/src/helper/getSession";
+import { getUserSubscriptionPlan } from "@/src/lib/subscription";
 
 export default function CancelSubscription() {
+  const [subscriptionPlan, setSubscriptionPlan] = useState<subscriptionType>();
+  const { session } = getSession();
+
+  useEffect(() => {
+    async function getSubscription() {
+      try {
+        const plan = await getUserSubscriptionPlan(); // Using await here
+        setSubscriptionPlan(plan);
+      } catch (error) {
+        console.error("Error fetching user subscription plan:", error);
+      }
+    }
+
+    getSubscription();
+  }, []); // Empty dependency array to only run once on component mount
   return (
     <ModalWrapper
       ButtonTrigger={
@@ -20,12 +40,16 @@ export default function CancelSubscription() {
         </p>
       </div>
       <div className="flex justify-center gap-5 ">
-        <Button
-          // submit form here! use onsubmit function
-          className="w-24 border-2 border-white rounded-2xl bg-primary hover:bg-transparent text-white font-semibold"
-        >
-          Yes
-        </Button>
+        {session && (
+          <SubscribeButton
+            buttonText="Yes"
+            userId={session?.user?.id}
+            email={session?.user?.email}
+            isSubscribed={subscriptionPlan?.isSubscribed}
+            stripeCustomerId={subscriptionPlan?.stripeCustomerId}
+            access={session?.user?.access}
+          />
+        )}
         <DialogClose asChild>
           <Button className="w-24 border-2 border-white rounded-2xl bg-primary hover:bg-transparent text-white font-semibold">
             No
