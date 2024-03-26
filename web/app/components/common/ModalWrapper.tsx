@@ -17,7 +17,7 @@ const ModalWrapper = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{ButtonTrigger}</DialogTrigger>
-      <DialogContent className="bg-white w-[90%] md:max-w-[600px]">
+      <DialogContent className="bg-[#181818] w-[90%] md:max-w-[450px] p-10 ">
         {children}
       </DialogContent>
     </Dialog>

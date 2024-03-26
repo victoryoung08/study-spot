@@ -1,6 +1,9 @@
+"use client";
 import { Button } from "@/app/components/ui/button";
+import CancelSubscription from "./CancelSubscription";
+import { useState } from "react";
 
-export default function SupportForm() {
+export default function SupportForm({ hasMembership }: any) {
   return (
     <div>
       <div className="mb-5">
@@ -15,21 +18,16 @@ export default function SupportForm() {
             <textarea
               //   {...register("inquiry")}
               className="textarea textarea-bordered w-full rounded-2xl border-2 border-white focus:border-primary bg-[#3a3939]"
-              rows={5}
+              rows={10}
               placeholder="Your inquiry"
             ></textarea>
           </div>
-          <div>
-            {/* {error && (
-              <p className="text-sm text-warning">
-                Error Submitting Form, Please try again
-              </p>
-            )} */}
-
+          <div className="flex gap-5">
             <Button className="w-full sm:w-52 py-5 bg-primary hover:bg-primary border-2 border-white rounded-2xl">
-              {/* {loading ? "Submitting..." : "Submit"} */}
               Submit
             </Button>
+
+            {hasMembership && <CancelSubscription />}
           </div>
         </form>
       </div>
