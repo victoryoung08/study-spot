@@ -83,6 +83,7 @@ export default function ListCafe({ setupCafe }: ListCafeProps) {
               )}
               {setupCafe && session && item.type != "Free" ? (
                 <SubscribeButton
+                  buttonText="Get Started"
                   userId={session?.user?.id}
                   email={session?.user?.email}
                   isSubscribed={subscriptionPlan?.isSubscribed}

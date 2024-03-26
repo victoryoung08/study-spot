@@ -51,11 +51,12 @@ export default function DashboardContent({ cafeData }: CafeFormTypes) {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cafeData]);
-
   if (!isFetched) {
     return (
       <div>
-        <h2 className="text-base">Hi! 👋🏻</h2>
+        <h2 className="text-base">
+          Hi! {cafeData ? cafeData.cafe_name : ""}👋🏻
+        </h2>
         <h2 className="pt-4 text-3xl md:text-3xl font-black ">
           {cafeData || overviewCount != 0 || overviewCount == undefined
             ? "Loading data...."
@@ -64,14 +65,14 @@ export default function DashboardContent({ cafeData }: CafeFormTypes) {
       </div>
     );
   }
-
   return (
     <div className="text-white space-y-5">
       {/* Display cafe name */}
       <DashboardCafe cafeName={cafeData?.cafe_name} />
-      <div className="flex flex-col sm:flex-row gap-5 lg:w-[30%]">
-        {/* Display analytics card if data available */}
-        {overviewCount && overviewPercentage && (
+
+      {overviewCount != 0 && overviewPercentage && (
+        <div className="flex flex-col sm:flex-row gap-5 lg:w-[30%]">
+          {/* Display analytics card if data available */}
           <>
             <AnalyticsCard
               twoColumn={false}
@@ -80,22 +81,24 @@ export default function DashboardContent({ cafeData }: CafeFormTypes) {
               hasMembership={cafeData?.hasMembership}
               percentage={overviewPercentage}
             />
-            {/* <AnalyticsCard
-              twoColumn={false}
-              title="Profile Visit"
-              number={overviewCount}
-              percentage={overviewPercentage}
-            /> */}
           </>
-        )}
-      </div>
+        </div>
+      )}
+
       {/* Display line chart */}
-      <Linechart
-        overview={true}
-        displayButton={cafeData?.hasMembership === false}
-        data={pageViewsByDate}
-        hasMembership={cafeData?.hasMembership}
-      />
+      {pageViewsByDate && pageViewsByDate?.labels.length > 0 && (
+        <Linechart
+          overview={true}
+          displayButton={cafeData?.hasMembership === false}
+          data={pageViewsByDate}
+          hasMembership={cafeData?.hasMembership}
+        />
+      )}
+      {pageViewsByDate && pageViewsByDate?.labels.length == 0 && (
+        <h2 className="pt-4 text-3xl md:text-3xl font-black ">
+          No data available for this cafe yet
+        </h2>
+      )}
     </div>
   );
 }

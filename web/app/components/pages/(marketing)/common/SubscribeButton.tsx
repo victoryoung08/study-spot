@@ -10,6 +10,7 @@ interface ManageStripeSubscriptionActionProps {
   email: string;
   userId: string;
   access: string;
+  buttonText: string;
 }
 
 export default function SubscribeButton({
@@ -18,6 +19,7 @@ export default function SubscribeButton({
   email,
   access,
   userId,
+  buttonText,
 }: ManageStripeSubscriptionActionProps) {
   const [isPending, startTransition] = useTransition();
   const handleSubscription = () => {
@@ -49,10 +51,14 @@ export default function SubscribeButton({
       <Button
         onClick={handleSubscription}
         type="button"
-        className="w-56 mx-auto btn border border-white bg-primary hover:bg-primary hover:border-white  text-white px-10 rounded-2xl capitalize"
+        className={`${
+          buttonText === "Yes"
+            ? "w-24 border-2 border-white rounded-2xl bg-primary hover:bg-transparent text-white font-semibold"
+            : "w-56 mx-auto btn border border-white bg-primary hover:bg-primary hover:border-white  text-white px-10 rounded-2xl capitalize"
+        }`}
       >
         {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        Get Started
+        {buttonText}
       </Button>
     </div>
   );
