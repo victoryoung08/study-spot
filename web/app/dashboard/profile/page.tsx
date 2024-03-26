@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  // const userData = await getUserDetails();
   const cafeData = await getCafeDetails();
+  const user = await getUserDetails();
   if (cafeData?.error) {
     return <div>Error: </div>;
   }
@@ -24,7 +24,7 @@ export default async function Page() {
 
   return (
     <div>
-      <Profile cafeData={cafeData.cafeDetails} />
+      <Profile cafeData={cafeData.cafeDetails} cafeUser={user?.userData} />
     </div>
   );
 }

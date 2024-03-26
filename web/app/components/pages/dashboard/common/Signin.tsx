@@ -18,6 +18,7 @@ import {
 import lockIcon from "@/public/images/lock.svg";
 import personIcon from "@/public/images/person.svg";
 import Image from "next/image";
+import { Loader2 } from "lucide-react";
 
 const schema = z.object({
   email: z.string().email(),
@@ -62,7 +63,6 @@ const SigninForm = () => {
         // Set the user details in the global state
         toast.success("Login Successfully!");
         setLoading(false);
-        reset();
         router.push("/dashboard/profile");
       } else {
         // Step 6: If there was an error during sign-in, set loading state to false
@@ -157,6 +157,7 @@ const SigninForm = () => {
             type="submit"
             className="w-full sm:w-96 border-2 border-white mx-auto h-12 font-bold text-base text-white hover:border-white bg-primary rounded-xl hover:bg-primary"
           >
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading ? "Logging in..." : "Log In"}
           </Button>
         </div>

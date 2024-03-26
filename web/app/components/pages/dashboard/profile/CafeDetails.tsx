@@ -33,9 +33,8 @@ CafeFormTypes) {
             <p className="font-bold text-xl">Vibe</p>
             <div className="space-y-2 mt-3">
               <CafeTags tagName="chill" name="isChill" control={control} />
-              <CafeTags tagName="fast" name="isFast" control={control} />
-
               <CafeTags tagName="cozy" name="isCozy" control={control} />
+              <CafeTags tagName="fast" name="isFast" control={control} />
               <CafeTags tagName="Upbeat" name="isUpbeat" control={control} />
             </div>
           </div>

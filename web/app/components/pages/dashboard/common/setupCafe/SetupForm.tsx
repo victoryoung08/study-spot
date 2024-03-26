@@ -13,7 +13,7 @@ export default function SetupForm() {
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
 
   function handlePrevStep() {
-    setStep(3);
+    setStep(2);
   }
 
   return (
@@ -29,8 +29,8 @@ export default function SetupForm() {
               </h2>
               <div className="mt-5">
                 <Progress
-                  value={step * 25}
-                  max={4}
+                  value={step * 33.3333333333}
+                  max={3}
                   className="w-3/4 lg:w-full h-2 mx-auto"
                 />
               </div>
@@ -42,7 +42,7 @@ export default function SetupForm() {
                 {...form}
                 {...rest}
               />
-              {step === 4 && (
+              {step === 3 && !rest.isSubmitted && (
                 <div className=" mx-5 lg:w-3/4 lg:mx-auto flex justify-between mt-5">
                   <Button
                     onClick={handlePrevStep}

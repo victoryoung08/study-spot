@@ -183,7 +183,7 @@ export default function CafeFeatures({
           </div>
         </div>
       </div>
-      <div className="mt-5 flex justify-between">
+      {/* <div className="mt-5 flex justify-between">
         <Button
           onClick={() => setStep(2)}
           className="w-1/4 my-5 bg-transparent text-white hover:bg-transparent border border-white"
@@ -196,7 +196,7 @@ export default function CafeFeatures({
         >
           Next
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

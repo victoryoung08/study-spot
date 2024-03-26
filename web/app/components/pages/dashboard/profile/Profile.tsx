@@ -13,14 +13,15 @@ import generateDefaultValues from "@/src/hooks/generateDefaultValues";
 import { useCafeData } from "@/app/store/cafeData";
 import UserInformation from "./UserInformation";
 import getSession from "@/src/helper/getSession";
+import { Loader2 } from "lucide-react";
 
-export default function Profile({ cafeData }: CafeFormTypes) {
+export default function Profile({ cafeData, cafeUser }: CafeFormTypes) {
   const [setupCafe, SetSetupCafe] = useState(false);
-  const { form } = useCafeProfileForm();
+  const { form, watchAllFields, errors } = useCafeProfileForm();
   const setCafe = useCafeData((state) => state.setCafe);
   const { onSubmit, ...rest } = useCafeProfileFormSubmit();
   const { session } = getSession();
-
+  console.log(errors);
   useEffect(() => {
     if (cafeData === null || cafeData === undefined) {
       SetSetupCafe(true);
@@ -30,14 +31,12 @@ export default function Profile({ cafeData }: CafeFormTypes) {
       form.reset(defaultValues);
       setCafe(cafeData);
 
-      const { user } = session || {};
-
       if (cafeData.hasMembership !== undefined) {
         form.setValue("hasMembership", cafeData.hasMembership);
       }
 
-      if (user) {
-        const { name, email, contact_number } = user;
+      if (cafeUser) {
+        const { name, email, contact_number } = cafeUser;
         form.setValue("ownerName", name);
         form.setValue("email", email);
         form.setValue("contact_number", contact_number);
@@ -68,6 +67,10 @@ export default function Profile({ cafeData }: CafeFormTypes) {
               type="submit"
               className="border-2 bg-primary hover:bg-primary rounded-2xl h-8 xs:h-auto w-2/4 sm:w-1/4 mx-auto"
             >
+              {/* {rest.loading && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )} */}
+
               {rest.loading ? "Submitting...." : "Submit"}
             </Button>
           </div>

@@ -752,6 +752,9 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     contact_number: Attribute.String;
     name: Attribute.String;
+    stripeSubscriptionID: Attribute.String;
+    stripeCustomerID: Attribute.String;
+    stripeCurrentPeriodEnd: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

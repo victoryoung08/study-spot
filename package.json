@@ -3,7 +3,8 @@
         "api": "cd api && yarn run develop",
         "web": "cd web && yarn run dev",
         "dev": "concurrently \"yarn run web\" \"yarn run api\"",
-        "setup": "yarn install && cd web && yarn install && cd ../api && yarn install"
+        "setup": "yarn install && cd web && yarn install && cd ../api && yarn install",
+        "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe"
     },
     "devDependencies": {
         "@types/node": "^20.10.5",

@@ -12,27 +12,16 @@ import setUserCafe from "@/src/queries/setUserCafe";
 import getAccessToken from "@/src/helper/getAccessToken";
 import { useCafeData } from "@/app/store/cafeData";
 import getAddressCoordinates from "@/src/helper/getAddressCoordinates";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function useCafeProfileFormSubmit() {
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { session } = getSession();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const image = useCreateImage((state) => state.images);
   const cafeDetails = useCafeData((state) => state.cafe);
-
-  const [membership, setMembership] = useState<"Free" | "Paid">(
-    (searchParams?.get("type") as "Free" | "Paid") || "Free"
-  );
-  useEffect(() => {
-    // Get the view from the URL
-    const type = searchParams?.get("type");
-    // Set the view state
-    setMembership(type === "Free" ? "Free" : "Paid");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const pathname = usePathname();
 
   async function onSubmit(data: CafeProfileType) {
     try {
@@ -41,9 +30,10 @@ export default function useCafeProfileFormSubmit() {
       const features = getFeaturesArray(data);
       const styles = getStyleArray(data);
       const vibes = getVibesArray(data);
-      // console.log(
-      //   cafeDetails.id ? `study-spots/${cafeDetails?.id}` : "study-spots"
-      // );
+      console.log("features", features);
+      console.log("styles", styles);
+      console.log("vibes", vibes.length > 0 ? vibes : null);
+
       const cafeData = {
         data: {
           ...data,
@@ -83,6 +73,9 @@ export default function useCafeProfileFormSubmit() {
         return;
       }
 
+      console.log("cafeData", cafeData);
+      // console.log("response", response);
+
       const cafeId = response?.data?.data?.id;
 
       if (cafeId && !cafeDetails?.id) {
@@ -99,16 +92,15 @@ export default function useCafeProfileFormSubmit() {
         }
       }
 
-      toast.success("Cafe Details submitted successfully");
-      setIsSubmitted(true);
+      // toast.success("Cafe Details submitted successfully");
       setLoading(false);
 
-      if (membership === "Paid") {
-        window.location.href = "https://buy.stripe.com/00g5n0ewI2dOfqo9AE";
-      } else {
+      setIsSubmitted(true);
+
+      if (pathname?.includes("/dashboard/profile ")) {
         setTimeout(() => {
           router.push("/dashboard/profile");
-        }, 500);
+        }, 300);
       }
     } catch (error) {
       console.error("An error occurred:", error);

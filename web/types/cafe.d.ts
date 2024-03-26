@@ -2,6 +2,7 @@ import { string } from "zod";
 
 export interface CafeFormTypes {
   cafeData?: CafeData;
+  cafeUser?: User;
   setUpCafe?: boolean;
   placeholder?: string;
   handleInputChange?: any;

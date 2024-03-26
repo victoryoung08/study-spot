@@ -30,16 +30,14 @@ export default function SetupCafeWizard({
   if (step === 1) {
     return <PersonalInformation {...props} setStep={setStep} />;
   }
-
   if (step === 2) {
     return <CafeInformation {...props} setStep={setStep} />;
   }
-
-  if (step === 3) {
+  if (step === 3 && !isSubmitted) {
     return <CafeFeatures {...props} setStep={setStep} />;
   }
-
-  if (step === 4) {
-    return <ListCafe {...props} setupCafe={true} />;
+  if (isSubmitted) {
+    return <ListCafe setupCafe={true} />;
   }
+  // return <ListCafe setupCafe={true} />;
 }

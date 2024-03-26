@@ -5,70 +5,38 @@ import studySpot from "@/public/images/LOGO.png";
 import studySpotVerified from "@/public/images/studyspotverifiedlogo.png";
 import { Check } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
-import { CafeProfileType } from "../../dashboard/profile/form/useCafeProfileForm";
-import { UseFormSetValue } from "react-hook-form";
-import { useCallback, useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { getUserSubscriptionPlan } from "@/src/lib/subscription";
+import { useEffect, useState } from "react";
+import SubscribeButton from "./SubscribeButton";
+import getSession from "@/src/helper/getSession";
 interface ListCafeProps {
   setupCafe?: boolean;
-  setValue?: UseFormSetValue<CafeProfileType>;
 }
 
-export default function ListCafe({ setupCafe, setValue }: ListCafeProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const [selectMembersip, SetSelectMembership] = useState<"Free" | "Paid">();
+export interface subscriptionType {
+  stripeSubscriptionId: string;
+  stripeCurrentPeriodEnd: Date;
+  stripeCustomerId: string;
+  isSubscribed: any;
+  isCanceled: boolean;
+}
 
-  const handleSelectMembership = (membershipType: "Free" | "Paid") => {
-    SetSelectMembership(membershipType);
-    toggleView(membershipType);
-    if (setValue) {
-      if (membershipType === "Free") {
-        setValue("hasMembership", false);
-      } else {
-        setValue("hasMembership", true);
-      }
-    }
-  };
-
-  const [membership, setMembership] = useState<"Free" | "Paid">(
-    (searchParams?.get("type") as "Free" | "Paid") || "Free"
-  );
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      // const params = new URLSearchParams(searchParams);
-      const params = searchParams
-        ? new URLSearchParams(searchParams)
-        : undefined;
-
-      params?.set(name, value);
-
-      return params?.toString();
-    },
-    [searchParams]
-  );
-
-  const toggleView = (type: "Free" | "Paid") => {
-    // Toggle the view state
-    const newQuery = type === "Free" ? "Free" : "Paid";
-    setMembership(newQuery);
-
-    // router.push(pathname + "?" + createQueryString("type", newQuery));
-    router.replace(pathname + "?" + createQueryString("type", newQuery));
-  };
+export default function ListCafe({ setupCafe }: ListCafeProps) {
+  const [subscriptionPlan, setSubscriptionPlan] = useState<subscriptionType>();
+  const { session } = getSession();
 
   useEffect(() => {
-    // Get the view from the URL
-    const type = searchParams?.get("type");
+    async function getSubscription() {
+      try {
+        const plan = await getUserSubscriptionPlan(); // Using await here
+        setSubscriptionPlan(plan);
+      } catch (error) {
+        console.error("Error fetching user subscription plan:", error);
+      }
+    }
 
-    // Set the view state
-    setMembership(type === "Free" ? "Free" : "Paid");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+    getSubscription();
+  }, []); // Empty dependency array to only run once on component mount
   return (
     <div>
       <div className="flex gap-10 justify-center">
@@ -76,26 +44,8 @@ export default function ListCafe({ setupCafe, setValue }: ListCafeProps) {
           return (
             <div
               key={item.id}
-              className={`${
-                setupCafe
-                  ? "cursor-pointer hover:scale-105 transition-all ease-in-out delay-75 relative"
-                  : "cursor-default"
-              } border border-gray-500 rounded-3xl p-12 w-[450px]`}
-              onClick={() => {
-                if (setupCafe) {
-                  handleSelectMembership(item.type as "Free" | "Paid");
-                }
-              }}
+              className="border border-gray-500 rounded-3xl p-12 w-[450px]"
             >
-              <div
-                className={` ${
-                  selectMembersip === item.type && setupCafe
-                    ? "bg-primary/75 absolute  top-0 bottom-0 left-0 right-0 rounded-3xl flex justify-center items-center"
-                    : "hidden"
-                } `}
-              >
-                <Check className="w-20 h-20 " />
-              </div>
               <div className="mb-8 h-20 flex items-center">
                 <Image
                   src={item.image.src}
@@ -124,21 +74,31 @@ export default function ListCafe({ setupCafe, setValue }: ListCafeProps) {
               {!setupCafe && (
                 <div className="text-center">
                   <Link
-                    href={item.ctaLink}
+                    href={setupCafe ? "" : item.ctaLink}
                     className="w-56 mx-auto btn border border-white btn-primary hover:bg-transparent hover:border-white transition-all delay-50 hover:scale-105 ease-in-out duration-500 text-white px-10 rounded-2xl capitalize"
                   >
                     {item.ctaText}
                   </Link>
                 </div>
               )}
-              {setupCafe && (
+              {setupCafe && session && item.type != "Free" ? (
+                <SubscribeButton
+                  userId={session?.user?.id}
+                  email={session?.user?.email}
+                  isSubscribed={subscriptionPlan?.isSubscribed}
+                  stripeCustomerId={subscriptionPlan?.stripeCustomerId}
+                  access={session?.user?.access}
+                />
+              ) : (
                 <div className="text-center">
-                  <Button
-                    type="button"
-                    className="w-56 mx-auto btn border border-white bg-primary hover:bg-primary hover:border-white  text-white px-10 rounded-2xl capitalize"
-                  >
-                    {item.ctaText}
-                  </Button>
+                  <Link href="/dashboard/profile">
+                    <Button
+                      type="button"
+                      className="w-56 mx-auto btn border border-white bg-primary hover:bg-primary hover:border-white  text-white px-10 rounded-2xl capitalize"
+                    >
+                      {item.ctaText}
+                    </Button>
+                  </Link>
                 </div>
               )}
             </div>
